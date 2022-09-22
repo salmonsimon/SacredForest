@@ -15,8 +15,8 @@ public class Mover : MonoBehaviour
 
     #region GameObjects
 
-    [SerializeField] protected CircleCollisionCheck groundCheck;
-    [SerializeField] protected CircleCollisionCheck wallCheck;
+    [SerializeField] protected CircleCollider groundCheck;
+    [SerializeField] protected CircleCollider wallCheck;
 
     #endregion
 
@@ -38,6 +38,7 @@ public class Mover : MonoBehaviour
     private protected bool isAbleToMove = true;
 
     private bool isGrounded;
+    private bool isJumping;
     private bool isCollidingWithWall;
     private bool isWallSliding;
     
@@ -49,7 +50,7 @@ public class Mover : MonoBehaviour
     private Vector3 originalScale;
     private Rigidbody2D rigidBody;
 
-    [SerializeField] private float dashForce = 400f;
+    private float dashForce = 25f;
 
     private float runVelocity = 3f;
     private float movementSmoothing = .05f;
@@ -103,11 +104,7 @@ public class Mover : MonoBehaviour
             {
                 if (isWallSliding)
                 {
-                    Flip();
-
-                    isCollidingWithWall = false;
-                    isWallSliding = false;
-                    animator.SetBool("IsWallSliding", false);
+                    FinishWallSliding();
                 }
 
                 StartCoroutine(DoDashAction());
@@ -187,6 +184,8 @@ public class Mover : MonoBehaviour
     private void DoJumpAction()
     {
         animator.SetBool("IsJumping", true);
+        isJumping = true;
+
         animator.SetTrigger("Jump");
 
         rigidBody.AddForce(new Vector2(0f, jumpForce));
@@ -202,6 +201,7 @@ public class Mover : MonoBehaviour
 
         animator.SetTrigger("Jump");
         animator.SetBool("IsJumping", true);
+        isJumping = true;
 
         Flip();
         rigidBody.velocity = Vector2.zero;
@@ -214,8 +214,9 @@ public class Mover : MonoBehaviour
     public void OnLanding()
     {
         animator.SetBool("IsJumping", false);
-        animator.SetBool("IsWallSliding", false);
+        isJumping = false;
 
+        animator.SetBool("IsWallSliding", false);
         isWallSliding = false;
 
         particlesLand.Play();
@@ -223,18 +224,32 @@ public class Mover : MonoBehaviour
 
     private void DoWallSlideAction()
     {
-        isWallSliding = true;
+        isJumping = false;
+        animator.SetBool("IsJumping", false);
 
+        isWallSliding = true;
         animator.SetBool("IsWallSliding", true);
+    }
+
+    public void FinishWallSliding()
+    {
+        Flip();
+
+        isCollidingWithWall = false;
+        isWallSliding = false;
+        animator.SetBool("IsWallSliding", false);
     }
 
     private IEnumerator DoDashAction()
     {
         animator.SetTrigger("Dash");
+        animator.SetBool("IsDashing", true);
 
         rigidBody.velocity = new Vector2(transform.localScale.x * dashForce, 0);
 
         yield return new WaitForSeconds(.1f);
+        animator.SetBool("IsDashing", false);
+
 
         StartCoroutine(DashCooldown());
     }
@@ -248,8 +263,33 @@ public class Mover : MonoBehaviour
         isAbleToDash = true;
     }
 
+    public void Death()
+    {
+        isAbleToMove = false;
+    }
+
     private bool IsFalling()
     {
         return rigidBody.velocity.y < 0.1;
+    }
+
+    public Vector2 GetMovement()
+    {
+        return movement;
+    }
+
+    public bool IsJumping()
+    {
+        return isJumping;
+    }
+
+    public bool IsWallSliding()
+    {
+        return isWallSliding;
+    }
+
+    public void SetIsAbleToMove(bool value)
+    {
+        isAbleToMove = value;
     }
 }

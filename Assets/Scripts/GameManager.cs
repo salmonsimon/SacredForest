@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     #region Logic Variables
 
     private bool isGamePaused;
-    public bool IsGamePaused { get => isGamePaused; private set => isGamePaused = value; }
 
     #endregion
 
@@ -25,5 +24,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
+    public bool IsGamePaused()
+    {
+        return isGamePaused;
+    }
 }

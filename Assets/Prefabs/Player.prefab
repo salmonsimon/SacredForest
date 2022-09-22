@@ -63,7 +63,112 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isColliding: 0
   tagsToCheck:
-  - Untagged
+  - Ground
+--- !u!1 &681107203
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 681107204}
+  - component: {fileID: 681107207}
+  - component: {fileID: 681107206}
+  - component: {fileID: 861199745}
+  - component: {fileID: 861199744}
+  m_Layer: 0
+  m_Name: Sword
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &681107204
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681107203}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6515762600975830349}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &681107207
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681107203}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.0036729425}
+  serializedVersion: 2
+  m_Radius: 0.16576256
+--- !u!61 &681107206
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681107203}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &861199745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681107203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3866054b6ecb4fc41967a9a27ad200d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isColliding: 0
+  tagsToCheck: []
+--- !u!114 &861199744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681107203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c90b7decf6e95d44aa89bd3d5885518b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isColliding: 0
+  tagsToCheck: []
 --- !u!1 &1141978300
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,7 +232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isColliding: 0
   tagsToCheck:
-  - Untagged
+  - Ground
 --- !u!1 &1275550357
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,7 +259,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1275550357}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.2, z: 0}
+  m_LocalPosition: {x: 0, y: -0.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -413,7 +518,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.05
+      scalar: 0.15
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -466,7 +571,7 @@ ParticleSystem:
     startSizeY:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.05
+      scalar: 0.15
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -5295,7 +5400,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.1
+      scalar: 0.15
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -5348,7 +5453,7 @@ ParticleSystem:
     startSizeY:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.1
+      scalar: 0.15
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -9845,9 +9950,10 @@ GameObject:
   - component: {fileID: 6515762600975830349}
   - component: {fileID: 6515762600975830348}
   - component: {fileID: 6515762600975830339}
-  - component: {fileID: 1285759741}
   - component: {fileID: 1902571027}
   - component: {fileID: 1902571026}
+  - component: {fileID: 292766574087176135}
+  - component: {fileID: 1534564919}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -9871,6 +9977,7 @@ Transform:
   - {fileID: 1275550358}
   - {fileID: 1141978301}
   - {fileID: 377021681}
+  - {fileID: 681107204}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9946,27 +10053,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1285759741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6515762600975830338}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d33a0fc11a15bb48b5adafb88b1ff86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  particlesJump: {fileID: 1443486158}
-  particlesLand: {fileID: 1275550360}
-  groundCheck: {fileID: 1141978303}
-  wallCheck: {fileID: 377021683}
-  hasAbilityToDash: 1
-  hasAbilityToWallJump: 1
-  isGrounded: 0
-  dashForce: 25
-  limitFallSpeed: 20
 --- !u!50 &1902571027
 Rigidbody2D:
   serializedVersion: 4
@@ -10004,3 +10090,34 @@ CapsuleCollider2D:
   m_Offset: {x: -0.0017172337, y: 0}
   m_Size: {x: 0.14848128, y: 0.33}
   m_Direction: 0
+--- !u!114 &292766574087176135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6515762600975830338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9c3cec9f3c896046b343ef307f60d6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particlesJump: {fileID: 1443486158}
+  particlesLand: {fileID: 1275550360}
+  groundCheck: {fileID: 1141978303}
+  wallCheck: {fileID: 377021683}
+  hasAbilityToDash: 1
+  hasAbilityToWallJump: 1
+  limitFallSpeed: 20
+--- !u!114 &1534564919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6515762600975830338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b283b07556e3255448ce2ef4b91e7ef3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
