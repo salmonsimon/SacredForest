@@ -23,6 +23,7 @@ public class Mover : MonoBehaviour
     #region Action Variables
 
     protected Vector2 movement;
+    protected Vector2 direction;
     protected Vector3 refVelocity = Vector3.zero;
     protected bool jumpAction;
     protected bool dashAction;
@@ -56,7 +57,7 @@ public class Mover : MonoBehaviour
     private float movementSmoothing = .05f;
 
     private float jumpForce = 200;
-    private float wallJumpForceX = -400;
+    private float wallJumpForceX = 400;
     private float wallJumpForceY = 160;
 
 
@@ -166,6 +167,11 @@ public class Mover : MonoBehaviour
 
     private void UpdateDirection(Vector2 movement)
     {
+        if (movement != Vector2.zero)
+        {
+            direction = movement.normalized;
+        }
+
         if (movement.x > 0)
         {
             transform.localScale = originalScale;
@@ -178,7 +184,14 @@ public class Mover : MonoBehaviour
 
     private void Flip()
     {
-        transform.localScale = new Vector3(originalScale.x * -1f, originalScale.y * 1f, originalScale.z * 1f);
+        if(direction.x > 0)
+        {
+            transform.localScale = new Vector3(originalScale.x * -1f, originalScale.y * 1f, originalScale.z * 1f);
+        }
+        else if (direction.x < 0)
+        {
+            transform.localScale = originalScale;
+        }
     }
 
     private void DoJumpAction()
@@ -204,8 +217,20 @@ public class Mover : MonoBehaviour
         isJumping = true;
 
         Flip();
+        float flippedWallJumpForceX;
+
+        if (direction.x > 0)
+        {
+            flippedWallJumpForceX = -wallJumpForceX;
+        }
+        else
+        {
+            flippedWallJumpForceX = wallJumpForceX;
+        }
+        
+
         rigidBody.velocity = Vector2.zero;
-        rigidBody.AddForce(new Vector2(wallJumpForceX, wallJumpForceY));
+        rigidBody.AddForce(new Vector2(flippedWallJumpForceX, wallJumpForceY));
 
         particlesLand.Play();
         particlesJump.Play();
