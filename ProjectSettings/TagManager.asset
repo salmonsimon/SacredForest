@@ -42,3 +42,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 759787747
+    locked: 0
+  - name: Tiles - Background
+    uniqueID: 606690787
+    locked: 0
+  - name: Tiles - Main
+    uniqueID: 3237204821
+    locked: 0
+  - name: Tiles - Front
+    uniqueID: 3808495215
+    locked: 0
+  - name: Foreground
+    uniqueID: 299465551
+    locked: 0
+  - name: Actors
+    uniqueID: 3728317459
+    locked: 0
