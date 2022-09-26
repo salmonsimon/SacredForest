@@ -23,7 +23,7 @@ public class Mover : MonoBehaviour
     #region Action Variables
 
     protected Vector2 movement;
-    protected Vector2 direction;
+    [SerializeField] protected Vector2 direction;
     protected Vector3 refVelocity = Vector3.zero;
     protected bool jumpAction;
     protected bool dashAction;
@@ -42,7 +42,7 @@ public class Mover : MonoBehaviour
     private bool isJumping;
     private bool isCollidingWithWall;
     private bool isWallSliding;
-    
+
 
     #endregion
 
@@ -135,7 +135,7 @@ public class Mover : MonoBehaviour
             
             if (isCollidingWithWall && !isGrounded && !isWallSliding)
             {
-                if (Mathf.Abs(movement.x) > 0.1)
+                if (Mathf.Abs(rigidBody.velocity.x) > 0.1)
                 {
                     DoWallSlideAction();
                 }
@@ -184,11 +184,13 @@ public class Mover : MonoBehaviour
 
     private void Flip()
     {
-        if(direction.x > 0)
+        Vector2 wallCheckDirection = (wallCheck.transform.position - transform.position).normalized;
+
+        if (wallCheckDirection.x > 0)
         {
             transform.localScale = new Vector3(originalScale.x * -1f, originalScale.y * 1f, originalScale.z * 1f);
         }
-        else if (direction.x < 0)
+        else if (wallCheckDirection.x < 0)
         {
             transform.localScale = originalScale;
         }
@@ -216,10 +218,11 @@ public class Mover : MonoBehaviour
         animator.SetBool("IsJumping", true);
         isJumping = true;
 
-        Flip();
         float flippedWallJumpForceX;
 
-        if (direction.x > 0)
+        Vector2 wallCheckDirection = (wallCheck.transform.position - transform.position).normalized;
+
+        if (wallCheckDirection.x > 0)
         {
             flippedWallJumpForceX = -wallJumpForceX;
         }
@@ -231,6 +234,8 @@ public class Mover : MonoBehaviour
 
         rigidBody.velocity = Vector2.zero;
         rigidBody.AddForce(new Vector2(flippedWallJumpForceX, wallJumpForceY));
+
+        Flip();
 
         particlesLand.Play();
         particlesJump.Play();
