@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerMovementController : Mover
 {
+    private float addedFallGravity = 0.3f;
+    private float  addedGravityLowJump = 1.8f;
+
     private void Update()
     {
         if (!GameManager.instance.IsGamePaused())
@@ -36,11 +39,25 @@ public class PlayerMovementController : Mover
 
     protected override void FixedUpdate()
     {
+        if (IsFalling() && !ExceedsFallVelocity())
+        {
+            rigidBody.velocity += Vector2.up * Physics2D.gravity.y * addedFallGravity * Time.deltaTime;
+        }
+        else if (IsJumpingUp() && IsJumping() && !Input.GetKey(KeyCode.Z))
+        {
+            rigidBody.velocity += Vector2.up * Physics2D.gravity.y * addedGravityLowJump * Time.deltaTime;
+        }
+
         base.FixedUpdate();
 
         UpdateMotor();
 
         jumpAction = false;
         dashAction = false;
+    }
+
+    private bool IsJumpingUp()
+    {
+        return rigidBody.velocity.y > 0.1;
     }
 }
