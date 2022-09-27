@@ -49,7 +49,7 @@ public class Mover : MonoBehaviour
     #region Parameters
 
     private Vector3 originalScale;
-    private Rigidbody2D rigidBody;
+    protected Rigidbody2D rigidBody;
 
     private float dashForce = 25f;
 
@@ -61,7 +61,7 @@ public class Mover : MonoBehaviour
     private float wallJumpForceY = 160;
 
 
-    [SerializeField] private float limitFallSpeed = 10f;
+    private float limitFallSpeed = 8f;
     private float wallSlidingVelocity = -1f;
 
     #endregion
@@ -161,10 +161,9 @@ public class Mover : MonoBehaviour
 
         if (!isGrounded && IsFalling() && !isWallSliding)
         {
-            if (rigidBody.velocity.y < -limitFallSpeed)
+            if (ExceedsFallVelocity())
             {
                 rigidBody.velocity = new Vector2(rigidBody.velocity.x, -limitFallSpeed);
-                Debug.Log("Limiting falling speed");
             }
         }
     }
@@ -302,7 +301,7 @@ public class Mover : MonoBehaviour
         isAbleToMove = false;
     }
 
-    private bool IsFalling()
+    protected bool IsFalling()
     {
         return rigidBody.velocity.y < 0.1;
     }
@@ -325,5 +324,10 @@ public class Mover : MonoBehaviour
     public void SetIsAbleToMove(bool value)
     {
         isAbleToMove = value;
+    }
+
+    public bool ExceedsFallVelocity()
+    {
+        return rigidBody.velocity.y < -limitFallSpeed;
     }
 }
