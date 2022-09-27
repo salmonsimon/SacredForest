@@ -23,7 +23,7 @@ public class Mover : MonoBehaviour
     #region Action Variables
 
     protected Vector2 movement;
-    [SerializeField] protected Vector2 direction;
+    protected Vector2 direction;
     protected Vector3 refVelocity = Vector3.zero;
     protected bool jumpAction;
     protected bool dashAction;
@@ -61,7 +61,7 @@ public class Mover : MonoBehaviour
     private float wallJumpForceY = 160;
 
 
-    [SerializeField] private float limitFallSpeed = 20f;
+    [SerializeField] private float limitFallSpeed = 10f;
     private float wallSlidingVelocity = -1f;
 
     #endregion
@@ -78,6 +78,8 @@ public class Mover : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
+        UpdateFallingVelocity();
+
         bool wasGrounded = isGrounded;
         isGrounded = groundCheck.IsColliding();
 
@@ -98,7 +100,6 @@ public class Mover : MonoBehaviour
         {
             UpdateDirection(movement);
 
-            UpdateFallingVelocity();
             animator.SetFloat("SpeedY", rigidBody.velocity.y);
 
             if (hasAbilityToDash && isAbleToDash && dashAction)
@@ -161,7 +162,10 @@ public class Mover : MonoBehaviour
         if (!isGrounded && IsFalling() && !isWallSliding)
         {
             if (rigidBody.velocity.y < -limitFallSpeed)
+            {
                 rigidBody.velocity = new Vector2(rigidBody.velocity.x, -limitFallSpeed);
+                Debug.Log("Limiting falling speed");
+            }
         }
     }
 
