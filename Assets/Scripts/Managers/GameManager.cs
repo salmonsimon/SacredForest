@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     #region Logic Variables
 
     private bool isGamePaused;
+    private bool isTeleporting;
 
     #endregion
 
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
     {
         if (GameManager.instance != null)
         {
+            Destroy(gameObject);
             Destroy(levelLoader.gameObject);
             Destroy(player.gameObject);
         }
@@ -45,6 +47,9 @@ public class GameManager : MonoBehaviour
     {
         player.transform.position = GameObject.FindGameObjectWithTag(Config.SPAWN_POINT_TAG).transform.position;
 
+        Cinemachine.CinemachineVirtualCamera virtualCamera = GameObject.FindGameObjectWithTag(Config.CINEMACHINE_CAMERA_TAG).GetComponent<Cinemachine.CinemachineVirtualCamera>();
+        virtualCamera.Follow = player.transform;
+
         StartCoroutine(levelLoader.FinishTransition());
     }
 
@@ -54,6 +59,11 @@ public class GameManager : MonoBehaviour
     public bool IsGamePaused()
     {
         return isGamePaused;
+    }
+
+    public bool IsTeleporting()
+    {
+        return isTeleporting;
     }
 
     public void SetGamePaused(bool value)

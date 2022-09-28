@@ -29,6 +29,7 @@ public class Portal : GeneralCollider
     {
         animator.SetTrigger("Close");
         GameManager.instance.GetPlayer().GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        GameManager.instance.GetPlayer().GetComponent<Animator>().enabled = false;
 
         yield return new WaitForSeconds(.5f);
 

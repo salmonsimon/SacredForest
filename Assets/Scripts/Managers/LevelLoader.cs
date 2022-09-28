@@ -7,7 +7,8 @@ public class LevelLoader : MonoBehaviour
 {
     [SerializeField] private Animator crossFade;
 
-    private float startTransitionTime, endTransitionTime = .5f;
+    private float startTransitionTime = .5f; 
+    private float endTransitionTime = 1f;
     private string lastTransitionType; 
 
     public void LoadLevel(string sceneName, string transitionType)
@@ -27,7 +28,7 @@ public class LevelLoader : MonoBehaviour
 
         lastTransitionType = transitionType;
 
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(startTransitionTime);
 
         GameManager.instance.SetGamePaused(true);
 
@@ -41,17 +42,22 @@ public class LevelLoader : MonoBehaviour
 
     public IEnumerator FinishTransition()
     {
-        GameManager.instance.SetGamePaused(false);
-
-        GameManager.instance.GetPlayer().GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
-
-        switch (lastTransitionType)
+        if (lastTransitionType != null)
         {
-            case Config.CROSSFADE_TRANSITION:
-                crossFade.SetTrigger("End");
-                yield return new WaitForSeconds(endTransitionTime * 2);
-                crossFade.gameObject.SetActive(false);
-                break;
+            GameManager.instance.SetGamePaused(false);
+            GameManager.instance.GetPlayer().GetComponent<Animator>().enabled = true;
+
+
+            GameManager.instance.GetPlayer().GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+
+            switch (lastTransitionType)
+            {
+                case Config.CROSSFADE_TRANSITION:
+                    crossFade.SetTrigger("End");
+                    yield return new WaitForSeconds(endTransitionTime);
+                    crossFade.gameObject.SetActive(false);
+                    break;
+            }
         }
     }
 }
