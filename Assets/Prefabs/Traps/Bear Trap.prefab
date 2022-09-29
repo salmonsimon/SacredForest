@@ -148,3 +148,5 @@ MonoBehaviour:
   isColliding: 0
   tagsToCheck:
   - Player
+  tagsToDisarm:
+  - Sword
