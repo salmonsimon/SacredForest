@@ -51,18 +51,17 @@ public class Mover : MonoBehaviour
     private Vector3 originalScale;
     protected Rigidbody2D rigidBody;
 
-    private float dashForce = 25f;
+    private float dashForce = Config.DASH_FORCE;
 
-    private float runVelocity = 3f;
-    private float movementSmoothing = .05f;
+    private float runSpeed = Config.RUN_SPEED;
+    private float movementSmoothing = Config.MOVEMENT_SMOOTHING;
 
-    private float jumpForce = 200;
-    private float wallJumpForceX = 400;
-    private float wallJumpForceY = 160;
+    private float jumpForce = Config.JUMP_FORCE;
+    private float wallJumpForceX = Config.WALL_JUMP_FORCE_X;
+    private float wallJumpForceY = Config.WALL_JUMP_FORCE_Y;
 
-
-    private float limitFallSpeed = 8f;
-    private float wallSlidingVelocity = -1f;
+    private float fallSpeedLimit = Config.FALL_SPEED_LIMIT;
+    private float wallSlidingVelocity = Config.WALL_SLIDING_VELOCITY;
 
     #endregion
 
@@ -100,7 +99,7 @@ public class Mover : MonoBehaviour
         {
             UpdateDirection(movement);
 
-            animator.SetFloat("SpeedY", rigidBody.velocity.y);
+            animator.SetFloat(Config.MOVEMENT_ANIMATOR_SPEED_Y, rigidBody.velocity.y);
 
             if (hasAbilityToDash && isAbleToDash && dashAction)
             {
@@ -119,7 +118,7 @@ public class Mover : MonoBehaviour
 
             }
 
-            Vector3 targetVelocity = new Vector2(movement.x * runVelocity, rigidBody.velocity.y);
+            Vector3 targetVelocity = new Vector2(movement.x * runSpeed, rigidBody.velocity.y);
             rigidBody.velocity = Vector3.SmoothDamp(rigidBody.velocity, targetVelocity, ref refVelocity, movementSmoothing);
 
             if (jumpAction)
@@ -151,7 +150,7 @@ public class Mover : MonoBehaviour
             if (!isCollidingWithWall)
             {
                 isWallSliding = false;
-                animator.SetBool("IsWallSliding", false);
+                animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_WALL_SLIDING, false);
             }
             else
             {
@@ -163,7 +162,7 @@ public class Mover : MonoBehaviour
         {
             if (ExceedsFallVelocity())
             {
-                rigidBody.velocity = new Vector2(rigidBody.velocity.x, -limitFallSpeed);
+                rigidBody.velocity = new Vector2(rigidBody.velocity.x, -fallSpeedLimit);
             }
         }
     }
@@ -201,10 +200,10 @@ public class Mover : MonoBehaviour
 
     private void DoJumpAction()
     {
-        animator.SetBool("IsJumping", true);
+        animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_JUMPING, true);
         isJumping = true;
 
-        animator.SetTrigger("Jump");
+        animator.SetTrigger(Config.MOVEMENT_ANIMATOR_JUMP_TRIGGER);
 
         rigidBody.AddForce(new Vector2(0f, jumpForce));
 
@@ -215,10 +214,10 @@ public class Mover : MonoBehaviour
     private void DoWallJumpAction()
     {
         isWallSliding = false;
-        animator.SetBool("IsWallSliding", false);
+        animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_WALL_SLIDING, false);
 
-        animator.SetTrigger("Jump");
-        animator.SetBool("IsJumping", true);
+        animator.SetTrigger(Config.MOVEMENT_ANIMATOR_JUMP_TRIGGER);
+        animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_JUMPING, true);
         isJumping = true;
 
         float flippedWallJumpForceX;
@@ -246,10 +245,10 @@ public class Mover : MonoBehaviour
 
     public void OnLanding()
     {
-        animator.SetBool("IsJumping", false);
+        animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_JUMPING, false);
         isJumping = false;
 
-        animator.SetBool("IsWallSliding", false);
+        animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_WALL_SLIDING, false);
         isWallSliding = false;
 
         particlesLand.Play();
@@ -258,10 +257,10 @@ public class Mover : MonoBehaviour
     private void DoWallSlideAction()
     {
         isJumping = false;
-        animator.SetBool("IsJumping", false);
+        animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_JUMPING, false);
 
         isWallSliding = true;
-        animator.SetBool("IsWallSliding", true);
+        animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_WALL_SLIDING, true);
     }
 
     public void FinishWallSliding()
@@ -270,18 +269,18 @@ public class Mover : MonoBehaviour
 
         isCollidingWithWall = false;
         isWallSliding = false;
-        animator.SetBool("IsWallSliding", false);
+        animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_WALL_SLIDING, false);
     }
 
     private IEnumerator DoDashAction()
     {
-        animator.SetTrigger("Dash");
-        animator.SetBool("IsDashing", true);
+        animator.SetTrigger(Config.MOVEMENT_ANIMATOR_DASH_TRIGGER);
+        animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_DASHING, true);
 
         rigidBody.velocity = new Vector2(transform.localScale.x * dashForce, 0);
 
-        yield return new WaitForSeconds(.1f);
-        animator.SetBool("IsDashing", false);
+        yield return new WaitForSeconds(Config.DASH_DURATION);
+        animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_DASHING, false);
 
 
         StartCoroutine(DashCooldown());
@@ -291,7 +290,7 @@ public class Mover : MonoBehaviour
     {
         isAbleToDash = false;
 
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(Config.DASH_COOLDOWN);
 
         isAbleToDash = true;
     }
@@ -328,6 +327,6 @@ public class Mover : MonoBehaviour
 
     public bool ExceedsFallVelocity()
     {
-        return rigidBody.velocity.y < -limitFallSpeed;
+        return rigidBody.velocity.y < -fallSpeedLimit;
     }
 }

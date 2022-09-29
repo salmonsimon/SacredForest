@@ -7,8 +7,8 @@ public class LevelLoader : MonoBehaviour
 {
     [SerializeField] private Animator crossFade;
 
-    private float startTransitionTime = .5f; 
-    private float endTransitionTime = 1f;
+    private float startTransitionDuration = Config.START_TRANSITION_DURATION; 
+    private float endTransitionDuration = Config.END_TRANSITION_DURATION;
     private string lastTransitionType; 
 
     public void LoadLevel(string sceneName, string transitionType)
@@ -22,13 +22,13 @@ public class LevelLoader : MonoBehaviour
         {
             case Config.CROSSFADE_TRANSITION:
                 crossFade.gameObject.SetActive(true);
-                crossFade.SetTrigger("Start");
+                crossFade.SetTrigger(Config.CROSSFADE_START_TRIGGER);
                 break;
         }
 
         lastTransitionType = transitionType;
 
-        yield return new WaitForSeconds(startTransitionTime);
+        yield return new WaitForSeconds(startTransitionDuration);
 
         GameManager.instance.SetGamePaused(true);
 
@@ -53,8 +53,8 @@ public class LevelLoader : MonoBehaviour
             switch (lastTransitionType)
             {
                 case Config.CROSSFADE_TRANSITION:
-                    crossFade.SetTrigger("End");
-                    yield return new WaitForSeconds(endTransitionTime);
+                    crossFade.SetTrigger(Config.CROSSFADE_END_TRIGGER);
+                    yield return new WaitForSeconds(endTransitionDuration);
                     crossFade.gameObject.SetActive(false);
                     break;
             }

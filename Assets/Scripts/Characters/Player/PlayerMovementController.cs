@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class PlayerMovementController : Mover
 {
-    private float addedFallGravity = 0.3f;
-    private float  addedGravityLowJump = 1.8f;
+    private float addedFallGravity = Config.ADDED_FALL_GRAVITY;
+    private float  addedGravityLowJump = Config.ADDED_GRAVITY_LOW_JUMP;
+
+
 
     private void Update()
     {
