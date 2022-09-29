@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Spawn Point
+  - CinemachineCamera
   layers:
   - Default
   - TransparentFX
@@ -53,6 +55,9 @@ TagManager:
     locked: 0
   - name: Actors
     uniqueID: 3728317459
+    locked: 0
+  - name: Interactible
+    uniqueID: 3449689739
     locked: 0
   - name: Tiles - Front
     uniqueID: 3808495215

@@ -20,7 +20,7 @@ public class PlayerAttackController : MonoBehaviour
 
     private void Update()
     {
-        if (!GameManager.instance.IsGamePaused())
+        if (!GameManager.instance.IsGamePaused() && !GameManager.instance.IsTeleporting())
         {
             if (Input.GetKeyDown(KeyCode.X))
             {

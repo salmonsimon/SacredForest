@@ -9,7 +9,7 @@ public class PlayerMovementController : Mover
 
     private void Update()
     {
-        if (!GameManager.instance.IsGamePaused())
+        if (!GameManager.instance.IsGamePaused() && !GameManager.instance.IsTeleporting())
         {
             movement.x = Input.GetAxisRaw("Horizontal");
             movement.y = Input.GetAxisRaw("Vertical");
