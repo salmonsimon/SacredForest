@@ -7,8 +7,8 @@ public class PlayerAttackController : MonoBehaviour
     private Animator animator;
     private PlayerMovementController playerMovementController;
 
-    private bool onCooldown = false;
-    private float cooldownTime = .5f;
+    private bool onAttackCooldown = false;
+    private float attackCooldownDuration = Config.ATTACK_COOLDOWN_DURATION;
 
     private bool ableToDoSecondAttack = true;
 
@@ -24,7 +24,7 @@ public class PlayerAttackController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.X))
             {
-                if (!onCooldown)
+                if (!onAttackCooldown)
                 {
                     DoAttack();
                 }
@@ -38,7 +38,7 @@ public class PlayerAttackController : MonoBehaviour
 
     public void DoAttack()
     {
-        onCooldown = true;
+        onAttackCooldown = true;
 
         if (playerMovementController.IsWallSliding())
         {
@@ -61,27 +61,27 @@ public class PlayerAttackController : MonoBehaviour
 
         ableToDoSecondAttack = false;
 
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(Config.SECOND_ATTACK_DURATION);
 
         animator.SetBool("IsDoingSecondAttack", false);
     }
 
     private IEnumerator Cooldown()
     {
-        yield return new WaitForSeconds(cooldownTime*(0.75f));
+        yield return new WaitForSeconds(attackCooldownDuration*(0.75f));
 
         ableToDoSecondAttack = false;
 
-        yield return new WaitForSeconds(cooldownTime*(0.25f));
+        yield return new WaitForSeconds(attackCooldownDuration*(0.25f));
 
-        onCooldown = false;
+        onAttackCooldown = false;
     }
 
     private IEnumerator CooldownToMove()
     {
         playerMovementController.SetIsAbleToMove(false);
 
-        yield return new WaitForSeconds(.3f);
+        yield return new WaitForSeconds(Config.WALLSLIDE_ATTACK_MOVEMENT_COOLDOWN);
 
         playerMovementController.SetIsAbleToMove(true);
     }
