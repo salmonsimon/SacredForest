@@ -298,6 +298,7 @@ public class Mover : MonoBehaviour
     public void Death()
     {
         isAbleToMove = false;
+        rigidBody.constraints = RigidbodyConstraints2D.FreezePositionX;
     }
 
     protected bool IsFalling()

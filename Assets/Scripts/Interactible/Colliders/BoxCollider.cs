@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BoxCollider : GeneralCollider
 {
-    private BoxCollider2D boxCollider;
+    protected BoxCollider2D boxCollider;
 
     protected virtual void Awake()
     {

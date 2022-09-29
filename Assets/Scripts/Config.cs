@@ -3,6 +3,8 @@ public class Config
     public const string SPAWN_POINT_TAG = "Spawn Point";
     public const string CINEMACHINE_CAMERA_TAG = "CinemachineCamera";
 
+    public const string ANIMATOR_BEAR_TRAP_TRIGGER = "Activate";
+
     #region Characters
 
     #region Player

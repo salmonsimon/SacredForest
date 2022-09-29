@@ -12,6 +12,8 @@ public class PlayerAttackController : MonoBehaviour
 
     private bool ableToDoSecondAttack = true;
 
+    private bool isDead;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -20,7 +22,7 @@ public class PlayerAttackController : MonoBehaviour
 
     private void Update()
     {
-        if (!GameManager.instance.IsGamePaused() && !GameManager.instance.IsTeleporting())
+        if (!GameManager.instance.IsGamePaused() && !GameManager.instance.IsTeleporting() && !isDead)
         {
             if (Input.GetKeyDown(KeyCode.X))
             {
@@ -84,5 +86,10 @@ public class PlayerAttackController : MonoBehaviour
         yield return new WaitForSeconds(Config.WALLSLIDE_ATTACK_MOVEMENT_COOLDOWN);
 
         playerMovementController.SetIsAbleToMove(true);
+    }
+
+    public void Death()
+    {
+        isDead = true;
     }
 }

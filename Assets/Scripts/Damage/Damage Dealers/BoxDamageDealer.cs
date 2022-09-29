@@ -10,8 +10,8 @@ public class BoxDamageDealer : BoxCollider
         {
             if (coll.gameObject.CompareTag(tagsToCheck[i]))
             {
-                Debug.Log("Damaged " + coll.name);
-                coll.SendMessage("ReceiveDamage");
+                if (coll.GetComponent<DamageReceiver>().IsAlive())
+                    coll.SendMessage("ReceiveDamage");
             }
         }
     }
