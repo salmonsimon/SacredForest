@@ -5,13 +5,15 @@ using UnityEngine;
 public class DamageReceiver : MonoBehaviour
 {
     [SerializeField] private Animator animator;
-    [SerializeField] Mover attachedCharacter;
+    [SerializeField] GameObject attachedCharacter;
 
     [SerializeField] private int currentHitPoints = 1;
     [SerializeField] private int maxHitPoints = 1;
 
     [SerializeField] private float immuneTime = 1f;
     private bool isImmune = false;
+
+    private bool isAlive = true;
 
     private void Awake()
     {
@@ -20,24 +22,31 @@ public class DamageReceiver : MonoBehaviour
 
     protected virtual void ReceiveDamage()
     {
-        if (!isImmune)
+        if (!isImmune && isAlive)
         {
             currentHitPoints--;
-            animator.SetTrigger("Hurt");
-            StartCoroutine(ImmuneCooldown());
 
             if (currentHitPoints < 1)
             {
                 Death();
+            }
+            else
+            {
+                animator.SetTrigger("Hurt");
+                StartCoroutine(ImmuneCooldown());
             }
         }
     }
 
     protected virtual void Death()
     {
+        animator.SetBool("IsDead", true);
         animator.SetTrigger("Death");
 
-        attachedCharacter.Death();
+        isAlive = false;
+
+        attachedCharacter.GetComponent<PlayerMovementController>().Death();
+        attachedCharacter.GetComponent<PlayerAttackController>().Death();
     }
 
     private IEnumerator ImmuneCooldown()
@@ -47,5 +56,10 @@ public class DamageReceiver : MonoBehaviour
         yield return new WaitForSeconds(immuneTime);
 
         isImmune = false;
+    }
+
+    public bool IsAlive()
+    {
+        return isAlive;
     }
 }

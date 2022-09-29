@@ -77,11 +77,9 @@ GameObject:
   - component: {fileID: 681107206}
   - component: {fileID: 861199745}
   - component: {fileID: 861199744}
-  - component: {fileID: 8288905641729672244}
-  - component: {fileID: 7722728832122788248}
   m_Layer: 0
   m_Name: Sword
-  m_TagString: Untagged
+  m_TagString: Sword
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -167,34 +165,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c90b7decf6e95d44aa89bd3d5885518b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isColliding: 0
-  tagsToCheck: []
---- !u!114 &8288905641729672244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 681107203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c90b7decf6e95d44aa89bd3d5885518b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isColliding: 0
-  tagsToCheck: []
---- !u!114 &7722728832122788248
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 681107203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3866054b6ecb4fc41967a9a27ad200d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isColliding: 0
@@ -9984,9 +9954,10 @@ GameObject:
   - component: {fileID: 1902571026}
   - component: {fileID: 292766574087176135}
   - component: {fileID: 1534564919}
+  - component: {fileID: 1593047561}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10069,8 +10040,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -566649837
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -3318188226485093758, guid: ae72133dacba6ec4eb33ecde48f50e56, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -10138,7 +10109,6 @@ MonoBehaviour:
   wallCheck: {fileID: 377021683}
   hasAbilityToDash: 1
   hasAbilityToWallJump: 1
-  limitFallSpeed: 20
 --- !u!114 &1534564919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10151,3 +10121,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b283b07556e3255448ce2ef4b91e7ef3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1593047561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6515762600975830338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e58c267cd4ef09409f30c564b9ca1d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 6515762600975830348}
+  attachedCharacter: {fileID: 6515762600975830338}
+  currentHitPoints: 1
+  maxHitPoints: 1
+  immuneTime: 2
