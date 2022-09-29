@@ -195,6 +195,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2123404659}
     m_Modifications:
+    - target: {fileID: 681107203, guid: d8cc93a66c8b71546acb630569542017, type: 3}
+      propertyPath: m_TagString
+      value: Sword
+      objectReference: {fileID: 0}
     - target: {fileID: 1902571027, guid: d8cc93a66c8b71546acb630569542017, type: 3}
       propertyPath: m_BodyType
       value: 0
