@@ -8,6 +8,7 @@ TagManager:
   - Spawn Point
   - CinemachineCamera
   - Sword
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -17,8 +18,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Enemy
+  - Player
   - 
   - 
   - 
