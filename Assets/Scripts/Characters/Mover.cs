@@ -35,8 +35,8 @@ public class Mover : MonoBehaviour
     [SerializeField] protected bool hasAbilityToDash;
     [SerializeField] protected bool hasAbilityToWallJump;
 
-    private protected bool isAbleToDash = true;
-    private protected bool isAbleToMove = true;
+    protected bool isAbleToDash = true;
+    protected bool isAbleToMove = true;
 
     private bool isGrounded;
     private bool isJumping;

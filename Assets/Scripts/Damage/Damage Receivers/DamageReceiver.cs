@@ -5,7 +5,7 @@ using UnityEngine;
 public class DamageReceiver : MonoBehaviour
 {
     [SerializeField] private Animator animator;
-    [SerializeField] GameObject attachedCharacter;
+    [SerializeField] protected GameObject attachedCharacter;
 
     [SerializeField] private int currentHitPoints = 1;
     [SerializeField] private int maxHitPoints = 1;
@@ -44,9 +44,6 @@ public class DamageReceiver : MonoBehaviour
         animator.SetTrigger("Death");
 
         isAlive = false;
-
-        attachedCharacter.GetComponent<PlayerMovementController>().Death();
-        attachedCharacter.GetComponent<PlayerAttackController>().Death();
     }
 
     private IEnumerator ImmuneCooldown()

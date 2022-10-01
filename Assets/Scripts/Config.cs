@@ -1,11 +1,28 @@
 public class Config 
 {
+    #region Tags
+
+    public const string PLAYER_TAG = "Player";
     public const string SPAWN_POINT_TAG = "Spawn Point";
     public const string CINEMACHINE_CAMERA_TAG = "CinemachineCamera";
 
+    #endregion
+
+    #region General Animations
+
     public const string ANIMATOR_BEAR_TRAP_TRIGGER = "Activate";
 
+    #endregion
+
     #region Characters
+
+    #region Enemies
+
+    public const string MOVEMENT_ANIMATOR_JUMP_BACK_TRIGGER = "JumpBack";
+    public const string MOVEMENT_ANIMATOR_IS_JUMPING_BACK = "IsJumpingBack";
+    public const float JUMP_BACK_COOLDOWN = 2f;
+
+    #endregion
 
     #region Player
 
