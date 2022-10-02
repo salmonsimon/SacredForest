@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-[RequireComponent(typeof(EnemyMover), typeof(SwordsmanAttacks))]
+[RequireComponent(typeof(EnemyMover), typeof(SwordsmanAttacks), typeof(DamageReceiver))]
 public class Swordsman : MonoBehaviour
 {
     private Animator animator;
@@ -11,6 +11,7 @@ public class Swordsman : MonoBehaviour
 
     private EnemyMover enemyMover;
     private SwordsmanAttacks swordsmanAttacks;
+    private DamageReceiver damageReceiver;
 
     #endregion
 
@@ -29,6 +30,7 @@ public class Swordsman : MonoBehaviour
 
     [SerializeField] private LayerMask playerLayer;
     private GameObject player;
+    private bool isPlayerAlive = true;
 
     #endregion
 
@@ -39,6 +41,8 @@ public class Swordsman : MonoBehaviour
     private bool stillMoreToWalk;
 
     private bool onActionCooldown = false;
+
+    private bool isAlive = true;
 
     #endregion
 
@@ -61,12 +65,24 @@ public class Swordsman : MonoBehaviour
 
         enemyMover = GetComponent<EnemyMover>();
         swordsmanAttacks = GetComponent<SwordsmanAttacks>();
+        damageReceiver = GetComponent<DamageReceiver>();
 
         player = GameObject.FindGameObjectWithTag(Config.PLAYER_TAG);
     }
 
+    private void Start()
+    {
+        damageReceiver.OnCharacterDeath += Death;
+    }
+
     private void FixedUpdate()
     {
+        if (isPlayerAlive)
+            isPlayerAlive = player.GetComponent<DamageReceiver>().IsAlive;
+
+        if (!isAlive || !isPlayerAlive)
+            return;
+
         movement = Vector2.zero;
 
         groundedAfterJumpBack = jumpBackGroundCheck.IsColliding();
@@ -77,8 +93,6 @@ public class Swordsman : MonoBehaviour
         if (!enemyMover.IsWalkingAway() && noticedPlayer)
             enemyMover.Flip(new Vector2(relativePlayerPositionX, 0));
 
-        // Create event for when player dies, so we dont do anything if player is dead
-
         if (!noticedPlayer)
             CheckForPlayer();
 
@@ -88,7 +102,7 @@ public class Swordsman : MonoBehaviour
 
             if (!swordsmanAttacks.OnAttackCooldown())
             {
-                PickRandomAttackPattern(swordsmanAttacks.HasSecondAttack(), swordsmanAttacks.HasThirdAttack(), enemyMover.IsAbleToJumpBack());
+                StartCoroutine(PickRandomAttackPattern(swordsmanAttacks.HasSecondAttack(), swordsmanAttacks.HasThirdAttack(), enemyMover.IsAbleToJumpBack()));
                 StartCoroutine(ActionCooldown(1f));
             }
             else if (enemyMover.IsWalkingAway())
@@ -124,8 +138,11 @@ public class Swordsman : MonoBehaviour
         ResetActionBooleans();
     }
 
-    private void PickRandomAttackPattern(bool hasSecondAttack, bool hasThirdAttack, bool isAbleToJumpBack)
+    private IEnumerator PickRandomAttackPattern(bool hasSecondAttack, bool hasThirdAttack, bool isAbleToJumpBack)
     {
+        StartCoroutine(swordsmanAttacks.AttackCooldown());
+        yield return new WaitForSeconds(.2f);
+
         firstAttackAction = true;
 
         if (hasThirdAttack)
@@ -150,7 +167,8 @@ public class Swordsman : MonoBehaviour
             }
         }
 
-        swordsmanAttacks.AttackPattern(firstAttackAction, secondAttackAction, thirdAttackAction);
+        if (isAlive)
+            swordsmanAttacks.AttackPattern(firstAttackAction, secondAttackAction, thirdAttackAction);
     }
 
     private void CheckForPlayer()
@@ -214,5 +232,10 @@ public class Swordsman : MonoBehaviour
         yield return new WaitForSeconds(duration);
 
         onActionCooldown = false;
+    }
+
+    private void Death()
+    {
+        isAlive = false;
     }
 }

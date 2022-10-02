@@ -7,11 +7,16 @@ public class PlayerMovementController : Mover
     private float addedFallGravity = Config.ADDED_FALL_GRAVITY;
     private float  addedGravityLowJump = Config.ADDED_GRAVITY_LOW_JUMP;
 
+    private bool isAlive = true;
 
+    private void Start()
+    {
+        GetComponent<DamageReceiver>().OnCharacterDeath += Death;
+    }
 
     private void Update()
     {
-        if (!GameManager.instance.IsGamePaused() && !GameManager.instance.IsTeleporting())
+        if (!GameManager.instance.IsGamePaused() && !GameManager.instance.IsTeleporting() && isAlive)
         {
             movement.x = Input.GetAxisRaw("Horizontal");
             movement.y = Input.GetAxisRaw("Vertical");
@@ -61,5 +66,12 @@ public class PlayerMovementController : Mover
     private bool IsJumpingUp()
     {
         return rigidBody.velocity.y > 0.1;
+    }
+
+    protected override void Death()
+    {
+        base.Death();
+
+        isAlive = false;
     }
 }

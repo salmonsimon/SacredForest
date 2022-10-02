@@ -23,7 +23,7 @@ public class SwordsmanAttacks : MonoBehaviour
     [SerializeField] private bool hasSecondAttack = false;
     [SerializeField] private bool hasThirdAttack = false;
 
-    private bool isDead = false;
+    private bool isAlive = true;
 
     #endregion
 
@@ -36,13 +36,16 @@ public class SwordsmanAttacks : MonoBehaviour
             hasSecondAttack = true;
     }
 
+    private void Start()
+    {
+        GetComponent<DamageReceiver>().OnCharacterDeath += Death;
+    }
+
     public void AttackPattern(bool firstAttack, bool secondAttack, bool thirdAttack)
     {
         int attackCount = System.Convert.ToInt32(firstAttack) + System.Convert.ToInt32(secondAttack) + System.Convert.ToInt32(thirdAttack);
 
         PlayClips(attackCount);
-
-        StartCoroutine(AttackCooldown());
     }
 
     public void PlayClips(int attackCount)
@@ -58,11 +61,14 @@ public class SwordsmanAttacks : MonoBehaviour
         StartCoroutine(IsAttackingCooldown(cumulativeLength));
     }
 
-    IEnumerator PlayClip(int clipHash, float startTime)
+    private IEnumerator PlayClip(int clipHash, float startTime) 
     {
         yield return new WaitForSeconds(startTime);
 
-        animator.Play(clipHash);
+        if (isAlive)
+        {
+            animator.Play(clipHash);
+        }
     }
 
     private IEnumerator IsAttackingCooldown(float duration)
@@ -106,5 +112,13 @@ public class SwordsmanAttacks : MonoBehaviour
     public bool HasThirdAttack()
     {
         return hasThirdAttack;
+    }
+
+    private void Death()
+    {
+        isAlive = false;
+
+        if (currentCoroutine != null)
+            StopCurrentAttackCoroutine();
     }
 }

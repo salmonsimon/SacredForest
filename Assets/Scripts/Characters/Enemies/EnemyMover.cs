@@ -32,7 +32,7 @@ public class EnemyMover : MonoBehaviour
     private Vector3 originalScale;
     protected Rigidbody2D rigidBody;
 
-    private float dashForce = 15f;
+    private float dashForce = Config.DASH_FORCE;
 
     private float movementSmoothing = Config.MOVEMENT_SMOOTHING;
     [SerializeField] private float runSpeed = 2f;
@@ -144,7 +144,7 @@ public class EnemyMover : MonoBehaviour
         animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_JUMPING_BACK, true);
         animator.SetTrigger(Config.MOVEMENT_ANIMATOR_JUMP_BACK_TRIGGER);
 
-        rigidBody.velocity = new Vector2(-transform.localScale.x * dashForce, 0);
+        rigidBody.AddForce(new Vector2(-transform.localScale.x * dashForce, 0));
 
         yield return new WaitForSeconds(Config.DASH_DURATION);
         animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_JUMPING_BACK, false);
@@ -162,19 +162,13 @@ public class EnemyMover : MonoBehaviour
     {
         animator.SetTrigger(Config.MOVEMENT_ANIMATOR_DASH_TRIGGER);
 
-        rigidBody.velocity = new Vector2(transform.localScale.x * dashForce, 0);
+        rigidBody.AddForce(new Vector2(transform.localScale.x * dashForce, 0));
 
         isAbleToDash = false;
 
         yield return new WaitForSeconds(Config.DASH_COOLDOWN);
 
         isAbleToDash = true;
-    }
-
-    public void Death()
-    {
-        SetIsAbleToMove(false);
-        rigidBody.constraints = RigidbodyConstraints2D.FreezePositionX;
     }
 
     public void SetIsAbleToMove(bool value)
