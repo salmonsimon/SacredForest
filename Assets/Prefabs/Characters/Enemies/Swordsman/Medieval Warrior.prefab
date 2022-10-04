@@ -1,5 +1,63 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &303674431
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 303674432}
+  - component: {fileID: 303674433}
+  m_Layer: 8
+  m_Name: GroupAlertCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &303674432
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303674431}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 771548696854713196}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &303674433
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303674431}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 4, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &771548696423926449
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,6 +166,7 @@ GameObject:
   - component: {fileID: 771548696854713198}
   - component: {fileID: 771548696854713184}
   - component: {fileID: 1978429411817555222}
+  - component: {fileID: 1076851815}
   m_Layer: 8
   m_Name: Medieval Warrior
   m_TagString: Enemy
@@ -124,7 +183,7 @@ Transform:
   m_GameObject: {fileID: 771548696854713193}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.2628043, y: -0.7188143, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 771548696423926448}
@@ -132,6 +191,7 @@ Transform:
   - {fileID: 771548696530122666}
   - {fileID: 771548698097287244}
   - {fileID: 771548697458528305}
+  - {fileID: 303674432}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -298,9 +358,13 @@ MonoBehaviour:
   stillMoreToWalkCheck: {fileID: 771548697458528304}
   jumpBackGroundCheck: {fileID: 771548698097287247}
   visionFieldCollider: {fileID: 771548696530122668}
+  groupAlertCollider: {fileID: 303674433}
   playerLayer:
     serializedVersion: 2
     m_Bits: 512
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 256
   startleDuration: 0.5
 --- !u!114 &1978429411817555222
 MonoBehaviour:
@@ -318,6 +382,18 @@ MonoBehaviour:
   currentHitPoints: 1
   maxHitPoints: 1
   immuneTime: 2
+--- !u!114 &1076851815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771548696854713193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aed2727e8c47bc44d82ee5f192799537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &771548697013693306
 GameObject:
   m_ObjectHideFlags: 0
