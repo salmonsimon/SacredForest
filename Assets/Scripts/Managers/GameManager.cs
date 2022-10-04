@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject player;
     [SerializeField] private LevelLoader levelLoader;
+    [SerializeField] private FloatingTextManager floatingTextManager;
 
     #endregion
 
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             Destroy(levelLoader.gameObject);
             Destroy(player.gameObject);
+            Destroy(floatingTextManager.gameObject);
         }
         else
         {
@@ -52,7 +54,10 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine(levelLoader.FinishTransition());
     }
-
+    public void ShowText(string msg, int fontSize, Color color, Vector3 position, Vector3 motion, float duration)
+    {
+        floatingTextManager.Show(msg, fontSize, color, position, motion, duration);
+    }
 
     #region Getters and Setters
 

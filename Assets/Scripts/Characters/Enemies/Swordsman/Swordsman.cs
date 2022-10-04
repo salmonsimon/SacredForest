@@ -42,6 +42,7 @@ public class Swordsman : MonoBehaviour
 
     private bool onActionCooldown = false;
 
+    private bool isStartled = false;
     private bool isAlive = true;
 
     #endregion
@@ -56,6 +57,12 @@ public class Swordsman : MonoBehaviour
     private bool thirdAttackAction = false;
 
     private bool jumpBackAction = false;
+
+    #endregion
+
+    #region Parameters
+
+    [SerializeField] private float startleDuration = 1f;
 
     #endregion
 
@@ -80,7 +87,7 @@ public class Swordsman : MonoBehaviour
         if (isPlayerAlive)
             isPlayerAlive = player.GetComponent<DamageReceiver>().IsAlive;
 
-        if (!isAlive || !isPlayerAlive)
+        if (!isAlive || !isPlayerAlive || isStartled)
             return;
 
         movement = Vector2.zero;
@@ -98,7 +105,8 @@ public class Swordsman : MonoBehaviour
 
         if (attackZoneCollider.IsColliding())
         {
-            noticedPlayer = true;
+            if (!noticedPlayer)
+                NoticedPlayer();
 
             if (!swordsmanAttacks.OnAttackCooldown())
             {
@@ -176,7 +184,26 @@ public class Swordsman : MonoBehaviour
         RaycastHit2D hit = Physics2D.BoxCast(visionFieldCollider.bounds.center, visionFieldCollider.bounds.size, 0, Vector2.left, 0, playerLayer);
 
         if (hit.collider)
-            noticedPlayer = true;
+            NoticedPlayer();
+    }
+
+    private void NoticedPlayer()
+    {
+        noticedPlayer = true;
+
+        StartCoroutine(Startled());
+        StartCoroutine(enemyMover.MovementCooldown(startleDuration));
+
+        GameManager.instance.ShowText("!", 32, Color.white, new Vector3(transform.position.x, transform.position.y + 0.32f, 0), Vector3.up * 40, 1f);
+    }
+
+    private IEnumerator Startled()
+    {
+        isStartled = true;
+
+        yield return new WaitForSeconds(startleDuration);
+
+        isStartled = false;
     }
 
     private void OnDrawGizmos()

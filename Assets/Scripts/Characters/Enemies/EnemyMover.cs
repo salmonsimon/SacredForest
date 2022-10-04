@@ -32,7 +32,7 @@ public class EnemyMover : MonoBehaviour
     private Vector3 originalScale;
     protected Rigidbody2D rigidBody;
 
-    private float dashForce = Config.DASH_FORCE;
+    [SerializeField] private float dashForce = Config.DASH_FORCE;
 
     private float movementSmoothing = Config.MOVEMENT_SMOOTHING;
     [SerializeField] private float runSpeed = 2f;
@@ -49,6 +49,9 @@ public class EnemyMover : MonoBehaviour
 
     #endregion
 
+    [SerializeField] private Vector3 velocity;
+    [SerializeField] private Vector2 movement;
+
     protected void Awake()
     {
         originalScale = transform.localScale;
@@ -57,10 +60,17 @@ public class EnemyMover : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
     }
 
+    private void Update()
+    {
+        velocity = rigidBody.velocity;
+    }
+
     public void UpdateMotor(Vector2 movement, bool dashAction, bool jumpBackAction)
     {
         if (isAbleToMove)
         {
+            this.movement = movement;
+
             UpdateDirection(movement);
             animator.SetFloat("Speed", Mathf.Abs(movement.x));
 
@@ -74,8 +84,12 @@ public class EnemyMover : MonoBehaviour
                 StartCoroutine(DoJumpBackAction());
             }
 
-            Vector3 targetVelocity = new Vector2(movement.x * runSpeed, rigidBody.velocity.y);
-            rigidBody.velocity = Vector3.SmoothDamp(rigidBody.velocity, targetVelocity, ref refVelocity, movementSmoothing);
+            if (isAbleToMove)
+            {
+                Vector3 targetVelocity = new Vector2(movement.x * runSpeed, rigidBody.velocity.y);
+                rigidBody.velocity = Vector3.SmoothDamp(rigidBody.velocity, targetVelocity, ref refVelocity, movementSmoothing);
+            }
+            
         }
     }
 
@@ -119,12 +133,13 @@ public class EnemyMover : MonoBehaviour
 
         int randomDecil = Random.Range(1, 10);
 
-        if (randomDecil <= 2)
+        if (randomDecil <= 10)
         {
-            if (hasJumpBack && isAbleToDash && groundedAfterJumpBack)
+            if (hasJumpBack && isAbleToJumpBack && groundedAfterJumpBack)
             {
                 jumpBackAction = true;
-                StartCoroutine(MoveCooldownAfterJumpBack());
+
+                Debug.Log("Jumped back");
             }
         }
         else if (randomDecil > 2 && randomDecil <= 4)
@@ -141,10 +156,13 @@ public class EnemyMover : MonoBehaviour
 
     private IEnumerator DoJumpBackAction()
     {
+        StartCoroutine(MoveCooldownAfterJumpBack());
+
         animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_JUMPING_BACK, true);
         animator.SetTrigger(Config.MOVEMENT_ANIMATOR_JUMP_BACK_TRIGGER);
 
-        rigidBody.AddForce(new Vector2(-transform.localScale.x * dashForce, 0));
+        rigidBody.AddForce(new Vector2(-transform.localScale.x * (2f * dashForce/3f), dashForce / 3f));
+        Debug.Log(dashForce);
 
         yield return new WaitForSeconds(Config.DASH_DURATION);
         animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_JUMPING_BACK, false);
@@ -224,9 +242,14 @@ public class EnemyMover : MonoBehaviour
     {
         yield return new WaitForSeconds(.05f);
 
+        StartCoroutine(MovementCooldown(1f));
+    }
+
+    public IEnumerator MovementCooldown(float duration)
+    {
         SetIsAbleToMove(false);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(duration);
 
         SetIsAbleToMove(true);
     }
