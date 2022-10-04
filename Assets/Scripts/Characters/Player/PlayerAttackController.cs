@@ -12,7 +12,7 @@ public class PlayerAttackController : MonoBehaviour
 
     private bool ableToDoSecondAttack = true;
 
-    private bool isDead;
+    private bool isAlive = true;
 
     private void Awake()
     {
@@ -20,9 +20,14 @@ public class PlayerAttackController : MonoBehaviour
         playerMovementController = GetComponent<PlayerMovementController>();
     }
 
+    private void Start()
+    {
+        GetComponent<DamageReceiver>().OnCharacterDeath += Death;
+    }
+
     private void Update()
     {
-        if (!GameManager.instance.IsGamePaused() && !GameManager.instance.IsTeleporting() && !isDead)
+        if (!GameManager.instance.IsGamePaused() && !GameManager.instance.IsTeleporting() && isAlive)
         {
             if (Input.GetKeyDown(KeyCode.X))
             {
@@ -90,6 +95,6 @@ public class PlayerAttackController : MonoBehaviour
 
     public void Death()
     {
-        isDead = true;
+        isAlive = false;
     }
 }

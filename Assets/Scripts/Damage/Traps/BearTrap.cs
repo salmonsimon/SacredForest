@@ -28,7 +28,7 @@ public class BearTrap : BoxCollider
         {
             if (coll.gameObject.CompareTag(tagsToCheck[j]))
             {
-                if (coll.GetComponent<DamageReceiver>().IsAlive())
+                if (coll.GetComponent<DamageReceiver>().IsAlive)
                     ActivateTrap(coll);
             }
         }

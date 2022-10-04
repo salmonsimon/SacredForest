@@ -10,7 +10,7 @@ public class CircleDamageDealer : CircleCollider
         {
             if (coll.gameObject.CompareTag(tagsToCheck[i]))
             {
-                if (coll.GetComponent<DamageReceiver>().IsAlive())
+                if (coll.GetComponent<DamageReceiver>().IsAlive)
                     coll.SendMessage("ReceiveDamage");
             }
         }

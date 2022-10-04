@@ -1,11 +1,31 @@
 public class Config 
 {
+    #region Tags
+
+    public const string PLAYER_TAG = "Player";
     public const string SPAWN_POINT_TAG = "Spawn Point";
     public const string CINEMACHINE_CAMERA_TAG = "CinemachineCamera";
 
+    #endregion
+
+    #region General Animations
+
     public const string ANIMATOR_BEAR_TRAP_TRIGGER = "Activate";
 
+    #endregion
+
     #region Characters
+
+    #region Enemies
+
+    public const float JUMP_BACK_FORCE = 250f;
+    public const string MOVEMENT_ANIMATOR_JUMP_BACK_TRIGGER = "JumpBack";
+    public const string MOVEMENT_ANIMATOR_IS_JUMPING_BACK = "IsJumpingBack";
+    public const float JUMP_BACK_DURATION = .2f;
+    public const float JUMP_BACK_COOLDOWN = 2f;
+    public const float MOVEMENT_AFTER_JUMP_BACK_COOLDOWN = 1f;
+
+    #endregion
 
     #region Player
 
@@ -31,7 +51,7 @@ public class Config
     public const float RUN_SPEED = 3f;
     public const float MOVEMENT_SMOOTHING = .05f;
 
-    public const float DASH_FORCE = 25f;
+    public const float DASH_FORCE = 850f;
 
     public const float JUMP_FORCE = 200;
     public const float WALL_JUMP_FORCE_X = 400;
@@ -51,7 +71,7 @@ public class Config
 
     public const string MOVEMENT_ANIMATOR_DASH_TRIGGER = "Dash";
     public const string MOVEMENT_ANIMATOR_IS_DASHING = "IsDashing";
-    public const float DASH_DURATION = .1f;
+    public const float DASH_DURATION = .2f;
     public const float DASH_COOLDOWN = .5f;
 
     #endregion

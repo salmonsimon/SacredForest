@@ -5,7 +5,6 @@ using UnityEngine;
 public class DamageReceiver : MonoBehaviour
 {
     [SerializeField] private Animator animator;
-    [SerializeField] GameObject attachedCharacter;
 
     [SerializeField] private int currentHitPoints = 1;
     [SerializeField] private int maxHitPoints = 1;
@@ -14,6 +13,21 @@ public class DamageReceiver : MonoBehaviour
     private bool isImmune = false;
 
     private bool isAlive = true;
+    public bool IsAlive
+    {
+        get { return isAlive; }
+        private set
+        {
+            if (isAlive = value) return;
+
+            isAlive = value;
+            if (OnCharacterDeath != null)
+                OnCharacterDeath();
+        }
+    }
+
+    public delegate void OnCharacterDeathDelegate();
+    public event OnCharacterDeathDelegate OnCharacterDeath;
 
     private void Awake()
     {
@@ -43,10 +57,10 @@ public class DamageReceiver : MonoBehaviour
         animator.SetBool("IsDead", true);
         animator.SetTrigger("Death");
 
-        isAlive = false;
+        IsAlive = false;
 
-        attachedCharacter.GetComponent<PlayerMovementController>().Death();
-        attachedCharacter.GetComponent<PlayerAttackController>().Death();
+        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        GetComponent<CapsuleCollider2D>().enabled = false;
     }
 
     private IEnumerator ImmuneCooldown()
@@ -56,10 +70,5 @@ public class DamageReceiver : MonoBehaviour
         yield return new WaitForSeconds(immuneTime);
 
         isImmune = false;
-    }
-
-    public bool IsAlive()
-    {
-        return isAlive;
     }
 }

@@ -35,8 +35,8 @@ public class Mover : MonoBehaviour
     [SerializeField] protected bool hasAbilityToDash;
     [SerializeField] protected bool hasAbilityToWallJump;
 
-    private protected bool isAbleToDash = true;
-    private protected bool isAbleToMove = true;
+    protected bool isAbleToDash = true;
+    protected bool isAbleToMove = true;
 
     private bool isGrounded;
     private bool isJumping;
@@ -277,7 +277,7 @@ public class Mover : MonoBehaviour
         animator.SetTrigger(Config.MOVEMENT_ANIMATOR_DASH_TRIGGER);
         animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_DASHING, true);
 
-        rigidBody.velocity = new Vector2(transform.localScale.x * dashForce, 0);
+        rigidBody.AddForce(new Vector2(transform.localScale.x * dashForce, 0));
 
         yield return new WaitForSeconds(Config.DASH_DURATION);
         animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_DASHING, false);
@@ -295,7 +295,7 @@ public class Mover : MonoBehaviour
         isAbleToDash = true;
     }
 
-    public void Death()
+    protected virtual void Death()
     {
         isAbleToMove = false;
         rigidBody.constraints = RigidbodyConstraints2D.FreezePositionX;
