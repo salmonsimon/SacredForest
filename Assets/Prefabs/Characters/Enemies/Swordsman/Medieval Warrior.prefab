@@ -256,8 +256,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c80af2e2caee70648958283479c7dbf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dashForce: 400
+  walkAwayDuration: 1.5
   runSpeed: 2
-  hasJumpBack: 0
+  hasJumpBack: 1
   hasDash: 0
   walksAwayWhenInAttackCooldown: 0
   movesWhileAttacking: 0
@@ -299,6 +301,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 512
+  startleDuration: 0.5
 --- !u!114 &1978429411817555222
 MonoBehaviour:
   m_ObjectHideFlags: 0

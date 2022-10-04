@@ -8223,18 +8223,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 771548696854713184, guid: d6488a535dbde8843a297c3fe7bd5c75, type: 3}
-      propertyPath: startleDuration
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 771548696854713185, guid: d6488a535dbde8843a297c3fe7bd5c75, type: 3}
-      propertyPath: dashForce
-      value: 400
-      objectReference: {fileID: 0}
-    - target: {fileID: 771548696854713185, guid: d6488a535dbde8843a297c3fe7bd5c75, type: 3}
-      propertyPath: hasJumpBack
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 771548696854713193, guid: d6488a535dbde8843a297c3fe7bd5c75, type: 3}
       propertyPath: m_Name
       value: Medieval Warrior
@@ -8242,10 +8230,6 @@ PrefabInstance:
     - target: {fileID: 771548696854713196, guid: d6488a535dbde8843a297c3fe7bd5c75, type: 3}
       propertyPath: m_RootOrder
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 771548696854713196, guid: d6488a535dbde8843a297c3fe7bd5c75, type: 3}
-      propertyPath: m_LocalScale.x
-      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 771548696854713196, guid: d6488a535dbde8843a297c3fe7bd5c75, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8296,14 +8280,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2123404659}
     m_Modifications:
-    - target: {fileID: 1971838360380672435, guid: da2b955bb7d5a7c43a29028653e8dd83, type: 3}
-      propertyPath: maxHitPoints
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 1971838360380672435, guid: da2b955bb7d5a7c43a29028653e8dd83, type: 3}
-      propertyPath: currentHitPoints
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 4697750405587687972, guid: da2b955bb7d5a7c43a29028653e8dd83, type: 3}
       propertyPath: m_RootOrder
       value: 0
