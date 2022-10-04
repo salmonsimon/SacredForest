@@ -357,14 +357,6 @@ MonoBehaviour:
   attackZoneCollider: {fileID: 771548697013693308}
   stillMoreToWalkCheck: {fileID: 771548697458528304}
   jumpBackGroundCheck: {fileID: 771548698097287247}
-  visionFieldCollider: {fileID: 771548696530122668}
-  groupAlertCollider: {fileID: 303674433}
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 512
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 256
   startleDuration: 0.5
 --- !u!114 &1978429411817555222
 MonoBehaviour:
@@ -394,6 +386,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aed2727e8c47bc44d82ee5f192799537, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visionFieldCollider: {fileID: 771548696530122668}
+  groupAlertCollider: {fileID: 303674433}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &771548697013693306
 GameObject:
   m_ObjectHideFlags: 0

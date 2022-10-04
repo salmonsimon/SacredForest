@@ -22,15 +22,10 @@ public class Swordsman : MonoBehaviour
     [SerializeField] private CircleCollider stillMoreToWalkCheck;
     [SerializeField] private CircleCollider jumpBackGroundCheck;
 
-    [SerializeField] private BoxCollider2D visionFieldCollider;
-    [SerializeField] private BoxCollider2D groupAlertCollider;
-
-
     #endregion
 
     #region Player
 
-    [SerializeField] private LayerMask playerLayer;
     private GameObject player;
     private bool isPlayerAlive = true;
 
@@ -45,9 +40,6 @@ public class Swordsman : MonoBehaviour
 
     private bool isStartled = false;
     private bool isAlive = true;
-
-    [SerializeField] private LayerMask enemyLayer;
-    private RaycastHit2D[] enemyGroup;
 
     #endregion
 
@@ -68,9 +60,7 @@ public class Swordsman : MonoBehaviour
 
     [SerializeField] private float startleDuration = .5f;
     private float actionCooldownDuration = Config.ACTION_COOLDOWN_DURATION;
-    private float alertGroupDelay = Config.ALERT_GROUP_DELAY;
     private float attackDelay = Config.ATTACK_DELAY;
-    
 
     #endregion
 
@@ -114,7 +104,7 @@ public class Swordsman : MonoBehaviour
             enemyMover.Flip(new Vector2(relativePlayerPositionX, 0));
 
         if (!playerDetection.DetectedPlayer)
-            CheckForPlayer();
+            playerDetection.CheckForPlayer();
 
         if (attackZoneCollider.IsColliding())
         {
@@ -195,38 +185,15 @@ public class Swordsman : MonoBehaviour
             swordsmanAttacks.AttackPattern(firstAttackAction, secondAttackAction, thirdAttackAction);
     }
 
-    private void CheckForPlayer()
-    {
-        RaycastHit2D hit = Physics2D.BoxCast(visionFieldCollider.bounds.center, visionFieldCollider.bounds.size, 0, Vector2.left, 0, playerLayer);
-
-        if (hit.collider)
-            playerDetection.DetectedPlayer = true;
-    }
-
     private void PlayerDetected()
     {
         enemyMover.Flip(new Vector2(relativePlayerPositionX, 0));
-        StartCoroutine(AlertGroupAfterDetectingPlayer());
+        StartCoroutine(playerDetection.AlertGroupAfterDetectingPlayer());
 
         StartCoroutine(Startled());
         StartCoroutine(enemyMover.MovementCooldown(startleDuration));
 
         GameManager.instance.ShowText("!", 32, Color.white, new Vector3(transform.position.x, transform.position.y + 0.32f, 0), Vector3.up * 40, 1f);
-    }
-
-    private IEnumerator AlertGroupAfterDetectingPlayer()
-    {
-        yield return new WaitForSeconds(alertGroupDelay);
-
-        enemyGroup = Physics2D.BoxCastAll(groupAlertCollider.bounds.center, groupAlertCollider.bounds.size, 0, Vector2.left, 0, enemyLayer);
-
-        if (enemyGroup != null)
-        {
-            foreach (RaycastHit2D enemy in enemyGroup)
-            {
-                enemy.transform.gameObject.GetComponent<PlayerDetection>().DetectedPlayer = true;
-            }
-        }
     }
 
     private IEnumerator Startled()
@@ -236,12 +203,6 @@ public class Swordsman : MonoBehaviour
         yield return new WaitForSeconds(startleDuration);
 
         isStartled = false;
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(visionFieldCollider.bounds.center, visionFieldCollider.bounds.size);
     }
 
     private Vector2 WalksTowards()
