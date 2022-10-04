@@ -12,9 +12,24 @@ public class Config
 
     public const string ANIMATOR_BEAR_TRAP_TRIGGER = "Activate";
 
+    #region Camera Shake
+
+    public const float CAMERASHAKE_HIT_AMPLITUDE = 3f;
+    public const float CAMERASHAKE_HIT_DURATION = .2f;
+
+    #endregion
+
     #endregion
 
     #region Characters
+
+    #region GENERAL ANIMATIONS
+
+    public const string ANIMATOR_HURT_TRIGGER = "Hurt";
+    public const string ANIMATOR_DEATH_TRIGGER = "Death";
+    public const string ANIMATOR_IS_DEAD = "IsDead";
+
+    #endregion
 
     #region Enemies
 
