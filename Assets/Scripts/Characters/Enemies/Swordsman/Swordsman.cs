@@ -12,6 +12,7 @@ public class Swordsman : MonoBehaviour
     private EnemyMover enemyMover;
     private SwordsmanAttacks swordsmanAttacks;
     private DamageReceiver damageReceiver;
+    private PlayerDetection playerDetection;
 
     #endregion
 
@@ -21,14 +22,10 @@ public class Swordsman : MonoBehaviour
     [SerializeField] private CircleCollider stillMoreToWalkCheck;
     [SerializeField] private CircleCollider jumpBackGroundCheck;
 
-    [SerializeField] private BoxCollider2D visionFieldCollider;
-
-
     #endregion
 
     #region Player
 
-    [SerializeField] private LayerMask playerLayer;
     private GameObject player;
     private bool isPlayerAlive = true;
 
@@ -36,7 +33,6 @@ public class Swordsman : MonoBehaviour
 
     #region Logic Variables
 
-    private bool noticedPlayer = false;
     private bool groundedAfterJumpBack;
     private bool stillMoreToWalk;
 
@@ -62,7 +58,9 @@ public class Swordsman : MonoBehaviour
 
     #region Parameters
 
-    [SerializeField] private float startleDuration = 1f;
+    [SerializeField] private float startleDuration = .5f;
+    private float actionCooldownDuration = Config.ACTION_COOLDOWN_DURATION;
+    private float attackDelay = Config.ATTACK_DELAY;
 
     #endregion
 
@@ -73,6 +71,7 @@ public class Swordsman : MonoBehaviour
         enemyMover = GetComponent<EnemyMover>();
         swordsmanAttacks = GetComponent<SwordsmanAttacks>();
         damageReceiver = GetComponent<DamageReceiver>();
+        playerDetection = GetComponent<PlayerDetection>();
 
         player = GameObject.FindGameObjectWithTag(Config.PLAYER_TAG);
     }
@@ -80,6 +79,7 @@ public class Swordsman : MonoBehaviour
     private void Start()
     {
         damageReceiver.OnCharacterDeath += Death;
+        playerDetection.OnDetectedPlayer += PlayerDetected;
     }
 
     private void FixedUpdate()
@@ -88,7 +88,10 @@ public class Swordsman : MonoBehaviour
             isPlayerAlive = player.GetComponent<DamageReceiver>().IsAlive;
 
         if (!isAlive || !isPlayerAlive || isStartled)
+        {
+            enemyMover.UpdateMotor(Vector2.zero, false, false);
             return;
+        }
 
         movement = Vector2.zero;
 
@@ -97,21 +100,24 @@ public class Swordsman : MonoBehaviour
 
         relativePlayerPositionX = player.transform.position.x - transform.position.x;
 
-        if (!enemyMover.IsWalkingAway() && noticedPlayer)
+        if (!enemyMover.IsWalkingAway() && playerDetection.DetectedPlayer)
             enemyMover.Flip(new Vector2(relativePlayerPositionX, 0));
 
-        if (!noticedPlayer)
-            CheckForPlayer();
+        if (!playerDetection.DetectedPlayer)
+            playerDetection.CheckForPlayer();
 
         if (attackZoneCollider.IsColliding())
         {
-            if (!noticedPlayer)
-                NoticedPlayer();
+            if (!playerDetection.DetectedPlayer)
+            {
+                playerDetection.DetectedPlayer = true;
+                return;
+            }
 
             if (!swordsmanAttacks.OnAttackCooldown())
             {
                 StartCoroutine(PickRandomAttackPattern(swordsmanAttacks.HasSecondAttack(), swordsmanAttacks.HasThirdAttack(), enemyMover.IsAbleToJumpBack()));
-                StartCoroutine(ActionCooldown(1f));
+                StartCoroutine(ActionCooldown(actionCooldownDuration));
             }
             else if (enemyMover.IsWalkingAway())
             {
@@ -120,10 +126,10 @@ public class Swordsman : MonoBehaviour
             else if (!onActionCooldown && !swordsmanAttacks.IsAttacking())
             {
                 jumpBackAction = enemyMover.PickNonAttackAction(groundedAfterJumpBack);
-                StartCoroutine(ActionCooldown(1f));
+                StartCoroutine(ActionCooldown(actionCooldownDuration));
             }
         }
-        else if (noticedPlayer && (!swordsmanAttacks.IsAttacking() || enemyMover.MovesWhileAttacking()))
+        else if (playerDetection.DetectedPlayer && (!swordsmanAttacks.IsAttacking() || enemyMover.MovesWhileAttacking()))
         {
             if (stillMoreToWalk)
             {
@@ -149,7 +155,7 @@ public class Swordsman : MonoBehaviour
     private IEnumerator PickRandomAttackPattern(bool hasSecondAttack, bool hasThirdAttack, bool isAbleToJumpBack)
     {
         StartCoroutine(swordsmanAttacks.AttackCooldown());
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForSeconds(attackDelay);
 
         firstAttackAction = true;
 
@@ -179,17 +185,10 @@ public class Swordsman : MonoBehaviour
             swordsmanAttacks.AttackPattern(firstAttackAction, secondAttackAction, thirdAttackAction);
     }
 
-    private void CheckForPlayer()
+    private void PlayerDetected()
     {
-        RaycastHit2D hit = Physics2D.BoxCast(visionFieldCollider.bounds.center, visionFieldCollider.bounds.size, 0, Vector2.left, 0, playerLayer);
-
-        if (hit.collider)
-            NoticedPlayer();
-    }
-
-    private void NoticedPlayer()
-    {
-        noticedPlayer = true;
+        enemyMover.Flip(new Vector2(relativePlayerPositionX, 0));
+        StartCoroutine(playerDetection.AlertGroupAfterDetectingPlayer());
 
         StartCoroutine(Startled());
         StartCoroutine(enemyMover.MovementCooldown(startleDuration));
@@ -204,12 +203,6 @@ public class Swordsman : MonoBehaviour
         yield return new WaitForSeconds(startleDuration);
 
         isStartled = false;
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(visionFieldCollider.bounds.center, visionFieldCollider.bounds.size);
     }
 
     private Vector2 WalksTowards()

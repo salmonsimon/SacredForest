@@ -18,12 +18,18 @@ public class Config
 
     #region Enemies
 
+    public const float ACTION_COOLDOWN_DURATION = 1f;
+
     public const float JUMP_BACK_FORCE = 250f;
     public const string MOVEMENT_ANIMATOR_JUMP_BACK_TRIGGER = "JumpBack";
     public const string MOVEMENT_ANIMATOR_IS_JUMPING_BACK = "IsJumpingBack";
     public const float JUMP_BACK_DURATION = .2f;
     public const float JUMP_BACK_COOLDOWN = 2f;
     public const float MOVEMENT_AFTER_JUMP_BACK_COOLDOWN = 1f;
+
+    public const float ATTACK_DELAY = .1f;
+
+    public const float ALERT_GROUP_DELAY = .2f;
 
     #endregion
 
