@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private LevelLoader levelLoader;
     [SerializeField] private FloatingTextManager floatingTextManager;
+    [SerializeField] private CinemachineShake cinemachineShake;
 
     #endregion
 
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
             Destroy(levelLoader.gameObject);
             Destroy(player.gameObject);
             Destroy(floatingTextManager.gameObject);
+            Destroy(cinemachineShake.gameObject);
         }
         else
         {
@@ -89,6 +91,11 @@ public class GameManager : MonoBehaviour
     public GameObject GetPlayer()
     {
         return player;
+    }
+
+    public CinemachineShake GetCinemachineShake()
+    {
+        return cinemachineShake;
     }
 
     #endregion

@@ -39,6 +39,7 @@ public class DamageReceiver : MonoBehaviour
         if (!isImmune && isAlive)
         {
             currentHitPoints--;
+            GameManager.instance.GetCinemachineShake().ShakeCamera(Config.CAMERASHAKE_HIT_AMPLITUDE, Config.CAMERASHAKE_HIT_DURATION);
 
             if (currentHitPoints < 1)
             {
@@ -46,7 +47,7 @@ public class DamageReceiver : MonoBehaviour
             }
             else
             {
-                animator.SetTrigger("Hurt");
+                animator.SetTrigger(Config.ANIMATOR_HURT_TRIGGER);
                 StartCoroutine(ImmuneCooldown());
             }
         }
@@ -54,8 +55,8 @@ public class DamageReceiver : MonoBehaviour
 
     protected virtual void Death()
     {
-        animator.SetBool("IsDead", true);
-        animator.SetTrigger("Death");
+        animator.SetBool(Config.ANIMATOR_IS_DEAD, true);
+        animator.SetTrigger(Config.ANIMATOR_DEATH_TRIGGER);
 
         IsAlive = false;
 
