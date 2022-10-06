@@ -275,6 +275,11 @@ public class Mover : MonoBehaviour
 
     private IEnumerator DoDashAction()
     {
+        Cinemachine.CinemachineVirtualCamera vcam = FindObjectOfType<Cinemachine.CinemachineVirtualCamera>();
+
+        float lookaheadSmoothing = vcam.GetCinemachineComponent<Cinemachine.CinemachineFramingTransposer>().m_LookaheadSmoothing;
+        vcam.GetCinemachineComponent<Cinemachine.CinemachineFramingTransposer>().m_LookaheadSmoothing = 20;
+
         animator.SetTrigger(Config.MOVEMENT_ANIMATOR_DASH_TRIGGER);
         animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_DASHING, true);
 
@@ -282,6 +287,8 @@ public class Mover : MonoBehaviour
 
         yield return new WaitForSeconds(Config.DASH_DURATION);
         animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_DASHING, false);
+
+        vcam.GetCinemachineComponent<Cinemachine.CinemachineFramingTransposer>().m_LookaheadSmoothing = lookaheadSmoothing;
 
         StartCoroutine(DashCooldown());
     }
