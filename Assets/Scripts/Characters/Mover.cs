@@ -54,7 +54,7 @@ public class Mover : MonoBehaviour
     private float dashForce = Config.DASH_FORCE;
 
     private float runSpeed = Config.RUN_SPEED;
-    private float movementSmoothing = Config.MOVEMENT_SMOOTHING;
+    [SerializeField] private float movementSmoothing = Config.MOVEMENT_SMOOTHING;
 
     private float jumpForce = Config.JUMP_FORCE;
     private float wallJumpForceX = Config.WALL_JUMP_FORCE_X;
@@ -251,7 +251,8 @@ public class Mover : MonoBehaviour
         animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_WALL_SLIDING, false);
         isWallSliding = false;
 
-        particlesLand.Play();
+        if(isGrounded)
+            particlesLand.Play();
     }
 
     private void DoWallSlideAction()
@@ -282,7 +283,6 @@ public class Mover : MonoBehaviour
         yield return new WaitForSeconds(Config.DASH_DURATION);
         animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_DASHING, false);
 
-
         StartCoroutine(DashCooldown());
     }
 
@@ -297,6 +297,8 @@ public class Mover : MonoBehaviour
 
     protected virtual void Death()
     {
+        OnLanding();
+
         isAbleToMove = false;
         rigidBody.constraints = RigidbodyConstraints2D.FreezePositionX;
     }

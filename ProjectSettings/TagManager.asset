@@ -9,6 +9,7 @@ TagManager:
   - CinemachineCamera
   - Sword
   - Enemy
+  - Arrow
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - 
   - Enemy
   - Player
-  - 
+  - Projectile
   - 
   - 
   - 

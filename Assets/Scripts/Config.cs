@@ -92,7 +92,7 @@ public class Config
 
     public const string MOVEMENT_ANIMATOR_DASH_TRIGGER = "Dash";
     public const string MOVEMENT_ANIMATOR_IS_DASHING = "IsDashing";
-    public const float DASH_DURATION = .2f;
+    public const float DASH_DURATION = .1f;
     public const float DASH_COOLDOWN = .5f;
 
     #endregion
