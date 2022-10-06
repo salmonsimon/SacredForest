@@ -9844,6 +9844,7 @@ MonoBehaviour:
   isColliding: 0
   tagsToCheck:
   - Enemy
+  - Arrow
 --- !u!1 &1971838361857962905
 GameObject:
   m_ObjectHideFlags: 0
@@ -9925,7 +9926,7 @@ GameObject:
   - component: {fileID: 1971838360700276062}
   - component: {fileID: 1971838360380672435}
   m_Layer: 9
-  m_Name: Warrior
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10078,6 +10079,7 @@ MonoBehaviour:
   wallCheck: {fileID: 1971838361857962906}
   hasAbilityToDash: 1
   hasAbilityToWallJump: 1
+  movementSmoothing: 0.05
 --- !u!114 &1971838360700276062
 MonoBehaviour:
   m_ObjectHideFlags: 0

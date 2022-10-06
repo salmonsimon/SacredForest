@@ -1,16 +1,16 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-[RequireComponent(typeof(EnemyMover), typeof(SwordsmanAttacks), typeof(DamageReceiver))]
-public class Swordsman : MonoBehaviour
+[RequireComponent(typeof(EnemyMover), typeof(ArcherAttacks), typeof(DamageReceiver))]
+public class Archer : MonoBehaviour
 {
     private Animator animator;
 
     #region Controllers
 
     private EnemyMover enemyMover;
-    private SwordsmanAttacks swordsmanAttacks;
+    private ArcherAttacks archerAttacks;
     private DamageReceiver damageReceiver;
     private PlayerDetection playerDetection;
 
@@ -19,6 +19,9 @@ public class Swordsman : MonoBehaviour
     #region Check Colliders
 
     [SerializeField] private BoxCollider attackZoneCollider;
+    [SerializeField] private BoxCollider dangerZoneCollider;
+    [SerializeField] private CircleCollider stillMoreToWalkCheck;
+    [SerializeField] private CircleCollider jumpBackGroundCheck;
 
     #endregion
 
@@ -30,6 +33,9 @@ public class Swordsman : MonoBehaviour
     #endregion
 
     #region Logic Variables
+
+    private bool groundedAfterJumpBack;
+    private bool stillMoreToWalk;
 
     private bool onActionCooldown = false;
 
@@ -43,9 +49,7 @@ public class Swordsman : MonoBehaviour
     Vector2 movement = Vector2.zero;
     float relativePlayerPositionX = 0;
 
-    private bool firstAttackAction = false;
-    private bool secondAttackAction = false;
-    private bool thirdAttackAction = false;
+    private bool shootArrowAction = false;
 
     private bool jumpBackAction = false;
 
@@ -55,7 +59,7 @@ public class Swordsman : MonoBehaviour
 
     [SerializeField] private float startleDuration = .5f;
     private float actionCooldownDuration = Config.ACTION_COOLDOWN_DURATION;
-    private float attackDelay = Config.ATTACK_DELAY;
+    private float attackDelay = 0f;
 
     #endregion
 
@@ -64,7 +68,7 @@ public class Swordsman : MonoBehaviour
         animator = GetComponent<Animator>();
 
         enemyMover = GetComponent<EnemyMover>();
-        swordsmanAttacks = GetComponent<SwordsmanAttacks>();
+        archerAttacks = GetComponent<ArcherAttacks>();
         damageReceiver = GetComponent<DamageReceiver>();
         playerDetection = GetComponent<PlayerDetection>();
 
@@ -90,6 +94,9 @@ public class Swordsman : MonoBehaviour
 
         movement = Vector2.zero;
 
+        groundedAfterJumpBack = jumpBackGroundCheck.IsColliding();
+        stillMoreToWalk = stillMoreToWalkCheck.IsColliding();
+
         relativePlayerPositionX = player.transform.position.x - transform.position.x;
 
         if (!enemyMover.IsWalkingAway() && playerDetection.DetectedPlayer)
@@ -98,83 +105,101 @@ public class Swordsman : MonoBehaviour
         if (!playerDetection.DetectedPlayer)
             playerDetection.CheckForPlayer();
 
-        if (attackZoneCollider.IsColliding())
+        if (playerDetection.DetectedPlayer)
         {
-            if (!playerDetection.DetectedPlayer)
+            if (!archerAttacks.OnAttackCooldown())
             {
-                playerDetection.DetectedPlayer = true;
-                return;
-            }
-
-            if (!swordsmanAttacks.OnAttackCooldown())
-            {
-                StartCoroutine(PickRandomAttackPattern(swordsmanAttacks.HasSecondAttack(), swordsmanAttacks.HasThirdAttack()));
+                StartCoroutine(PickRandomAttackPattern());
                 StartCoroutine(ActionCooldown(actionCooldownDuration));
             }
-            else if (enemyMover.IsWalkingAway())
+            else if (enemyMover.IsWalkingAway() && stillMoreToWalk && !archerAttacks.IsAttacking())
             {
                 movement = WalksAway();
             }
-            else if (!onActionCooldown && !swordsmanAttacks.IsAttacking())
+            else if (!onActionCooldown && !archerAttacks.IsAttacking() && dangerZoneCollider.IsColliding())
             {
-                jumpBackAction = enemyMover.PickNonAttackAction(enemyMover.IsGroundedAfterJumpBack());
+                jumpBackAction = enemyMover.PickNonAttackAction(groundedAfterJumpBack, 4, 6);
                 StartCoroutine(ActionCooldown(actionCooldownDuration));
             }
         }
-        else if (playerDetection.DetectedPlayer && (!swordsmanAttacks.IsAttacking() || enemyMover.MovesWhileAttacking()))
+        else if (playerDetection.DetectedPlayer && (!archerAttacks.IsAttacking() || enemyMover.MovesWhileAttacking()))
         {
-            if (enemyMover.StillMoreToWalk())
+            if (stillMoreToWalk)
             {
                 if (enemyMover.IsWalkingAway())
                 {
                     movement = WalksAway();
                 }
-                else
-                {
-                    movement = WalksTowards();
-                }
             }
         }
 
-        if (jumpBackAction)
-            swordsmanAttacks.StopCurrentAttackCoroutine();
+        if (jumpBackAction && archerAttacks.AttackCoroutineOnCourse())
+            archerAttacks.StopCurrentAttackCoroutine();
 
         enemyMover.UpdateMotor(movement, false, jumpBackAction);
 
         ResetActionBooleans();
     }
 
-    private IEnumerator PickRandomAttackPattern(bool hasSecondAttack, bool hasThirdAttack)
+    // This one will only have the arrow attack for now
+    // but could use it if we find other character with dagger attacks
+    // to defend when player in close range
+    private IEnumerator PickRandomAttackPattern()
     {
-        StartCoroutine(swordsmanAttacks.AttackCooldown());
+        StartCoroutine(archerAttacks.AttackCooldown());
         yield return new WaitForSeconds(attackDelay);
 
-        firstAttackAction = true;
+        shootArrowAction = true;
 
-        if (hasThirdAttack)
+        if (shootArrowAction)
+            archerAttacks.ArrowAttack(transform.position, player.transform.position);
+    }
+
+    private Vector2 WalksTowards()
+    {
+        Vector2 movement;
+
+        if (relativePlayerPositionX > 0)
         {
-            float randomPercentage = Random.Range(0f, 1f);
-
-            if (randomPercentage > .15f && randomPercentage <= .5f)
-            {
-                secondAttackAction = true;
-            }
-            else
-            {
-                secondAttackAction = true;
-                thirdAttackAction = true;
-            }
+            movement = Vector2.right;
         }
-        else if (hasSecondAttack)
+        else
         {
-            if (Random.Range(0f,1f) <= .75f)
-            {
-                secondAttackAction = true;
-            }
+            movement = Vector2.left;
         }
 
-        if (isAlive)
-            swordsmanAttacks.AttackPattern(firstAttackAction, secondAttackAction, thirdAttackAction);
+        return movement;
+    }
+
+    private Vector2 WalksAway()
+    {
+        Vector2 movement;
+
+        if (relativePlayerPositionX > 0)
+        {
+            movement = Vector2.left;
+        }
+        else
+        {
+            movement = Vector2.right;
+        }
+
+        return movement;
+    }
+
+    private void ResetActionBooleans()
+    {
+        jumpBackAction = false;
+        shootArrowAction = false;
+    }
+
+    private IEnumerator ActionCooldown(float duration)
+    {
+        onActionCooldown = true;
+
+        yield return new WaitForSeconds(duration);
+
+        onActionCooldown = false;
     }
 
     private void PlayerDetected()
@@ -195,55 +220,6 @@ public class Swordsman : MonoBehaviour
         yield return new WaitForSeconds(startleDuration);
 
         isStartled = false;
-    }
-
-    private Vector2 WalksTowards()
-    {
-        Vector2 movement;
-
-        if (relativePlayerPositionX > 0)
-        {
-            movement = Vector2.right;
-        }
-        else
-        {
-            movement = Vector2.left;
-        }
-
-        return movement;
-    }
-
-    private Vector2 WalksAway() 
-    {
-        Vector2 movement;
-
-        if (relativePlayerPositionX > 0)
-        {
-            movement = Vector2.left;
-        }
-        else
-        {
-            movement = Vector2.right;
-        }
-
-        return movement;
-    }
-
-    private void ResetActionBooleans()
-    {
-        jumpBackAction = false;
-        firstAttackAction = false;
-        secondAttackAction = false;
-        thirdAttackAction = false;
-    }
-
-    private IEnumerator ActionCooldown(float duration)
-    {
-        onActionCooldown = true;
-
-        yield return new WaitForSeconds(duration);
-
-        onActionCooldown = false;
     }
 
     private void Death()

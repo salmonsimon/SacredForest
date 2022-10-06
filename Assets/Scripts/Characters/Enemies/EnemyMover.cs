@@ -10,6 +10,21 @@ public class EnemyMover : MonoBehaviour
 
     #endregion
 
+    #region Game Objects
+
+    private DamageReceiver damageReceiver;
+
+    #endregion
+
+    #region Check Colliders
+
+    [SerializeField] private CircleCollider groundCheck;
+    [SerializeField] private CircleCollider walkAwayCheck;
+    [SerializeField] private CircleCollider stillMoreToWalkCheck;
+    [SerializeField] private CircleCollider jumpBackGroundCheck;
+
+    #endregion
+
     #region Action Variables
 
     protected Vector2 direction;
@@ -19,11 +34,17 @@ public class EnemyMover : MonoBehaviour
 
     #region Logic Variables
 
+    protected bool isGrounded = false;
+    protected bool isGroundedAfterJumpBack = false;
+    protected bool stillMoreToWalk = false;
+
     protected bool isAbleToJumpBack = true;
     protected bool isAbleToDash = true;
     protected bool isAbleToMove = true;
 
     protected bool isWalkingAway = false;
+
+    protected bool isAlive = true;
 
     #endregion
 
@@ -57,6 +78,52 @@ public class EnemyMover : MonoBehaviour
 
         animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();
+        damageReceiver = GetComponent<DamageReceiver>();
+    }
+
+    private void Start()
+    {
+        damageReceiver.OnCharacterDeath += Death;
+    }
+
+    private void FixedUpdate()
+    {
+        isGrounded = groundCheck.IsColliding();
+        isGroundedAfterJumpBack = jumpBackGroundCheck.IsColliding();
+        stillMoreToWalk = stillMoreToWalkCheck.IsColliding();
+    }
+
+    protected virtual void Death()
+    {
+        isAbleToMove = false;
+        isAlive = false;
+
+        if (isGrounded)
+        {
+            rigidBody.constraints = RigidbodyConstraints2D.FreezeAll;
+            GetComponent<CapsuleCollider2D>().enabled = false;
+        }
+        else
+        {
+            StartCoroutine(WaitUntilGroundedToDisable());
+        }
+
+    }
+
+    private IEnumerator WaitUntilGroundedToDisable()
+    {
+        while (!isGrounded)
+        {
+            if (isGrounded)
+            {
+                rigidBody.constraints = RigidbodyConstraints2D.FreezeAll;
+                GetComponent<CapsuleCollider2D>().enabled = false;
+
+                break;
+            }
+
+            yield return new WaitForSeconds(.5f);
+        }
     }
 
     public void UpdateMotor(Vector2 movement, bool dashAction, bool jumpBackAction)
@@ -117,22 +184,22 @@ public class EnemyMover : MonoBehaviour
         }
     }
 
-    public bool PickNonAttackAction(bool groundedAfterJumpBack)
+    public bool PickNonAttackAction(bool groundedAfterJumpBack, int jumpBackDecil = 2, int walkAwayDecil = 2)
     {
         bool jumpBackAction = false;
 
         int randomDecil = Random.Range(1, 10);
 
-        if (randomDecil <= 2)
+        if (randomDecil <= jumpBackDecil)
         {
             if (hasJumpBack && isAbleToJumpBack && groundedAfterJumpBack)
             {
                 jumpBackAction = true;
             }
         }
-        else if (randomDecil > 2 && randomDecil <= 4)
+        else if (randomDecil > jumpBackDecil && randomDecil <= jumpBackDecil + walkAwayDecil)
         {
-            if (walksAwayWhenInAttackCooldown && !isWalkingAway)
+            if (walksAwayWhenInAttackCooldown && !isWalkingAway && walkAwayCheck.IsColliding())
             {
                 StartCoroutine(WalkingAwayCooldown(walkAwayDuration));
             }
@@ -232,5 +299,20 @@ public class EnemyMover : MonoBehaviour
         yield return new WaitForSeconds(duration);
 
         SetIsAbleToMove(true);
+    }
+
+    public bool IsGrounded()
+    {
+        return isGrounded;
+    }
+
+    public bool IsGroundedAfterJumpBack()
+    {
+        return isGroundedAfterJumpBack;
+    }
+
+    public bool StillMoreToWalk()
+    {
+        return stillMoreToWalk;
     }
 }

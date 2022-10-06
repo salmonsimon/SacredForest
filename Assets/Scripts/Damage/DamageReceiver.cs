@@ -59,9 +59,6 @@ public class DamageReceiver : MonoBehaviour
         animator.SetTrigger(Config.ANIMATOR_DEATH_TRIGGER);
 
         IsAlive = false;
-
-        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-        GetComponent<CapsuleCollider2D>().enabled = false;
     }
 
     private IEnumerator ImmuneCooldown()
