@@ -21,12 +21,21 @@ public class Arrow : MonoBehaviour
     {
         if(!hasHitGround)
         {
-            float angle = Mathf.Atan2(rigidBody.velocity.y, rigidBody.velocity.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            if (rigidBody.velocity.x > 0)
+            {
+                float angle = Mathf.Atan2(rigidBody.velocity.y, rigidBody.velocity.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            }
+            else
+            {
+                float angle = Mathf.Atan2(rigidBody.velocity.y, -rigidBody.velocity.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.AngleAxis(angle, Vector3.back);
+            }
 
             hasHitGround = groundCheck.IsColliding();
-            if(hasHitGround)
+            if (hasHitGround)
             {
+                rigidBody.AddForce(-rigidBody.velocity);
                 rigidBody.velocity = Vector2.zero;
                 rigidBody.isKinematic = true;
 

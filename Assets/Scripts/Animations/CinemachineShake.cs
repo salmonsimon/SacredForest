@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class CinemachineShake : MonoBehaviour
 {
@@ -16,13 +17,32 @@ public class CinemachineShake : MonoBehaviour
 
     private void Awake()
     {
-        noiseSettings = Resources.Load("Cinemachine/6D Shake") as NoiseSettings;
+        noiseSettings = Resources.Load("Cinemachine/2D Shake") as NoiseSettings;
     }
 
     private void Start()
     {
+        SetVirtualCamera();
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        SetVirtualCamera();
+    }
+
+    private void SetVirtualCamera()
+    {
         cinemachineVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
-        
+
         cinemachineBasicMultiChannelPerlin = cinemachineVirtualCamera.AddCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0;
         cinemachineBasicMultiChannelPerlin.m_NoiseProfile = noiseSettings;

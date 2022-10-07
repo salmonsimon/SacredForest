@@ -410,8 +410,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -566649837
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 1331891882, guid: 37d772cffbe59b44a9e4de2cf9f2f2af, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -497,7 +497,7 @@ MonoBehaviour:
   dangerZoneCollider: {fileID: 2957183606304197321}
   stillMoreToWalkCheck: {fileID: 2957183605671449914}
   jumpBackGroundCheck: {fileID: 2957183606066013608}
-  startleDuration: 0.5
+  startleDuration: 1
 --- !u!114 &2957183605891938237
 MonoBehaviour:
   m_ObjectHideFlags: 0

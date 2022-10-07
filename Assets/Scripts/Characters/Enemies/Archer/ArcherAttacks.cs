@@ -32,7 +32,6 @@ public class ArcherAttacks : MonoBehaviour
     private Vector2 shootingDirection;
     private bool isGoingToShoot = false;
 
-
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -58,7 +57,7 @@ public class ArcherAttacks : MonoBehaviour
             StartCoroutine(GetComponent<EnemyMover>().MovementCooldown(.3f));
 
             StartCoroutine(PlayClip(Animator.StringToHash(arrowAnimationClip.name), 0));
-            StartCoroutine(ShotArrow(shootingSpeed, shootingDirection, shootingAngle));
+            StartCoroutine(ShotArrow(shootingSpeed, shootingDirection));
         }
     }
 
@@ -78,15 +77,84 @@ public class ArcherAttacks : MonoBehaviour
             else
             {
                 this.shootingSpeed = shootingSpeed;
-                shootingAngle = Mathf.Atan(((shootingSpeed * shootingSpeed) - Mathf.Sqrt(sqrt)) / (yGravity * xDistance));
+
+                if (Mathf.Abs(yDistance) < .5)
+                    shootingAngle = Mathf.Atan(((shootingSpeed * shootingSpeed) - Mathf.Sqrt(sqrt)) / (yGravity * xDistance));
+                else
+                {
+                    shootingAngle = Mathf.Atan(((shootingSpeed * shootingSpeed) + Mathf.Sqrt(sqrt)) / (yGravity * xDistance));
+
+                    float shootingSpeedCorrection = CalculateShootingSpeedCorrection(yDistance);
+
+                    if (yDistance > 0)
+                    {
+                        this.shootingSpeed += shootingSpeedCorrection;
+                    }
+                    else
+                    {
+                        this.shootingSpeed -= shootingSpeedCorrection;
+                    }
+                }
+
                 shootingDirection = new Vector2(Mathf.Sign(xDistance) * Mathf.Cos(shootingAngle), -Mathf.Sign(xDistance) * Mathf.Sin(shootingAngle));
 
                 isGoingToShoot = true;
             }
         }
+
+        if (!isGoingToShoot)
+        {
+            Debug.Log("Lacks power");
+        }
     }
 
-    private IEnumerator ShotArrow(float shootingForce, Vector2 direction, float angle)
+    private float CalculateShootingSpeedCorrection(float yDistance)
+    {
+        float speedCorrection = 0;
+
+        float absoluteDifference = Mathf.Abs(yDistance);
+
+        if (yDistance > 0)
+        {
+            if (absoluteDifference >= 1)
+            {
+                speedCorrection += 0.1f;
+
+                absoluteDifference -= 1;
+
+                int correctionFactor = Mathf.RoundToInt(absoluteDifference / 0.25f);
+
+                speedCorrection += 0.1f * correctionFactor;
+            }
+        }
+        else
+        {
+            speedCorrection += 0.7f;
+
+            absoluteDifference -= 1;
+
+            if (absoluteDifference > 2.5f)
+            {
+                speedCorrection += 0.6f;
+
+                absoluteDifference -= 2.5f;
+
+                int correctionFactor = Mathf.RoundToInt(absoluteDifference / 0.25f);
+
+                speedCorrection += 0.15f * correctionFactor;
+            }
+            else
+            {
+                int correctionFactor = Mathf.RoundToInt(absoluteDifference / 0.25f);
+
+                speedCorrection += 0.1f * correctionFactor;
+            }
+        }
+
+        return speedCorrection;
+    }
+
+    private IEnumerator ShotArrow(float shootingForce, Vector2 direction)
     {
         yield return new WaitForSeconds(.3f);
 
