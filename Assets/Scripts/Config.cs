@@ -14,7 +14,7 @@ public class Config
 
     #region Camera Shake
 
-    public const float CAMERASHAKE_HIT_AMPLITUDE = 3f;
+    public const float CAMERASHAKE_HIT_AMPLITUDE = 6f;
     public const float CAMERASHAKE_HIT_DURATION = .2f;
 
     #endregion

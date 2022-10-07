@@ -17,7 +17,7 @@ public class CinemachineShake : MonoBehaviour
 
     private void Awake()
     {
-        noiseSettings = Resources.Load("Cinemachine/6D Shake") as NoiseSettings;
+        noiseSettings = Resources.Load("Cinemachine/2D Shake") as NoiseSettings;
     }
 
     private void Start()
