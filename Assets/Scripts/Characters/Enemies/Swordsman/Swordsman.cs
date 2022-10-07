@@ -185,7 +185,7 @@ public class Swordsman : MonoBehaviour
         StartCoroutine(Startled());
         StartCoroutine(enemyMover.MovementCooldown(startleDuration));
 
-        GameManager.instance.ShowText("!", 32, Color.white, new Vector3(transform.position.x, transform.position.y + 0.32f, 0), Vector3.up * 40, 1f);
+        GameManager.instance.ShowText("!", 1, Color.white, new Vector3(transform.position.x, transform.position.y + 0.32f, 0), Vector3.up * .05f, .5f);
     }
 
     private IEnumerator Startled()
