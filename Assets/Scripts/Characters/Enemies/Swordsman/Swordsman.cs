@@ -96,7 +96,12 @@ public class Swordsman : MonoBehaviour
             enemyMover.Flip(new Vector2(relativePlayerPositionX, 0));
 
         if (!playerDetection.DetectedPlayer)
+        {
             playerDetection.CheckForPlayer();
+
+            if (isStartled)
+                return;
+        }
 
         if (attackZoneCollider.IsColliding())
         {
