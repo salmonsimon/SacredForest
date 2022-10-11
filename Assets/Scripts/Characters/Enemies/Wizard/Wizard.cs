@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyMover), typeof(ArcherAttacks), typeof(DamageReceiver))]
-public class Archer : MonoBehaviour
+[RequireComponent(typeof(EnemyMover), typeof(WizardAttacks), typeof(DamageReceiver))]
+public class Wizard : MonoBehaviour
 {
     private Animator animator;
 
     #region Controllers
 
     private EnemyMover enemyMover;
-    private ArcherAttacks archerAttacks;
+    private WizardAttacks wizardAttacks;
     private DamageReceiver damageReceiver;
     private PlayerDetection playerDetection;
 
@@ -19,6 +19,7 @@ public class Archer : MonoBehaviour
     #region Check Colliders
 
     [SerializeField] private BoxCollider attackZoneCollider;
+    [SerializeField] private BoxCollider meleeZoneCollider;
     [SerializeField] private BoxCollider dangerZoneCollider;
 
     #endregion
@@ -44,10 +45,6 @@ public class Archer : MonoBehaviour
     Vector2 movement = Vector2.zero;
     float relativePlayerPositionX = 0;
 
-    private bool shootArrowAction = false;
-
-    private bool jumpBackAction = false;
-
     #endregion
 
     #region Parameters
@@ -63,7 +60,7 @@ public class Archer : MonoBehaviour
         animator = GetComponent<Animator>();
 
         enemyMover = GetComponent<EnemyMover>();
-        archerAttacks = GetComponent<ArcherAttacks>();
+        wizardAttacks = GetComponent<WizardAttacks>();
         damageReceiver = GetComponent<DamageReceiver>();
         playerDetection = GetComponent<PlayerDetection>();
 
@@ -104,22 +101,22 @@ public class Archer : MonoBehaviour
 
         if (playerDetection.DetectedPlayer)
         {
-            if (!archerAttacks.OnAttackCooldown())
+            if (!wizardAttacks.OnAttackCooldown())
             {
                 StartCoroutine(PickRandomAttackPattern());
                 StartCoroutine(ActionCooldown(actionCooldownDuration));
             }
-            else if (enemyMover.IsWalkingAway() && enemyMover.StillMoreToWalk() && !archerAttacks.IsAttacking())
+            else if (enemyMover.IsWalkingAway() && enemyMover.StillMoreToWalk() && !wizardAttacks.IsAttacking())
             {
                 movement = WalksAway();
             }
-            else if (!onActionCooldown && !archerAttacks.IsAttacking() && dangerZoneCollider.IsColliding())
+            else if (!onActionCooldown && !wizardAttacks.IsAttacking() && dangerZoneCollider.IsColliding())
             {
-                jumpBackAction = enemyMover.PickNonAttackAction(enemyMover.IsGroundedAfterJumpBack(), 4, 6);
+                enemyMover.PickNonAttackAction(enemyMover.IsGroundedAfterJumpBack(), 0, 5);
                 StartCoroutine(ActionCooldown(actionCooldownDuration));
             }
         }
-        else if (playerDetection.DetectedPlayer && (!archerAttacks.IsAttacking() || enemyMover.MovesWhileAttacking()))
+        else if (playerDetection.DetectedPlayer && (!wizardAttacks.IsAttacking() || enemyMover.MovesWhileAttacking()))
         {
             if (enemyMover.StillMoreToWalk())
             {
@@ -130,42 +127,22 @@ public class Archer : MonoBehaviour
             }
         }
 
-        if (jumpBackAction && archerAttacks.AttackCoroutineOnCourse())
-            archerAttacks.StopCurrentAttackCoroutine();
-
-        enemyMover.UpdateMotor(movement, false, jumpBackAction);
-
-        ResetActionBooleans();
+        enemyMover.UpdateMotor(movement, false, false);
     }
 
-    // This one will only have the arrow attack for now
-    // but could use it if we find other character with dagger attacks
-    // to defend when player in close range
     private IEnumerator PickRandomAttackPattern()
     {
-        StartCoroutine(archerAttacks.AttackCooldown());
+        StartCoroutine(wizardAttacks.AttackCooldown());
         yield return new WaitForSeconds(attackDelay);
 
-        shootArrowAction = true;
-
-        if (shootArrowAction)
-            archerAttacks.ArrowAttack(transform.position, player.transform.position);
-    }
-
-    private Vector2 WalksTowards()
-    {
-        Vector2 movement;
-
-        if (relativePlayerPositionX > 0)
+        if (meleeZoneCollider.IsColliding())
         {
-            movement = Vector2.right;
+            wizardAttacks.MeleeAttack(transform.position, player.transform.position);
         }
         else
         {
-            movement = Vector2.left;
+            wizardAttacks.ProjectileAttack(transform.position, player.transform.position);
         }
-
-        return movement;
     }
 
     private Vector2 WalksAway()
@@ -182,12 +159,6 @@ public class Archer : MonoBehaviour
         }
 
         return movement;
-    }
-
-    private void ResetActionBooleans()
-    {
-        jumpBackAction = false;
-        shootArrowAction = false;
     }
 
     private IEnumerator ActionCooldown(float duration)

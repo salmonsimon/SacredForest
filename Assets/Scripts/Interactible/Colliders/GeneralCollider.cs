@@ -41,4 +41,9 @@ public class GeneralCollider : MonoBehaviour
     {
         return isColliding;
     }
+
+    public void ChangeTagsToCheck(List<string> tagsToCheck)
+    {
+        this.tagsToCheck = tagsToCheck;
+    }
 }

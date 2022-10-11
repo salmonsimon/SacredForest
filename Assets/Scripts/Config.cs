@@ -46,6 +46,8 @@ public class Config
 
     public const float ALERT_GROUP_DELAY = .2f;
 
+    public const float MAGIC_PROJECTILE_SPEED = 1.5f;
+
     #endregion
 
     #region Player
