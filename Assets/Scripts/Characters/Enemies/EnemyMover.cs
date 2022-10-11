@@ -7,6 +7,8 @@ public class EnemyMover : MonoBehaviour
     #region Animation
 
     protected Animator animator;
+    [SerializeField] protected ParticleSystem particlesJump;
+    [SerializeField] protected ParticleSystem particlesLand;
 
     #endregion
 
@@ -89,6 +91,11 @@ public class EnemyMover : MonoBehaviour
     private void FixedUpdate()
     {
         isGrounded = groundCheck.IsColliding();
+        bool wasGrounded = isGrounded;
+
+        if (!wasGrounded && isGrounded)
+            OnLanding();
+
         isGroundedAfterJumpBack = jumpBackGroundCheck.IsColliding();
         stillMoreToWalk = stillMoreToWalkCheck.IsColliding();
     }
@@ -97,6 +104,8 @@ public class EnemyMover : MonoBehaviour
     {
         isAbleToMove = false;
         isAlive = false;
+
+        OnLanding();
 
         if (isGrounded)
         {
@@ -217,6 +226,8 @@ public class EnemyMover : MonoBehaviour
 
         rigidBody.AddForce(new Vector2(-transform.localScale.x * (jumpBackForce / 2f), jumpBackForce / 2f));
 
+        particlesLand.Play();
+        particlesJump.Play();
 
         yield return new WaitForSeconds(Config.JUMP_BACK_DURATION);
         animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_JUMPING_BACK, false);
@@ -241,6 +252,14 @@ public class EnemyMover : MonoBehaviour
         yield return new WaitForSeconds(Config.DASH_COOLDOWN);
 
         isAbleToDash = true;
+    }
+
+    public void OnLanding()
+    {
+        animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_JUMPING_BACK, false);
+
+        if (isGrounded)
+            particlesLand.Play();
     }
 
     public void SetIsAbleToMove(bool value)
