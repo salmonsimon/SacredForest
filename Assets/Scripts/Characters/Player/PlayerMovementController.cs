@@ -46,21 +46,24 @@ public class PlayerMovementController : Mover
 
     protected override void FixedUpdate()
     {
-        if (IsFalling() && !ExceedsFallVelocity())
+        if (!GameManager.instance.IsGamePaused() && !GameManager.instance.IsTeleporting() && isAlive)
         {
-            rigidBody.velocity += Vector2.up * Physics2D.gravity.y * addedFallGravity * Time.deltaTime;
+            if (IsFalling() && !ExceedsFallVelocity())
+            {
+                rigidBody.velocity += Vector2.up * Physics2D.gravity.y * addedFallGravity * Time.deltaTime;
+            }
+            else if (IsJumpingUp() && IsJumping() && !Input.GetKey(KeyCode.Z))
+            {
+                rigidBody.velocity += Vector2.up * Physics2D.gravity.y * addedGravityLowJump * Time.deltaTime;
+            }
+
+            base.FixedUpdate();
+
+            UpdateMotor();
+
+            jumpAction = false;
+            dashAction = false;
         }
-        else if (IsJumpingUp() && IsJumping() && !Input.GetKey(KeyCode.Z))
-        {
-            rigidBody.velocity += Vector2.up * Physics2D.gravity.y * addedGravityLowJump * Time.deltaTime;
-        }
-
-        base.FixedUpdate();
-
-        UpdateMotor();
-
-        jumpAction = false;
-        dashAction = false;
     }
 
     private bool IsJumpingUp()

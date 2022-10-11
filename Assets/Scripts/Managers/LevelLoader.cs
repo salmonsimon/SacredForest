@@ -45,7 +45,11 @@ public class LevelLoader : MonoBehaviour
         if (lastTransitionType != null)
         {
             GameManager.instance.SetGamePaused(false);
+            GameManager.instance.SetIsTeleporting(false);
+            
             GameManager.instance.GetPlayer().GetComponent<Animator>().enabled = true;
+            GameManager.instance.GetPlayer().transform.localScale = Vector3.one;
+            GameManager.instance.GetPlayer().transform.rotation = Quaternion.identity;
 
 
             GameManager.instance.GetPlayer().GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
