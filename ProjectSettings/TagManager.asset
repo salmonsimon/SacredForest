@@ -10,6 +10,7 @@ TagManager:
   - Sword
   - Enemy
   - Arrow
+  - MagicProjectile
   layers:
   - Default
   - TransparentFX

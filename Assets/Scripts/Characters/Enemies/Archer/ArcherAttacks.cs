@@ -57,7 +57,7 @@ public class ArcherAttacks : MonoBehaviour
             StartCoroutine(GetComponent<EnemyMover>().MovementCooldown(.3f));
 
             StartCoroutine(PlayClip(Animator.StringToHash(arrowAnimationClip.name), 0));
-            StartCoroutine(ShotArrow(shootingSpeed, shootingDirection));
+            StartCoroutine(ShootArrow(shootingSpeed, shootingDirection));
         }
     }
 
@@ -154,7 +154,7 @@ public class ArcherAttacks : MonoBehaviour
         return speedCorrection;
     }
 
-    private IEnumerator ShotArrow(float shootingForce, Vector2 direction)
+    private IEnumerator ShootArrow(float shootingForce, Vector2 direction)
     {
         yield return new WaitForSeconds(.3f);
 

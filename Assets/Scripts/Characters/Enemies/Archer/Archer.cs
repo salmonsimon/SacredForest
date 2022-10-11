@@ -20,8 +20,6 @@ public class Archer : MonoBehaviour
 
     [SerializeField] private BoxCollider attackZoneCollider;
     [SerializeField] private BoxCollider dangerZoneCollider;
-    [SerializeField] private CircleCollider stillMoreToWalkCheck;
-    [SerializeField] private CircleCollider jumpBackGroundCheck;
 
     #endregion
 
@@ -33,9 +31,6 @@ public class Archer : MonoBehaviour
     #endregion
 
     #region Logic Variables
-
-    private bool groundedAfterJumpBack;
-    private bool stillMoreToWalk;
 
     private bool onActionCooldown = false;
 
@@ -94,9 +89,6 @@ public class Archer : MonoBehaviour
 
         movement = Vector2.zero;
 
-        groundedAfterJumpBack = jumpBackGroundCheck.IsColliding();
-        stillMoreToWalk = stillMoreToWalkCheck.IsColliding();
-
         relativePlayerPositionX = player.transform.position.x - transform.position.x;
 
         if (!enemyMover.IsWalkingAway() && playerDetection.DetectedPlayer)
@@ -117,19 +109,19 @@ public class Archer : MonoBehaviour
                 StartCoroutine(PickRandomAttackPattern());
                 StartCoroutine(ActionCooldown(actionCooldownDuration));
             }
-            else if (enemyMover.IsWalkingAway() && stillMoreToWalk && !archerAttacks.IsAttacking())
+            else if (enemyMover.IsWalkingAway() && enemyMover.StillMoreToWalk() && !archerAttacks.IsAttacking())
             {
                 movement = WalksAway();
             }
             else if (!onActionCooldown && !archerAttacks.IsAttacking() && dangerZoneCollider.IsColliding())
             {
-                jumpBackAction = enemyMover.PickNonAttackAction(groundedAfterJumpBack, 4, 6);
+                jumpBackAction = enemyMover.PickNonAttackAction(enemyMover.IsGroundedAfterJumpBack(), 4, 6);
                 StartCoroutine(ActionCooldown(actionCooldownDuration));
             }
         }
         else if (playerDetection.DetectedPlayer && (!archerAttacks.IsAttacking() || enemyMover.MovesWhileAttacking()))
         {
-            if (stillMoreToWalk)
+            if (enemyMover.StillMoreToWalk())
             {
                 if (enemyMover.IsWalkingAway())
                 {
