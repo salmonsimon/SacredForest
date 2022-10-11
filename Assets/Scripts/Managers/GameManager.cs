@@ -74,6 +74,11 @@ public class GameManager : MonoBehaviour
         return isTeleporting;
     }
 
+    public void SetIsTeleporting(bool value)
+    {
+        isTeleporting = value;
+    }
+
     public void SetGamePaused(bool value)
     {
         isGamePaused = value;
