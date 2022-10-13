@@ -302,14 +302,6 @@ public class Mover : MonoBehaviour
         isAbleToDash = true;
     }
 
-    protected virtual void Death()
-    {
-        OnLanding();
-
-        isAbleToMove = false;
-        rigidBody.constraints = RigidbodyConstraints2D.FreezePositionX;
-    }
-
     protected bool IsFalling()
     {
         return rigidBody.velocity.y < 0.1;
@@ -338,5 +330,23 @@ public class Mover : MonoBehaviour
     public bool ExceedsFallVelocity()
     {
         return rigidBody.velocity.y < -fallSpeedLimit;
+    }
+
+    protected virtual void Death()
+    {
+        OnLanding();
+
+        isAbleToMove = false;
+        rigidBody.constraints = RigidbodyConstraints2D.FreezePositionX;
+    }
+
+    protected virtual void Resurrection()
+    {
+        OnLanding();
+
+        isAbleToMove = true;
+
+        rigidBody.constraints = RigidbodyConstraints2D.None;
+        rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 }

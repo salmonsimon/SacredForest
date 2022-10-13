@@ -69,7 +69,7 @@ public class Wizard : MonoBehaviour
 
     private void Start()
     {
-        damageReceiver.OnCharacterDeath += Death;
+        damageReceiver.OnCharacterAliveStatusChange += Death;
         playerDetection.OnDetectedPlayer += PlayerDetected;
     }
 

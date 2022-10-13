@@ -49,12 +49,14 @@ public class GameManager : MonoBehaviour
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        player.transform.position = GameObject.FindGameObjectWithTag(Config.SPAWN_POINT_TAG).transform.position;
+        GameObject playerSpawnPoint = GameObject.FindGameObjectWithTag(Config.SPAWN_POINT_TAG);
+        if (playerSpawnPoint)
+            player.transform.position = playerSpawnPoint.transform.position;
 
         Cinemachine.CinemachineVirtualCamera virtualCamera = GameObject.FindGameObjectWithTag(Config.CINEMACHINE_CAMERA_TAG).GetComponent<Cinemachine.CinemachineVirtualCamera>();
         virtualCamera.Follow = player.transform;
 
-        StartCoroutine(levelLoader.FinishTransition());
+        levelLoader.FinishTransition();
     }
 
     public void ShowText(string msg, int fontSize, Color color, Vector3 position, Vector3 motion, float duration)

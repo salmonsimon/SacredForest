@@ -35,7 +35,7 @@ public class WizardAttacks : MonoBehaviour
 
     private void Start()
     {
-        GetComponent<DamageReceiver>().OnCharacterDeath += Death;
+        GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += Death;
     }
 
     public void MeleeAttack(Vector3 magePosition, Vector3 playerPosition)

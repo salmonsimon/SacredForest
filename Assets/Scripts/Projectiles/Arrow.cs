@@ -14,7 +14,7 @@ public class Arrow : MonoBehaviour
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
-        GetComponent<DamageReceiver>().OnCharacterDeath += Death;
+        GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += Death;
     }
 
     private void Update()

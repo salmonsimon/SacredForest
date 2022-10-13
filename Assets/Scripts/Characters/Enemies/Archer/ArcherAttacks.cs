@@ -39,7 +39,7 @@ public class ArcherAttacks : MonoBehaviour
 
     private void Start()
     {
-        GetComponent<DamageReceiver>().OnCharacterDeath += Death;
+        GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += Death;
     }
 
     public void ArrowAttack(Vector3 archerPosition, Vector3 playerPosition)

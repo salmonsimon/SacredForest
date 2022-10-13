@@ -8,12 +8,7 @@ public class RandomEnemySpawner : MonoBehaviour
     [SerializeField] private GameObject[] possibleEnemies;
     [SerializeField] private bool facingRight;
 
-    private void Awake()
-    {
-        SpawnEnemy();
-    }
-
-    public void SpawnEnemy()
+    public GameObject SpawnEnemy()
     {
         int randomIndex = Random.Range(0, possibleEnemies.Length);
 
@@ -23,5 +18,7 @@ public class RandomEnemySpawner : MonoBehaviour
         {
             newEnemy.transform.localScale = new Vector3(newEnemy.transform.localScale.x * -1f, newEnemy.transform.localScale.y, newEnemy.transform.localScale.z);
         }
+
+        return newEnemy;
     }
 }

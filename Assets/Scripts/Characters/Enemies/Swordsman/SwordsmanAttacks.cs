@@ -38,7 +38,7 @@ public class SwordsmanAttacks : MonoBehaviour
 
     private void Start()
     {
-        GetComponent<DamageReceiver>().OnCharacterDeath += Death;
+        GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += Death;
     }
 
     public void AttackPattern(bool firstAttack, bool secondAttack, bool thirdAttack)

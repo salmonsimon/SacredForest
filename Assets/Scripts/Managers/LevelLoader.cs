@@ -21,8 +21,7 @@ public class LevelLoader : MonoBehaviour
         switch (transitionType)
         {
             case Config.CROSSFADE_TRANSITION:
-                crossFade.gameObject.SetActive(true);
-                crossFade.SetTrigger(Config.CROSSFADE_START_TRIGGER);
+                CrossfadeStart();
                 break;
         }
 
@@ -40,7 +39,7 @@ public class LevelLoader : MonoBehaviour
         }
     }
 
-    public IEnumerator FinishTransition()
+    public void FinishTransition()
     {
         if (lastTransitionType != null)
         {
@@ -57,11 +56,24 @@ public class LevelLoader : MonoBehaviour
             switch (lastTransitionType)
             {
                 case Config.CROSSFADE_TRANSITION:
-                    crossFade.SetTrigger(Config.CROSSFADE_END_TRIGGER);
-                    yield return new WaitForSeconds(endTransitionDuration);
-                    crossFade.gameObject.SetActive(false);
+                    StartCoroutine(CrossfadeEnd());
                     break;
             }
         }
+    }
+
+    public void CrossfadeStart()
+    {
+        crossFade.gameObject.SetActive(true);
+        crossFade.SetTrigger(Config.CROSSFADE_START_TRIGGER);
+    }
+
+    public IEnumerator CrossfadeEnd()
+    {
+        crossFade.SetTrigger(Config.CROSSFADE_END_TRIGGER);
+
+        yield return new WaitForSeconds(endTransitionDuration);
+
+        crossFade.gameObject.SetActive(false);
     }
 }
