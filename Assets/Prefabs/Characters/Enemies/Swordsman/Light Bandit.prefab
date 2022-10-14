@@ -5259,7 +5259,7 @@ MonoBehaviour:
   runSpeed: 1.5
   hasJumpBack: 0
   hasDash: 0
-  walksAwayWhenInAttackCooldown: 0
+  walksAwayWhenInAttackCooldown: 1
   movesWhileAttacking: 0
 --- !u!114 &4044693872866003595
 MonoBehaviour:

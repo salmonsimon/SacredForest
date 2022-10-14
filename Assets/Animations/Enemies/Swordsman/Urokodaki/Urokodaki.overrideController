@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Urokodaki
+  m_Controller: {fileID: 9100000, guid: 29e12f3c7ecd17b439875a1ad650c68f, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 4667812ea66582849bbedc30a748a852, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 0e160d6b8e812c746be76386f589a585, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 27108073f599823428f4489c75a6f175, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: cf7ecf19debac43469dc44ac919a2bb1, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 51e50517d508f0e4f9c04b9d0e5f1890, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: fe6ddc4643d74914fb1967e65d1c2df8, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 2b74374ef95491647ac7876443e2c60c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d878894147011d447b6a1561f28767b9, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 4358df0d87acbfd498ab081a38c2a7b6, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: c512e93605918674c940646c5266c2cf, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 669079cfac29e524983d3a80e4d00f6b, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: b6ed100a6edd58f489b4175dbd94b7fc, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: d005dab1604980a4eb6ccba317029e8a, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 939c4b3b0b3a5524bb5e948e2843eed1, type: 2}
