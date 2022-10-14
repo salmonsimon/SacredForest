@@ -11,7 +11,7 @@ public class PlayerMovementController : Mover
 
     private void Start()
     {
-        GetComponent<DamageReceiver>().OnCharacterDeath += Death;
+        GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += AliveStatusChange;
     }
 
     private void Update()
@@ -71,10 +71,29 @@ public class PlayerMovementController : Mover
         return rigidBody.velocity.y > 0.1;
     }
 
+    private void AliveStatusChange()
+    {
+        if (GetComponent<DamageReceiver>().IsAlive)
+        {
+            Resurrection();
+        }
+        else
+        {
+            Death();
+        }
+    }
+
     protected override void Death()
     {
         base.Death();
 
         isAlive = false;
+    }
+
+    protected override void Resurrection()
+    {
+        base.Resurrection();
+
+        isAlive = true;
     }
 }

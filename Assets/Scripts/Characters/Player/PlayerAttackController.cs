@@ -22,7 +22,7 @@ public class PlayerAttackController : MonoBehaviour
 
     private void Start()
     {
-        GetComponent<DamageReceiver>().OnCharacterDeath += Death;
+        GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += AliveStatusChange;
     }
 
     private void Update()
@@ -93,8 +93,26 @@ public class PlayerAttackController : MonoBehaviour
         playerMovementController.SetIsAbleToMove(true);
     }
 
-    public void Death()
+    private void AliveStatusChange()
+    {
+        if (GetComponent<DamageReceiver>().IsAlive)
+        {
+            Resurrection();
+        }
+        else
+        {
+            Death();
+        }
+    }
+
+    private void Death()
     {
         isAlive = false;
     }
+
+    private void Resurrection()
+    {
+        isAlive = true;
+    }
+
 }

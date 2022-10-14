@@ -73,7 +73,7 @@ public class Swordsman : MonoBehaviour
 
     private void Start()
     {
-        damageReceiver.OnCharacterDeath += Death;
+        damageReceiver.OnCharacterAliveStatusChange += Death;
         playerDetection.OnDetectedPlayer += PlayerDetected;
     }
 

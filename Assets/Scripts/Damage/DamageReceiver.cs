@@ -18,16 +18,16 @@ public class DamageReceiver : MonoBehaviour
         get { return isAlive; }
         private set
         {
-            if (isAlive = value) return;
+            if (isAlive == value) return;
 
             isAlive = value;
-            if (OnCharacterDeath != null)
-                OnCharacterDeath();
+            if (OnCharacterAliveStatusChange != null)
+                OnCharacterAliveStatusChange();
         }
     }
 
-    public delegate void OnCharacterDeathDelegate();
-    public event OnCharacterDeathDelegate OnCharacterDeath;
+    public delegate void OnCharacterAliveStatusChangeDelegate();
+    public event OnCharacterAliveStatusChangeDelegate OnCharacterAliveStatusChange;
 
     private void Awake()
     {
@@ -53,6 +53,15 @@ public class DamageReceiver : MonoBehaviour
         }
     }
 
+    private IEnumerator ImmuneCooldown()
+    {
+        isImmune = true;
+
+        yield return new WaitForSeconds(immuneTime);
+
+        isImmune = false;
+    }
+
     protected virtual void Death()
     {
         animator.SetBool(Config.ANIMATOR_IS_DEAD, true);
@@ -61,12 +70,12 @@ public class DamageReceiver : MonoBehaviour
         IsAlive = false;
     }
 
-    private IEnumerator ImmuneCooldown()
+    public void Resurrect()
     {
-        isImmune = true;
+        currentHitPoints = maxHitPoints;
 
-        yield return new WaitForSeconds(immuneTime);
+        animator.SetBool(Config.ANIMATOR_IS_DEAD, false);
 
-        isImmune = false;
+        IsAlive = true;
     }
 }

@@ -21,7 +21,7 @@ public class MagicProjectile : MonoBehaviour
         damageDealer = GetComponent<CircleDamageDealer>();
 
         if (isDestroyable)
-            GetComponent<DamageReceiver>().OnCharacterDeath += Death;
+            GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += Death;
     }
 
     private void Start()

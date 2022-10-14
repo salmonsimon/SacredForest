@@ -85,7 +85,7 @@ public class EnemyMover : MonoBehaviour
 
     private void Start()
     {
-        damageReceiver.OnCharacterDeath += Death;
+        damageReceiver.OnCharacterAliveStatusChange += Death;
     }
 
     private void FixedUpdate()
