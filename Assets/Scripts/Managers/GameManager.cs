@@ -53,8 +53,13 @@ public class GameManager : MonoBehaviour
         if (playerSpawnPoint)
             player.transform.position = playerSpawnPoint.transform.position;
 
-        Cinemachine.CinemachineVirtualCamera virtualCamera = GameObject.FindGameObjectWithTag(Config.CINEMACHINE_CAMERA_TAG).GetComponent<Cinemachine.CinemachineVirtualCamera>();
-        virtualCamera.Follow = player.transform;
+        GameObject virtualCameraGameObject = GameObject.FindGameObjectWithTag(Config.CINEMACHINE_CAMERA_TAG);
+
+        if (virtualCameraGameObject)
+        {
+            Cinemachine.CinemachineVirtualCamera virtualCamera = virtualCameraGameObject.GetComponent<Cinemachine.CinemachineVirtualCamera>();
+            virtualCamera.Follow = player.transform;
+        }
 
         levelLoader.FinishTransition();
     }

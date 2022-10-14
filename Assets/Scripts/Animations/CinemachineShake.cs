@@ -43,9 +43,13 @@ public class CinemachineShake : MonoBehaviour
     {
         cinemachineVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
 
-        cinemachineBasicMultiChannelPerlin = cinemachineVirtualCamera.AddCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-        cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0;
-        cinemachineBasicMultiChannelPerlin.m_NoiseProfile = noiseSettings;
+        if (cinemachineVirtualCamera)
+        {
+            cinemachineBasicMultiChannelPerlin = cinemachineVirtualCamera.AddCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+            cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0;
+            cinemachineBasicMultiChannelPerlin.m_NoiseProfile = noiseSettings;
+        }
+        
     }
 
     public void ShakeCamera(float intensity, float time)

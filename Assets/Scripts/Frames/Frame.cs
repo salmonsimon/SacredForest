@@ -13,9 +13,7 @@ public class Frame : MonoBehaviour
 
     [SerializeField] private BoxCollider frameChangeTrigger;
 
-    [SerializeField] private PolygonCollider2D cameraConfiner;
-
-    [SerializeField] private GameObject player;
+    private GameObject player;
     [SerializeField] private Transform playerSpawnPoint;
 
     private void Start()
@@ -46,7 +44,11 @@ public class Frame : MonoBehaviour
         if (enemiesKilledCount != enemiesTotalCount)
             frameChangeTrigger.gameObject.SetActive(false);
 
+        CinemachineVirtualCamera cinemachineVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
+        cinemachineVirtualCamera.Follow = player.transform;
+
         GameManager.instance.GetCinemachineShake().SetVirtualCamera();
+
     }
 
     public void RestartFrame()
