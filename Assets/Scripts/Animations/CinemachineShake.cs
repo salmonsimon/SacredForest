@@ -39,7 +39,7 @@ public class CinemachineShake : MonoBehaviour
         SetVirtualCamera();
     }
 
-    private void SetVirtualCamera()
+    public void SetVirtualCamera()
     {
         cinemachineVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
 

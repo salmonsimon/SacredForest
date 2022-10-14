@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Frame : MonoBehaviour
 {
@@ -12,11 +13,12 @@ public class Frame : MonoBehaviour
 
     [SerializeField] private BoxCollider frameChangeTrigger;
 
-    private GameObject player;
+    [SerializeField] private PolygonCollider2D cameraConfiner;
+
+    [SerializeField] private GameObject player;
     [SerializeField] private Transform playerSpawnPoint;
 
-
-    private void Awake()
+    private void Start()
     {
         player = GameManager.instance.GetPlayer();
     }
@@ -24,6 +26,9 @@ public class Frame : MonoBehaviour
     public void StartFrame()
     {
         CleanFrame();
+
+        if (!player)
+            player = GameManager.instance.GetPlayer();
 
         player.transform.position = playerSpawnPoint.position;
 
@@ -40,6 +45,8 @@ public class Frame : MonoBehaviour
 
         if (enemiesKilledCount != enemiesTotalCount)
             frameChangeTrigger.gameObject.SetActive(false);
+
+        GameManager.instance.GetCinemachineShake().SetVirtualCamera();
     }
 
     public void RestartFrame()
