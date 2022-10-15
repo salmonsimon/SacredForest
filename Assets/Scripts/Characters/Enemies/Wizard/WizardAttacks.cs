@@ -28,6 +28,8 @@ public class WizardAttacks : MonoBehaviour
     [SerializeField] private MagicProjectile magicProjectilePrefab;
     [SerializeField] private float shootingForce = Config.MAGIC_PROJECTILE_SPEED;
 
+    [SerializeField] private float shootingWaitingTime = .5f;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -65,7 +67,7 @@ public class WizardAttacks : MonoBehaviour
 
     private IEnumerator ShootProjectile(Vector2 direction)
     {
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(shootingWaitingTime);
 
         MagicProjectile newProjectile = Instantiate(magicProjectilePrefab, transform.position + new Vector3(transform.localScale.x * .16f, 0, 0), Quaternion.identity);
 
