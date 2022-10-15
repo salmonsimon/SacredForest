@@ -55,7 +55,7 @@ public class Swordsman : MonoBehaviour
 
     [SerializeField] private float startleDuration = .5f;
     private float actionCooldownDuration = Config.ACTION_COOLDOWN_DURATION;
-    private float attackDelay = Config.ATTACK_DELAY;
+    [SerializeField] private float attackDelay = Config.ATTACK_DELAY;
 
     #endregion
 

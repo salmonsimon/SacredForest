@@ -5082,6 +5082,7 @@ MonoBehaviour:
   attackCooldownDuration: 3
   magicProjectilePrefab: {fileID: 5039259422374071178, guid: cd2bfd63f1cdb0a42856c944bfd04584, type: 3}
   shootingForce: 1.5
+  shootingWaitingTime: 0.5
 --- !u!114 &8742912997571526416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10476,7 +10477,7 @@ CircleCollider2D:
   m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
