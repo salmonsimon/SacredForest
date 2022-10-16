@@ -579,7 +579,7 @@ PolygonCollider2D:
   m_GameObject: {fileID: 134752275}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 18512d9c28574ca4f9157986b58aa5a8, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -597,24 +597,24 @@ PolygonCollider2D:
     m_Paths:
     - - {x: -0.6810295, y: 1.7172885}
       - {x: -2.5148113, y: 1.7117584}
-      - {x: -3.3123565, y: 1.7525939}
-      - {x: -3.600803, y: 1.7341443}
+      - {x: -3.4507892, y: 1.7141403}
+      - {x: -3.6084936, y: 1.7110722}
       - {x: -3.5730004, y: 1.5745418}
       - {x: -3.5030544, y: 1.5133265}
-      - {x: -3.478318, y: 0.97610295}
-      - {x: -4.455848, y: 0.9828894}
+      - {x: -3.4664173, y: 0.95230186}
+      - {x: -4.473699, y: 0.94718766}
       - {x: -4.6991205, y: 0.9092741}
       - {x: -4.6916924, y: 0.8074244}
       - {x: -4.6232305, y: 0.73726416}
       - {x: -4.5545516, y: 0.7115474}
-      - {x: -4.541076, y: 0.15340376}
+      - {x: -4.558927, y: 0.12960243}
       - {x: -5.58336, y: 0.1358751}
       - {x: -5.8335724, y: 0.11762428}
       - {x: -5.8110795, y: 0.00647521}
       - {x: -5.74289, y: -0.0848515}
       - {x: -5.706486, y: -0.08411026}
       - {x: -5.686389, y: -0.66057754}
-      - {x: -6.708839, y: -0.6274817}
+      - {x: -6.7326403, y: -0.6691339}
       - {x: -6.95654, y: -0.7012017}
       - {x: -6.941294, y: -0.81371474}
       - {x: -6.848481, y: -0.88700247}
@@ -653,7 +653,7 @@ PolygonCollider2D:
       - {x: 2.1967566, y: 1.5817565}
       - {x: 2.2528932, y: 1.6048595}
       - {x: 2.239309, y: 1.6981575}
-      - {x: 1.9929149, y: 1.7637086}
+      - {x: 2.0104678, y: 1.7373794}
 --- !u!1 &167333841
 GameObject:
   m_ObjectHideFlags: 0
@@ -37020,7 +37020,7 @@ PolygonCollider2D:
   m_GameObject: {fileID: 1473959344}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 18512d9c28574ca4f9157986b58aa5a8, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -37211,7 +37211,7 @@ PolygonCollider2D:
   m_GameObject: {fileID: 1563937881}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 18512d9c28574ca4f9157986b58aa5a8, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -37884,6 +37884,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1853539560}
     m_Modifications:
+    - target: {fileID: 1971838360380672435, guid: da2b955bb7d5a7c43a29028653e8dd83, type: 3}
+      propertyPath: maxHitPoints
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1971838360380672435, guid: da2b955bb7d5a7c43a29028653e8dd83, type: 3}
+      propertyPath: currentHitPoints
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4697750405587687972, guid: da2b955bb7d5a7c43a29028653e8dd83, type: 3}
       propertyPath: m_RootOrder
       value: 2

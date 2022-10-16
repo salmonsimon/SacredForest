@@ -12,6 +12,7 @@ TagManager:
   - Arrow
   - MagicProjectile
   - EnemySpawner
+  - Projectile Container
   layers:
   - Default
   - TransparentFX

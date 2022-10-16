@@ -52,14 +52,14 @@ public class PlayerAttackController : MonoBehaviour
             playerMovementController.FinishWallSliding();
             StartCoroutine(CooldownToMove());
         }
-            
 
+        StartCoroutine(IsAttackingCooldown());
         animator.SetTrigger("FirstAttack");
 
         if(!playerMovementController.IsJumping())
             ableToDoSecondAttack = true;
 
-        StartCoroutine(Cooldown());
+        StartCoroutine(AttackCooldown());
     }
 
     private IEnumerator DoSecondAttack()
@@ -73,7 +73,16 @@ public class PlayerAttackController : MonoBehaviour
         animator.SetBool("IsDoingSecondAttack", false);
     }
 
-    private IEnumerator Cooldown()
+    private IEnumerator IsAttackingCooldown()
+    {
+        animator.SetBool("IsAttacking", true);
+
+        yield return new WaitForSeconds(.3f);
+
+        animator.SetBool("IsAttacking", false);
+    }
+
+    private IEnumerator AttackCooldown()
     {
         yield return new WaitForSeconds(attackCooldownDuration*(0.75f));
 
@@ -81,6 +90,11 @@ public class PlayerAttackController : MonoBehaviour
 
         yield return new WaitForSeconds(attackCooldownDuration*(0.25f));
 
+        onAttackCooldown = false;
+    }
+
+    public void EndAttackCooldown()
+    {
         onAttackCooldown = false;
     }
 

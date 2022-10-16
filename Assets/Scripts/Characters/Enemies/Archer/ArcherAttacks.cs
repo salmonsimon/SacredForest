@@ -26,11 +26,13 @@ public class ArcherAttacks : MonoBehaviour
 
     [SerializeField] private Arrow arrowPrefab;
 
-    private float[] shootingSpeeds = { 7f, 10f, 12f };
+    private float[] shootingSpeeds = { 10f, 7f };
     private float shootingSpeed;
     private float shootingAngle;
     private Vector2 shootingDirection;
     private bool isGoingToShoot = false;
+
+    private GameObject projectileContainer;
 
     private void Awake()
     {
@@ -40,6 +42,8 @@ public class ArcherAttacks : MonoBehaviour
     private void Start()
     {
         GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += Death;
+
+        projectileContainer = GameObject.FindGameObjectWithTag("Projectile Container");
     }
 
     public void ArrowAttack(Vector3 archerPosition, Vector3 playerPosition)
@@ -159,6 +163,7 @@ public class ArcherAttacks : MonoBehaviour
         yield return new WaitForSeconds(.3f);
 
         Arrow newArrow = Instantiate(arrowPrefab, transform.position + new Vector3(transform.localScale.x * .16f, 0, 0), Quaternion.identity);
+        newArrow.transform.SetParent(projectileContainer.transform);
 
         if (transform.localScale.x < 0)
         {

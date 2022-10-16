@@ -40,6 +40,9 @@ public class Arrow : MonoBehaviour
                 rigidBody.isKinematic = true;
 
                 Destroy(GetComponent<BoxDamageDealer>());
+                Destroy(GetComponent<DamageReceiver>());
+                Destroy(GetComponent<BoxCollider2D>());
+
                 GetComponent<Animator>().enabled = false;
             }
         }
@@ -48,6 +51,18 @@ public class Arrow : MonoBehaviour
     private void Death()
     {
         brokeParticles.Play();
+
         Destroy(GetComponent<BoxDamageDealer>());
+        Destroy(GetComponent<DamageReceiver>());
+        Destroy(GetComponent<BoxCollider2D>());
+
+        StartCoroutine(WaitToDestroy());
+    }
+
+    private IEnumerator WaitToDestroy()
+    {
+        yield return new WaitForSeconds(1f);
+
+        Destroy(gameObject);
     }
 }

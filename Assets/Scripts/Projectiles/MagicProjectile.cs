@@ -14,6 +14,8 @@ public class MagicProjectile : MonoBehaviour
 
     [SerializeField] private bool isDestroyable = false;
 
+    private bool hasBeenReflected = false;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -42,8 +44,10 @@ public class MagicProjectile : MonoBehaviour
     {
         if (!hasHit)
         {
-            if (swordCollisionCheck.IsColliding())
+            if (!hasBeenReflected && swordCollisionCheck.IsColliding())
             {
+                hasBeenReflected = true;
+
                 transform.localScale = new Vector3(transform.localScale.x * -1f, transform.localScale.y, transform.localScale.z);
 
                 Vector2 originalVelocity = rigidBody.velocity;

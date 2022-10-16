@@ -10371,7 +10371,7 @@ MonoBehaviour:
   meleeAttackAnimationClip: {fileID: 7400000, guid: 7bf21a54ee4fba649952e9d3433e6c54, type: 2}
   attackCooldownDuration: 3
   magicProjectilePrefab: {fileID: 5339643554312622404, guid: 57395e93b55b8274c98c6435061b5bfc, type: 3}
-  shootingForce: 1.5
+  shootingForce: 3
   shootingWaitingTime: 0.2
 --- !u!114 &3403554590150775901
 MonoBehaviour:

@@ -20,7 +20,7 @@ public class FloatingTextManager : MonoBehaviour
     {
         FloatingText floatingText = GetFloatingText();
 
-        floatingText.go.transform.localScale *= .3f;
+        
 
         floatingText.txt.text = msg;
         floatingText.txt.fontSize = fontSize;
@@ -44,6 +44,8 @@ public class FloatingTextManager : MonoBehaviour
             floatingText.go = Instantiate(textPrefab);
             floatingText.go.transform.SetParent(textContainer.transform);
             floatingText.txt = floatingText.go.GetComponent<Text>();
+
+            floatingText.go.transform.localScale *= .3f;
 
             floatingTexts.Add(floatingText);
         }

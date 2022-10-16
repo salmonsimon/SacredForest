@@ -66,7 +66,8 @@ public class PlayerDetection : MonoBehaviour
         {
             foreach (RaycastHit2D enemy in enemyGroup)
             {
-                enemy.transform.gameObject.GetComponent<PlayerDetection>().DetectedPlayer = true;
+                if (enemy.transform.gameObject.GetComponent<DamageReceiver>().IsAlive)
+                    enemy.transform.gameObject.GetComponent<PlayerDetection>().DetectedPlayer = true;
             }
         }
 

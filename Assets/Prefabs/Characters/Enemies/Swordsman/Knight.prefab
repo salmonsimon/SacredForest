@@ -10235,7 +10235,7 @@ GameObject:
   - component: {fileID: 8428708079665638834}
   - component: {fileID: 8428708079665638832}
   - component: {fileID: 8428708079665638835}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: AttackZoneCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10308,7 +10308,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8428708080137679205}
   - component: {fileID: 8428708080137679203}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: VisionFieldCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10462,7 +10462,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9101174672306500239}
   - component: {fileID: 9101174672306500238}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: GroupAlertCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
