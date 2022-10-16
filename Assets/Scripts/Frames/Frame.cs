@@ -16,9 +16,15 @@ public class Frame : MonoBehaviour
     private GameObject player;
     [SerializeField] private Transform playerSpawnPoint;
 
+    GameObject projectileContainer;
+
     private void Start()
     {
         player = GameManager.instance.GetPlayer();
+
+        projectileContainer = new GameObject("Projectile Container");
+        projectileContainer.transform.SetParent(gameObject.transform);
+        projectileContainer.tag = "Projectile Container";
     }
 
     public void StartFrame()
@@ -58,6 +64,13 @@ public class Frame : MonoBehaviour
         player.GetComponent<DamageReceiver>().Resurrect();
         player.transform.position = playerSpawnPoint.position;
 
+        StartCoroutine(SpawnEnemiesAfterWait());
+    }
+
+    private IEnumerator SpawnEnemiesAfterWait()
+    {
+        yield return new WaitForSeconds(.1f);
+
         foreach (RandomEnemySpawner randomEnemySpawner in randomEnemySpawners)
         {
             GameObject newEnemy = randomEnemySpawner.SpawnEnemy();
@@ -71,13 +84,22 @@ public class Frame : MonoBehaviour
     public void CleanFrame()
     {
         enemiesKilledCount = 0;
-        
+
         foreach (GameObject enemy in enemies)
         {
             Destroy(enemy.gameObject);
         }
 
         enemies.Clear();
+
+        if (projectileContainer)
+        {
+            Destroy(projectileContainer.gameObject);
+            projectileContainer = new GameObject("Projectile Container");
+            projectileContainer.transform.SetParent(gameObject.transform);
+            projectileContainer.tag = "Projectile Container";
+        }
+        
 
         if (enemiesKilledCount != enemiesTotalCount)
             frameChangeTrigger.gameObject.SetActive(false);
@@ -102,7 +124,10 @@ public class Frame : MonoBehaviour
 
     public bool FrameChangeTriggered()
     {
-        return frameChangeTrigger.IsColliding();
+        if (frameChangeTrigger)
+            return frameChangeTrigger.IsColliding();
+        else
+            return false;
     }
 
     public GameObject GetPlayer()

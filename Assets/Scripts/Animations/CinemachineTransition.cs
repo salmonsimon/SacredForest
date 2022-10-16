@@ -12,9 +12,30 @@ public class CinemachineTransition : MonoBehaviour
 
     [SerializeField] BoxCollider2D blockCollider;
 
+    private GameObject player;
+
     private void Awake()
     {
         transitionTrigger = GetComponent<BoxCollider>();
+    }
+
+    private void Start()
+    {
+        player = GameManager.instance.GetPlayer();
+    }
+
+    private void Update()
+    {
+        if (!player.GetComponent<DamageReceiver>().IsAlive)
+        {
+            if (Input.GetKeyDown(KeyCode.Space) && !GameManager.instance.IsTeleporting())
+            {
+                activeVcam.Priority = 1;
+                otherVcam.Priority = 0;
+
+                blockCollider.gameObject.SetActive(false);
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -25,8 +46,6 @@ public class CinemachineTransition : MonoBehaviour
             otherVcam.Priority = 1;
 
             blockCollider.gameObject.SetActive(true);
-
-            Destroy(gameObject);
         }
     }
 }

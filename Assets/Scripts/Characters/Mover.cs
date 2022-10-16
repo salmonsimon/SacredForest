@@ -133,7 +133,7 @@ public class Mover : MonoBehaviour
                 }
             }
             
-            if (isCollidingWithWall && !isGrounded && !isWallSliding)
+            if (hasAbilityToWallJump && isCollidingWithWall && !isGrounded && !isWallSliding)
             {
                 if (Mathf.Abs(rigidBody.velocity.x) > 0.1)
                 {

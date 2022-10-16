@@ -257,7 +257,7 @@ MonoBehaviour:
   meleeAttackAnimationClip: {fileID: 7400000, guid: 7bf21a54ee4fba649952e9d3433e6c54, type: 2}
   attackCooldownDuration: 3
   magicProjectilePrefab: {fileID: 1823809230247134057, guid: 7f3885e971a0e154f8a00f8496db6582, type: 3}
-  shootingForce: 1.5
+  shootingForce: 3
   shootingWaitingTime: 0.5
 --- !u!114 &8697647331725521208
 MonoBehaviour:
@@ -459,7 +459,7 @@ GameObject:
   - component: {fileID: 8697647332093862386}
   - component: {fileID: 8697647332093862380}
   - component: {fileID: 8697647332093862387}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: AttackZoneCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -532,7 +532,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8697647332126589133}
   - component: {fileID: 8697647332126589132}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: GroupAlertCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5478,7 +5478,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8697647332854721929}
   - component: {fileID: 8697647332854721928}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: VisionFieldCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10419,7 +10419,7 @@ GameObject:
   - component: {fileID: 8697647333373958352}
   - component: {fileID: 8697647333373958354}
   - component: {fileID: 8697647333373958353}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: DangerZoneCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10493,7 +10493,7 @@ GameObject:
   - component: {fileID: 8697647333380751690}
   - component: {fileID: 8697647333380751689}
   - component: {fileID: 8697647333380751688}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: MeleeZoneCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10567,7 +10567,7 @@ GameObject:
   - component: {fileID: 8697647333524610131}
   - component: {fileID: 8697647333524610129}
   - component: {fileID: 8697647333524610128}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Wand - MeeleMagic
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -46,6 +46,7 @@ public class FrameManager : MonoBehaviour
 
         GameManager.instance.GetPlayer().GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         GameManager.instance.GetPlayer().GetComponent<Animator>().enabled = false;
+        GameManager.instance.GetPlayer().GetComponent<PlayerAttackController>().EndAttackCooldown();
 
         GameManager.instance.GetLevelLoader().CrossfadeStart();
         yield return new WaitForSeconds(Config.START_TRANSITION_DURATION);

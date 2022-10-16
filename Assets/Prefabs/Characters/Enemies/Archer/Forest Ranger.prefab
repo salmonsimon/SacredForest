@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 2957183604744304406}
   - component: {fileID: 2957183604744304404}
   - component: {fileID: 2957183604744304407}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: AttackZoneCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,7 +276,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2957183605755421289}
   - component: {fileID: 2957183605755421270}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: VisionFieldCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -497,8 +497,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackZoneCollider: {fileID: 2957183604744304407}
   dangerZoneCollider: {fileID: 2957183606304197321}
-  stillMoreToWalkCheck: {fileID: 2957183605671449914}
-  jumpBackGroundCheck: {fileID: 2957183606066013608}
   startleDuration: 1
 --- !u!114 &2957183605891938237
 MonoBehaviour:
@@ -651,7 +649,7 @@ GameObject:
   - component: {fileID: 2957183606304197320}
   - component: {fileID: 2957183606304197302}
   - component: {fileID: 2957183606304197321}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: DangerZoneCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -724,7 +722,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2957183606371556817}
   - component: {fileID: 2957183606371556830}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: GroupAlertCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

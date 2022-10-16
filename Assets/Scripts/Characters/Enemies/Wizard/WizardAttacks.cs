@@ -54,7 +54,7 @@ public class WizardAttacks : MonoBehaviour
         float xDistance = playerPosition.x - magePosition.x;
         float yDistance = playerPosition.y - magePosition.y;
 
-        Vector2 shootingDirection = new Vector2(xDistance, yDistance);
+        Vector2 shootingDirection = new Vector2(xDistance, yDistance).normalized;
 
         isAttacking = true;
 
@@ -69,7 +69,7 @@ public class WizardAttacks : MonoBehaviour
     {
         yield return new WaitForSeconds(shootingWaitingTime);
 
-        MagicProjectile newProjectile = Instantiate(magicProjectilePrefab, transform.position + new Vector3(transform.localScale.x * .16f, 0, 0), Quaternion.identity);
+        MagicProjectile newProjectile = Instantiate(magicProjectilePrefab, transform.position + new Vector3(transform.localScale.x * .16f, .1f, 0), Quaternion.identity);
 
         if (transform.localScale.x < 0)
         {
