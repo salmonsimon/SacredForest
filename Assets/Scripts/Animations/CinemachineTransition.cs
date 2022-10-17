@@ -28,7 +28,7 @@ public class CinemachineTransition : MonoBehaviour
     {
         if (!player.GetComponent<DamageReceiver>().IsAlive)
         {
-            if (Input.GetKeyDown(KeyCode.Space) && !GameManager.instance.IsTeleporting())
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 activeVcam.Priority = 1;
                 otherVcam.Priority = 0;

@@ -54,7 +54,7 @@ public class Mover : MonoBehaviour
     private float dashForce = Config.DASH_FORCE;
 
     private float runSpeed = Config.RUN_SPEED;
-    [SerializeField] private float movementSmoothing = Config.MOVEMENT_SMOOTHING;
+    private float movementSmoothing = Config.MOVEMENT_SMOOTHING;
 
     private float jumpForce = Config.JUMP_FORCE;
     private float wallJumpForceX = Config.WALL_JUMP_FORCE_X;
@@ -65,6 +65,12 @@ public class Mover : MonoBehaviour
 
     #endregion
 
+    private float groundedRememberDuration = .1f;
+    private float groundedRememberTime = 0;
+
+    protected float jumpRememberDuration = .1f;
+    protected float jumpRememberTime = 0;
+
 
     protected void Awake()
     {
@@ -72,6 +78,19 @@ public class Mover : MonoBehaviour
 
         animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();
+    }
+
+    protected virtual void Update()
+    {
+        if (!GameManager.instance.IsGamePaused() && !GameManager.instance.IsTeleporting())
+        {
+            groundedRememberTime -= Time.deltaTime;
+
+            if (isGrounded)
+            {
+                groundedRememberTime = groundedRememberDuration;
+            }
+        }
     }
 
 
@@ -121,14 +140,17 @@ public class Mover : MonoBehaviour
             Vector3 targetVelocity = new Vector2(movement.x * runSpeed, rigidBody.velocity.y);
             rigidBody.velocity = Vector3.SmoothDamp(rigidBody.velocity, targetVelocity, ref refVelocity, movementSmoothing);
 
-            if (jumpAction)
+            //if (jumpAction && !isJumping)
+            if (jumpRememberTime > 0 && !isJumping)
             {
-                if (isGrounded)
+                if (groundedRememberTime > 0)
                 {
+                    jumpRememberTime = 0;
                     DoJumpAction();
                 }
                 else if (hasAbilityToWallJump && isWallSliding)
                 {
+                    jumpRememberTime = 0;
                     DoWallJumpAction();
                 }
             }
@@ -205,10 +227,15 @@ public class Mover : MonoBehaviour
 
         animator.SetTrigger(Config.MOVEMENT_ANIMATOR_JUMP_TRIGGER);
 
+        rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0);
         rigidBody.AddForce(new Vector2(0f, jumpForce));
 
-        particlesLand.Play();
-        particlesJump.Play();
+        if (isGrounded)
+        {
+            particlesLand.Play();
+            particlesJump.Play();
+        }
+        
     }
 
     private void DoWallJumpAction()
