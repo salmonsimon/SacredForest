@@ -33,6 +33,8 @@ public class Config
 
     #region Enemies
 
+    public const string ENEMY_TAG = "Enemy"; 
+
     public const float ACTION_COOLDOWN_DURATION = 1f;
 
     public const float JUMP_BACK_FORCE = 250f;

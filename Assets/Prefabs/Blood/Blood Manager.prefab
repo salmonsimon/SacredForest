@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4761989694019737953
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4761989694019737952}
+  - component: {fileID: 4761989694019737955}
+  m_Layer: 0
+  m_Name: Blood Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4761989694019737952
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4761989694019737953}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.1471276, y: 0.4112369, z: -0.0032556897}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4761989694019737955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4761989694019737953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44a4d93aa262b7a499ef0f583b1e008d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloodPrefabs:
+  - {fileID: 7122797306679333177, guid: 7e0f630288c088d4fbae2c65de54ecb8, type: 3}
+  - {fileID: 6970065549508700149, guid: a897d9e7566297f4186d8eef298ea2b8, type: 3}
+  - {fileID: 3096565895484061635, guid: a9e09f49c2ab56c43ad4a534c81fa28f, type: 3}
+  - {fileID: 1119464136909095822, guid: efeaa759d4aa5d042a6c49fa66049192, type: 3}
+  - {fileID: 5876681854990873183, guid: 4b31a7bf46cd0c64ab4487f00b0232ef, type: 3}
+  - {fileID: 7422937468528320542, guid: 9ba248f51f4822b4c9ffddab5f5baa75, type: 3}
+  - {fileID: 7475619554514522767, guid: a7ae6446a53adc8438f77ddf5408b1fa, type: 3}
+  - {fileID: 6412269297652333213, guid: afe0f40dced648e458ca35ffc31a0e4b, type: 3}
+  - {fileID: 7530649087258604556, guid: e7e05cd333f502d4d8a5087d4883ce9b, type: 3}
