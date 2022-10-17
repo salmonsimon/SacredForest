@@ -14,10 +14,14 @@ public class PlayerMovementController : Mover
         GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += AliveStatusChange;
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
+
         if (!GameManager.instance.IsGamePaused() && !GameManager.instance.IsTeleporting() && isAlive)
         {
+            jumpRememberTime -= Time.deltaTime;
+
             movement.x = Input.GetAxisRaw("Horizontal");
             movement.y = Input.GetAxisRaw("Vertical");
 
@@ -32,7 +36,8 @@ public class PlayerMovementController : Mover
 
             if (Input.GetKeyDown(KeyCode.Z))
             {
-                jumpAction = true;
+                //jumpAction = true;
+                jumpRememberTime = jumpRememberDuration;
             }
 
             if (Input.GetKeyDown(KeyCode.C))
@@ -61,7 +66,7 @@ public class PlayerMovementController : Mover
 
             UpdateMotor();
 
-            jumpAction = false;
+            //jumpAction = false;
             dashAction = false;
         }
     }
