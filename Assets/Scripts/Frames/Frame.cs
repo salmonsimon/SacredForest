@@ -18,6 +18,9 @@ public class Frame : MonoBehaviour
 
     GameObject projectileContainer;
 
+    [SerializeField] private bool rightSided = true;
+    private bool frameCleared = false;
+
     private void Start()
     {
         player = GameManager.instance.GetPlayer();
@@ -83,7 +86,11 @@ public class Frame : MonoBehaviour
 
     public void CleanFrame()
     {
+        frameCleared = false;
         enemiesKilledCount = 0;
+
+        ShowArrowUI();
+        GameManager.instance.GetAnimationManager().ShowImageUI("Space Key", false);
 
         foreach (GameObject enemy in enemies)
         {
@@ -117,9 +124,34 @@ public class Frame : MonoBehaviour
 
     private void FrameCleared()
     {
-        // print arrow indicating the direction to go
-
+        frameCleared = true;
         frameChangeTrigger.gameObject.SetActive(true);
+
+        ShowArrowUI();
+    }
+
+    private void ShowArrowUI()
+    {
+        if (rightSided)
+        {
+            GameManager.instance.GetAnimationManager().ShowImageUI("Right Arrow", frameCleared);
+        }
+        else
+        {
+            GameManager.instance.GetAnimationManager().ShowImageUI("Left Arrow", frameCleared);
+        }
+    }
+
+    public void ShowArrowUI(bool active)
+    {
+        if (rightSided)
+        {
+            GameManager.instance.GetAnimationManager().ShowImageUI("Right Arrow", active);
+        }
+        else
+        {
+            GameManager.instance.GetAnimationManager().ShowImageUI("Left Arrow", active);
+        }
     }
 
     public bool FrameChangeTriggered()

@@ -40,6 +40,7 @@ public class DamageReceiver : MonoBehaviour
         {
             currentHitPoints--;
             GameManager.instance.GetCinemachineShake().ShakeCamera(Config.CAMERASHAKE_HIT_AMPLITUDE, Config.CAMERASHAKE_HIT_DURATION);
+            Bleed();
 
             if (currentHitPoints < 1)
             {
@@ -77,5 +78,13 @@ public class DamageReceiver : MonoBehaviour
         animator.SetBool(Config.ANIMATOR_IS_DEAD, false);
 
         IsAlive = true;
+    }
+
+    private void Bleed()
+    {
+        if (gameObject.CompareTag(Config.PLAYER_TAG) || gameObject.CompareTag(Config.ENEMY_TAG))
+        {
+            GameManager.instance.GetBloodManager().Bleed(gameObject.transform, gameObject.transform.position);
+        }
     }
 }
