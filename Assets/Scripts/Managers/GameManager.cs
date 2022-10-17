@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private FloatingTextManager floatingTextManager;
     [SerializeField] private CinemachineShake cinemachineShake;
     [SerializeField] private BloodManager bloodManager;
+    [SerializeField] private AnimationManager animationManager;
 
     #endregion
 
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
             Destroy(floatingTextManager.gameObject);
             Destroy(cinemachineShake.gameObject);
             Destroy(bloodManager.gameObject);
+            Destroy(animationManager.gameObject);
         }
         else
         {
@@ -116,6 +118,11 @@ public class GameManager : MonoBehaviour
     public BloodManager GetBloodManager()
     {
         return bloodManager;
+    }
+
+    public AnimationManager GetAnimationManager()
+    {
+        return animationManager;
     }
 
     #endregion

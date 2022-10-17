@@ -23,10 +23,14 @@ public class FrameManager : MonoBehaviour
 
     private void Update()
     {
-        if (!player.GetComponent<DamageReceiver>().IsAlive)
+        if (!player.GetComponent<DamageReceiver>().IsAlive && !GameManager.instance.IsTeleporting())
         {
+            GameManager.instance.GetAnimationManager().ShowImageUI("Space Key", true);
+
             if (Input.GetKeyDown(KeyCode.Space) && !GameManager.instance.IsTeleporting())
             {
+                GameManager.instance.GetAnimationManager().ShowImageUI("Space Key", false);
+                activeFrame.ShowArrowUI(false);
                 StartCoroutine(RestartFrame());
             }
         }
@@ -36,6 +40,7 @@ public class FrameManager : MonoBehaviour
     {
         if (activeFrame.FrameChangeTriggered() && !GameManager.instance.IsTeleporting())
         {
+            activeFrame.ShowArrowUI(false);
             StartCoroutine(NextFrame());
         }
     }
