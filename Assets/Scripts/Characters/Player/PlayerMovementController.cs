@@ -36,7 +36,6 @@ public class PlayerMovementController : Mover
 
             if (Input.GetKeyDown(KeyCode.Z))
             {
-                //jumpAction = true;
                 jumpRememberTime = jumpRememberDuration;
             }
 
@@ -66,7 +65,6 @@ public class PlayerMovementController : Mover
 
             UpdateMotor();
 
-            //jumpAction = false;
             dashAction = false;
         }
     }

@@ -54,7 +54,7 @@ public class Config
 
     #region Player Attack
 
-    public const float ATTACK_COOLDOWN_DURATION = .5f;
+    public const float ATTACK_COOLDOWN_DURATION = .3f;
     public const float SECOND_ATTACK_DURATION = .1f;
     public const float WALLSLIDE_ATTACK_MOVEMENT_COOLDOWN = .3f;
 

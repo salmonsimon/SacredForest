@@ -7673,7 +7673,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 251672659}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 18512d9c28574ca4f9157986b58aa5a8, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -51699,12 +51699,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frames:
+  - {fileID: 1403479523}
   - {fileID: 1368459968}
   - {fileID: 2071746091}
   - {fileID: 329032152}
   - {fileID: 1035707527}
   - {fileID: 761324798}
-  - {fileID: 1403479523}
   - {fileID: 420930561}
 --- !u!1001 &1621057103
 PrefabInstance:
