@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BoxDamageDealer : BoxCollider
 {
+    [SerializeField] int damage = 1;
+
     protected override void CheckCollision(Collider2D coll, bool boolToAssing)
     {
         for (int i = 0; i < tagsToCheck.Count; i++)
@@ -11,7 +13,7 @@ public class BoxDamageDealer : BoxCollider
             if (coll.gameObject.CompareTag(tagsToCheck[i]))
             {
                 if (coll.GetComponent<DamageReceiver>().IsAlive)
-                    coll.SendMessage("ReceiveDamage");
+                    coll.SendMessage("ReceiveDamage", damage);
             }
         }
     }

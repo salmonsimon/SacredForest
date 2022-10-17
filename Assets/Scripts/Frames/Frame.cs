@@ -24,10 +24,6 @@ public class Frame : MonoBehaviour
     private void Start()
     {
         player = GameManager.instance.GetPlayer();
-
-        projectileContainer = new GameObject("Projectile Container");
-        projectileContainer.transform.SetParent(gameObject.transform);
-        projectileContainer.tag = "Projectile Container";
     }
 
     public void StartFrame()
@@ -41,14 +37,7 @@ public class Frame : MonoBehaviour
 
         enemiesTotalCount = randomEnemySpawners.Length;
 
-        foreach (RandomEnemySpawner randomEnemySpawner in randomEnemySpawners)
-        {
-            GameObject newEnemy = randomEnemySpawner.SpawnEnemy();
-
-            enemies.Add(newEnemy);
-
-            newEnemy.GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += EnemyKilled;
-        }
+        StartCoroutine(WaitAndSpawnEnemies(Config.END_TRANSITION_DURATION - .1f));
 
         if (enemiesKilledCount != enemiesTotalCount)
             frameChangeTrigger.gameObject.SetActive(false);
@@ -60,19 +49,9 @@ public class Frame : MonoBehaviour
 
     }
 
-    public void RestartFrame()
+    private IEnumerator WaitAndSpawnEnemies(float waitingTime)
     {
-        CleanFrame();
-
-        player.GetComponent<DamageReceiver>().Resurrect();
-        player.transform.position = playerSpawnPoint.position;
-
-        StartCoroutine(SpawnEnemiesAfterWait());
-    }
-
-    private IEnumerator SpawnEnemiesAfterWait()
-    {
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(waitingTime);
 
         foreach (RandomEnemySpawner randomEnemySpawner in randomEnemySpawners)
         {
@@ -82,6 +61,16 @@ public class Frame : MonoBehaviour
 
             newEnemy.GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += EnemyKilled;
         }
+    }
+
+    public void RestartFrame()
+    {
+        CleanFrame();
+
+        player.GetComponent<DamageReceiver>().Resurrect();
+        player.transform.position = playerSpawnPoint.position;
+
+        StartCoroutine(WaitAndSpawnEnemies(Config.END_TRANSITION_DURATION - .1f));
     }
 
     public void CleanFrame()
@@ -102,6 +91,12 @@ public class Frame : MonoBehaviour
         if (projectileContainer)
         {
             Destroy(projectileContainer.gameObject);
+            projectileContainer = new GameObject("Projectile Container");
+            projectileContainer.transform.SetParent(gameObject.transform);
+            projectileContainer.tag = "Projectile Container";
+        }
+        else
+        {
             projectileContainer = new GameObject("Projectile Container");
             projectileContainer.transform.SetParent(gameObject.transform);
             projectileContainer.tag = "Projectile Container";

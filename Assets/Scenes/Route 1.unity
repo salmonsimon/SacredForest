@@ -6870,7 +6870,7 @@ PrefabInstance:
     - target: {fileID: 6040917913547949046, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: possibleEnemies.Array.data[0]
       value: 
-      objectReference: {fileID: 8742912997571526421, guid: f1b9131af2d35374c99aaa73bb66acfd, type: 3}
+      objectReference: {fileID: 8428708079556957606, guid: 5091602d243c8154c9e31eea3332e9ed, type: 3}
     - target: {fileID: 6040917913547949047, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: m_Name
       value: Spawner 7 - Strong
@@ -7307,6 +7307,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6040917913547949046, guid: 1296094cee6366740b7f9a067805457e, type: 3}
+      propertyPath: possibleEnemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 6143442378185450500, guid: 120d2e9a5667caf4596797ec6dd43ede, type: 3}
     - target: {fileID: 6040917913547949047, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: m_Name
       value: Spawner 1
@@ -23169,6 +23173,7 @@ MonoBehaviour:
   tagsToCheck:
   - Player
   - Enemy
+  damage: 100
 --- !u!61 &379079592
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -23402,6 +23407,10 @@ PrefabInstance:
       propertyPath: facingRight
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6040917913547949046, guid: 1296094cee6366740b7f9a067805457e, type: 3}
+      propertyPath: possibleEnemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 6143442378185450500, guid: 120d2e9a5667caf4596797ec6dd43ede, type: 3}
     - target: {fileID: 6040917913547949047, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: m_Name
       value: Spawner 3 - Swordsman
@@ -23475,6 +23484,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6040917913547949046, guid: 1296094cee6366740b7f9a067805457e, type: 3}
+      propertyPath: possibleEnemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 3644736830735068549, guid: 3b949235610817d40b4eaaff00806cbb, type: 3}
     - target: {fileID: 6040917913547949047, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: m_Name
       value: Spawner 2 - Swordsman
@@ -24375,6 +24388,7 @@ MonoBehaviour:
   tagsToCheck:
   - Player
   - Enemy
+  damage: 100
 --- !u!61 &504860637
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -31566,6 +31580,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6040917913547949046, guid: 1296094cee6366740b7f9a067805457e, type: 3}
+      propertyPath: possibleEnemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 3644736830735068549, guid: 3b949235610817d40b4eaaff00806cbb, type: 3}
     - target: {fileID: 6040917913547949047, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: m_Name
       value: Spawner 1 - Swordsman
@@ -34334,6 +34352,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6040917913547949046, guid: 1296094cee6366740b7f9a067805457e, type: 3}
+      propertyPath: possibleEnemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 3644736830735068549, guid: 3b949235610817d40b4eaaff00806cbb, type: 3}
     - target: {fileID: 6040917913547949047, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: m_Name
       value: Spawner 3
@@ -34402,7 +34424,7 @@ PrefabInstance:
     - target: {fileID: 6040917913547949046, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: possibleEnemies.Array.data[0]
       value: 
-      objectReference: {fileID: 771548696854713193, guid: d6488a535dbde8843a297c3fe7bd5c75, type: 3}
+      objectReference: {fileID: 6143442378185450500, guid: 120d2e9a5667caf4596797ec6dd43ede, type: 3}
     - target: {fileID: 6040917913547949047, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: m_Name
       value: Spawner 5
@@ -34670,6 +34692,7 @@ MonoBehaviour:
   tagsToCheck:
   - Player
   - Enemy
+  damage: 100
 --- !u!61 &717402676
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -34803,7 +34826,7 @@ PrefabInstance:
     - target: {fileID: 6040917913547949046, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: possibleEnemies.Array.data[0]
       value: 
-      objectReference: {fileID: 771548696854713193, guid: d6488a535dbde8843a297c3fe7bd5c75, type: 3}
+      objectReference: {fileID: 6143442378185450500, guid: 120d2e9a5667caf4596797ec6dd43ede, type: 3}
     - target: {fileID: 6040917913547949047, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: m_Name
       value: Spawner 4 - Swordsman
@@ -35604,7 +35627,7 @@ PrefabInstance:
     - target: {fileID: 6040917913547949046, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: possibleEnemies.Array.data[0]
       value: 
-      objectReference: {fileID: 8742912997571526421, guid: 3aaee04036c66034199b5120de2a817a, type: 3}
+      objectReference: {fileID: 8428708079556957606, guid: 6a244f07962d5f6408c93e160fd1682d, type: 3}
     - target: {fileID: 6040917913547949047, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: m_Name
       value: Random Enemy Spawner
@@ -47341,11 +47364,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6040917913547949045, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6040917913547949045, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.815
+      value: 7.441
       objectReference: {fileID: 0}
     - target: {fileID: 6040917913547949045, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -47385,7 +47408,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6040917913547949046, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: facingRight
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6040917913547949046, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: possibleEnemies.Array.size
@@ -47397,7 +47420,7 @@ PrefabInstance:
       objectReference: {fileID: 2957183605891938226, guid: b51da8133876644468de399ec6a8242b, type: 3}
     - target: {fileID: 6040917913547949047, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: m_Name
-      value: Spawner 5 - Ranger
+      value: Spawner 6 - Ranger
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1296094cee6366740b7f9a067805457e, type: 3}
@@ -47544,6 +47567,10 @@ PrefabInstance:
       propertyPath: facingRight
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6040917913547949046, guid: 1296094cee6366740b7f9a067805457e, type: 3}
+      propertyPath: possibleEnemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 3644736830735068549, guid: 3b949235610817d40b4eaaff00806cbb, type: 3}
     - target: {fileID: 6040917913547949047, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: m_Name
       value: Spawner 1
@@ -47787,6 +47814,10 @@ PrefabInstance:
       propertyPath: facingRight
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6040917913547949046, guid: 1296094cee6366740b7f9a067805457e, type: 3}
+      propertyPath: possibleEnemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 6143442378185450500, guid: 120d2e9a5667caf4596797ec6dd43ede, type: 3}
     - target: {fileID: 6040917913547949047, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: m_Name
       value: Spawner 1 - Swordsman
@@ -48040,6 +48071,7 @@ MonoBehaviour:
   tagsToCheck:
   - Player
   - Enemy
+  damage: 100
 --- !u!61 &1084774063
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -48255,7 +48287,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1121704464}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.96000004, y: 66.130005, z: -5}
+  m_LocalPosition: {x: -0.82909584, y: 42.640907, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -48406,7 +48438,7 @@ PrefabInstance:
     - target: {fileID: 6040917913547949046, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: possibleEnemies.Array.data[0]
       value: 
-      objectReference: {fileID: 771548696854713193, guid: d6488a535dbde8843a297c3fe7bd5c75, type: 3}
+      objectReference: {fileID: 8428708079556957606, guid: 5091602d243c8154c9e31eea3332e9ed, type: 3}
     - target: {fileID: 6040917913547949047, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: m_Name
       value: Spawner 5 - Swordsman
@@ -48659,8 +48691,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6040917913547949046, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: facingRight
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6040917913547949046, guid: 1296094cee6366740b7f9a067805457e, type: 3}
+      propertyPath: possibleEnemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 6143442378185450500, guid: 120d2e9a5667caf4596797ec6dd43ede, type: 3}
     - target: {fileID: 6040917913547949047, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: m_Name
       value: Spawner 4
@@ -48802,6 +48838,10 @@ PrefabInstance:
       propertyPath: facingRight
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6040917913547949046, guid: 1296094cee6366740b7f9a067805457e, type: 3}
+      propertyPath: possibleEnemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 8428708079556957606, guid: 5091602d243c8154c9e31eea3332e9ed, type: 3}
     - target: {fileID: 6040917913547949047, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: m_Name
       value: Spawner 2 - Swordsman
@@ -49515,6 +49555,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6040917913547949045, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6040917913547949046, guid: 1296094cee6366740b7f9a067805457e, type: 3}
+      propertyPath: facingRight
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6040917913547949046, guid: 1296094cee6366740b7f9a067805457e, type: 3}
@@ -55847,8 +55891,8 @@ Transform:
   - {fileID: 466552801}
   - {fileID: 457192911}
   - {fileID: 2097739638}
-  - {fileID: 851555832}
   - {fileID: 1669099113}
+  - {fileID: 851555832}
   m_Father: {fileID: 329032151}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -56149,6 +56193,10 @@ PrefabInstance:
       propertyPath: facingRight
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6040917913547949046, guid: 1296094cee6366740b7f9a067805457e, type: 3}
+      propertyPath: possibleEnemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 6143442378185450500, guid: 120d2e9a5667caf4596797ec6dd43ede, type: 3}
     - target: {fileID: 6040917913547949047, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: m_Name
       value: Spawner 2
@@ -56771,7 +56819,7 @@ PrefabInstance:
     - target: {fileID: 6040917913547949046, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: possibleEnemies.Array.data[0]
       value: 
-      objectReference: {fileID: 771548696854713193, guid: d6488a535dbde8843a297c3fe7bd5c75, type: 3}
+      objectReference: {fileID: 6143442378185450500, guid: 120d2e9a5667caf4596797ec6dd43ede, type: 3}
     - target: {fileID: 6040917913547949047, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: m_Name
       value: Spawner 6
@@ -57235,6 +57283,10 @@ PrefabInstance:
       propertyPath: facingRight
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6040917913547949046, guid: 1296094cee6366740b7f9a067805457e, type: 3}
+      propertyPath: possibleEnemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 6143442378185450500, guid: 120d2e9a5667caf4596797ec6dd43ede, type: 3}
     - target: {fileID: 6040917913547949047, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: m_Name
       value: Spawner 2
@@ -57410,6 +57462,7 @@ MonoBehaviour:
   tagsToCheck:
   - Player
   - Enemy
+  damage: 100
 --- !u!61 &1623120913
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -57882,11 +57935,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6040917913547949045, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6040917913547949045, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.43
+      value: 6.842
       objectReference: {fileID: 0}
     - target: {fileID: 6040917913547949045, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -57935,10 +57988,10 @@ PrefabInstance:
     - target: {fileID: 6040917913547949046, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: possibleEnemies.Array.data[0]
       value: 
-      objectReference: {fileID: 771548696854713193, guid: d6488a535dbde8843a297c3fe7bd5c75, type: 3}
+      objectReference: {fileID: 6143442378185450500, guid: 120d2e9a5667caf4596797ec6dd43ede, type: 3}
     - target: {fileID: 6040917913547949047, guid: 1296094cee6366740b7f9a067805457e, type: 3}
       propertyPath: m_Name
-      value: Spawner 6 - Swordsman
+      value: Spawner 5 - Swordsman
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1296094cee6366740b7f9a067805457e, type: 3}
@@ -102232,6 +102285,7 @@ MonoBehaviour:
   tagsToCheck:
   - Player
   - Enemy
+  damage: 100
 --- !u!61 &2112896984
 BoxCollider2D:
   m_ObjectHideFlags: 0
