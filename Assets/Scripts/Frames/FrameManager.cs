@@ -63,13 +63,14 @@ public class FrameManager : MonoBehaviour
 
         activeFrame = frames[activeFrameIndex];
 
+        StartCoroutine(GameManager.instance.GetLevelLoader().CrossfadeEnd());
+
         activeFrame.gameObject.SetActive(true);
         activeFrame.StartFrame();
 
-        GameManager.instance.SetIsTeleporting(false);
-
-        StartCoroutine(GameManager.instance.GetLevelLoader().CrossfadeEnd());
         yield return new WaitForSeconds(Config.END_TRANSITION_DURATION);
+
+        GameManager.instance.SetIsTeleporting(false);
 
         GameManager.instance.GetPlayer().GetComponent<Animator>().enabled = true;
         GameManager.instance.GetPlayer().GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
@@ -78,15 +79,20 @@ public class FrameManager : MonoBehaviour
     private IEnumerator RestartFrame()
     {
         GameManager.instance.SetIsTeleporting(true);
+        GameManager.instance.GetPlayer().GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        GameManager.instance.GetPlayer().GetComponent<PlayerAttackController>().EndAttackCooldown();
 
         GameManager.instance.GetLevelLoader().CrossfadeStart();
 
         yield return new WaitForSeconds(Config.START_TRANSITION_DURATION);
 
+        StartCoroutine(GameManager.instance.GetLevelLoader().CrossfadeEnd());
+
         activeFrame.RestartFrame();
 
-        GameManager.instance.SetIsTeleporting(false);
+        yield return new WaitForSeconds(Config.END_TRANSITION_DURATION);
 
-        StartCoroutine(GameManager.instance.GetLevelLoader().CrossfadeEnd());
+        GameManager.instance.SetIsTeleporting(false);
+        GameManager.instance.GetPlayer().GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 }

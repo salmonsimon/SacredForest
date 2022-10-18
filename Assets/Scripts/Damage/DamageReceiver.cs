@@ -34,11 +34,11 @@ public class DamageReceiver : MonoBehaviour
         currentHitPoints = maxHitPoints;
     }
 
-    protected virtual void ReceiveDamage()
+    protected virtual void ReceiveDamage(int damage)
     {
         if (!isImmune && isAlive)
         {
-            currentHitPoints--;
+            currentHitPoints -= damage;
             GameManager.instance.GetCinemachineShake().ShakeCamera(Config.CAMERASHAKE_HIT_AMPLITUDE, Config.CAMERASHAKE_HIT_DURATION);
             Bleed();
 

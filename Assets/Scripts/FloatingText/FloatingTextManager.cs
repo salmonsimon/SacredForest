@@ -16,11 +16,9 @@ public class FloatingTextManager : MonoBehaviour
             txt.UpdateFloatingText();
     }
 
-    public void Show(string msg, int fontSize, Color color, Vector3 position, Vector3 motion, float duration)
+    public void Show(string msg, int fontSize, Color color, Vector3 position, Vector3 motion, float duration, Transform lookAt = null)
     {
         FloatingText floatingText = GetFloatingText();
-
-        
 
         floatingText.txt.text = msg;
         floatingText.txt.fontSize = fontSize;
@@ -29,6 +27,12 @@ public class FloatingTextManager : MonoBehaviour
         floatingText.go.transform.position = position;
         floatingText.motion = motion;
         floatingText.duration = duration;
+
+        if (lookAt)
+        {
+            floatingText.lookAt = lookAt;
+            floatingText.originalDisplacement = position - lookAt.position;
+        }
 
         floatingText.Show();
     }

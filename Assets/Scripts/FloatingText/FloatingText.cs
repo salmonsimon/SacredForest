@@ -10,6 +10,8 @@ public class FloatingText
     public Vector3 motion;
     public float duration;
     public float lastShown;
+    public Transform lookAt;
+    public Vector3 originalDisplacement; 
 
     public void Show()
     {
@@ -34,6 +36,13 @@ public class FloatingText
         if (Time.time - lastShown > duration)
         {
             Hide();
+        }
+
+        if (lookAt)
+        {
+            Vector3 displacement = lookAt.position - go.transform.position + originalDisplacement;
+
+            go.transform.position += displacement;
         }
 
         go.transform.position += motion * Time.deltaTime;

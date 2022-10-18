@@ -90,8 +90,8 @@ public class EnemyMover : MonoBehaviour
 
     private void FixedUpdate()
     {
-        isGrounded = groundCheck.IsColliding();
         bool wasGrounded = isGrounded;
+        isGrounded = groundCheck.IsColliding();
 
         if (!wasGrounded && isGrounded)
             OnLanding();
@@ -259,7 +259,10 @@ public class EnemyMover : MonoBehaviour
         animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_JUMPING_BACK, false);
 
         if (isGrounded)
+        {
+            rigidBody.velocity *= .1f;
             particlesLand.Play();
+        }
     }
 
     public void SetIsAbleToMove(bool value)
