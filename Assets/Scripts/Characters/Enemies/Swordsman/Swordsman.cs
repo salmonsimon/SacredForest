@@ -73,6 +73,9 @@ public class Swordsman : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(Startled(1f));
+        StartCoroutine(enemyMover.MovementCooldown(1f));
+
         damageReceiver.OnCharacterAliveStatusChange += Death;
         playerDetection.OnDetectedPlayer += PlayerDetected;
     }
@@ -190,7 +193,7 @@ public class Swordsman : MonoBehaviour
         StartCoroutine(Startled());
         StartCoroutine(enemyMover.MovementCooldown(startleDuration));
 
-        GameManager.instance.ShowText("!", 1, Color.white, new Vector3(transform.position.x, transform.position.y + 0.32f, 0), Vector3.up * .05f, .5f);
+        GameManager.instance.ShowText("!", 1, Color.white, new Vector3(transform.position.x, transform.position.y + 0.32f, 0), Vector3.up * .05f, .5f, transform);
     }
 
     private IEnumerator Startled()
@@ -198,6 +201,15 @@ public class Swordsman : MonoBehaviour
         isStartled = true;
 
         yield return new WaitForSeconds(startleDuration);
+
+        isStartled = false;
+    }
+
+    private IEnumerator Startled(float duration)
+    {
+        isStartled = true;
+
+        yield return new WaitForSeconds(duration);
 
         isStartled = false;
     }

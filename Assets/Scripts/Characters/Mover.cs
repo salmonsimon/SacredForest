@@ -103,6 +103,13 @@ public class Mover : MonoBehaviour
 
         if (!wasGrounded && isGrounded)
             OnLanding();
+        /*
+        if (wasGrounded && isGrounded && isJumping)
+        {
+            animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_JUMPING, false);
+            isJumping = false;
+        } 
+        */
 
         isCollidingWithWall = false;
 

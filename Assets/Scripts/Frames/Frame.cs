@@ -37,7 +37,7 @@ public class Frame : MonoBehaviour
 
         enemiesTotalCount = randomEnemySpawners.Length;
 
-        StartCoroutine(WaitAndSpawnEnemies(Config.END_TRANSITION_DURATION - .1f));
+        StartCoroutine(WaitAndSpawnEnemies(.1f));
 
         if (enemiesKilledCount != enemiesTotalCount)
             frameChangeTrigger.gameObject.SetActive(false);
@@ -70,7 +70,7 @@ public class Frame : MonoBehaviour
         player.GetComponent<DamageReceiver>().Resurrect();
         player.transform.position = playerSpawnPoint.position;
 
-        StartCoroutine(WaitAndSpawnEnemies(Config.END_TRANSITION_DURATION - .1f));
+        StartCoroutine(WaitAndSpawnEnemies(.1f));
     }
 
     public void CleanFrame()
