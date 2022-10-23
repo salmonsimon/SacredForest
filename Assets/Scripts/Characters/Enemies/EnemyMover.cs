@@ -139,7 +139,6 @@ public class EnemyMover : MonoBehaviour
     {
         if (isAbleToMove)
         {
-
             UpdateDirection(movement);
             animator.SetFloat("Speed", Mathf.Abs(movement.x));
 

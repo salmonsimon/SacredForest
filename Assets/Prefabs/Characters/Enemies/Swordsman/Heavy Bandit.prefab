@@ -5225,7 +5225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackZoneCollider: {fileID: 6143442378142866449}
   startleDuration: 0.5
-  attackDelay: 0.1
+  attackDelay: 0
 --- !u!114 &6143442378185450499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5506,6 +5506,7 @@ MonoBehaviour:
   isColliding: 0
   tagsToCheck:
   - Player
+  damage: 1
 --- !u!1 &6914418752066569042
 GameObject:
   m_ObjectHideFlags: 0
