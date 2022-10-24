@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 5586027166884921136}
   - component: {fileID: 5586027166884921137}
   - component: {fileID: 5586027166884921138}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Earthen Hands
-  m_TagString: Untagged
+  m_TagString: MagicProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,13 +118,13 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.020008028, y: -0.35213953}
+  m_Offset: {x: -0.020008028, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.2}
     oldSize: {x: 2.88, y: 1.28}
     newSize: {x: 2.9127111, y: 1.28}
     adaptiveTilingThreshold: 0.5

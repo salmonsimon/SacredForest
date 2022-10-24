@@ -16,9 +16,9 @@ public class GroundMonkAttacks : MonoBehaviour
 
     #region Logic Variables
 
-    [SerializeField] private bool isAttacking = false;
+    private bool isAttacking = false;
 
-    private bool onAttackCooldown = false;
+    [SerializeField] private bool onAttackCooldown = false;
     [SerializeField] private float attackCooldownDuration = 2f;
 
     private bool isAlive = true;
@@ -53,14 +53,39 @@ public class GroundMonkAttacks : MonoBehaviour
         if (isTransformed)
         {
             attackAnimationClip = transformedMeleeAttackAnimationClips[attackPattern];
+
+            switch (attackPattern)
+            {
+                case 0:
+                    StartCoroutine(IsAttackingCooldown(.6f));
+                    break;
+                case 1:
+                    StartCoroutine(IsAttackingCooldown(.9f));
+                    break;
+                case 2:
+                    StartCoroutine(IsAttackingCooldown(1.4f));
+                    break;
+            }
         }
         else
         {
             attackAnimationClip = meleeAttackAnimationClips[attackPattern];
+
+            switch (attackPattern)
+            {
+                case 0:
+                    StartCoroutine(IsAttackingCooldown(.5f));
+                    break;
+                case 1:
+                    StartCoroutine(IsAttackingCooldown(1.1f));
+                    break;
+                case 2:
+                    StartCoroutine(IsAttackingCooldown(2.2f));
+                    break;
+            }
         }
 
         StartCoroutine(PlayClip(Animator.StringToHash(attackAnimationClip.name), 0));
-        StartCoroutine(IsAttackingCooldown(1f));
     }
 
     public void ProjectileAttack(Vector3 magePosition, Vector3 playerPosition)
@@ -82,7 +107,7 @@ public class GroundMonkAttacks : MonoBehaviour
     {
         yield return new WaitForSeconds(shootingWaitingTime);
 
-        EarthenHands newEarthenHands = Instantiate(projectilePrefab, new Vector3( playerPosition.x, transform.position.y - .13f, transform.position.z), Quaternion.identity);
+        EarthenHands newEarthenHands = Instantiate(projectilePrefab, new Vector3( playerPosition.x, transform.position.y - .02f, transform.position.z), Quaternion.identity);
         newEarthenHands.SetLookat(GameManager.instance.GetPlayer().transform);
 
         yield return new WaitForSeconds(2f);

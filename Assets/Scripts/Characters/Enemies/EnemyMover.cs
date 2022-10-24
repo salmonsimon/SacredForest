@@ -336,4 +336,10 @@ public class EnemyMover : MonoBehaviour
     {
         return stillMoreToWalk;
     }
+
+    public void StayInPosition()
+    {
+        rigidBody.velocity = Vector2.zero;
+        UpdateMotor(Vector2.zero, false, false);
+    }
 }

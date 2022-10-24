@@ -1,5 +1,153 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &168085672
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 168085673}
+  - component: {fileID: 168085675}
+  - component: {fileID: 168085674}
+  m_Layer: 8
+  m_Name: Melee Hit Box 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &168085673
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 168085672}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6285235481602671981}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &168085675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 168085672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3866054b6ecb4fc41967a9a27ad200d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isColliding: 0
+  tagsToCheck: []
+  damage: 1
+--- !u!61 &168085674
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 168085672}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!1 &2133394592
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2133394593}
+  - component: {fileID: 2133394595}
+  - component: {fileID: 2133394594}
+  m_Layer: 8
+  m_Name: Melee Hit Box 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2133394593
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2133394592}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6285235481602671981}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2133394595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2133394592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3866054b6ecb4fc41967a9a27ad200d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isColliding: 0
+  tagsToCheck: []
+  damage: 1
+--- !u!61 &2133394594
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2133394592}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &6285235480967028591
 GameObject:
   m_ObjectHideFlags: 0
@@ -26,7 +174,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6285235480967028591}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.011098756, y: -0.6039599, z: 0}
+  m_LocalPosition: {x: 0.011098756, y: -0.19035777, z: 0}
   m_LocalScale: {x: 0.83333325, y: 0.83333325, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4850,7 +4998,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6285235481002867806}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.011098756, y: -0.56229323, z: 0}
+  m_LocalPosition: {x: 0.011098756, y: -0.14869109, z: 0}
   m_LocalScale: {x: 0.83333325, y: 0.83333325, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9732,7 +9880,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6285235481368796917}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.011098756, y: -0.41145992, z: 0}
+  m_LocalPosition: {x: 0.011098756, y: 0.0021422207, z: 0}
   m_LocalScale: {x: 0.83333325, y: 0.83333325, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9752,7 +9900,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.37361503, y: 0}
+  m_Offset: {x: 0.055232704, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -9763,7 +9911,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2273629, y: 1}
+  m_Size: {x: 0.59059834, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &6285235481368796915
 MonoBehaviour:
@@ -9806,7 +9954,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6285235481483321421}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.011098756, y: -0.6093345, z: 0}
+  m_LocalPosition: {x: 0.011098756, y: -0.19573238, z: 0}
   m_LocalScale: {x: 0.83333325, y: 0.83333325, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9870,7 +10018,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6285235481540964457}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.30276537, y: -0.6093345, z: 0}
+  m_LocalPosition: {x: 0.30276537, y: -0.19573238, z: 0}
   m_LocalScale: {x: 0.83333325, y: 0.83333325, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9934,7 +10082,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6285235481592598217}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.28056785, y: -0.6093345, z: 0}
+  m_LocalPosition: {x: -0.28056785, y: -0.19573238, z: 0}
   m_LocalScale: {x: 0.83333325, y: 0.83333325, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9983,6 +10131,8 @@ GameObject:
   - component: {fileID: 6285235481594139103}
   - component: {fileID: 6285235481594139101}
   - component: {fileID: 6285235481594139100}
+  - component: {fileID: 1861602781}
+  - component: {fileID: 1861602780}
   m_Layer: 0
   m_Name: Wand - MeeleMagic
   m_TagString: Untagged
@@ -9998,7 +10148,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6285235481594139102}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.055170327, y: -0.3326044, z: 0}
+  m_LocalPosition: {x: 0.055170327, y: 0.081, z: 0}
   m_LocalScale: {x: 0.41666663, y: 0.41666663, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10018,9 +10168,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.52290255, y: -0.021087648}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.17529298
 --- !u!114 &6285235481594139100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10031,6 +10181,48 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c90b7decf6e95d44aa89bd3d5885518b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isColliding: 0
+  tagsToCheck:
+  - Player
+  damage: 1
+--- !u!61 &1861602781
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6285235481594139102}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.87533253, y: -0.46047837}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.42750752, y: 0.34453583}
+  m_EdgeRadius: 0
+--- !u!114 &1861602780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6285235481594139102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3866054b6ecb4fc41967a9a27ad200d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isColliding: 0
@@ -10054,9 +10246,9 @@ GameObject:
   - component: {fileID: 6285235481602671976}
   - component: {fileID: 6285235481602671979}
   - component: {fileID: 6285235481602671978}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ground Monk
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10081,6 +10273,8 @@ Transform:
   - {fileID: 6285235481483321418}
   - {fileID: 6285235480967028588}
   - {fileID: 6285235481002867807}
+  - {fileID: 168085673}
+  - {fileID: 2133394593}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10190,7 +10384,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.003770478, y: -0.40355176}
+  m_Offset: {x: 0.003770478, y: 0}
   m_Size: {x: 0.1273982, y: 0.37537783}
   m_Direction: 0
 --- !u!114 &6285235481602671977
@@ -10206,6 +10400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meleeZoneCollider: {fileID: 6285235481368796915}
+  onActionCooldown: 0
 --- !u!114 &6285235481602671976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10227,6 +10422,7 @@ MonoBehaviour:
   - {fileID: 7400000, guid: 8c7bc84497bc2444488d15099751a13c, type: 2}
   - {fileID: 7400000, guid: 8c8d4164e9372344098f2f9eb110769a, type: 2}
   - {fileID: 7400000, guid: c798a63bba52c1446955c98cfff72840, type: 2}
+  onAttackCooldown: 0
   attackCooldownDuration: 2
   projectilePrefab: {fileID: 5586027166884921138, guid: c2143ac22c6a25644814d7ce0b46a029, type: 3}
   shootingWaitingTime: 0.4
@@ -10250,7 +10446,7 @@ MonoBehaviour:
   jumpBackGroundCheck: {fileID: 6285235481618227884}
   dashForce: 850
   walkAwayDuration: 1.5
-  runSpeed: 2
+  runSpeed: 1.8
   hasJumpBack: 0
   hasDash: 0
   walksAwayWhenInAttackCooldown: 0
@@ -10297,7 +10493,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6285235481618227886}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.3305677, y: -0.6093345, z: 0}
+  m_LocalPosition: {x: -1.3305677, y: -0.19573238, z: 0}
   m_LocalScale: {x: 0.83333325, y: 0.83333325, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
