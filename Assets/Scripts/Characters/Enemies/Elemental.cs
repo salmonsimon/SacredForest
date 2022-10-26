@@ -18,9 +18,6 @@ public class Elemental : Enemy
         {
             onActionCooldown = false;
 
-            // see where we put this
-            //groundMonkAttacks.ResetIsAttacking();
-
             enemyMover.StayInPosition();
 
             CheckDamageToTransform();

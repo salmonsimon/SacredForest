@@ -139,9 +139,6 @@ public class Enemy : MonoBehaviour
         {
             onActionCooldown = false;
             enemyMover.StayInPosition();
-            
-            // see where we put this
-            //enemyAttacks.ResetIsAttacking();
 
             StartCoroutine(Startled(Config.STUN_DURATION));
             StartCoroutine(damageReceiver.ImmuneCooldown());
