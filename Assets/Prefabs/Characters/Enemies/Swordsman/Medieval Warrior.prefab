@@ -351,7 +351,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 18512d9c28574ca4f9157986b58aa5a8, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -384,8 +384,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc4d5af0feacf24da431439066d3099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackZoneCollider: {fileID: 771548697013693308}
   startleDuration: 0.5
+  attackZoneCollider: {fileID: 771548697013693308}
   attackDelay: 0.1
 --- !u!114 &771548696854713198
 MonoBehaviour:
@@ -399,11 +399,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b51727b4cfeca44591924a5e131ef65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackCooldownDuration: 3
   animationClips:
   - {fileID: 7400000, guid: 4667812ea66582849bbedc30a748a852, type: 2}
   - {fileID: 7400000, guid: 27108073f599823428f4489c75a6f175, type: 2}
   - {fileID: 7400000, guid: 60857eecc7c2cf240ae73f0824107fd7, type: 2}
-  attackCooldownDuration: 3
   hasSecondAttack: 1
   hasThirdAttack: 1
 --- !u!114 &771548696854713185
@@ -464,9 +464,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 771548696854713194}
-  currentHitPoints: 1
-  maxHitPoints: 1
   immuneTime: 2
+  maxHitPoints: 1
+  currentHitPoints: 1
 --- !u!1 &771548697013693306
 GameObject:
   m_ObjectHideFlags: 0
@@ -679,6 +679,7 @@ MonoBehaviour:
   isColliding: 0
   tagsToCheck:
   - Player
+  damage: 1
 --- !u!1 &771548698097287245
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,6 +818,7 @@ MonoBehaviour:
   isColliding: 0
   tagsToCheck:
   - Player
+  damage: 1
 --- !u!1 &2964961801301530751
 GameObject:
   m_ObjectHideFlags: 0

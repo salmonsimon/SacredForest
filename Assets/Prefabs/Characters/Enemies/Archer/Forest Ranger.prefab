@@ -462,7 +462,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 18512d9c28574ca4f9157986b58aa5a8, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -495,9 +495,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 454330d883b138d49ba8350c600ad743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startleDuration: 1
   attackZoneCollider: {fileID: 2957183604744304407}
   dangerZoneCollider: {fileID: 2957183606304197321}
-  startleDuration: 1
 --- !u!114 &2957183605891938237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -510,9 +510,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c193fb0bd9c8cca46b74ec0e1f997fdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrowAnimationClip: {fileID: 7400000, guid: 33ba12ab319d1694b94b63289b95dfb1, type: 2}
   attackCooldownDuration: 3
+  arrowAnimationClip: {fileID: 7400000, guid: 33ba12ab319d1694b94b63289b95dfb1, type: 2}
   arrowPrefab: {fileID: 4554462955417439476, guid: 04d5739dc3c1b6748820e6225f94623c, type: 3}
+  shootingWaitingTime: 0.3
 --- !u!114 &2957183605891938239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -571,9 +572,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 2957183605891938227}
-  currentHitPoints: 1
-  maxHitPoints: 1
   immuneTime: 2
+  maxHitPoints: 1
+  currentHitPoints: 1
 --- !u!1 &2957183606066013610
 GameObject:
   m_ObjectHideFlags: 0

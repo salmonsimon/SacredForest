@@ -9845,6 +9845,7 @@ MonoBehaviour:
   tagsToCheck:
   - Enemy
   - Arrow
+  damage: 1
 --- !u!1 &1971838361857962905
 GameObject:
   m_ObjectHideFlags: 0
@@ -10079,7 +10080,6 @@ MonoBehaviour:
   wallCheck: {fileID: 1971838361857962906}
   hasAbilityToDash: 1
   hasAbilityToWallJump: 1
-  movementSmoothing: 0.05
 --- !u!114 &1971838360700276062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10105,6 +10105,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 4697750405587687973}
-  currentHitPoints: 1
-  maxHitPoints: 1
   immuneTime: 2
+  maxHitPoints: 1
+  currentHitPoints: 1
