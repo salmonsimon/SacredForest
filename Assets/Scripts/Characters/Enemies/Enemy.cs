@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyMover), typeof(EnemyAttacks), typeof(DamageReceiver))]
+[RequireComponent(typeof(EnemyMover), typeof(DamageReceiver))]
 public class Enemy : MonoBehaviour
 {
     protected Animator animator;
@@ -10,8 +10,8 @@ public class Enemy : MonoBehaviour
     #region Controllers
 
     protected EnemyMover enemyMover;
-    protected EnemyAttacks enemyAttacks;
     protected DamageReceiver damageReceiver;
+    protected PlayerDetection playerDetection;
 
     #endregion
 
@@ -41,6 +41,7 @@ public class Enemy : MonoBehaviour
     #region Parameters
 
     protected float actionCooldownDuration = Config.ACTION_COOLDOWN_DURATION;
+    [SerializeField] protected float startleDuration = .5f;
 
     #endregion
 
@@ -49,8 +50,11 @@ public class Enemy : MonoBehaviour
         animator = GetComponent<Animator>();
 
         enemyMover = GetComponent<EnemyMover>();
-        enemyAttacks = GetComponent<EnemyAttacks>();
         damageReceiver = GetComponent<DamageReceiver>();
+
+        if (TryGetComponent(out PlayerDetection playerDetection)) {
+            this.playerDetection = playerDetection;
+        }
 
         player = GameObject.FindGameObjectWithTag(Config.PLAYER_TAG);
     }
@@ -63,12 +67,22 @@ public class Enemy : MonoBehaviour
         damageReceiver.OnCharacterDamaged += Damaged;
     }
 
+    protected void PlayerDetected()
+    {
+        enemyMover.Flip(new Vector2(relativePlayerPositionX, 0));
+        StartCoroutine(playerDetection.AlertGroupAfterDetectingPlayer());
+
+        StartCoroutine(Startled(startleDuration));
+
+        GameManager.instance.ShowText("!", 1, Color.white, new Vector3(transform.position.x, transform.position.y + 0.32f, 0), Vector3.up * .05f, .5f, transform);
+    }
+
     protected void FlipTowardsPlayer()
     {
         enemyMover.Flip(new Vector2(relativePlayerPositionX, 0));
     }
 
-    private Vector2 WalksAway()
+    protected Vector2 WalksAway()
     {
         Vector2 movement;
 
@@ -84,7 +98,7 @@ public class Enemy : MonoBehaviour
         return movement;
     }
 
-    private Vector2 WalksTowards()
+    protected Vector2 WalksTowards()
     {
         Vector2 movement;
 
@@ -100,7 +114,7 @@ public class Enemy : MonoBehaviour
         return movement;
     }
 
-    private IEnumerator ActionCooldown(float duration)
+    protected IEnumerator ActionCooldown(float duration)
     {
         onActionCooldown = true;
 
@@ -125,7 +139,9 @@ public class Enemy : MonoBehaviour
         {
             onActionCooldown = false;
             enemyMover.StayInPosition();
-            enemyAttacks.ResetIsAttacking();
+            
+            // see where we put this
+            //enemyAttacks.ResetIsAttacking();
 
             StartCoroutine(Startled(.5f));
             StartCoroutine(damageReceiver.ImmuneCooldown());

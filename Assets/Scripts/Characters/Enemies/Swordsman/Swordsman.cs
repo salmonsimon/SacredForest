@@ -2,17 +2,12 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-[RequireComponent(typeof(EnemyMover), typeof(SwordsmanAttacks), typeof(DamageReceiver))]
-public class Swordsman : MonoBehaviour
+[RequireComponent(typeof(SwordsmanAttacks), typeof(PlayerDetection))]
+public class Swordsman : Enemy
 {
-    private Animator animator;
-
     #region Controllers
 
-    private EnemyMover enemyMover;
     private SwordsmanAttacks swordsmanAttacks;
-    private DamageReceiver damageReceiver;
-    private PlayerDetection playerDetection;
 
     #endregion
 
@@ -22,26 +17,7 @@ public class Swordsman : MonoBehaviour
 
     #endregion
 
-    #region Player
-
-    private GameObject player;
-    private bool isPlayerAlive = true;
-
-    #endregion
-
-    #region Logic Variables
-
-    private bool onActionCooldown = false;
-
-    private bool isStartled = false;
-    private bool isAlive = true;
-
-    #endregion
-
     #region Action Variables
-
-    Vector2 movement = Vector2.zero;
-    float relativePlayerPositionX = 0;
 
     private bool firstAttackAction = false;
     private bool secondAttackAction = false;
@@ -53,30 +29,21 @@ public class Swordsman : MonoBehaviour
 
     #region Parameters
 
-    [SerializeField] private float startleDuration = .5f;
-    private float actionCooldownDuration = Config.ACTION_COOLDOWN_DURATION;
     [SerializeField] private float attackDelay = Config.ATTACK_DELAY;
 
     #endregion
 
-    private void Awake()
+    protected override void Awake()
     {
-        animator = GetComponent<Animator>();
+        base.Awake();
 
-        enemyMover = GetComponent<EnemyMover>();
         swordsmanAttacks = GetComponent<SwordsmanAttacks>();
-        damageReceiver = GetComponent<DamageReceiver>();
-        playerDetection = GetComponent<PlayerDetection>();
-
-        player = GameObject.FindGameObjectWithTag(Config.PLAYER_TAG);
     }
 
-    private void Start()
+    protected override void Start()
     {
-        StartCoroutine(Startled(1f));
-        StartCoroutine(enemyMover.MovementCooldown(1f));
+        base.Start();
 
-        damageReceiver.OnCharacterAliveStatusChange += Death;
         playerDetection.OnDetectedPlayer += PlayerDetected;
     }
 
@@ -185,86 +152,11 @@ public class Swordsman : MonoBehaviour
             swordsmanAttacks.AttackPattern(firstAttackAction, secondAttackAction, thirdAttackAction);
     }
 
-    private void PlayerDetected()
-    {
-        enemyMover.Flip(new Vector2(relativePlayerPositionX, 0));
-        StartCoroutine(playerDetection.AlertGroupAfterDetectingPlayer());
-
-        StartCoroutine(Startled());
-        StartCoroutine(enemyMover.MovementCooldown(startleDuration));
-
-        GameManager.instance.ShowText("!", 1, Color.white, new Vector3(transform.position.x, transform.position.y + 0.32f, 0), Vector3.up * .05f, .5f, transform);
-    }
-
-    private IEnumerator Startled()
-    {
-        isStartled = true;
-
-        yield return new WaitForSeconds(startleDuration);
-
-        isStartled = false;
-    }
-
-    private IEnumerator Startled(float duration)
-    {
-        isStartled = true;
-
-        yield return new WaitForSeconds(duration);
-
-        isStartled = false;
-    }
-
-    private Vector2 WalksTowards()
-    {
-        Vector2 movement;
-
-        if (relativePlayerPositionX > 0)
-        {
-            movement = Vector2.right;
-        }
-        else
-        {
-            movement = Vector2.left;
-        }
-
-        return movement;
-    }
-
-    private Vector2 WalksAway() 
-    {
-        Vector2 movement;
-
-        if (relativePlayerPositionX > 0)
-        {
-            movement = Vector2.left;
-        }
-        else
-        {
-            movement = Vector2.right;
-        }
-
-        return movement;
-    }
-
     private void ResetActionBooleans()
     {
         jumpBackAction = false;
         firstAttackAction = false;
         secondAttackAction = false;
         thirdAttackAction = false;
-    }
-
-    private IEnumerator ActionCooldown(float duration)
-    {
-        onActionCooldown = true;
-
-        yield return new WaitForSeconds(duration);
-
-        onActionCooldown = false;
-    }
-
-    private void Death()
-    {
-        isAlive = false;
     }
 }
