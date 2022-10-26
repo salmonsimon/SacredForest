@@ -33,6 +33,8 @@ public class CinemachineTransition : MonoBehaviour
                 activeVcam.Priority = 1;
                 otherVcam.Priority = 0;
 
+                GameManager.instance.GetCinemachineShake().SetVirtualCamera();
+
                 blockCollider.gameObject.SetActive(false);
             }
         }
@@ -44,6 +46,8 @@ public class CinemachineTransition : MonoBehaviour
         {
             activeVcam.Priority = 0;
             otherVcam.Priority = 1;
+
+            GameManager.instance.GetCinemachineShake().SetVirtualCamera();
 
             blockCollider.gameObject.SetActive(true);
         }

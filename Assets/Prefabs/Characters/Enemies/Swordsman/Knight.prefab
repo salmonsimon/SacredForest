@@ -10188,7 +10188,7 @@ MonoBehaviour:
   hasJumpBack: 1
   hasDash: 0
   walksAwayWhenInAttackCooldown: 0
-  movesWhileAttacking: 1
+  movesWhileAttacking: 0
 --- !u!114 &9101174670998811304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10222,9 +10222,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 8428708079556957605}
-  currentHitPoints: 1
-  maxHitPoints: 1
   immuneTime: 2
+  maxHitPoints: 1
+  currentHitPoints: 1
 --- !u!1 &8428708079665638837
 GameObject:
   m_ObjectHideFlags: 0

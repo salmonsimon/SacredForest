@@ -1,0 +1,203 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GroundMonkAttacks : MonoBehaviour
+{
+    #region Animation
+
+    [SerializeField] private AnimationClip rollAnimationClip;
+
+    [SerializeField] private AnimationClip projectileAnimationClip;
+
+    [SerializeField] private AnimationClip[] meleeAttackAnimationClips;
+    [SerializeField] private AnimationClip[] transformedMeleeAttackAnimationClips;
+
+    [SerializeField] private AnimationClip transformedSpecialAttack;
+    private Animator animator;
+
+    #endregion
+
+    #region Logic Variables
+
+    private bool isAttacking = false;
+
+    [SerializeField] private bool onAttackCooldown = false;
+    [SerializeField] private float attackCooldownDuration = 2f;
+
+    private bool isAlive = true;
+
+    #endregion
+
+    #region Projectile
+
+    [SerializeField] private EarthenHands projectilePrefab;
+    [SerializeField] private float shootingWaitingTime = .4f;
+
+    #endregion
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    private void Start()
+    {
+        GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += Death;
+    }
+
+    public void RollAction()
+    {
+        StartCoroutine(IsAttackingCooldown(.5f));
+        StartCoroutine(GetComponent<DamageReceiver>().SetImmune(.5f));
+        StartCoroutine(ToDashLayerCooldown(.5f));
+
+        StartCoroutine(PlayClip(Animator.StringToHash(rollAnimationClip.name), 0));
+
+        
+    }
+
+    private IEnumerator ToDashLayerCooldown(float duration)
+    {
+        gameObject.layer = LayerMask.NameToLayer("Dash");
+        InvokeRepeating("MovementForRoll", 0, .01f);
+
+        yield return new WaitForSeconds(duration);
+
+        gameObject.layer = LayerMask.NameToLayer("Enemy");
+        CancelInvoke();
+    }
+
+    private void MovementForRoll()
+    {
+        EnemyMover enemyMover = GetComponent<EnemyMover>();
+
+        Vector2 direction = enemyMover.GetDirection();
+
+        enemyMover.UpdateMotor(direction * 10f, false, false);
+    }
+
+    public void MeleeAttack(Vector3 position, Vector3 playerPosition, int attackPattern, bool isTransformed)
+    {
+        float xDistance = playerPosition.x - position.x;
+
+        GetComponent<EnemyMover>().Flip(new Vector2(xDistance, 0));
+
+        AnimationClip attackAnimationClip;
+
+        if (isTransformed)
+        {
+            attackAnimationClip = transformedMeleeAttackAnimationClips[attackPattern];
+
+            switch (attackPattern)
+            {
+                case 0:
+                    StartCoroutine(IsAttackingCooldown(.6f));
+                    break;
+                case 1:
+                    StartCoroutine(IsAttackingCooldown(.9f));
+                    break;
+                case 2:
+                    StartCoroutine(IsAttackingCooldown(1.4f));
+                    break;
+            }
+        }
+        else
+        {
+            attackAnimationClip = meleeAttackAnimationClips[attackPattern];
+
+            switch (attackPattern)
+            {
+                case 0:
+                    StartCoroutine(IsAttackingCooldown(.5f));
+                    break;
+                case 1:
+                    StartCoroutine(IsAttackingCooldown(1.1f));
+                    break;
+                case 2:
+                    StartCoroutine(IsAttackingCooldown(2.2f));
+                    break;
+            }
+        }
+
+        StartCoroutine(PlayClip(Animator.StringToHash(attackAnimationClip.name), 0));
+    }
+
+    public void ProjectileAttack(Vector3 magePosition, Vector3 playerPosition)
+    {
+
+        float xDistance = playerPosition.x - magePosition.x;
+
+        GetComponent<EnemyMover>().Flip(new Vector2(xDistance, 0));
+        StartCoroutine(GetComponent<EnemyMover>().MovementCooldown(2.4f));
+        StartCoroutine(IsAttackingCooldown(3f));
+
+        StartCoroutine(PlayClip(Animator.StringToHash(projectileAnimationClip.name), 0));
+        StartCoroutine(ShootProjectile(playerPosition));
+    }
+
+    private IEnumerator ShootProjectile(Vector3 playerPosition)
+    {
+        yield return new WaitForSeconds(shootingWaitingTime);
+
+        EarthenHands newEarthenHands = Instantiate(projectilePrefab, new Vector3( playerPosition.x, transform.position.y - .02f, transform.position.z), Quaternion.identity);
+        newEarthenHands.SetLookat(GameManager.instance.GetPlayer().transform);
+
+        GameManager.instance.GetCinemachineShake().ShakeCamera(.5f, 2f);
+    }
+
+    public void TransformedSpecialAttack()
+    {
+        StartCoroutine(GetComponent<EnemyMover>().MovementCooldown(1.2f));
+        StartCoroutine(IsAttackingCooldown(1.2f));
+
+        StartCoroutine(PlayClip(Animator.StringToHash(transformedSpecialAttack.name), 0));
+    }
+
+    private IEnumerator PlayClip(int clipHash, float startTime)
+    {
+        yield return new WaitForSeconds(startTime);
+
+        if (isAlive)
+        {
+            animator.Play(clipHash);
+        }
+    }
+
+    private IEnumerator IsAttackingCooldown(float duration)
+    {
+        isAttacking = true;
+
+        yield return new WaitForSeconds(duration);
+
+        isAttacking = false;
+    }
+
+    public IEnumerator AttackCooldown()
+    {
+        onAttackCooldown = true;
+
+        yield return new WaitForSeconds(attackCooldownDuration);
+
+        onAttackCooldown = false;
+    }
+
+    public bool OnAttackCooldown()
+    {
+        return onAttackCooldown;
+    }
+
+    public void ResetoIsAttacking()
+    {
+        isAttacking = false;
+    }
+
+    public bool IsAttacking()
+    {
+        return isAttacking;
+    }
+    private void Death()
+    {
+        isAlive = false;
+    }
+}

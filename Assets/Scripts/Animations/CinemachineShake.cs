@@ -41,7 +41,19 @@ public class CinemachineShake : MonoBehaviour
 
     public void SetVirtualCamera()
     {
-        cinemachineVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
+        CinemachineVirtualCamera[] virtualCameras = FindObjectsOfType<CinemachineVirtualCamera>();
+
+        for (int i = 0; i < virtualCameras.Length; i++)
+        {
+            if (i == 0)
+            {
+                cinemachineVirtualCamera = virtualCameras[i];
+            }
+            else if (virtualCameras[i].Priority > cinemachineVirtualCamera.Priority)
+            {
+                cinemachineVirtualCamera = virtualCameras[i];
+            }
+        }
 
         if (cinemachineVirtualCamera)
         {

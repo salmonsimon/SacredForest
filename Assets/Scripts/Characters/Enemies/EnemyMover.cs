@@ -139,7 +139,6 @@ public class EnemyMover : MonoBehaviour
     {
         if (isAbleToMove)
         {
-
             UpdateDirection(movement);
             animator.SetFloat("Speed", Mathf.Abs(movement.x));
 
@@ -336,5 +335,23 @@ public class EnemyMover : MonoBehaviour
     public bool StillMoreToWalk()
     {
         return stillMoreToWalk;
+    }
+
+    public void StayInPosition()
+    {
+        animator.SetFloat("Speed", 0);
+
+        rigidBody.velocity = Vector2.zero;
+        UpdateMotor(Vector2.zero, false, false);
+    }
+
+    public void AlterRunSpeed(float newSpeed)
+    {
+        runSpeed = newSpeed;
+    }
+
+    public Vector2 GetDirection()
+    {
+        return direction;
     }
 }

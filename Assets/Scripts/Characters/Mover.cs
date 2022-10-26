@@ -361,6 +361,18 @@ public class Mover : MonoBehaviour
         isAbleToMove = value;
     }
 
+    public void BlockMovement(bool value)
+    {
+        if (value)
+        {
+            rigidBody.constraints = RigidbodyConstraints2D.FreezePosition;
+        }
+        else
+        {
+            rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
+    }
+
     public bool ExceedsFallVelocity()
     {
         return rigidBody.velocity.y < -fallSpeedLimit;
