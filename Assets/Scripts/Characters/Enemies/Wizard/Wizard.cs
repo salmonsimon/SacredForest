@@ -40,7 +40,7 @@ public class Wizard : Enemy
 
         if (!isAlive || !isPlayerAlive || isStartled)
         {
-            enemyMover.UpdateMotor(Vector2.zero, false, false);
+            enemyMover.StayInPosition();
             return;
         }
 

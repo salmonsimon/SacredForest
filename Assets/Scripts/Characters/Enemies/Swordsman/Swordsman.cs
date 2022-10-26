@@ -29,7 +29,7 @@ public class Swordsman : Enemy
 
     #region Parameters
 
-    [SerializeField] private float attackDelay = Config.ATTACK_DELAY;
+    [SerializeField] private float attackDelay = Config.SMALL_DELAY;
 
     #endregion
 
@@ -54,7 +54,7 @@ public class Swordsman : Enemy
 
         if (!isAlive || !isPlayerAlive || isStartled)
         {
-            enemyMover.UpdateMotor(Vector2.zero, false, false);
+            enemyMover.StayInPosition();
             return;
         }
 

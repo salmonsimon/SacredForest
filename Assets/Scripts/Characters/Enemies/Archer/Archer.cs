@@ -47,7 +47,7 @@ public class Archer : Enemy
 
         if (!isAlive || !isPlayerAlive || isStartled)
         {
-            enemyMover.UpdateMotor(Vector2.zero, false, false);
+            enemyMover.StayInPosition();
             return;
         }
 
@@ -93,9 +93,6 @@ public class Archer : Enemy
                 }
             }
         }
-
-        if (jumpBackAction && archerAttacks.AttackCoroutineOnCourse())
-            archerAttacks.StopCurrentAttackCoroutine();
 
         enemyMover.UpdateMotor(movement, false, jumpBackAction);
 

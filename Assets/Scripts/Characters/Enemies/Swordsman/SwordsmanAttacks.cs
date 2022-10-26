@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordsmanAttacks : MonoBehaviour
+public class SwordsmanAttacks : EnemyAttacks
 {
     #region Animation
 
     [SerializeField] private AnimationClip[] animationClips;
-    private Animator animator;
 
     private Coroutine currentCoroutine = null;
 
@@ -15,30 +14,17 @@ public class SwordsmanAttacks : MonoBehaviour
 
     #region Logic Variables
 
-    private bool isAttacking = false;
-
-    private bool onAttackCooldown = false;
-    [SerializeField] private float attackCooldownDuration = 3f;
-
     [SerializeField] private bool hasSecondAttack = false;
     [SerializeField] private bool hasThirdAttack = false;
 
-    private bool isAlive = true;
-
     #endregion
 
-
-    private void Awake()
+    protected override void Awake()
     {
-        animator = GetComponent<Animator>();
+        base.Awake();
 
         if (hasThirdAttack)
             hasSecondAttack = true;
-    }
-
-    private void Start()
-    {
-        GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += Death;
     }
 
     public void AttackPattern(bool firstAttack, bool secondAttack, bool thirdAttack)
@@ -61,47 +47,11 @@ public class SwordsmanAttacks : MonoBehaviour
         StartCoroutine(IsAttackingCooldown(cumulativeLength));
     }
 
-    private IEnumerator PlayClip(int clipHash, float startTime) 
-    {
-        yield return new WaitForSeconds(startTime);
-
-        if (isAlive)
-        {
-            animator.Play(clipHash);
-        }
-    }
-
-    private IEnumerator IsAttackingCooldown(float duration)
-    {
-        isAttacking = true;
-
-        yield return new WaitForSeconds(duration);
-
-        isAttacking = false;
-    }
-
-    public IEnumerator AttackCooldown()
-    {
-        onAttackCooldown = true;
-
-        yield return new WaitForSeconds(attackCooldownDuration);
-
-        onAttackCooldown = false;
-    }
-
-    public bool IsAttacking()
-    {
-        return isAttacking;
-    }
-
     public void StopCurrentAttackCoroutine()
     {
         StopCoroutine(currentCoroutine);
-    }
 
-    public bool OnAttackCooldown()
-    {
-        return onAttackCooldown;
+        ResetIsAttacking();
     }
 
     public bool HasSecondAttack()
@@ -114,9 +64,9 @@ public class SwordsmanAttacks : MonoBehaviour
         return hasThirdAttack;
     }
 
-    private void Death()
+    protected override void Death()
     {
-        isAlive = false;
+        base.Death();
 
         if (currentCoroutine != null)
             StopCurrentAttackCoroutine();

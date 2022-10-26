@@ -2,29 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArcherAttacks : MonoBehaviour
+public class ArcherAttacks : EnemyAttacks
 {
     #region Animation
 
     [SerializeField] private AnimationClip arrowAnimationClip;
-    private Animator animator;
-
-    private Coroutine currentAttackCoroutine = null;
 
     #endregion
 
-    #region Logic Variables
-
-    private bool isAttacking = false;
-
-    private bool onAttackCooldown = false;
-    [SerializeField] private float attackCooldownDuration = 3f;
-
-    private bool isAlive = true;
-
-    #endregion
+    #region Arrow - Projectile
 
     [SerializeField] private Arrow arrowPrefab;
+    [SerializeField] private float shootingWaitingTime = .3f;
 
     private float[] shootingSpeeds = { 10f, 7f };
     private float shootingSpeed;
@@ -34,14 +23,11 @@ public class ArcherAttacks : MonoBehaviour
 
     private GameObject projectileContainer;
 
-    private void Awake()
-    {
-        animator = GetComponent<Animator>();
-    }
+    #endregion
 
-    private void Start()
+    protected override void Start()
     {
-        GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += Death;
+        base.Start();
 
         projectileContainer = GameObject.FindGameObjectWithTag("Projectile Container");
     }
@@ -56,9 +42,9 @@ public class ArcherAttacks : MonoBehaviour
 
         if (isGoingToShoot)
         {
-            isAttacking = true;
             GetComponent<EnemyMover>().Flip(new Vector2(xDistance, 0));
-            StartCoroutine(GetComponent<EnemyMover>().MovementCooldown(.3f));
+            StartCoroutine(GetComponent<EnemyMover>().MovementCooldown(shootingWaitingTime));
+            StartCoroutine(IsAttackingCooldown(shootingWaitingTime + .2f));
 
             StartCoroutine(PlayClip(Animator.StringToHash(arrowAnimationClip.name), 0));
             StartCoroutine(ShootArrow(shootingSpeed, shootingDirection));
@@ -104,11 +90,6 @@ public class ArcherAttacks : MonoBehaviour
 
                 isGoingToShoot = true;
             }
-        }
-
-        if (!isGoingToShoot)
-        {
-            Debug.Log("Lacks power");
         }
     }
 
@@ -160,7 +141,7 @@ public class ArcherAttacks : MonoBehaviour
 
     private IEnumerator ShootArrow(float shootingForce, Vector2 direction)
     {
-        yield return new WaitForSeconds(.3f);
+        yield return new WaitForSeconds(shootingWaitingTime);
 
         Arrow newArrow = Instantiate(arrowPrefab, transform.position + new Vector3(transform.localScale.x * .16f, 0, 0), Quaternion.identity);
         newArrow.transform.SetParent(projectileContainer.transform);
@@ -171,64 +152,5 @@ public class ArcherAttacks : MonoBehaviour
         }
 
         newArrow.GetComponent<Rigidbody2D>().velocity = direction * shootingForce;
-
-        yield return new WaitForSeconds(.2f);
-        isAttacking = false;
-    }
-
-    private IEnumerator PlayClip(int clipHash, float startTime)
-    {
-        yield return new WaitForSeconds(startTime);
-
-        if (isAlive)
-        {
-            animator.Play(clipHash);
-        }
-    }
-
-    private IEnumerator IsAttackingCooldown(float duration)
-    {
-        isAttacking = true;
-
-        yield return new WaitForSeconds(duration);
-
-        isAttacking = false;
-    }
-
-    public IEnumerator AttackCooldown()
-    {
-        onAttackCooldown = true;
-
-        yield return new WaitForSeconds(attackCooldownDuration);
-
-        onAttackCooldown = false;
-    }
-
-    public bool OnAttackCooldown()
-    {
-        return onAttackCooldown;
-    }
-
-    public bool IsAttacking()
-    {
-        return isAttacking;
-    }
-
-    public bool AttackCoroutineOnCourse()
-    {
-        return currentAttackCoroutine != null;
-    }
-
-    public void StopCurrentAttackCoroutine()
-    {
-        StopCoroutine(currentAttackCoroutine);
-    }
-
-    private void Death()
-    {
-        isAlive = false;
-
-        if (currentAttackCoroutine != null)
-            StopCurrentAttackCoroutine();
     }
 }

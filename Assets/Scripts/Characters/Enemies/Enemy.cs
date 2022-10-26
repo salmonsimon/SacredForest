@@ -74,7 +74,7 @@ public class Enemy : MonoBehaviour
 
         StartCoroutine(Startled(startleDuration));
 
-        GameManager.instance.ShowText("!", 1, Color.white, new Vector3(transform.position.x, transform.position.y + 0.32f, 0), Vector3.up * .05f, .5f, transform);
+        GameManager.instance.ShowText("!", 1, Color.white, new Vector3(transform.position.x, transform.position.y + 0.32f, 0), Vector3.up * .05f, Config.STUN_DURATION, transform);
     }
 
     protected void FlipTowardsPlayer()
@@ -143,7 +143,7 @@ public class Enemy : MonoBehaviour
             // see where we put this
             //enemyAttacks.ResetIsAttacking();
 
-            StartCoroutine(Startled(.5f));
+            StartCoroutine(Startled(Config.STUN_DURATION));
             StartCoroutine(damageReceiver.ImmuneCooldown());
         }
     }

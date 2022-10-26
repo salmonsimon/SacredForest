@@ -200,7 +200,7 @@ public class EnemyMover : MonoBehaviour
 
         if (randomDecil <= jumpBackDecil)
         {
-            if (hasJumpBack && isAbleToJumpBack && groundedAfterJumpBack)
+            if (hasJumpBack && isAbleToJumpBack && groundedAfterJumpBack && !isWalkingAway)
             {
                 jumpBackAction = true;
             }

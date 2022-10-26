@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GroundMonkAttacks : MonoBehaviour
+public class GroundMonkAttacks : EnemyAttacks
 {
     #region Animation
 
@@ -14,18 +14,6 @@ public class GroundMonkAttacks : MonoBehaviour
     [SerializeField] private AnimationClip[] transformedMeleeAttackAnimationClips;
 
     [SerializeField] private AnimationClip transformedSpecialAttack;
-    private Animator animator;
-
-    #endregion
-
-    #region Logic Variables
-
-    private bool isAttacking = false;
-
-    [SerializeField] private bool onAttackCooldown = false;
-    [SerializeField] private float attackCooldownDuration = 2f;
-
-    private bool isAlive = true;
 
     #endregion
 
@@ -36,16 +24,6 @@ public class GroundMonkAttacks : MonoBehaviour
 
     #endregion
 
-    private void Awake()
-    {
-        animator = GetComponent<Animator>();
-    }
-
-    private void Start()
-    {
-        GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += Death;
-    }
-
     public void RollAction()
     {
         StartCoroutine(IsAttackingCooldown(.5f));
@@ -53,8 +31,6 @@ public class GroundMonkAttacks : MonoBehaviour
         StartCoroutine(ToDashLayerCooldown(.5f));
 
         StartCoroutine(PlayClip(Animator.StringToHash(rollAnimationClip.name), 0));
-
-        
     }
 
     private IEnumerator ToDashLayerCooldown(float duration)
@@ -152,52 +128,5 @@ public class GroundMonkAttacks : MonoBehaviour
         StartCoroutine(IsAttackingCooldown(1.2f));
 
         StartCoroutine(PlayClip(Animator.StringToHash(transformedSpecialAttack.name), 0));
-    }
-
-    private IEnumerator PlayClip(int clipHash, float startTime)
-    {
-        yield return new WaitForSeconds(startTime);
-
-        if (isAlive)
-        {
-            animator.Play(clipHash);
-        }
-    }
-
-    private IEnumerator IsAttackingCooldown(float duration)
-    {
-        isAttacking = true;
-
-        yield return new WaitForSeconds(duration);
-
-        isAttacking = false;
-    }
-
-    public IEnumerator AttackCooldown()
-    {
-        onAttackCooldown = true;
-
-        yield return new WaitForSeconds(attackCooldownDuration);
-
-        onAttackCooldown = false;
-    }
-
-    public bool OnAttackCooldown()
-    {
-        return onAttackCooldown;
-    }
-
-    public void ResetIsAttacking()
-    {
-        isAttacking = false;
-    }
-
-    public bool IsAttacking()
-    {
-        return isAttacking;
-    }
-    private void Death()
-    {
-        isAlive = false;
     }
 }
