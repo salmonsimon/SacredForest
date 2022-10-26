@@ -5190,7 +5190,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 18512d9c28574ca4f9157986b58aa5a8, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -5223,8 +5223,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc4d5af0feacf24da431439066d3099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackZoneCollider: {fileID: 6143442378142866449}
   startleDuration: 0.5
+  attackZoneCollider: {fileID: 6143442378142866449}
   attackDelay: 0
 --- !u!114 &6143442378185450499
 MonoBehaviour:
@@ -5238,9 +5238,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b51727b4cfeca44591924a5e131ef65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackCooldownDuration: 3
   animationClips:
   - {fileID: 7400000, guid: 6f40c952a41761e40a9737bfb4279366, type: 2}
-  attackCooldownDuration: 3
   hasSecondAttack: 0
   hasThirdAttack: 0
 --- !u!114 &6143442378185450508
@@ -5301,9 +5301,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 6143442378185450503}
-  currentHitPoints: 1
-  maxHitPoints: 1
   immuneTime: 2
+  maxHitPoints: 1
+  currentHitPoints: 1
 --- !u!1 &6143442378789070675
 GameObject:
   m_ObjectHideFlags: 0

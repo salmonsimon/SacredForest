@@ -5028,7 +5028,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 18512d9c28574ca4f9157986b58aa5a8, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -5061,10 +5061,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04dd6cc0bdcf1294a9d8e885a394107f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startleDuration: 0.5
   attackZoneCollider: {fileID: 8742912998008352731}
   meleeZoneCollider: {fileID: 8742912998079876960}
   dangerZoneCollider: {fileID: 8742912998069901049}
-  startleDuration: 0.5
 --- !u!114 &8742912997571526430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5077,9 +5077,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70d3587ba60708a409da95a2e6062d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackCooldownDuration: 3
   projectileAnimationClip: {fileID: 7400000, guid: 97754a44779590e4eb2c74af3dea4e65, type: 2}
   meleeAttackAnimationClip: {fileID: 7400000, guid: 01f2abc34cc43554bb1f1e1a0dcfe1e7, type: 2}
-  attackCooldownDuration: 3
   magicProjectilePrefab: {fileID: 5039259422374071178, guid: cd2bfd63f1cdb0a42856c944bfd04584, type: 3}
   shootingForce: 3
   shootingWaitingTime: 0.5
@@ -5141,9 +5141,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 8742912997571526419}
-  currentHitPoints: 1
-  maxHitPoints: 1
   immuneTime: 2
+  maxHitPoints: 1
+  currentHitPoints: 1
 --- !u!1 &8742912997652913577
 GameObject:
   m_ObjectHideFlags: 0
@@ -10498,6 +10498,7 @@ MonoBehaviour:
   isColliding: 0
   tagsToCheck:
   - Player
+  damage: 1
 --- !u!1 &8742912998681083321
 GameObject:
   m_ObjectHideFlags: 0

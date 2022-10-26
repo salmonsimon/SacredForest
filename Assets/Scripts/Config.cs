@@ -21,6 +21,13 @@ public class Config
 
     #endregion
 
+    #region General
+
+    public const float SMALL_DELAY = .1f;
+    public const float MEDIUM_DELAY = .2f;
+
+    #endregion
+
     #region Characters
 
     #region GENERAL ANIMATIONS
@@ -44,11 +51,11 @@ public class Config
     public const float JUMP_BACK_COOLDOWN = 2f;
     public const float MOVEMENT_AFTER_JUMP_BACK_COOLDOWN = 1f;
 
-    public const float ATTACK_DELAY = .1f;
-
     public const float ALERT_GROUP_DELAY = .2f;
 
     public const float MAGIC_PROJECTILE_SPEED = 1.5f;
+
+    public const float STUN_DURATION = .5f;
 
     #endregion
 

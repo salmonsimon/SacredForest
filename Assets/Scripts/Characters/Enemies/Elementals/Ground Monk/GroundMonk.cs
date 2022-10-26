@@ -2,16 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyMover), typeof(GroundMonkAttacks), typeof(DamageReceiver))]
-public class GroundMonk : MonoBehaviour
+[RequireComponent(typeof(GroundMonkAttacks))]
+public class GroundMonk : Elemental
 {
-    private Animator animator;
-
     #region Controllers
 
-    private EnemyMover enemyMover;
     private GroundMonkAttacks groundMonkAttacks;
-    private DamageReceiver damageReceiver;
 
     #endregion
 
@@ -22,58 +18,18 @@ public class GroundMonk : MonoBehaviour
 
     #endregion
 
-    #region Player
-
-    private GameObject player;
-    private bool isPlayerAlive = true;
-
-    #endregion
-
     #region Logic Variables
-
-    private bool isTransformed = false;
-
-    [SerializeField] private bool onActionCooldown = false;
 
     private bool onSpecialAttackCooldown = false;
     private float specialAttackCooldownDuration = 5f;
 
-    private bool isStartled = false;
-    private bool isAlive = true;
-
     #endregion
 
-    #region Action Variables
-
-    Vector2 movement = Vector2.zero;
-    float relativePlayerPositionX = 0;
-
-    #endregion
-
-    #region Parameters
-
-    private float actionCooldownDuration = Config.ACTION_COOLDOWN_DURATION;
-
-    #endregion
-
-    private void Awake()
+    protected override void Awake()
     {
-        animator = GetComponent<Animator>();
+        base.Awake();
 
-        enemyMover = GetComponent<EnemyMover>();
         groundMonkAttacks = GetComponent<GroundMonkAttacks>();
-        damageReceiver = GetComponent<DamageReceiver>();
-
-        player = GameObject.FindGameObjectWithTag(Config.PLAYER_TAG);
-    }
-
-    private void Start()
-    {
-        StartCoroutine(Startled(1f));
-        StartCoroutine(enemyMover.MovementCooldown(1f));
-
-        damageReceiver.OnCharacterAliveStatusChange += Death;
-        damageReceiver.OnCharacterDamaged += Damaged;
     }
 
     private void FixedUpdate()
@@ -121,11 +77,6 @@ public class GroundMonk : MonoBehaviour
         enemyMover.UpdateMotor(movement, false, false);
     }
 
-    private void FlipTowardsPlayer()
-    {
-        enemyMover.Flip(new Vector2(relativePlayerPositionX, 0));
-    }
-
     private void PickRandomAttackPattern()
     {
         if (meleeZoneCollider.IsColliding())
@@ -167,57 +118,6 @@ public class GroundMonk : MonoBehaviour
         }
     }
 
-    private Vector2 WalksAway()
-    {
-        Vector2 movement;
-
-        if (relativePlayerPositionX > 0)
-        {
-            movement = Vector2.left;
-        }
-        else
-        {
-            movement = Vector2.right;
-        }
-
-        return movement;
-    }
-
-    private Vector2 WalksTowards()
-    {
-        Vector2 movement;
-
-        if (relativePlayerPositionX > 0)
-        {
-            movement = Vector2.right;
-        }
-        else
-        {
-            movement = Vector2.left;
-        }
-
-        return movement;
-    }
-
-    private IEnumerator ActionCooldown(float duration)
-    {
-        onActionCooldown = true;
-
-        yield return new WaitForSeconds(duration);
-
-        onActionCooldown = false;
-    }
-
-    private IEnumerator Startled(float duration)
-    {
-        isStartled = true;
-
-        enemyMover.StayInPosition();
-        yield return new WaitForSeconds(duration);
-
-        isStartled = false;
-    }
-
     private IEnumerator SpecialAttackCooldown()
     {
         onSpecialAttackCooldown = true;
@@ -227,63 +127,11 @@ public class GroundMonk : MonoBehaviour
         onSpecialAttackCooldown = false;
     }
 
-    private void Damaged()
+    protected override void Transform()
     {
-        if (isAlive)
-        {
-            onActionCooldown = false;
-            groundMonkAttacks.ResetoIsAttacking();
-            enemyMover.StayInPosition();
+        base.Transform();
 
-            CheckDamageToTransform();
-        }
-    }
-
-    private void CheckDamageToTransform()
-    {
-        bool isTransforming = false;
-
-        if (!isTransformed)
-        {
-            if (damageReceiver.CurrentHitPoints <= (float)(damageReceiver.MaxHitPoints / 2f))
-            {
-                Transform();
-                isTransforming = true;
-            }
-        }
-
-        if (!isTransforming)
-        {
-            StartCoroutine(Startled(.5f));
-            StartCoroutine(damageReceiver.ImmuneCooldown());
-        }
-            
-    }
-
-    public void Transform()
-    {
-        StartCoroutine(damageReceiver.SetImmune(3.5f));
-
-        StartCoroutine(Startled(3.5f));
-
-        isTransformed = true;
         meleeZoneCollider = transformedMeleeZoneCollider;
-
-        StartCoroutine(WaitAndSetTransform());
-
         enemyMover.AlterRunSpeed(1f);
-    }
-
-    private IEnumerator WaitAndSetTransform()
-    {
-        yield return new WaitForSeconds(.1f);
-
-        animator.SetBool("IsTransformed", true);
-        animator.SetTrigger("Transform");
-    }
-
-    private void Death()
-    {
-        isAlive = false;
     }
 }

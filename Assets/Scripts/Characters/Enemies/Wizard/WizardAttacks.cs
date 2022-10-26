@@ -2,43 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WizardAttacks : MonoBehaviour
+public class WizardAttacks : EnemyAttacks
 {
     #region Animation
 
     [SerializeField] private AnimationClip projectileAnimationClip;
     [SerializeField] private AnimationClip meleeAttackAnimationClip;
-    private Animator animator;
-
-    private Coroutine currentAttackCoroutine = null;
 
     #endregion
 
-    #region Logic Variables
-
-    private bool isAttacking = false;
-
-    private bool onAttackCooldown = false;
-    [SerializeField] private float attackCooldownDuration = 3f;
-
-    private bool isAlive = true;
-
-    #endregion
+    #region Magic Projectile
 
     [SerializeField] private MagicProjectile magicProjectilePrefab;
     [SerializeField] private float shootingForce = Config.MAGIC_PROJECTILE_SPEED;
 
     [SerializeField] private float shootingWaitingTime = .5f;
 
-    private void Awake()
-    {
-        animator = GetComponent<Animator>();
-    }
-
-    private void Start()
-    {
-        GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += Death;
-    }
+    #endregion
 
     public void MeleeAttack(Vector3 magePosition, Vector3 playerPosition)
     {
@@ -46,6 +26,7 @@ public class WizardAttacks : MonoBehaviour
 
         GetComponent<EnemyMover>().Flip(new Vector2(xDistance, 0));
         StartCoroutine(PlayClip(Animator.StringToHash(meleeAttackAnimationClip.name), 0));
+        StartCoroutine(IsAttackingCooldown(meleeAttackAnimationClip.length));
     }
 
     public void ProjectileAttack(Vector3 magePosition, Vector3 playerPosition)
@@ -56,10 +37,9 @@ public class WizardAttacks : MonoBehaviour
 
         Vector2 shootingDirection = new Vector2(xDistance, yDistance).normalized;
 
-        isAttacking = true;
-
         GetComponent<EnemyMover>().Flip(new Vector2(xDistance, 0));
-        StartCoroutine(GetComponent<EnemyMover>().MovementCooldown(.5f));
+        StartCoroutine(GetComponent<EnemyMover>().MovementCooldown(shootingWaitingTime));
+        StartCoroutine(IsAttackingCooldown(shootingWaitingTime + .2f));
 
         StartCoroutine(PlayClip(Animator.StringToHash(projectileAnimationClip.name), 0));
         StartCoroutine(ShootProjectile(shootingDirection));
@@ -77,64 +57,5 @@ public class WizardAttacks : MonoBehaviour
         }
 
         newProjectile.GetComponent<Rigidbody2D>().velocity = direction * shootingForce;
-
-        yield return new WaitForSeconds(.2f);
-        isAttacking = false;
-    }
-
-    private IEnumerator PlayClip(int clipHash, float startTime)
-    {
-        yield return new WaitForSeconds(startTime);
-
-        if (isAlive)
-        {
-            animator.Play(clipHash);
-        }
-    }
-
-    private IEnumerator IsAttackingCooldown(float duration)
-    {
-        isAttacking = true;
-
-        yield return new WaitForSeconds(duration);
-
-        isAttacking = false;
-    }
-
-    public IEnumerator AttackCooldown()
-    {
-        onAttackCooldown = true;
-
-        yield return new WaitForSeconds(attackCooldownDuration);
-
-        onAttackCooldown = false;
-    }
-
-    public bool OnAttackCooldown()
-    {
-        return onAttackCooldown;
-    }
-
-    public bool IsAttacking()
-    {
-        return isAttacking;
-    }
-
-    public bool AttackCoroutineOnCourse()
-    {
-        return currentAttackCoroutine != null;
-    }
-
-    public void StopCurrentAttackCoroutine()
-    {
-        StopCoroutine(currentAttackCoroutine);
-    }
-
-    private void Death()
-    {
-        isAlive = false;
-
-        if (currentAttackCoroutine != null)
-            StopCurrentAttackCoroutine();
     }
 }

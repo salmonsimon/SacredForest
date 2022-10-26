@@ -2,17 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyMover), typeof(ArcherAttacks), typeof(DamageReceiver))]
-public class Archer : MonoBehaviour
+[RequireComponent(typeof(ArcherAttacks), typeof(PlayerDetection))]
+public class Archer : Enemy
 {
-    private Animator animator;
-
     #region Controllers
 
-    private EnemyMover enemyMover;
     private ArcherAttacks archerAttacks;
-    private DamageReceiver damageReceiver;
-    private PlayerDetection playerDetection;
 
     #endregion
 
@@ -23,26 +18,7 @@ public class Archer : MonoBehaviour
 
     #endregion
 
-    #region Player
-
-    private GameObject player;
-    private bool isPlayerAlive = true;
-
-    #endregion
-
-    #region Logic Variables
-
-    private bool onActionCooldown = false;
-
-    private bool isStartled = false;
-    private bool isAlive = true;
-
-    #endregion
-
     #region Action Variables
-
-    Vector2 movement = Vector2.zero;
-    float relativePlayerPositionX = 0;
 
     private bool shootArrowAction = false;
 
@@ -50,32 +26,17 @@ public class Archer : MonoBehaviour
 
     #endregion
 
-    #region Parameters
-
-    [SerializeField] private float startleDuration = .5f;
-    private float actionCooldownDuration = Config.ACTION_COOLDOWN_DURATION;
-    private float attackDelay = 0f;
-
-    #endregion
-
-    private void Awake()
+    protected override void Awake()
     {
-        animator = GetComponent<Animator>();
+        base.Awake();
 
-        enemyMover = GetComponent<EnemyMover>();
         archerAttacks = GetComponent<ArcherAttacks>();
-        damageReceiver = GetComponent<DamageReceiver>();
-        playerDetection = GetComponent<PlayerDetection>();
-
-        player = GameObject.FindGameObjectWithTag(Config.PLAYER_TAG);
     }
 
-    private void Start()
+    protected override void Start()
     {
-        StartCoroutine(Startled(1f));
-        StartCoroutine(enemyMover.MovementCooldown(1f));
+        base.Start();
 
-        damageReceiver.OnCharacterAliveStatusChange += Death;
         playerDetection.OnDetectedPlayer += PlayerDetected;
     }
 
@@ -86,7 +47,7 @@ public class Archer : MonoBehaviour
 
         if (!isAlive || !isPlayerAlive || isStartled)
         {
-            enemyMover.UpdateMotor(Vector2.zero, false, false);
+            enemyMover.StayInPosition();
             return;
         }
 
@@ -109,7 +70,7 @@ public class Archer : MonoBehaviour
         {
             if (!archerAttacks.OnAttackCooldown())
             {
-                StartCoroutine(PickRandomAttackPattern());
+                PickRandomAttackPattern();
                 StartCoroutine(ActionCooldown(actionCooldownDuration));
             }
             else if (enemyMover.IsWalkingAway() && enemyMover.StillMoreToWalk() && !archerAttacks.IsAttacking())
@@ -133,21 +94,14 @@ public class Archer : MonoBehaviour
             }
         }
 
-        if (jumpBackAction && archerAttacks.AttackCoroutineOnCourse())
-            archerAttacks.StopCurrentAttackCoroutine();
-
         enemyMover.UpdateMotor(movement, false, jumpBackAction);
 
         ResetActionBooleans();
     }
 
-    // This one will only have the arrow attack for now
-    // but could use it if we find other character with dagger attacks
-    // to defend when player in close range
-    private IEnumerator PickRandomAttackPattern()
+    private void PickRandomAttackPattern()
     {
         StartCoroutine(archerAttacks.AttackCooldown());
-        yield return new WaitForSeconds(attackDelay);
 
         shootArrowAction = true;
 
@@ -155,84 +109,9 @@ public class Archer : MonoBehaviour
             archerAttacks.ArrowAttack(transform.position, player.transform.position);
     }
 
-    private Vector2 WalksTowards()
-    {
-        Vector2 movement;
-
-        if (relativePlayerPositionX > 0)
-        {
-            movement = Vector2.right;
-        }
-        else
-        {
-            movement = Vector2.left;
-        }
-
-        return movement;
-    }
-
-    private Vector2 WalksAway()
-    {
-        Vector2 movement;
-
-        if (relativePlayerPositionX > 0)
-        {
-            movement = Vector2.left;
-        }
-        else
-        {
-            movement = Vector2.right;
-        }
-
-        return movement;
-    }
-
     private void ResetActionBooleans()
     {
         jumpBackAction = false;
         shootArrowAction = false;
-    }
-
-    private IEnumerator ActionCooldown(float duration)
-    {
-        onActionCooldown = true;
-
-        yield return new WaitForSeconds(duration);
-
-        onActionCooldown = false;
-    }
-
-    private void PlayerDetected()
-    {
-        enemyMover.Flip(new Vector2(relativePlayerPositionX, 0));
-        StartCoroutine(playerDetection.AlertGroupAfterDetectingPlayer());
-
-        StartCoroutine(Startled());
-        StartCoroutine(enemyMover.MovementCooldown(startleDuration));
-
-        GameManager.instance.ShowText("!", 1, Color.white, new Vector3(transform.position.x, transform.position.y + 0.32f, 0), Vector3.up * .05f, .5f, transform);
-    }
-
-    private IEnumerator Startled()
-    {
-        isStartled = true;
-
-        yield return new WaitForSeconds(startleDuration);
-
-        isStartled = false;
-    }
-
-    private IEnumerator Startled(float duration)
-    {
-        isStartled = true;
-
-        yield return new WaitForSeconds(duration);
-
-        isStartled = false;
-    }
-
-    private void Death()
-    {
-        isAlive = false;
     }
 }
