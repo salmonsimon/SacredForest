@@ -25,14 +25,17 @@ public class EarthenHands : MonoBehaviour
     {
         followingTime -= Time.deltaTime;
 
-        if (followingTime <= 0)
+        if (followingTime <= .5f)
         {
-            isFollowing = false;
-
-            if (Mathf.Abs(lookat.position.x - transform.position.x) < .2f)
+            if (Mathf.Abs(lookat.position.x - transform.position.x) < .2f && lookat.position.y - transform.position.y < .4f)
             {
                 CatchPlayer();
             }
+        }
+
+        if (followingTime <= 0)
+        {
+            isFollowing = false;
         }
         else
         {
@@ -60,14 +63,47 @@ public class EarthenHands : MonoBehaviour
 
     private void CatchPlayer()
     {
-        GameManager.instance.GetPlayer().GetComponent<PlayerMovementController>().BlockMovement(true);
+        isFollowing = false;
+
+        StartCoroutine(SmoothPlayerPlacement());
+
+        GameObject player = GameManager.instance.GetPlayer();
+        player.GetComponent<PlayerMovementController>().SetIsAbleToMove(false);
+    }
+
+    private IEnumerator SmoothPlayerPlacement()
+    {
+        float duration = .2f;
+
+        float startTime = Time.time;
+        float endTime = startTime + duration;
+
+        GameObject player = GameManager.instance.GetPlayer();
+
+        Vector3 playerOriginalPosition = player.transform.position;
+        Vector3 playerFinalPosition = new Vector3(transform.position.x, transform.position.y, player.transform.position.z);
+
+        while (Time.time < endTime)
+        {
+            player.transform.position = Vector3.Lerp(playerOriginalPosition, playerFinalPosition, (Time.time - startTime) / duration);
+
+            yield return null;
+        }
     }
 
     private IEnumerator WaitAndDestroy(float waitingTime)
     {
         yield return new WaitForSeconds(waitingTime);
 
-        GameManager.instance.GetPlayer().GetComponent<PlayerMovementController>().BlockMovement(false);
+        GameObject player = GameManager.instance.GetPlayer();
+
+        if (player.GetComponent<DamageReceiver>().IsAlive)
+            player.GetComponent<PlayerMovementController>().SetIsAbleToMove(true);
+        else
+        {
+            player.GetComponent<PlayerMovementController>().BlockMovement(true);
+        }
+
         Destroy(gameObject);
     }
 

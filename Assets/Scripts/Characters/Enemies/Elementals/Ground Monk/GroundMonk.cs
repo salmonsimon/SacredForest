@@ -18,6 +18,7 @@ public class GroundMonk : MonoBehaviour
     #region Check Colliders
 
     [SerializeField] private BoxCollider meleeZoneCollider;
+    [SerializeField] private BoxCollider transformedMeleeZoneCollider;
 
     #endregion
 
@@ -72,12 +73,15 @@ public class GroundMonk : MonoBehaviour
         StartCoroutine(enemyMover.MovementCooldown(1f));
 
         damageReceiver.OnCharacterAliveStatusChange += Death;
+        damageReceiver.OnCharacterDamaged += Damaged;
     }
 
     private void FixedUpdate()
     {
         if (isPlayerAlive)
             isPlayerAlive = player.GetComponent<DamageReceiver>().IsAlive;
+
+        relativePlayerPositionX = player.transform.position.x - transform.position.x;
 
         if (!isAlive || !isPlayerAlive || isStartled || groundMonkAttacks.IsAttacking())
         {
@@ -87,49 +91,39 @@ public class GroundMonk : MonoBehaviour
 
         movement = Vector2.zero;
 
-        relativePlayerPositionX = player.transform.position.x - transform.position.x;
+        FlipTowardsPlayer();
 
-        if (!enemyMover.IsWalkingAway())
-            enemyMover.Flip(new Vector2(relativePlayerPositionX, 0));
-
-        if (meleeZoneCollider.IsColliding())
+        if (meleeZoneCollider.IsColliding() && !isStartled)
         {
-            if (!groundMonkAttacks.OnAttackCooldown() && !groundMonkAttacks.IsAttacking())
+            if (!groundMonkAttacks.OnAttackCooldown() && !groundMonkAttacks.IsAttacking() && !isStartled)
             {
                 PickRandomAttackPattern();
                 StartCoroutine(ActionCooldown(actionCooldownDuration));
             }
-            else if (enemyMover.IsWalkingAway() && enemyMover.StillMoreToWalk() && !groundMonkAttacks.IsAttacking())
+            else if (!isTransformed && !onActionCooldown && !groundMonkAttacks.IsAttacking() && !isStartled)
             {
-                movement = WalksAway();
-            }
-            else if (!onActionCooldown && !groundMonkAttacks.IsAttacking() && meleeZoneCollider.IsColliding())
-            {
-                //do roll action
-                StartCoroutine(ActionCooldown(actionCooldownDuration));
+                groundMonkAttacks.RollAction();
             }
         }
-        else if (!groundMonkAttacks.OnAttackCooldown() && !groundMonkAttacks.IsAttacking() && !onSpecialAttackCooldown)
+        else if (!groundMonkAttacks.OnAttackCooldown() && !groundMonkAttacks.IsAttacking() && !onSpecialAttackCooldown && !isStartled)
         {
             PickRandomAttackPattern();
             StartCoroutine(ActionCooldown(actionCooldownDuration));
         }
-        else if (!groundMonkAttacks.IsAttacking())
+        else if (!groundMonkAttacks.IsAttacking() && !isStartled)
         {
             if (enemyMover.StillMoreToWalk())
             {
-                if (enemyMover.IsWalkingAway())
-                {
-                    movement = WalksAway();
-                }
-                else
-                {
-                    movement = WalksTowards();
-                }
+                movement = WalksTowards();
             }
         }
 
         enemyMover.UpdateMotor(movement, false, false);
+    }
+
+    private void FlipTowardsPlayer()
+    {
+        enemyMover.Flip(new Vector2(relativePlayerPositionX, 0));
     }
 
     private void PickRandomAttackPattern()
@@ -148,7 +142,7 @@ public class GroundMonk : MonoBehaviour
                 attackPattern = 2;
             }
 
-            if (isAlive)
+            if (isAlive && !isStartled)
             {
                 StartCoroutine(groundMonkAttacks.AttackCooldown());
 
@@ -159,12 +153,15 @@ public class GroundMonk : MonoBehaviour
         {
             if (!onSpecialAttackCooldown)
             {
-                if (isAlive)
+                if (isAlive && !isStartled)
                 {
                     StartCoroutine(groundMonkAttacks.AttackCooldown());
                     StartCoroutine(SpecialAttackCooldown());
 
-                    groundMonkAttacks.ProjectileAttack(transform.position, player.transform.position);
+                    if (!isTransformed)
+                        groundMonkAttacks.ProjectileAttack(transform.position, player.transform.position);
+                    else
+                        groundMonkAttacks.TransformedSpecialAttack();
                 }
             }
         }
@@ -215,6 +212,7 @@ public class GroundMonk : MonoBehaviour
     {
         isStartled = true;
 
+        enemyMover.StayInPosition();
         yield return new WaitForSeconds(duration);
 
         isStartled = false;
@@ -227,6 +225,61 @@ public class GroundMonk : MonoBehaviour
         yield return new WaitForSeconds(specialAttackCooldownDuration);
 
         onSpecialAttackCooldown = false;
+    }
+
+    private void Damaged()
+    {
+        if (isAlive)
+        {
+            onActionCooldown = false;
+            groundMonkAttacks.ResetoIsAttacking();
+            enemyMover.StayInPosition();
+
+            CheckDamageToTransform();
+        }
+    }
+
+    private void CheckDamageToTransform()
+    {
+        bool isTransforming = false;
+
+        if (!isTransformed)
+        {
+            if (damageReceiver.CurrentHitPoints <= (float)(damageReceiver.MaxHitPoints / 2f))
+            {
+                Transform();
+                isTransforming = true;
+            }
+        }
+
+        if (!isTransforming)
+        {
+            StartCoroutine(Startled(.5f));
+            StartCoroutine(damageReceiver.ImmuneCooldown());
+        }
+            
+    }
+
+    public void Transform()
+    {
+        StartCoroutine(damageReceiver.SetImmune(3.5f));
+
+        StartCoroutine(Startled(3.5f));
+
+        isTransformed = true;
+        meleeZoneCollider = transformedMeleeZoneCollider;
+
+        StartCoroutine(WaitAndSetTransform());
+
+        enemyMover.AlterRunSpeed(1f);
+    }
+
+    private IEnumerator WaitAndSetTransform()
+    {
+        yield return new WaitForSeconds(.1f);
+
+        animator.SetBool("IsTransformed", true);
+        animator.SetTrigger("Transform");
     }
 
     private void Death()

@@ -6,10 +6,14 @@ public class GroundMonkAttacks : MonoBehaviour
 {
     #region Animation
 
+    [SerializeField] private AnimationClip rollAnimationClip;
+
     [SerializeField] private AnimationClip projectileAnimationClip;
 
     [SerializeField] private AnimationClip[] meleeAttackAnimationClips;
     [SerializeField] private AnimationClip[] transformedMeleeAttackAnimationClips;
+
+    [SerializeField] private AnimationClip transformedSpecialAttack;
     private Animator animator;
 
     #endregion
@@ -40,6 +44,37 @@ public class GroundMonkAttacks : MonoBehaviour
     private void Start()
     {
         GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += Death;
+    }
+
+    public void RollAction()
+    {
+        StartCoroutine(IsAttackingCooldown(.5f));
+        StartCoroutine(GetComponent<DamageReceiver>().SetImmune(.5f));
+        StartCoroutine(ToDashLayerCooldown(.5f));
+
+        StartCoroutine(PlayClip(Animator.StringToHash(rollAnimationClip.name), 0));
+
+        
+    }
+
+    private IEnumerator ToDashLayerCooldown(float duration)
+    {
+        gameObject.layer = LayerMask.NameToLayer("Dash");
+        InvokeRepeating("MovementForRoll", 0, .01f);
+
+        yield return new WaitForSeconds(duration);
+
+        gameObject.layer = LayerMask.NameToLayer("Enemy");
+        CancelInvoke();
+    }
+
+    private void MovementForRoll()
+    {
+        EnemyMover enemyMover = GetComponent<EnemyMover>();
+
+        Vector2 direction = enemyMover.GetDirection();
+
+        enemyMover.UpdateMotor(direction * 10f, false, false);
     }
 
     public void MeleeAttack(Vector3 position, Vector3 playerPosition, int attackPattern, bool isTransformed)
@@ -93,11 +128,9 @@ public class GroundMonkAttacks : MonoBehaviour
 
         float xDistance = playerPosition.x - magePosition.x;
 
-        isAttacking = true;
-
         GetComponent<EnemyMover>().Flip(new Vector2(xDistance, 0));
         StartCoroutine(GetComponent<EnemyMover>().MovementCooldown(2.4f));
-        StartCoroutine(IsAttackingCooldown(2.6f));
+        StartCoroutine(IsAttackingCooldown(3f));
 
         StartCoroutine(PlayClip(Animator.StringToHash(projectileAnimationClip.name), 0));
         StartCoroutine(ShootProjectile(playerPosition));
@@ -110,8 +143,15 @@ public class GroundMonkAttacks : MonoBehaviour
         EarthenHands newEarthenHands = Instantiate(projectilePrefab, new Vector3( playerPosition.x, transform.position.y - .02f, transform.position.z), Quaternion.identity);
         newEarthenHands.SetLookat(GameManager.instance.GetPlayer().transform);
 
-        yield return new WaitForSeconds(2f);
-        isAttacking = false;
+        GameManager.instance.GetCinemachineShake().ShakeCamera(.5f, 2f);
+    }
+
+    public void TransformedSpecialAttack()
+    {
+        StartCoroutine(GetComponent<EnemyMover>().MovementCooldown(1.2f));
+        StartCoroutine(IsAttackingCooldown(1.2f));
+
+        StartCoroutine(PlayClip(Animator.StringToHash(transformedSpecialAttack.name), 0));
     }
 
     private IEnumerator PlayClip(int clipHash, float startTime)
@@ -145,6 +185,11 @@ public class GroundMonkAttacks : MonoBehaviour
     public bool OnAttackCooldown()
     {
         return onAttackCooldown;
+    }
+
+    public void ResetoIsAttacking()
+    {
+        isAttacking = false;
     }
 
     public bool IsAttacking()

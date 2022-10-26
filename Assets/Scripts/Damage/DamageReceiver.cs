@@ -6,11 +6,36 @@ public class DamageReceiver : MonoBehaviour
 {
     [SerializeField] private Animator animator;
 
-    [SerializeField] private int currentHitPoints = 1;
-    [SerializeField] private int maxHitPoints = 1;
-
     [SerializeField] private float immuneTime = 1f;
     private bool isImmune = false;
+
+    [SerializeField] private int maxHitPoints = 1;
+    public int MaxHitPoints
+    {
+        get { return maxHitPoints; }
+    }
+
+    #region Properties
+
+    #region CurrentHitPoints
+
+    [SerializeField] private int currentHitPoints = 1;
+    public int CurrentHitPoints
+    {
+        get { return currentHitPoints; }
+    }
+
+    public void Damage(int damage)
+    {
+        currentHitPoints -= damage;
+
+        if (OnCharacterDamaged != null)
+            OnCharacterDamaged();
+    }
+
+    #endregion
+
+    #region IsAlive Property
 
     private bool isAlive = true;
     public bool IsAlive
@@ -29,6 +54,13 @@ public class DamageReceiver : MonoBehaviour
     public delegate void OnCharacterAliveStatusChangeDelegate();
     public event OnCharacterAliveStatusChangeDelegate OnCharacterAliveStatusChange;
 
+    #endregion
+
+    public delegate void OnCharacterDamagedDelegate();
+    public event OnCharacterDamagedDelegate OnCharacterDamaged;
+
+    #endregion
+
     private void Awake()
     {
         currentHitPoints = maxHitPoints;
@@ -38,7 +70,7 @@ public class DamageReceiver : MonoBehaviour
     {
         if (!isImmune && isAlive)
         {
-            currentHitPoints -= damage;
+            Damage(damage);
             GameManager.instance.GetCinemachineShake().ShakeCamera(Config.CAMERASHAKE_HIT_AMPLITUDE, Config.CAMERASHAKE_HIT_DURATION);
             Bleed();
 
@@ -49,16 +81,27 @@ public class DamageReceiver : MonoBehaviour
             else
             {
                 animator.SetTrigger(Config.ANIMATOR_HURT_TRIGGER);
-                StartCoroutine(ImmuneCooldown());
+                //StartCoroutine(ImmuneCooldown());
             }
         }
     }
 
-    private IEnumerator ImmuneCooldown()
+    public IEnumerator ImmuneCooldown()
     {
         isImmune = true;
 
         yield return new WaitForSeconds(immuneTime);
+
+        isImmune = false;
+    }
+
+    public IEnumerator SetImmune(float duration)
+    {
+        StopAllCoroutines();
+
+        isImmune = true;
+
+        yield return new WaitForSeconds(duration);
 
         isImmune = false;
     }

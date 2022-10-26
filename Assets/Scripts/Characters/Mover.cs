@@ -365,7 +365,7 @@ public class Mover : MonoBehaviour
     {
         if (value)
         {
-            rigidBody.constraints = RigidbodyConstraints2D.FreezePositionX;
+            rigidBody.constraints = RigidbodyConstraints2D.FreezePosition;
         }
         else
         {
