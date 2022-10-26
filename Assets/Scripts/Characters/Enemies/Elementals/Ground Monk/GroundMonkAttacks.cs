@@ -187,7 +187,7 @@ public class GroundMonkAttacks : MonoBehaviour
         return onAttackCooldown;
     }
 
-    public void ResetoIsAttacking()
+    public void ResetIsAttacking()
     {
         isAttacking = false;
     }

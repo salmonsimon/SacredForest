@@ -232,7 +232,7 @@ public class GroundMonk : MonoBehaviour
         if (isAlive)
         {
             onActionCooldown = false;
-            groundMonkAttacks.ResetoIsAttacking();
+            groundMonkAttacks.ResetIsAttacking();
             enemyMover.StayInPosition();
 
             CheckDamageToTransform();
