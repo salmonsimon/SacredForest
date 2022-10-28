@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CinemachineShake cinemachineShake;
     [SerializeField] private BloodManager bloodManager;
     [SerializeField] private AnimationManager animationManager;
+    [SerializeField] private DialogueManager dialogueManager;
 
     #endregion
 
@@ -123,6 +124,11 @@ public class GameManager : MonoBehaviour
     public AnimationManager GetAnimationManager()
     {
         return animationManager;
+    }
+
+    public DialogueManager GetDialogueManager()
+    {
+        return dialogueManager;
     }
 
     #endregion

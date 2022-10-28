@@ -12,8 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a29fe2c6e1452341a540e858dfdab48, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
-  dialogue:
-  - a
-  - first... dialogue
-  - second! dial.ogue
-  - third one
+  dialogues:
+  - text: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+      aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+      aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+      aaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+    duration: 5
+    isSkippable: 1
+  - text: ss, ss
+    duration: 3
+    isSkippable: 1
+  - text: hola... que tal
+    duration: 5
+    isSkippable: 1
+  - text: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+      aaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+    duration: 5
+    isSkippable: 1
+  - text: nuevo. ultima!!! prueba
+    duration: 5
+    isSkippable: 1

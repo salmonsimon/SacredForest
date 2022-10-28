@@ -7,25 +7,39 @@ public class TypewriterEffect : MonoBehaviour
 {
     private readonly Dictionary<HashSet<char>, float> punctuations = new Dictionary<HashSet<char>, float>()
     {
-        {new HashSet<char>() {'.', '!', '?'}, 0.6f },
-        {new HashSet<char>() {',', ';', ':'}, 0.3f }
+        {new HashSet<char>() {'.', '!', '?', '-'}, 0.3f },
+        {new HashSet<char>() {',', ';', ':'}, 0.1f }
     };
 
-    [SerializeField] private float typewriterSpeed = 50f;
+    [SerializeField] private float typewriterSpeed = 15f;
 
     private Coroutine typingCoroutine;
-    private TMP_Text textLabel;
 
+    private TMP_Text textLabel;
     private string textToType;
+    private float duration;
 
     public bool IsRunning { get; private set; }
+    public bool FinishedWaitingTime { get; private set; }
 
-    public void Run(string textToType, TMP_Text textLabel)
+    public void Run(Dialogue dialogue, TMP_Text textLabel)
     {
-        this.textToType = textToType;
+        this.textToType = dialogue.Text;
         this.textLabel = textLabel;
+        this.duration = dialogue.Duration;
 
         typingCoroutine = StartCoroutine(TypeText());
+    }
+
+    public void Reset()
+    {
+        StopAllCoroutines();
+
+        this.textToType = string.Empty;
+        this.textLabel = null;
+        this.duration = 0;
+
+        FinishedWaitingTime = false;
     }
 
     public void Stop()
@@ -33,12 +47,16 @@ public class TypewriterEffect : MonoBehaviour
         if (!IsRunning)
             return;
 
-        StopCoroutine(typingCoroutine);
+        StopAllCoroutines();
         OnTypingCompleted();
+        StartCoroutine(WaitForWaitingTime());
     }
 
     private IEnumerator TypeText()
     {
+        DialogueBubble dialogueBubble = GetComponent<DialogueBubble>();
+        dialogueBubble.ScaleBubbleDimensions(textToType.Length);
+
         IsRunning = true;
 
         textLabel.maxVisibleCharacters = 0;
@@ -66,18 +84,30 @@ public class TypewriterEffect : MonoBehaviour
                 {
                     yield return new WaitForSeconds(waitDuration);
                 }
+                else if (IsPunctuation(textToType[i], out float waitDuration2) && !isLast && (textToType[i + 1] == '.'))
+                {
+                    yield return new WaitForSeconds(waitDuration2 / 2);
+                }
             }
 
             yield return null;
         }
 
         OnTypingCompleted();
+        StartCoroutine(WaitForWaitingTime());
     }
 
     private void OnTypingCompleted()
     {
         IsRunning = false;
         textLabel.maxVisibleCharacters = textToType.Length;
+    }
+
+    private IEnumerator WaitForWaitingTime()
+    {
+        yield return new WaitForSeconds(duration);
+
+        FinishedWaitingTime = true;
     }
 
     private bool IsPunctuation(char character, out float waitDuration)
