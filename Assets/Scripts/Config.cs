@@ -119,4 +119,14 @@ public class Config
     public const float START_TRANSITION_DURATION = .5f;
     public const float END_TRANSITION_DURATION = 1f;
     #endregion
+
+    #region Audio
+
+    #region SFX
+
+    public const string GRAB_SFX = "Grab";
+
+    #endregion
+
+    #endregion
 }
