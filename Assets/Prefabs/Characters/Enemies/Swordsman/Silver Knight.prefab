@@ -9953,6 +9953,7 @@ GameObject:
   - component: {fileID: 7412544365542400338}
   - component: {fileID: 7812534380196644436}
   - component: {fileID: 8583713217779906341}
+  - component: {fileID: 566494796777725340}
   m_Layer: 8
   m_Name: Silver Knight
   m_TagString: Enemy
@@ -10188,6 +10189,21 @@ MonoBehaviour:
   immuneTime: 2
   maxHitPoints: 1
   currentHitPoints: 1
+--- !u!114 &566494796777725340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7412544365542400346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37bfd2404f5892a4aa2099707fa8dc07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpingClips: []
+  meleeAttackClips: []
+  deathClips: []
 --- !u!1 &7412544366010753549
 GameObject:
   m_ObjectHideFlags: 0

@@ -342,6 +342,7 @@ GameObject:
   - component: {fileID: 2957183605891938239}
   - component: {fileID: 2957183605891938238}
   - component: {fileID: 2957183605891938236}
+  - component: {fileID: 6753229235929549756}
   m_Layer: 8
   m_Name: Forest Ranger
   m_TagString: Enemy
@@ -575,6 +576,22 @@ MonoBehaviour:
   immuneTime: 2
   maxHitPoints: 1
   currentHitPoints: 1
+--- !u!114 &6753229235929549756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2957183605891938226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37bfd2404f5892a4aa2099707fa8dc07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpingClips: []
+  meleeAttackClips: []
+  rangedAttackClips: []
+  deathClips: []
 --- !u!1 &2957183606066013610
 GameObject:
   m_ObjectHideFlags: 0

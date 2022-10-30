@@ -120,11 +120,20 @@ public class Config
     public const float END_TRANSITION_DURATION = 1f;
     #endregion
 
+    #region Damage Types
+
+    public const string SWORD_DAMAGE = "Sword";
+    public const string DEFAULT_DAMAGE = "Default";
+    public const string BLUDGEONING_DAMAGE = "Bludgeoning";
+    public const string FIRE_DAMAGE = "Fire";
+
+    #endregion
+
     #region Audio
 
     #region SFX
 
-    public const string GRAB_SFX = "Grab";
+    public const string ARROW_HIT_SFX = "Arrow Hit";
 
     #endregion
 

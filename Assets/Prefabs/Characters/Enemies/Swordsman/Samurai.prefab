@@ -9788,6 +9788,7 @@ GameObject:
   - component: {fileID: 7210463735521948854}
   - component: {fileID: 7972956713391264688}
   - component: {fileID: 8489684361392546497}
+  - component: {fileID: -6526200596372505151}
   m_Layer: 8
   m_Name: Samurai
   m_TagString: Enemy
@@ -10023,6 +10024,33 @@ MonoBehaviour:
   immuneTime: 2
   maxHitPoints: 1
   currentHitPoints: 1
+--- !u!114 &-6526200596372505151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7210463735521948862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37bfd2404f5892a4aa2099707fa8dc07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpingClips:
+  - {fileID: 8300000, guid: 81d912608dd35c249a4df14951858b37, type: 3}
+  meleeAttackClips: []
+  deathClips:
+  - {fileID: 8300000, guid: e7738405198f4cf4faa31bdcff43bc7f, type: 3}
+  - {fileID: 8300000, guid: 7438f751964376f4385575f5814db4f3, type: 3}
+  - {fileID: 8300000, guid: 6ed46fd36b1ca3f4796d46042812d860, type: 3}
+  - {fileID: 8300000, guid: 87b6d0ad9e4bfea42a24a6c2bdc9d6f5, type: 3}
+  - {fileID: 8300000, guid: b5795298c7d1f05468e32ca2a5b409a4, type: 3}
+  - {fileID: 8300000, guid: b7da1d974d4d51b45be43f791e26d185, type: 3}
+  - {fileID: 8300000, guid: 90c6ef465f51a194f847d3bd366e6501, type: 3}
+  - {fileID: 8300000, guid: 778171bbbd0dcb945af42b7c2e622ccc, type: 3}
+  - {fileID: 8300000, guid: d92ed699aec26cb44b9d5685bca938b3, type: 3}
+  - {fileID: 8300000, guid: f022fbcad0e451c478c07d4d907c5647, type: 3}
+  - {fileID: 8300000, guid: db29af80b25bd1b43969f41e1ea362d0, type: 3}
 --- !u!1 &7210463735612525741
 GameObject:
   m_ObjectHideFlags: 0

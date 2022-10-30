@@ -48,6 +48,7 @@ MonoBehaviour:
   isColliding: 0
   tagsToCheck: []
   damage: 1
+  damageType: 0
 --- !u!61 &168085674
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -122,6 +123,7 @@ MonoBehaviour:
   isColliding: 0
   tagsToCheck: []
   damage: 1
+  damageType: 0
 --- !u!61 &2133394594
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10261,6 +10263,7 @@ MonoBehaviour:
   tagsToCheck:
   - Player
   damage: 1
+  damageType: 1
 --- !u!61 &1861602781
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10303,6 +10306,7 @@ MonoBehaviour:
   tagsToCheck:
   - Player
   damage: 1
+  damageType: 1
 --- !u!1 &6285235481602671982
 GameObject:
   m_ObjectHideFlags: 0
@@ -10320,6 +10324,7 @@ GameObject:
   - component: {fileID: 6285235481602671976}
   - component: {fileID: 6285235481602671979}
   - component: {fileID: 6285235481602671978}
+  - component: {fileID: 5553898471596128270}
   m_Layer: 8
   m_Name: Ground Monk
   m_TagString: Enemy
@@ -10474,9 +10479,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed88095b2d341434b8cb57f0a5cf96f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startleDuration: 0.5
+  transformationDuration: 3
   meleeZoneCollider: {fileID: 6285235481368796915}
   transformedMeleeZoneCollider: {fileID: 3275713088289029728}
-  onActionCooldown: 0
 --- !u!114 &6285235481602671976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10489,6 +10495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86fdc6f749b34164fa61428d97c9f819, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackCooldownDuration: 2
   rollAnimationClip: {fileID: 7400000, guid: bd57c4bce990ad84bbe9ae0d8aa189cb, type: 2}
   projectileAnimationClip: {fileID: 7400000, guid: d7181b866e86c0d42abb0905507df90f, type: 2}
   meleeAttackAnimationClips:
@@ -10500,8 +10507,6 @@ MonoBehaviour:
   - {fileID: 7400000, guid: 8c8d4164e9372344098f2f9eb110769a, type: 2}
   - {fileID: 7400000, guid: c798a63bba52c1446955c98cfff72840, type: 2}
   transformedSpecialAttack: {fileID: 7400000, guid: cabe217519699dd4b834d3376b5d23a8, type: 2}
-  onAttackCooldown: 0
-  attackCooldownDuration: 2
   projectilePrefab: {fileID: 5586027166884921138, guid: c2143ac22c6a25644814d7ce0b46a029, type: 3}
   shootingWaitingTime: 0.4
 --- !u!114 &6285235481602671979
@@ -10545,6 +10550,32 @@ MonoBehaviour:
   immuneTime: 1
   maxHitPoints: 10
   currentHitPoints: 10
+--- !u!114 &5553898471596128270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6285235481602671982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37bfd2404f5892a4aa2099707fa8dc07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpingClips: []
+  meleeAttackClips: []
+  deathClips:
+  - {fileID: 8300000, guid: e7738405198f4cf4faa31bdcff43bc7f, type: 3}
+  - {fileID: 8300000, guid: 7438f751964376f4385575f5814db4f3, type: 3}
+  - {fileID: 8300000, guid: 6ed46fd36b1ca3f4796d46042812d860, type: 3}
+  - {fileID: 8300000, guid: 87b6d0ad9e4bfea42a24a6c2bdc9d6f5, type: 3}
+  - {fileID: 8300000, guid: b5795298c7d1f05468e32ca2a5b409a4, type: 3}
+  - {fileID: 8300000, guid: b7da1d974d4d51b45be43f791e26d185, type: 3}
+  - {fileID: 8300000, guid: 90c6ef465f51a194f847d3bd366e6501, type: 3}
+  - {fileID: 8300000, guid: 778171bbbd0dcb945af42b7c2e622ccc, type: 3}
+  - {fileID: 8300000, guid: d92ed699aec26cb44b9d5685bca938b3, type: 3}
+  - {fileID: 8300000, guid: f022fbcad0e451c478c07d4d907c5647, type: 3}
+  - {fileID: 8300000, guid: db29af80b25bd1b43969f41e1ea362d0, type: 3}
 --- !u!1 &6285235481618227886
 GameObject:
   m_ObjectHideFlags: 0
