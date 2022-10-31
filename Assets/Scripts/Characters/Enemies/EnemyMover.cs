@@ -131,7 +131,7 @@ public class EnemyMover : MonoBehaviour
                 break;
             }
 
-            yield return new WaitForSeconds(.5f);
+            yield return new WaitForSeconds(Config.BIG_DELAY);
         }
     }
 
@@ -140,7 +140,7 @@ public class EnemyMover : MonoBehaviour
         if (isAbleToMove)
         {
             UpdateDirection(movement);
-            animator.SetFloat("Speed", Mathf.Abs(movement.x));
+            animator.SetFloat(Config.MOVEMENT_ANIMATOR_SPEED, Mathf.Abs(movement.x));
 
             if (isAbleToDash && dashAction)
             {
@@ -233,7 +233,7 @@ public class EnemyMover : MonoBehaviour
         yield return new WaitForSeconds(Config.JUMP_BACK_DURATION);
         animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_JUMPING_BACK, false);
 
-        animator.SetFloat("Speed", 0);
+        animator.SetFloat(Config.MOVEMENT_ANIMATOR_SPEED, 0);
 
         isAbleToJumpBack = false;
 
@@ -341,7 +341,7 @@ public class EnemyMover : MonoBehaviour
 
     public void StayInPosition()
     {
-        animator.SetFloat("Speed", 0);
+        animator.SetFloat(Config.MOVEMENT_ANIMATOR_SPEED, 0);
 
         rigidBody.velocity = Vector2.zero;
         UpdateMotor(Vector2.zero, false, false);

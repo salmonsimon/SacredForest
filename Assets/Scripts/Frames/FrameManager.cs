@@ -25,11 +25,11 @@ public class FrameManager : MonoBehaviour
     {
         if (!player.GetComponent<DamageReceiver>().IsAlive && !GameManager.instance.IsTeleporting())
         {
-            GameManager.instance.GetAnimationManager().ShowImageUI("Space Key", true);
+            GameManager.instance.GetAnimationManager().ShowImageUI(Config.SPACE_KEY_GUI, true);
 
             if (Input.GetKeyDown(KeyCode.Space) && !GameManager.instance.IsTeleporting())
             {
-                GameManager.instance.GetAnimationManager().ShowImageUI("Space Key", false);
+                GameManager.instance.GetAnimationManager().ShowImageUI(Config.SPACE_KEY_GUI, false);
                 activeFrame.ShowArrowUI(false);
                 StartCoroutine(RestartFrame());
             }

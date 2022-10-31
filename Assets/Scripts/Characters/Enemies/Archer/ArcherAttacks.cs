@@ -29,7 +29,7 @@ public class ArcherAttacks : EnemyAttacks
     {
         base.Start();
 
-        projectileContainer = GameObject.FindGameObjectWithTag("Projectile Container");
+        projectileContainer = GameObject.FindGameObjectWithTag(Config.PROJECTILE_CONTAINER_NAME);
     }
 
     public void ArrowAttack(Vector3 archerPosition, Vector3 playerPosition)
@@ -44,7 +44,7 @@ public class ArcherAttacks : EnemyAttacks
         {
             GetComponent<EnemyMover>().Flip(new Vector2(xDistance, 0));
             StartCoroutine(GetComponent<EnemyMover>().MovementCooldown(shootingWaitingTime));
-            StartCoroutine(IsAttackingCooldown(shootingWaitingTime + .2f));
+            StartCoroutine(IsAttackingCooldown(shootingWaitingTime + Config.MEDIUM_DELAY));
 
             StartCoroutine(PlayClip(Animator.StringToHash(arrowAnimationClip.name), 0));
             StartCoroutine(ShootArrow(shootingSpeed, shootingDirection));

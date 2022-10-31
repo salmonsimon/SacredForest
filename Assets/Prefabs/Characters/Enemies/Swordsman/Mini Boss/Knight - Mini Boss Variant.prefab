@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &495469372577162819
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7293884391147160537, guid: 5091602d243c8154c9e31eea3332e9ed, type: 3}
+      propertyPath: immuneTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7293884391147160537, guid: 5091602d243c8154c9e31eea3332e9ed, type: 3}
+      propertyPath: maxHitPoints
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7293884391147160537, guid: 5091602d243c8154c9e31eea3332e9ed, type: 3}
+      propertyPath: currentHitPoints
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428708079556957601, guid: 5091602d243c8154c9e31eea3332e9ed, type: 3}
+      propertyPath: attackCooldownDuration
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428708079556957603, guid: 5091602d243c8154c9e31eea3332e9ed, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428708079556957603, guid: 5091602d243c8154c9e31eea3332e9ed, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.044534504
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428708079556957603, guid: 5091602d243c8154c9e31eea3332e9ed, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.35628176
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428708079556957603, guid: 5091602d243c8154c9e31eea3332e9ed, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428708079556957603, guid: 5091602d243c8154c9e31eea3332e9ed, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428708079556957603, guid: 5091602d243c8154c9e31eea3332e9ed, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428708079556957603, guid: 5091602d243c8154c9e31eea3332e9ed, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428708079556957603, guid: 5091602d243c8154c9e31eea3332e9ed, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428708079556957603, guid: 5091602d243c8154c9e31eea3332e9ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428708079556957603, guid: 5091602d243c8154c9e31eea3332e9ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428708079556957603, guid: 5091602d243c8154c9e31eea3332e9ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428708079556957606, guid: 5091602d243c8154c9e31eea3332e9ed, type: 3}
+      propertyPath: m_Name
+      value: Knight - Mini Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428708079556957615, guid: 5091602d243c8154c9e31eea3332e9ed, type: 3}
+      propertyPath: startleDuration
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5091602d243c8154c9e31eea3332e9ed, type: 3}

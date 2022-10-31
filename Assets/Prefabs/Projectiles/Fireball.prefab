@@ -246,6 +246,7 @@ MonoBehaviour:
   swordCollisionCheck: {fileID: 5740534553889392579}
   collisionCheck: {fileID: 1948253653255177697}
   isDestroyable: 0
+  hitAnimationDuration: 1.2
 --- !u!114 &5283609043005339004
 MonoBehaviour:
   m_ObjectHideFlags: 0

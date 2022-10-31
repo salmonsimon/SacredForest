@@ -26,22 +26,24 @@ public class GroundMonkAttacks : EnemyAttacks
 
     public void RollAction()
     {
-        StartCoroutine(IsAttackingCooldown(.5f));
-        StartCoroutine(GetComponent<DamageReceiver>().SetImmune(.5f));
-        StartCoroutine(ToDashLayerCooldown(.5f));
+        StartCoroutine(IsAttackingCooldown(Config.BIG_DELAY));
+        StartCoroutine(GetComponent<DamageReceiver>().SetImmune(Config.BIG_DELAY));
+        StartCoroutine(ToDashLayerCooldown(Config.BIG_DELAY));
 
         StartCoroutine(PlayClip(Animator.StringToHash(rollAnimationClip.name), 0));
     }
 
     private IEnumerator ToDashLayerCooldown(float duration)
     {
-        gameObject.layer = LayerMask.NameToLayer("Dash");
+        gameObject.layer = LayerMask.NameToLayer(Config.DASH_LAYER);
         InvokeRepeating("MovementForRoll", 0, .01f);
 
         yield return new WaitForSeconds(duration);
 
-        gameObject.layer = LayerMask.NameToLayer("Enemy");
+        gameObject.layer = LayerMask.NameToLayer(Config.ENEMY_LAYER);
         CancelInvoke();
+
+        GetComponent<EnemyMover>().StayInPosition();
     }
 
     private void MovementForRoll()

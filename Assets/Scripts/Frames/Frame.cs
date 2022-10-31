@@ -37,7 +37,7 @@ public class Frame : MonoBehaviour
 
         enemiesTotalCount = randomEnemySpawners.Length;
 
-        StartCoroutine(WaitAndSpawnEnemies(.1f));
+        StartCoroutine(WaitAndSpawnEnemies(Config.SMALL_DELAY));
 
         if (enemiesKilledCount != enemiesTotalCount)
             frameChangeTrigger.gameObject.SetActive(false);
@@ -70,7 +70,7 @@ public class Frame : MonoBehaviour
         player.GetComponent<DamageReceiver>().Resurrect();
         player.transform.position = playerSpawnPoint.position;
 
-        StartCoroutine(WaitAndSpawnEnemies(.1f));
+        StartCoroutine(WaitAndSpawnEnemies(Config.SMALL_DELAY));
     }
 
     public void CleanFrame()
@@ -79,7 +79,7 @@ public class Frame : MonoBehaviour
         enemiesKilledCount = 0;
 
         ShowArrowUI();
-        GameManager.instance.GetAnimationManager().ShowImageUI("Space Key", false);
+        GameManager.instance.GetAnimationManager().ShowImageUI(Config.SPACE_KEY_GUI, false);
 
         foreach (GameObject enemy in enemies)
         {
@@ -91,15 +91,15 @@ public class Frame : MonoBehaviour
         if (projectileContainer)
         {
             Destroy(projectileContainer.gameObject);
-            projectileContainer = new GameObject("Projectile Container");
+            projectileContainer = new GameObject(Config.PROJECTILE_CONTAINER_NAME);
             projectileContainer.transform.SetParent(gameObject.transform);
-            projectileContainer.tag = "Projectile Container";
+            projectileContainer.tag = Config.PROJECTILE_CONTAINER_NAME;
         }
         else
         {
-            projectileContainer = new GameObject("Projectile Container");
+            projectileContainer = new GameObject(Config.PROJECTILE_CONTAINER_NAME);
             projectileContainer.transform.SetParent(gameObject.transform);
-            projectileContainer.tag = "Projectile Container";
+            projectileContainer.tag = Config.PROJECTILE_CONTAINER_NAME;
         }
         
 
@@ -129,11 +129,11 @@ public class Frame : MonoBehaviour
     {
         if (rightSided)
         {
-            GameManager.instance.GetAnimationManager().ShowImageUI("Right Arrow", frameCleared);
+            GameManager.instance.GetAnimationManager().ShowImageUI(Config.RIGHT_ARROW_GUI, frameCleared);
         }
         else
         {
-            GameManager.instance.GetAnimationManager().ShowImageUI("Left Arrow", frameCleared);
+            GameManager.instance.GetAnimationManager().ShowImageUI(Config.LEFT_ARROW_GUI, frameCleared);
         }
     }
 
@@ -141,11 +141,11 @@ public class Frame : MonoBehaviour
     {
         if (rightSided)
         {
-            GameManager.instance.GetAnimationManager().ShowImageUI("Right Arrow", active);
+            GameManager.instance.GetAnimationManager().ShowImageUI(Config.RIGHT_ARROW_GUI, active);
         }
         else
         {
-            GameManager.instance.GetAnimationManager().ShowImageUI("Left Arrow", active);
+            GameManager.instance.GetAnimationManager().ShowImageUI(Config.LEFT_ARROW_GUI, active);
         }
     }
 

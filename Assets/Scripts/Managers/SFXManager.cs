@@ -5,6 +5,8 @@ public class SFXManager : MonoBehaviour
 {
     private AudioSource audioSource;
 
+    [SerializeField] private AudioClip stepClip;
+
     [Header("Projectile Sounds")]
     [SerializeField] private AudioClip arrowHitSFX;
 
@@ -17,8 +19,6 @@ public class SFXManager : MonoBehaviour
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-
-        //arrowHitSFX = Resources.Load<AudioClip>("Audio/SFX/Projectile/Arrow/hit");
     }
 
     // GameManager.instance.GetSoundManager().PlaySound(Config.HOVER_SFX);
@@ -31,15 +31,9 @@ public class SFXManager : MonoBehaviour
                 audioSource.PlayOneShot(arrowHitSFX);
                 break;
 
-            /*
-            case Config.THROW_SFX:
-                audioSource.PlayOneShot(throwSFX);
+            case Config.STEP_SFX:
+                audioSource.PlayOneShot(stepClip);
                 break;
-
-            case Config.STORE_SFX:
-                audioSource.PlayOneShot(storeSFX);
-                break;
-            */
         }
     }
 

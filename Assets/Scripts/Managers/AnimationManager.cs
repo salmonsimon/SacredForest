@@ -19,15 +19,15 @@ public class AnimationManager : MonoBehaviour
     {
         switch(imageName)
         {
-            case "Right Arrow":
+            case Config.RIGHT_ARROW_GUI:
                 rightArrow.SetActive(active);
                 break;
 
-            case "Left Arrow":
+            case Config.LEFT_ARROW_GUI:
                 leftArrow.SetActive(active);
                 break;
 
-            case "Space Key":
+            case Config.SPACE_KEY_GUI:
                 spaceKey.SetActive(active);
                 break;
         }

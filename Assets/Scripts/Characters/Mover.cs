@@ -65,10 +65,10 @@ public class Mover : MonoBehaviour
 
     #endregion
 
-    private float groundedRememberDuration = .1f;
+    private float groundedRememberDuration = Config.SMALL_DELAY;
     private float groundedRememberTime = 0;
 
-    protected float jumpRememberDuration = .1f;
+    protected float jumpRememberDuration = Config.SMALL_DELAY;
     protected float jumpRememberTime = 0;
 
 
@@ -147,7 +147,6 @@ public class Mover : MonoBehaviour
             Vector3 targetVelocity = new Vector2(movement.x * runSpeed, rigidBody.velocity.y);
             rigidBody.velocity = Vector3.SmoothDamp(rigidBody.velocity, targetVelocity, ref refVelocity, movementSmoothing);
 
-            //if (jumpAction && !isJumping)
             if (jumpRememberTime > 0 && !isJumping)
             {
                 if (groundedRememberTime > 0)
@@ -290,7 +289,10 @@ public class Mover : MonoBehaviour
         isWallSliding = false;
 
         if(isGrounded)
+        {
             particlesLand.Play();
+            GameManager.instance.GetSFXManager().PlaySound(Config.STEP_SFX);
+        }
     }
 
     private void DoWallSlideAction()

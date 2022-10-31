@@ -16,6 +16,8 @@ public class MagicProjectile : MonoBehaviour
 
     private bool hasBeenReflected = false;
 
+    [SerializeField] private float hitAnimationDuration = .6f;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -57,12 +59,12 @@ public class MagicProjectile : MonoBehaviour
 
                 List<string> tagsToCheckCollision = new List<string> 
                 {
-                    "Ground", "Enemy" 
+                    Config.GROUND_TAG, Config.ENEMY_TAG
                 };
 
                 List<string> tagsToCheckDamage = new List<string>
                 {
-                    "Enemy"
+                    Config.ENEMY_TAG
                 };
 
                 collisionCheck.ChangeTagsToCheck(tagsToCheckCollision);
@@ -91,11 +93,11 @@ public class MagicProjectile : MonoBehaviour
     {
         rigidBody.constraints = RigidbodyConstraints2D.FreezeAll;
 
-        animator.SetTrigger("Hit");
+        animator.SetTrigger(Config.PROJECTILE_ANIMATOR_HIT_TRIGGER);
 
         Destroy(GetComponent<BoxDamageDealer>());
 
-        StartCoroutine(WaitAndDestroy(.6f));
+        StartCoroutine(WaitAndDestroy(hitAnimationDuration));
     }
 
     private void Death()

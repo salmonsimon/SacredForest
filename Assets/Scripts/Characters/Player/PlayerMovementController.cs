@@ -22,17 +22,17 @@ public class PlayerMovementController : Mover
         {
             jumpRememberTime -= Time.deltaTime;
 
-            movement.x = Input.GetAxisRaw("Horizontal");
-            movement.y = Input.GetAxisRaw("Vertical");
+            movement.x = Input.GetAxisRaw(Config.MOVEMENT_ANIMATOR_HORIZONTAL);
+            movement.y = Input.GetAxisRaw(Config.MOVEMENT_ANIMATOR_VERTICAL);
 
             if (movement != Vector2.zero)
             {
-                animator.SetFloat("Horizontal", movement.x);
+                animator.SetFloat(Config.MOVEMENT_ANIMATOR_HORIZONTAL, movement.x);
             }
 
-            animator.SetFloat("Vertical", movement.y);
+            animator.SetFloat(Config.MOVEMENT_ANIMATOR_VERTICAL, movement.y);
 
-            animator.SetFloat("Speed", Mathf.Abs(movement.x));
+            animator.SetFloat(Config.MOVEMENT_ANIMATOR_SPEED, Mathf.Abs(movement.x));
 
             if (Input.GetKeyDown(KeyCode.Z))
             {

@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
             Destroy(cinemachineShake.gameObject);
             Destroy(bloodManager.gameObject);
             Destroy(animationManager.gameObject);
+            Destroy(dialogueManager.gameObject);
             Destroy(sfxManager.gameObject);
         }
         else

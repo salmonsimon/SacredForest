@@ -38,7 +38,7 @@ public class BloodManager : MonoBehaviour
             bloodParticles.Add(newBloodParticle);
         }
 
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(Config.BIG_DELAY);
 
         foreach (GameObject bloodParticle in bloodParticles)
         {
