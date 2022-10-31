@@ -79,6 +79,7 @@ GameObject:
   - component: {fileID: 1823809230247134062}
   - component: {fileID: 1823809230247134063}
   - component: {fileID: 1823809230247134057}
+  - component: {fileID: 8023533792677477420}
   m_Layer: 10
   m_Name: Soul Eater
   m_TagString: MagicProjectile
@@ -228,6 +229,7 @@ MonoBehaviour:
   tagsToCheck:
   - Player
   damage: 1
+  damageType: 3
 --- !u!114 &1823809230247134057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,6 +245,18 @@ MonoBehaviour:
   swordCollisionCheck: {fileID: 2089450952940148206}
   collisionCheck: {fileID: 5214279075355842508}
   isDestroyable: 0
+--- !u!114 &8023533792677477420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823809230247134032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b68a93e6d46a94da7e0f682e00d908, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7840748434532668189
 GameObject:
   m_ObjectHideFlags: 0

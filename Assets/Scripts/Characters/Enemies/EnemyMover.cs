@@ -223,6 +223,8 @@ public class EnemyMover : MonoBehaviour
         animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_JUMPING_BACK, true);
         animator.SetTrigger(Config.MOVEMENT_ANIMATOR_JUMP_BACK_TRIGGER);
 
+        GetComponent<CharacterSFX>().PlayRandomJumpAudioClip();
+
         rigidBody.AddForce(new Vector2(-transform.localScale.x * (jumpBackForce / 2f), jumpBackForce / 2f));
 
         particlesLand.Play();

@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private BloodManager bloodManager;
     [SerializeField] private AnimationManager animationManager;
     [SerializeField] private DialogueManager dialogueManager;
+    [SerializeField] private SFXManager sfxManager;
 
     #endregion
 
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
             Destroy(cinemachineShake.gameObject);
             Destroy(bloodManager.gameObject);
             Destroy(animationManager.gameObject);
+            Destroy(sfxManager.gameObject);
         }
         else
         {
@@ -129,6 +131,11 @@ public class GameManager : MonoBehaviour
     public DialogueManager GetDialogueManager()
     {
         return dialogueManager;
+    }
+
+    public SFXManager GetSFXManager()
+    {
+        return sfxManager;
     }
 
     #endregion

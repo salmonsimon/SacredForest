@@ -4898,6 +4898,7 @@ GameObject:
   - component: {fileID: 4554462955417439476}
   - component: {fileID: 2713362105013421769}
   - component: {fileID: 303550760}
+  - component: {fileID: 3481584301586844790}
   m_Layer: 10
   m_Name: Arrow
   m_TagString: Arrow
@@ -5070,6 +5071,8 @@ MonoBehaviour:
   isColliding: 0
   tagsToCheck:
   - Player
+  damage: 1
+  damageType: 1
 --- !u!114 &303550760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5083,9 +5086,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 2713362105013421772}
-  currentHitPoints: 1
-  maxHitPoints: 1
   immuneTime: 1
+  maxHitPoints: 1
+  currentHitPoints: 1
+--- !u!114 &3481584301586844790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2713362105013421773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b68a93e6d46a94da7e0f682e00d908, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2713362105204954576
 GameObject:
   m_ObjectHideFlags: 0

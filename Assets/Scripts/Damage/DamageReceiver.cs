@@ -66,12 +66,13 @@ public class DamageReceiver : MonoBehaviour
         currentHitPoints = maxHitPoints;
     }
 
-    protected virtual void ReceiveDamage(int damage)
+    protected virtual void ReceiveDamage(Damage damage)
     {
         if (!isImmune && isAlive)
         {
-            Damage(damage);
+            Damage(damage.damage);
             GameManager.instance.GetCinemachineShake().ShakeCamera(Config.CAMERASHAKE_HIT_AMPLITUDE, Config.CAMERASHAKE_HIT_DURATION);
+            PlayDamageAudioClip(damage.damageType);
             Bleed();
 
             if (currentHitPoints < 1)
@@ -81,7 +82,6 @@ public class DamageReceiver : MonoBehaviour
             else
             {
                 animator.SetTrigger(Config.ANIMATOR_HURT_TRIGGER);
-                //StartCoroutine(ImmuneCooldown());
             }
         }
     }
@@ -111,6 +111,11 @@ public class DamageReceiver : MonoBehaviour
         animator.SetBool(Config.ANIMATOR_IS_DEAD, true);
         animator.SetTrigger(Config.ANIMATOR_DEATH_TRIGGER);
 
+        if (TryGetComponent(out CharacterSFX characterSFX))
+        {
+            characterSFX.PlayRandomDeathAudioClip();
+        }
+
         IsAlive = false;
     }
 
@@ -128,6 +133,31 @@ public class DamageReceiver : MonoBehaviour
         if (gameObject.CompareTag(Config.PLAYER_TAG) || gameObject.CompareTag(Config.ENEMY_TAG))
         {
             GameManager.instance.GetBloodManager().Bleed(gameObject.transform, gameObject.transform.position);
+        }
+    }
+
+    private void PlayDamageAudioClip(string damageType)
+    {
+        if (gameObject.CompareTag(Config.PLAYER_TAG) || gameObject.CompareTag(Config.ENEMY_TAG))
+        {
+            switch (damageType)
+            {
+                case Config.SWORD_DAMAGE:
+                    GameManager.instance.GetSFXManager().PlayRandomSwordDamageClip();
+                    break;
+
+                case Config.DEFAULT_DAMAGE:
+                    GameManager.instance.GetSFXManager().PlayRandomDefaultDamageClip();
+                    break;
+
+                case Config.BLUDGEONING_DAMAGE:
+                    GameManager.instance.GetSFXManager().PlayRandomBludgeoningDamageClip();
+                    break;
+
+                case Config.FIRE_DAMAGE:
+                    GameManager.instance.GetSFXManager().PlayRandomFireDamageClip();
+                    break;
+            }
         }
     }
 }

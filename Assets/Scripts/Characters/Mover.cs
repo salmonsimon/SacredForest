@@ -234,6 +234,8 @@ public class Mover : MonoBehaviour
 
         animator.SetTrigger(Config.MOVEMENT_ANIMATOR_JUMP_TRIGGER);
 
+        GetComponent<CharacterSFX>().PlayRandomJumpAudioClip();
+
         rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0);
         rigidBody.AddForce(new Vector2(0f, jumpForce));
 
@@ -253,6 +255,8 @@ public class Mover : MonoBehaviour
         animator.SetTrigger(Config.MOVEMENT_ANIMATOR_JUMP_TRIGGER);
         animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_JUMPING, true);
         isJumping = true;
+
+        GetComponent<CharacterSFX>().PlayRandomJumpAudioClip();
 
         float flippedWallJumpForceX;
 

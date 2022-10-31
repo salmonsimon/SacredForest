@@ -39,6 +39,8 @@ public class Arrow : MonoBehaviour
                 rigidBody.velocity = Vector2.zero;
                 rigidBody.isKinematic = true;
 
+                GameManager.instance.GetSFXManager().PlaySound(Config.ARROW_HIT_SFX);
+
                 Destroy(GetComponent<BoxDamageDealer>());
                 Destroy(GetComponent<DamageReceiver>());
                 Destroy(GetComponent<BoxCollider2D>());
