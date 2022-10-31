@@ -10201,9 +10201,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37bfd2404f5892a4aa2099707fa8dc07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpingClips: []
+  jumpingClips:
+  - {fileID: 8300000, guid: f71cb38390b0dd24192a2b9386123b41, type: 3}
+  - {fileID: 8300000, guid: a861f2ee0796c154aa64b4356e433b0b, type: 3}
+  - {fileID: 8300000, guid: 5be2b7d20d01ef44daee3106bffd26ab, type: 3}
   meleeAttackClips: []
-  deathClips: []
+  deathClips:
+  - {fileID: 8300000, guid: 5a2575935def2b14784ac4529127e927, type: 3}
+  - {fileID: 8300000, guid: c526af889e758eb4d873e87e6783c98c, type: 3}
+  - {fileID: 8300000, guid: 669d8b603ab53344f926fe08a8e31aea, type: 3}
+  - {fileID: 8300000, guid: b183f76513c6fbd4ab478efd1728f5eb, type: 3}
+  - {fileID: 8300000, guid: 0b409a80b2906f74481a48d750fa9aeb, type: 3}
+  - {fileID: 8300000, guid: 0b63d4f7e9c43674b987bcb285a9cc55, type: 3}
 --- !u!1 &7412544366010753549
 GameObject:
   m_ObjectHideFlags: 0
@@ -10343,6 +10352,7 @@ MonoBehaviour:
   tagsToCheck:
   - Player
   damage: 1
+  damageType: 0
 --- !u!1 &7412544366415950462
 GameObject:
   m_ObjectHideFlags: 0
@@ -10604,3 +10614,4 @@ MonoBehaviour:
   tagsToCheck:
   - Player
   damage: 1
+  damageType: 0
