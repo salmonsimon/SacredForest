@@ -12,7 +12,7 @@ public class EnemyAttacks : MonoBehaviour
 
     #region Logic Variables
 
-    protected bool isAttacking = false;
+    [SerializeField] protected bool isAttacking = false;
 
     protected bool onAttackCooldown = false;
     [SerializeField] protected float attackCooldownDuration = 2f;
@@ -20,6 +20,7 @@ public class EnemyAttacks : MonoBehaviour
     protected bool isAlive = true;
 
     #endregion
+
 
     protected virtual void Awake()
     {
@@ -44,7 +45,7 @@ public class EnemyAttacks : MonoBehaviour
         }
     }
 
-    protected IEnumerator IsAttackingCooldown(float duration)
+    protected virtual IEnumerator IsAttackingCooldown(float duration)
     {
         isAttacking = true;
 
@@ -79,8 +80,7 @@ public class EnemyAttacks : MonoBehaviour
 
     protected virtual void Damaged()
     {
-        if (GetComponent<DamageReceiver>().IsAlive)
-            ResetIsAttacking();
+
     }
 
     protected virtual void Death()

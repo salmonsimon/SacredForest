@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
             Destroy(cinemachineShake.gameObject);
             Destroy(bloodManager.gameObject);
             Destroy(animationManager.gameObject);
+            Destroy(dialogueManager.gameObject);
             Destroy(sfxManager.gameObject);
         }
         else
@@ -101,6 +102,20 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0f;
         else
             Time.timeScale = 1f;
+    }
+
+    public void RestartPlayer()
+    {
+        player.transform.rotation = Quaternion.identity;
+
+        player.GetComponent<Animator>().keepAnimatorControllerStateOnDisable = false;
+
+        player.gameObject.SetActive(false);
+
+        player.GetComponent<PlayerMovementController>().Reset();
+        player.GetComponent<PlayerAttackController>().Reset();
+
+        player.gameObject.SetActive(true);
     }
 
     public LevelLoader GetLevelLoader()

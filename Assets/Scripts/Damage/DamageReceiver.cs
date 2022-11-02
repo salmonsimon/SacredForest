@@ -88,6 +88,8 @@ public class DamageReceiver : MonoBehaviour
 
     public IEnumerator ImmuneCooldown()
     {
+        StopAllCoroutines();
+
         isImmune = true;
 
         yield return new WaitForSeconds(immuneTime);
@@ -108,6 +110,8 @@ public class DamageReceiver : MonoBehaviour
 
     protected virtual void Death()
     {
+        transform.gameObject.layer = LayerMask.NameToLayer(Config.DEAD_LAYER);
+
         animator.SetBool(Config.ANIMATOR_IS_DEAD, true);
         animator.SetTrigger(Config.ANIMATOR_DEATH_TRIGGER);
 
@@ -121,6 +125,8 @@ public class DamageReceiver : MonoBehaviour
 
     public void Resurrect()
     {
+        transform.gameObject.layer = LayerMask.NameToLayer(transform.gameObject.tag);
+
         currentHitPoints = maxHitPoints;
 
         animator.SetBool(Config.ANIMATOR_IS_DEAD, false);

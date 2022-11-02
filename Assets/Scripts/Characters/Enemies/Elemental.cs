@@ -59,7 +59,7 @@ public class Elemental : Enemy
     {
         yield return new WaitForSeconds(Config.SMALL_DELAY);
 
-        animator.SetBool("IsTransformed", true);
-        animator.SetTrigger("Transform");
+        animator.SetBool(Config.ELEMENTAL_ANIMATOR_IS_TRANSFORMED, true);
+        animator.SetTrigger(Config.ELEMENTAL_ANIMATOR_TRANSFORM_TRIGGER);
     }
 }

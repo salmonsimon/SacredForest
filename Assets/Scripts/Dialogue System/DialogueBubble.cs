@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogueBubble : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class DialogueBubble : MonoBehaviour
 
     public bool IsOpen { get; private set; }
 
-    private float animationDuration = .2f;
+    private float animationDuration = Config.MEDIUM_DELAY;
     public float AnimationDuration { get; private set; }
 
     private Vector3 originalScale = Vector3.zero;
@@ -41,6 +42,9 @@ public class DialogueBubble : MonoBehaviour
         originalScale = dialogueBox.transform.localScale;
 
         spaceBarIcon.SetActive(false);
+
+        RectTransform rectTransform = GetComponent<RectTransform>();
+        rectTransform.pivot = GetComponent<Image>().sprite.pivot / rectTransform.sizeDelta;
 
         ResetDialogueBubble();
     }

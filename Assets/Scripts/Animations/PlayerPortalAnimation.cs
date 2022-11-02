@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerPortalAnimation : MonoBehaviour
 {
     private float portalUseTimer = 0f;
-    private float portalUseTimerTotal = .5f;
+    private float portalUseTimerTotal = Config.BIG_DELAY;
 
     public void PlayerTeleport(float duration)
     {

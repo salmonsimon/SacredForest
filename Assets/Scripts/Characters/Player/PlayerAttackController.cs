@@ -7,12 +7,23 @@ public class PlayerAttackController : MonoBehaviour
     private Animator animator;
     private PlayerMovementController playerMovementController;
 
+    [SerializeField] private BoxCollider2D swordCollider;
+
     private bool onAttackCooldown = false;
     private float attackCooldownDuration = Config.ATTACK_COOLDOWN_DURATION;
 
     private bool ableToDoSecondAttack = true;
 
     private bool isAlive = true;
+
+    public void Reset()
+    {
+        onAttackCooldown = false;
+        ableToDoSecondAttack = true;
+        isAlive = true;
+
+        swordCollider.enabled = false;
+    }
 
     private void Awake()
     {
@@ -54,7 +65,7 @@ public class PlayerAttackController : MonoBehaviour
         }
 
         StartCoroutine(IsAttackingCooldown());
-        animator.SetTrigger("FirstAttack");
+        animator.SetTrigger(Config.ANIMATOR_FIRST_ATTACK_TRIGGER);
 
         if(!playerMovementController.IsJumping())
             ableToDoSecondAttack = true;
@@ -64,22 +75,22 @@ public class PlayerAttackController : MonoBehaviour
 
     private IEnumerator DoSecondAttack()
     {
-        animator.SetBool("IsDoingSecondAttack", true);
+        animator.SetBool(Config.ANIMATOR_IS_DOING_SECOND_ATTACK, true);
 
         ableToDoSecondAttack = false;
 
         yield return new WaitForSeconds(Config.SECOND_ATTACK_DURATION);
 
-        animator.SetBool("IsDoingSecondAttack", false);
+        animator.SetBool(Config.ANIMATOR_IS_DOING_SECOND_ATTACK, false);
     }
 
     private IEnumerator IsAttackingCooldown()
     {
-        animator.SetBool("IsAttacking", true);
+        animator.SetBool(Config.ANIMATOR_IS_ATTACKING, true);
 
         yield return new WaitForSeconds(.3f);
 
-        animator.SetBool("IsAttacking", false);
+        animator.SetBool(Config.ANIMATOR_IS_ATTACKING, false);
     }
 
     private IEnumerator AttackCooldown()
@@ -126,7 +137,7 @@ public class PlayerAttackController : MonoBehaviour
 
     private void Resurrection()
     {
-        isAlive = true;
+        Reset();
     }
 
 }

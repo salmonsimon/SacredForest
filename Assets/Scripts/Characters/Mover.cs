@@ -39,7 +39,7 @@ public class Mover : MonoBehaviour
     protected bool isAbleToMove = true;
 
     private bool isGrounded;
-    private bool isJumping;
+    [SerializeField] private bool isJumping;
     private bool isCollidingWithWall;
     private bool isWallSliding;
 
@@ -65,12 +65,25 @@ public class Mover : MonoBehaviour
 
     #endregion
 
-    private float groundedRememberDuration = .1f;
+    private float groundedRememberDuration = Config.SMALL_DELAY;
     private float groundedRememberTime = 0;
 
-    protected float jumpRememberDuration = .1f;
+    protected float jumpRememberDuration = Config.SMALL_DELAY;
     protected float jumpRememberTime = 0;
 
+    public virtual void Reset()
+    {
+        isGrounded = false;
+        isJumping = false;
+        isCollidingWithWall = false;
+        isWallSliding = false;
+
+        isAbleToDash = true;
+        isAbleToMove = true;
+
+        groundedRememberTime = 0;
+        jumpRememberTime = 0;
+    }
 
     protected void Awake()
     {
@@ -102,14 +115,9 @@ public class Mover : MonoBehaviour
         isGrounded = groundCheck.IsColliding();
 
         if (!wasGrounded && isGrounded)
-            OnLanding();
-        /*
-        if (wasGrounded && isGrounded && isJumping)
         {
-            animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_JUMPING, false);
-            isJumping = false;
-        } 
-        */
+            OnLanding();
+        }
 
         isCollidingWithWall = false;
 
@@ -147,7 +155,6 @@ public class Mover : MonoBehaviour
             Vector3 targetVelocity = new Vector2(movement.x * runSpeed, rigidBody.velocity.y);
             rigidBody.velocity = Vector3.SmoothDamp(rigidBody.velocity, targetVelocity, ref refVelocity, movementSmoothing);
 
-            //if (jumpAction && !isJumping)
             if (jumpRememberTime > 0 && !isJumping)
             {
                 if (groundedRememberTime > 0)
@@ -283,14 +290,19 @@ public class Mover : MonoBehaviour
 
     public void OnLanding()
     {
+        ResetJumpAndWallSlide();
+
+        particlesLand.Play();
+        GameManager.instance.GetSFXManager().PlaySound(Config.STEP_SFX);
+    }
+
+    private void ResetJumpAndWallSlide()
+    {
         animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_JUMPING, false);
         isJumping = false;
 
         animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_WALL_SLIDING, false);
         isWallSliding = false;
-
-        if(isGrounded)
-            particlesLand.Play();
     }
 
     private void DoWallSlideAction()
@@ -384,7 +396,7 @@ public class Mover : MonoBehaviour
 
     protected virtual void Death()
     {
-        OnLanding();
+        ResetJumpAndWallSlide();
 
         isAbleToMove = false;
         rigidBody.constraints = RigidbodyConstraints2D.FreezePositionX;
@@ -392,7 +404,7 @@ public class Mover : MonoBehaviour
 
     protected virtual void Resurrection()
     {
-        OnLanding();
+        ResetJumpAndWallSlide();
 
         isAbleToMove = true;
 

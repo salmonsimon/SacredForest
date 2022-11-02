@@ -4850,7 +4850,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3300970528991534100}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.35, y: -0.29218566, z: 0}
+  m_LocalPosition: {x: -0.35, y: -0.24000001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9845,6 +9845,7 @@ MonoBehaviour:
   tagsToCheck:
   - Player
   damage: 1
+  damageType: 0
 --- !u!1 &8428708078568130178
 GameObject:
   m_ObjectHideFlags: 0
@@ -9935,7 +9936,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8428708078952355569}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.35, y: -0.29218566, z: 0}
+  m_LocalPosition: {x: 0.35, y: -0.24, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10160,6 +10161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b51727b4cfeca44591924a5e131ef65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAttacking: 0
   attackCooldownDuration: 3
   animationClips:
   - {fileID: 7400000, guid: bb7e9176b03c11249bd53cda0d6e0855, type: 2}
@@ -10443,7 +10445,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9101174672033739671}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.29218566, z: 0}
+  m_LocalPosition: {x: 0, y: -0.24000001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

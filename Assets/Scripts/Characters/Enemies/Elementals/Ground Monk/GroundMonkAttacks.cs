@@ -24,24 +24,28 @@ public class GroundMonkAttacks : EnemyAttacks
 
     #endregion
 
+    private Coroutine isAttackingCooldownCoroutine = null;
+
     public void RollAction()
     {
-        StartCoroutine(IsAttackingCooldown(.5f));
-        StartCoroutine(GetComponent<DamageReceiver>().SetImmune(.5f));
-        StartCoroutine(ToDashLayerCooldown(.5f));
+        isAttackingCooldownCoroutine = StartCoroutine(IsAttackingCooldown(Config.BIG_DELAY));
+        StartCoroutine(GetComponent<DamageReceiver>().SetImmune(Config.BIG_DELAY));
+        StartCoroutine(ToDashLayerCooldown(Config.BIG_DELAY));
 
         StartCoroutine(PlayClip(Animator.StringToHash(rollAnimationClip.name), 0));
     }
 
     private IEnumerator ToDashLayerCooldown(float duration)
     {
-        gameObject.layer = LayerMask.NameToLayer("Dash");
+        gameObject.layer = LayerMask.NameToLayer(Config.DASH_LAYER);
         InvokeRepeating("MovementForRoll", 0, .01f);
 
         yield return new WaitForSeconds(duration);
 
-        gameObject.layer = LayerMask.NameToLayer("Enemy");
+        gameObject.layer = LayerMask.NameToLayer(Config.ENEMY_LAYER);
         CancelInvoke();
+
+        GetComponent<EnemyMover>().StayInPosition();
     }
 
     private void MovementForRoll()
@@ -68,13 +72,13 @@ public class GroundMonkAttacks : EnemyAttacks
             switch (attackPattern)
             {
                 case 0:
-                    StartCoroutine(IsAttackingCooldown(.6f));
+                    isAttackingCooldownCoroutine = StartCoroutine(IsAttackingCooldown(.6f));
                     break;
                 case 1:
-                    StartCoroutine(IsAttackingCooldown(.9f));
+                    isAttackingCooldownCoroutine = StartCoroutine(IsAttackingCooldown(.9f));
                     break;
                 case 2:
-                    StartCoroutine(IsAttackingCooldown(1.4f));
+                    isAttackingCooldownCoroutine = StartCoroutine(IsAttackingCooldown(1.4f));
                     break;
             }
         }
@@ -85,13 +89,13 @@ public class GroundMonkAttacks : EnemyAttacks
             switch (attackPattern)
             {
                 case 0:
-                    StartCoroutine(IsAttackingCooldown(.5f));
+                    isAttackingCooldownCoroutine = StartCoroutine(IsAttackingCooldown(.5f));
                     break;
                 case 1:
-                    StartCoroutine(IsAttackingCooldown(1.1f));
+                    isAttackingCooldownCoroutine = StartCoroutine(IsAttackingCooldown(1.1f));
                     break;
                 case 2:
-                    StartCoroutine(IsAttackingCooldown(2.2f));
+                    isAttackingCooldownCoroutine = StartCoroutine(IsAttackingCooldown(2.2f));
                     break;
             }
         }
@@ -106,7 +110,7 @@ public class GroundMonkAttacks : EnemyAttacks
 
         GetComponent<EnemyMover>().Flip(new Vector2(xDistance, 0));
         StartCoroutine(GetComponent<EnemyMover>().MovementCooldown(2.4f));
-        StartCoroutine(IsAttackingCooldown(3f));
+        isAttackingCooldownCoroutine = StartCoroutine(IsAttackingCooldown(3f));
 
         StartCoroutine(PlayClip(Animator.StringToHash(projectileAnimationClip.name), 0));
         StartCoroutine(ShootProjectile(playerPosition));
@@ -125,8 +129,18 @@ public class GroundMonkAttacks : EnemyAttacks
     public void TransformedSpecialAttack()
     {
         StartCoroutine(GetComponent<EnemyMover>().MovementCooldown(1.2f));
-        StartCoroutine(IsAttackingCooldown(1.2f));
+        isAttackingCooldownCoroutine = StartCoroutine(IsAttackingCooldown(1.2f));
 
         StartCoroutine(PlayClip(Animator.StringToHash(transformedSpecialAttack.name), 0));
     }
+
+    protected override IEnumerator IsAttackingCooldown(float duration)
+    {
+        if (isAttackingCooldownCoroutine != null)
+            StopCoroutine(isAttackingCooldownCoroutine);
+
+        return base.IsAttackingCooldown(duration);
+    }
+
+
 }

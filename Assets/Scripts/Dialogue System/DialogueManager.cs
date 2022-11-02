@@ -43,7 +43,6 @@ public class DialogueManager : MonoBehaviour
             dialogueBubble.originalDisplacement = position - lookAt.position;
         }
 
-        //StartCoroutine(dialogueBubble.OpenDialogueBubble());
         StartCoroutine(StepThroughDialogue(dialogueObject, dialogueBubble));
     }
 
@@ -53,11 +52,11 @@ public class DialogueManager : MonoBehaviour
 
         switch (bubbleType)
         {
-            case "WhiteBubble":
+            case Config.WHITE_DIALOGUE_BUBBLE:
                 bubblePrefab = whiteDialogueBubblePrefab;
                 break;
 
-            case "BlackBubble":
+            case Config.BLACK_DIALOGUE_BUBBLE:
                 bubblePrefab = blackDialogueBubblePrefab;
                 break;
         }
@@ -88,7 +87,7 @@ public class DialogueManager : MonoBehaviour
                 //TODO: dsps borrar este timer
                 yield return new WaitForSeconds(2f);
 
-                yield return new WaitForSeconds(.5f);
+                yield return new WaitForSeconds(Config.BIG_DELAY);
                 yield return new WaitForSeconds(dialogueBubble.AnimationDuration);
             }
 
@@ -98,7 +97,7 @@ public class DialogueManager : MonoBehaviour
 
             yield return new WaitUntil(() => !dialogueBubble.TypewriterEffect.IsRunning);
 
-            yield return new WaitForSeconds(.1f);
+            yield return new WaitForSeconds(Config.SMALL_DELAY);
             dialogueBubble.ShowSpaceBarIcon();
 
             yield return null;

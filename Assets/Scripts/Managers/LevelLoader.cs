@@ -7,9 +7,9 @@ public class LevelLoader : MonoBehaviour
 {
     [SerializeField] private Animator crossFade;
 
-    private float startTransitionDuration = Config.START_TRANSITION_DURATION; 
+    private float startTransitionDuration = Config.START_TRANSITION_DURATION;
     private float endTransitionDuration = Config.END_TRANSITION_DURATION;
-    private string lastTransitionType; 
+    private string lastTransitionType;
 
     public void LoadLevel(string sceneName, string transitionType)
     {
@@ -44,14 +44,6 @@ public class LevelLoader : MonoBehaviour
         if (lastTransitionType != null)
         {
             GameManager.instance.SetGamePaused(false);
-            GameManager.instance.SetIsTeleporting(false);
-            
-            GameManager.instance.GetPlayer().GetComponent<Animator>().enabled = true;
-            GameManager.instance.GetPlayer().transform.localScale = Vector3.one;
-            GameManager.instance.GetPlayer().transform.rotation = Quaternion.identity;
-
-
-            GameManager.instance.GetPlayer().GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
 
             switch (lastTransitionType)
             {
@@ -72,8 +64,23 @@ public class LevelLoader : MonoBehaviour
     {
         crossFade.SetTrigger(Config.CROSSFADE_END_TRIGGER);
 
+        SetPlayerVariablesAfterTransition();
+
         yield return new WaitForSeconds(endTransitionDuration);
 
         crossFade.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(Config.MEDIUM_DELAY);
+
+        GameManager.instance.SetIsTeleporting(false);
+    }
+
+    private void SetPlayerVariablesAfterTransition()
+    {
+        GameManager.instance.GetPlayer().GetComponent<Animator>().enabled = true;
+        GameManager.instance.GetPlayer().transform.localScale = Vector3.one;
+        GameManager.instance.RestartPlayer();
+
+        GameManager.instance.GetPlayer().GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 }

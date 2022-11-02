@@ -39,7 +39,7 @@ public class WizardAttacks : EnemyAttacks
 
         GetComponent<EnemyMover>().Flip(new Vector2(xDistance, 0));
         StartCoroutine(GetComponent<EnemyMover>().MovementCooldown(shootingWaitingTime));
-        StartCoroutine(IsAttackingCooldown(shootingWaitingTime + .2f));
+        StartCoroutine(IsAttackingCooldown(shootingWaitingTime + Config.MEDIUM_DELAY));
 
         StartCoroutine(PlayClip(Animator.StringToHash(projectileAnimationClip.name), 0));
         StartCoroutine(ShootProjectile(shootingDirection));

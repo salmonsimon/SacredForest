@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2957183604436015033}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.35, y: -0.23744959, z: 0}
+  m_LocalPosition: {x: -0.35, y: -0.141, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -164,7 +164,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2957183605584680045}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.23744959, z: 0}
+  m_LocalPosition: {x: 0, y: -0.14099997, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -228,7 +228,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2957183605671449916}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.35, y: -0.23744959, z: 0}
+  m_LocalPosition: {x: 0.35, y: -0.14099997, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -511,6 +511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c193fb0bd9c8cca46b74ec0e1f997fdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAttacking: 0
   attackCooldownDuration: 3
   arrowAnimationClip: {fileID: 7400000, guid: 33ba12ab319d1694b94b63289b95dfb1, type: 2}
   arrowPrefab: {fileID: 4554462955417439476, guid: 04d5739dc3c1b6748820e6225f94623c, type: 3}

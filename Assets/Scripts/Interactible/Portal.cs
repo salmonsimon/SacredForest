@@ -36,9 +36,9 @@ public class Portal : GeneralCollider
         GameManager.instance.GetPlayer().GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         GameManager.instance.GetPlayer().GetComponent<Animator>().enabled = false;
 
-        playerPortalAnimation.PlayerTeleport(1f);
+        playerPortalAnimation.PlayerTeleport(Config.BIG_DELAY * 2);
 
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(Config.BIG_DELAY);
 
         GameManager.instance.GetLevelLoader().LoadLevel(sceneName, Config.CROSSFADE_TRANSITION);
     }
