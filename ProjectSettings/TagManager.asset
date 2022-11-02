@@ -13,6 +13,7 @@ TagManager:
   - MagicProjectile
   - EnemySpawner
   - Projectile Container
+  - Ground Type
   layers:
   - Default
   - TransparentFX

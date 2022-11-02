@@ -154,3 +154,39 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d7ea6b2cca581414e87717a0d085aa62, type: 3}
   fireDamageClips:
   - {fileID: 8300000, guid: af2c78ece9c3f6a4b83fc3562a867d9c, type: 3}
+  grassStepClips:
+  - {fileID: 8300000, guid: 6f8e1ce74e4ab3645b0ac67f2de59e4f, type: 3}
+  - {fileID: 8300000, guid: 8960923e98a18a840baa0eda51c263c6, type: 3}
+  - {fileID: 8300000, guid: 8f4ad510b83eff746bb50de2cd65a9b0, type: 3}
+  - {fileID: 8300000, guid: b953997a83c7487478c85c138a3b58fd, type: 3}
+  - {fileID: 8300000, guid: 2c2c553dd07785f4791d5271f3468870, type: 3}
+  - {fileID: 8300000, guid: fd25e42a3d5ddb14b9aec04891bb6f01, type: 3}
+  - {fileID: 8300000, guid: c291e7f0067a4f44f8635ea3aa43ed9e, type: 3}
+  - {fileID: 8300000, guid: 09ef06f98ea012c48adf08c1f76eeb9a, type: 3}
+  - {fileID: 8300000, guid: c87b368b221434246bca59fed68ff27e, type: 3}
+  - {fileID: 8300000, guid: f119cb31ce6654742b1a579ea5f1ae03, type: 3}
+  - {fileID: 8300000, guid: 8a4f8b8deecd0ad458be06e397193758, type: 3}
+  rockStepClips:
+  - {fileID: 8300000, guid: 885e2935a68e8974795ae51ad00dcd4f, type: 3}
+  - {fileID: 8300000, guid: dc625ea3aa1f10d4ab919fc2ddd8f981, type: 3}
+  woodStepClips:
+  - {fileID: 8300000, guid: f7ccb2e6c82a1e647ae2be84178356a9, type: 3}
+  - {fileID: 8300000, guid: 4fa30003d7ac74d46b1facf9569400e7, type: 3}
+  dirtStepClips:
+  - {fileID: 8300000, guid: d23e4682db6542b4f90c2aed016a5bcd, type: 3}
+  - {fileID: 8300000, guid: 64d4a667b5f027e459793e89092f1e3a, type: 3}
+  - {fileID: 8300000, guid: f77c96c760adeea4b8641a4f246d7c72, type: 3}
+  - {fileID: 8300000, guid: e854f190b94584e498edabea3e373f94, type: 3}
+  - {fileID: 8300000, guid: 69e73b683ef5e47438b78279e64782cb, type: 3}
+  - {fileID: 8300000, guid: bfff1ab2b10f40f49aa7ffe45cbaa23b, type: 3}
+  - {fileID: 8300000, guid: 7d9b3fb0ab8163347b76add4d7b90f4b, type: 3}
+  - {fileID: 8300000, guid: 3c521fdc0961e0247ac87b4dbca91097, type: 3}
+  - {fileID: 8300000, guid: 6e11ffeadd3971b4794c2268d705e991, type: 3}
+  - {fileID: 8300000, guid: dc106b13df9ce17439253fe17232fbfd, type: 3}
+  - {fileID: 8300000, guid: 08d6926ab61ab5a4fbdb64e02884e649, type: 3}
+  - {fileID: 8300000, guid: 94c1a8629cc0e9f4492a8958b61090e4, type: 3}
+  - {fileID: 8300000, guid: e5eba76308debc14e86f9d401f91cd3b, type: 3}
+  grassLandingClip: {fileID: 8300000, guid: 8aed5f04f7ebe8b40b597c7ced476667, type: 3}
+  rockLandingClip: {fileID: 8300000, guid: 885e2935a68e8974795ae51ad00dcd4f, type: 3}
+  woodLandingClip: {fileID: 8300000, guid: 4a0a255188fdc8d4bb57487b70583078, type: 3}
+  dirtLandingClip: {fileID: 8300000, guid: 5ad089ca210e8fe4fb7b93aa3feb600d, type: 3}

@@ -88,16 +88,16 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.2
-    functionName: PlayAudioClip
+    functionName: PlayStepSound
     data: 
-    objectReferenceParameter: {fileID: 8300000, guid: db8c2a4c1d1b92a4fba422ec17497270, type: 3}
+    objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.46666667
-    functionName: PlayAudioClip
+    functionName: PlayStepSound
     data: 
-    objectReferenceParameter: {fileID: 8300000, guid: db8c2a4c1d1b92a4fba422ec17497270, type: 3}
+    objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
