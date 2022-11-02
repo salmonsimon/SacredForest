@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,11 +19,20 @@ public class GameManager : MonoBehaviour
     [SerializeField] private DialogueManager dialogueManager;
     [SerializeField] private SFXManager sfxManager;
 
+    #region UI
+
+    [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject pauseMenu;
+
+    #endregion
+
     #endregion
 
     #region Logic Variables
 
-    private bool isGamePaused;
+    [SerializeField] private bool onMainMenu = true;
+
+    [SerializeField] private bool isGamePaused;
     private bool isTeleporting;
 
     #endregion
@@ -40,6 +50,9 @@ public class GameManager : MonoBehaviour
             Destroy(animationManager.gameObject);
             Destroy(dialogueManager.gameObject);
             Destroy(sfxManager.gameObject);
+
+            Destroy(mainMenu.gameObject);
+            Destroy(pauseMenu.gameObject);
         }
         else
         {
@@ -55,18 +68,37 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+    private void Update()
+    {
+        if (!isGamePaused && !onMainMenu && Input.GetKeyDown(KeyCode.Escape))
+            PauseGame();
+        else if (isGamePaused && !onMainMenu && Input.GetKeyDown(KeyCode.Escape))
+            ResumeGame();
+    }
+
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        GameObject playerSpawnPoint = GameObject.FindGameObjectWithTag(Config.SPAWN_POINT_TAG);
-        if (playerSpawnPoint)
-            player.transform.position = playerSpawnPoint.transform.position;
 
-        GameObject virtualCameraGameObject = GameObject.FindGameObjectWithTag(Config.CINEMACHINE_CAMERA_TAG);
-
-        if (virtualCameraGameObject)
+        if (!onMainMenu)
         {
-            Cinemachine.CinemachineVirtualCamera virtualCamera = virtualCameraGameObject.GetComponent<Cinemachine.CinemachineVirtualCamera>();
-            virtualCamera.Follow = player.transform;
+            mainMenu.SetActive(false);
+
+            GameObject playerSpawnPoint = GameObject.FindGameObjectWithTag(Config.SPAWN_POINT_TAG);
+            if (playerSpawnPoint)
+                player.transform.position = playerSpawnPoint.transform.position;
+
+            GameObject virtualCameraGameObject = GameObject.FindGameObjectWithTag(Config.CINEMACHINE_CAMERA_TAG);
+
+            if (virtualCameraGameObject)
+            {
+                Cinemachine.CinemachineVirtualCamera virtualCamera = virtualCameraGameObject.GetComponent<Cinemachine.CinemachineVirtualCamera>();
+                virtualCamera.Follow = player.transform;
+            }
+        }
+        else
+        {
+            mainMenu.SetActive(true);
+            pauseMenu.SetActive(false);
         }
 
         levelLoader.FinishTransition();
@@ -75,6 +107,57 @@ public class GameManager : MonoBehaviour
     public void ShowText(string msg, int fontSize, Color color, Vector3 position, Vector3 motion, float duration, Transform parent = null)
     {
         floatingTextManager.Show(msg, fontSize, color, position, motion, duration, parent);
+    }
+
+    public void ToMainMenu()
+    {
+        SetGamePaused(false);
+        onMainMenu = true;
+
+        levelLoader.LoadLevel(Config.MAIN_MENU_SCENE_NAME, Config.CROSSFADE_TRANSITION);
+        pauseMenu.SetActive(false);
+    }
+
+    public void PlayGame()
+    {
+        onMainMenu = false;
+        levelLoader.LoadLevel(Config.MAIN_SCENE_NAME, Config.CROSSFADE_TRANSITION);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void DeleteSavedGame()
+    {
+        string path = Application.persistentDataPath;
+
+        DirectoryInfo di = new DirectoryInfo(path);
+
+        foreach (FileInfo file in di.EnumerateFiles())
+        {
+            file.Delete();
+        }
+        foreach (DirectoryInfo dir in di.EnumerateDirectories())
+        {
+            dir.Delete(true);
+        }
+    }
+
+    public void PauseGame()
+    {
+        GetSFXManager().PlaySound(Config.PAUSE_SFX);
+        SetGamePaused(true);
+
+        pauseMenu.SetActive(true);
+    }
+
+    public void ResumeGame()
+    {
+        SetGamePaused(false);
+
+        pauseMenu.SetActive(false);
     }
 
     #region Getters and Setters

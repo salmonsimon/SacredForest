@@ -1,5 +1,12 @@
 public class Config 
 {
+    #region Scene Names
+
+    public const string MAIN_MENU_SCENE_NAME = "Main Menu";
+    public const string MAIN_SCENE_NAME = "Main";
+
+    #endregion
+
     #region Tags
 
     public const string PLAYER_TAG = "Player";
@@ -197,7 +204,7 @@ public class Config
     #region SFX
 
     public const string ARROW_HIT_SFX = "Arrow Hit";
-    public const string STEP_SFX = "Step";
+    public const string PAUSE_SFX = "Pause";
 
     #endregion
 
