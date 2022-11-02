@@ -5,7 +5,8 @@ public class SFXManager : MonoBehaviour
 {
     private AudioSource audioSource;
 
-    [SerializeField] private AudioClip stepClip;
+    [Header("UI Sounds")]
+    [SerializeField] private AudioClip pauseSFX;
 
     [Header("Projectile Sounds")]
     [SerializeField] private AudioClip arrowHitSFX;
@@ -41,8 +42,6 @@ public class SFXManager : MonoBehaviour
 
     }
 
-    // GameManager.instance.GetSoundManager().PlaySound(Config.HOVER_SFX);
-
     public void PlaySound(string str)
     {
         switch (str)
@@ -51,8 +50,8 @@ public class SFXManager : MonoBehaviour
                 audioSource.PlayOneShot(arrowHitSFX);
                 break;
 
-            case Config.STEP_SFX:
-                audioSource.PlayOneShot(stepClip);
+            case Config.PAUSE_SFX:
+                audioSource.PlayOneShot(pauseSFX);
                 break;
         }
     }

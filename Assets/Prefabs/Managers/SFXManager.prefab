@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd56c76dd1cc2974c88397e34855061f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepClip: {fileID: 8300000, guid: db8c2a4c1d1b92a4fba422ec17497270, type: 3}
+  pauseSFX: {fileID: 8300000, guid: a5feaeda103f792438c1071c29116d10, type: 3}
   arrowHitSFX: {fileID: 8300000, guid: 9d7cb2fcbadf09b4687614c644e7ab59, type: 3}
   swordDamageClips:
   - {fileID: 8300000, guid: 7cbd6cd765888ff418d01d98bd1ce9c2, type: 3}
