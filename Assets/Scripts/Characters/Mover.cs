@@ -16,6 +16,7 @@ public class Mover : MonoBehaviour
     #region GameObjects
 
     [SerializeField] protected CircleCollider groundCheck;
+    [SerializeField] protected GroundTypeCheck groundTypeCheck;
     [SerializeField] protected CircleCollider wallCheck;
 
     #endregion
@@ -39,7 +40,7 @@ public class Mover : MonoBehaviour
     protected bool isAbleToMove = true;
 
     private bool isGrounded;
-    [SerializeField] private bool isJumping;
+    private bool isJumping;
     private bool isCollidingWithWall;
     private bool isWallSliding;
 
@@ -288,13 +289,7 @@ public class Mover : MonoBehaviour
         particlesJump.Play();
     }
 
-    public void OnLanding()
-    {
-        ResetJumpAndWallSlide();
-
-        particlesLand.Play();
-        GameManager.instance.GetSFXManager().PlaySound(Config.STEP_SFX);
-    }
+    
 
     private void ResetJumpAndWallSlide()
     {
@@ -341,6 +336,73 @@ public class Mover : MonoBehaviour
         vcam.GetCinemachineComponent<Cinemachine.CinemachineFramingTransposer>().m_LookaheadSmoothing = lookaheadSmoothing;
 
         StartCoroutine(DashCooldown());
+    }
+
+    public void OnLanding()
+    {
+        ResetJumpAndWallSlide();
+
+        particlesLand.Play();
+        PlayLandingSound();
+    }
+
+    private void PlayLandingSound()
+    {
+        string floorType = groundTypeCheck.GetGroundType();
+
+        switch (floorType)
+        {
+            case null:
+                GameManager.instance.GetSFXManager().PlayGrassLandingSound();
+                break;
+
+            case Config.GRASS_FLOOR:
+                GameManager.instance.GetSFXManager().PlayGrassLandingSound();
+                break;
+
+            case Config.ROCK_FLOOR:
+                GameManager.instance.GetSFXManager().PlayRockLandingSound();
+                break;
+
+            case Config.WOOD_FLOOR:
+                GameManager.instance.GetSFXManager().PlayWoodLandingSound();
+                break;
+
+            case Config.DIRT_FLOOR:
+                GameManager.instance.GetSFXManager().PlayDirtLandingSound();
+                break;
+        }
+    }
+
+    public void PlayStepSound()
+    {
+        if (isGrounded)
+        {
+            string floorType = groundTypeCheck.GetGroundType();
+
+            switch (floorType)
+            {
+                case null:
+                    GameManager.instance.GetSFXManager().PlayGrassStepSound();
+                    break;
+
+                case Config.GRASS_FLOOR:
+                    GameManager.instance.GetSFXManager().PlayGrassStepSound();
+                    break;
+
+                case Config.ROCK_FLOOR:
+                    GameManager.instance.GetSFXManager().PlayRockStepSound();
+                    break;
+
+                case Config.WOOD_FLOOR:
+                    GameManager.instance.GetSFXManager().PlayWoodStepSound();
+                    break;
+
+                case Config.DIRT_FLOOR:
+                    GameManager.instance.GetSFXManager().PlayDirtStepSound();
+                    break;
+            }
+        }
     }
 
     private IEnumerator DashCooldown()

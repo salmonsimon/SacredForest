@@ -19,6 +19,15 @@ public class Config
 
     #endregion
 
+    #region Floor Types
+
+    public const string GRASS_FLOOR = "Grass Floor";
+    public const string ROCK_FLOOR = "Rock Floor";
+    public const string WOOD_FLOOR = "Wood Floor";
+    public const string DIRT_FLOOR = "Dirt Floor";
+
+    #endregion
+
     #region Important Game Objects
 
     public const string PROJECTILE_CONTAINER_NAME = "Projectile Container";
