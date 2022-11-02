@@ -104,6 +104,20 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1f;
     }
 
+    public void RestartPlayer()
+    {
+        player.transform.rotation = Quaternion.identity;
+
+        player.GetComponent<Animator>().keepAnimatorControllerStateOnDisable = false;
+
+        player.gameObject.SetActive(false);
+
+        player.GetComponent<PlayerMovementController>().Reset();
+        player.GetComponent<PlayerAttackController>().Reset();
+
+        player.gameObject.SetActive(true);
+    }
+
     public LevelLoader GetLevelLoader()
     {
         return levelLoader;

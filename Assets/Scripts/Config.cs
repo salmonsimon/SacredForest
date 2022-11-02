@@ -15,6 +15,7 @@ public class Config
     public const string PLAYER_LAYER = "Player";
     public const string ENEMY_LAYER = "Enemy";
     public const string DASH_LAYER = "Dash";
+    public const string DEAD_LAYER = "Dead";
 
     #endregion
 

@@ -35917,29 +35917,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4697750405587687972, guid: da2b955bb7d5a7c43a29028653e8dd83, type: 3}
   m_PrefabInstance: {fileID: 1708248213}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &661296833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 661296816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37bfd2404f5892a4aa2099707fa8dc07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpingClips:
-  - {fileID: 8300000, guid: 66ea683d48f31a6429dc488714268cc7, type: 3}
-  - {fileID: 8300000, guid: 0a4d300de93fb03468fddb4fed72c76c, type: 3}
-  - {fileID: 8300000, guid: 1104280fbf517a3428232293d0038315, type: 3}
-  - {fileID: 8300000, guid: 2f852acd1be91ce4eb3f5789d90a9a8a, type: 3}
-  meleeAttackClips:
-  - {fileID: 8300000, guid: 06a8777b2e78a5347beff011fc535ffa, type: 3}
-  - {fileID: 8300000, guid: 42b9e1ffb44640a46a3eec33da5487da, type: 3}
-  - {fileID: 8300000, guid: 1d1645d7264a91040a99be4952f426c3, type: 3}
-  - {fileID: 8300000, guid: 97e7cba0a5c972a47ac136e4d7bf3703, type: 3}
-  deathClips: []
 --- !u!4 &688078551 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7838359911046812374, guid: edfd647152798c34199fcc3b9c0d1b4d, type: 3}
@@ -38118,14 +38095,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1853539560}
     m_Modifications:
-    - target: {fileID: 1971838360380672435, guid: da2b955bb7d5a7c43a29028653e8dd83, type: 3}
-      propertyPath: maxHitPoints
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1971838360380672435, guid: da2b955bb7d5a7c43a29028653e8dd83, type: 3}
-      propertyPath: currentHitPoints
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4697750405587687972, guid: da2b955bb7d5a7c43a29028653e8dd83, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -38168,10 +38137,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4697750405587687972, guid: da2b955bb7d5a7c43a29028653e8dd83, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4697750405587687978, guid: da2b955bb7d5a7c43a29028653e8dd83, type: 3}
-      propertyPath: m_FlipX
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4697750405587687979, guid: da2b955bb7d5a7c43a29028653e8dd83, type: 3}

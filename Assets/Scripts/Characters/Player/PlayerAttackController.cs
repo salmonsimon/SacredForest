@@ -7,12 +7,23 @@ public class PlayerAttackController : MonoBehaviour
     private Animator animator;
     private PlayerMovementController playerMovementController;
 
+    [SerializeField] private BoxCollider2D swordCollider;
+
     private bool onAttackCooldown = false;
     private float attackCooldownDuration = Config.ATTACK_COOLDOWN_DURATION;
 
     private bool ableToDoSecondAttack = true;
 
     private bool isAlive = true;
+
+    public void Reset()
+    {
+        onAttackCooldown = false;
+        ableToDoSecondAttack = true;
+        isAlive = true;
+
+        swordCollider.enabled = false;
+    }
 
     private void Awake()
     {
@@ -126,7 +137,7 @@ public class PlayerAttackController : MonoBehaviour
 
     private void Resurrection()
     {
-        isAlive = true;
+        Reset();
     }
 
 }

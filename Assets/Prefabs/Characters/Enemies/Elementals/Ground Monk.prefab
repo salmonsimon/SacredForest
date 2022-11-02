@@ -10030,7 +10030,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6285235481483321421}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.011098756, y: -0.19573238, z: 0}
+  m_LocalPosition: {x: 0.011098756, y: -0.161, z: 0}
   m_LocalScale: {x: 0.83333325, y: 0.83333325, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10094,7 +10094,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6285235481540964457}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.30276537, y: -0.19573238, z: 0}
+  m_LocalPosition: {x: 0.30276537, y: -0.16099998, z: 0}
   m_LocalScale: {x: 0.83333325, y: 0.83333325, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10158,7 +10158,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6285235481592598217}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.28056785, y: -0.19573238, z: 0}
+  m_LocalPosition: {x: -0.28056785, y: -0.16099998, z: 0}
   m_LocalScale: {x: 0.83333325, y: 0.83333325, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10495,6 +10495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86fdc6f749b34164fa61428d97c9f819, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAttacking: 0
   attackCooldownDuration: 2
   rollAnimationClip: {fileID: 7400000, guid: bd57c4bce990ad84bbe9ae0d8aa189cb, type: 2}
   projectileAnimationClip: {fileID: 7400000, guid: d7181b866e86c0d42abb0905507df90f, type: 2}

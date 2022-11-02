@@ -67,10 +67,17 @@ public class Frame : MonoBehaviour
     {
         CleanFrame();
 
-        player.GetComponent<DamageReceiver>().Resurrect();
         player.transform.position = playerSpawnPoint.position;
+        StartCoroutine(WaitAndResurrectPlayer(Config.SMALL_DELAY));
 
         StartCoroutine(WaitAndSpawnEnemies(Config.SMALL_DELAY));
+    }
+
+    private IEnumerator WaitAndResurrectPlayer(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+
+        player.GetComponent<DamageReceiver>().Resurrect();
     }
 
     public void CleanFrame()

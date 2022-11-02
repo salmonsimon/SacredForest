@@ -9,6 +9,13 @@ public class PlayerMovementController : Mover
 
     private bool isAlive = true;
 
+    public override void Reset()
+    {
+        base.Reset();
+
+        isAlive = true;
+    }
+
     private void Start()
     {
         GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += AliveStatusChange;
@@ -97,6 +104,6 @@ public class PlayerMovementController : Mover
     {
         base.Resurrection();
 
-        isAlive = true;
+        Reset();
     }
 }

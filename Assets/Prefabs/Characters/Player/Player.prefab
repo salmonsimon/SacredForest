@@ -4908,7 +4908,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1971838360555217877}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.2, z: 0}
+  m_LocalPosition: {x: 0, y: -0.138, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9846,6 +9846,7 @@ MonoBehaviour:
   - Enemy
   - Arrow
   damage: 1
+  damageType: 0
 --- !u!1 &1971838361857962905
 GameObject:
   m_ObjectHideFlags: 0
@@ -9872,7 +9873,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1971838361857962905}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1, y: 0, z: 0}
+  m_LocalPosition: {x: 0.081, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9926,6 +9927,7 @@ GameObject:
   - component: {fileID: 2255596629432346798}
   - component: {fileID: 1971838360700276062}
   - component: {fileID: 1971838360380672435}
+  - component: {fileID: 661296833}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -10080,6 +10082,7 @@ MonoBehaviour:
   wallCheck: {fileID: 1971838361857962906}
   hasAbilityToDash: 1
   hasAbilityToWallJump: 1
+  isJumping: 0
 --- !u!114 &1971838360700276062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10092,6 +10095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b283b07556e3255448ce2ef4b91e7ef3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  swordCollider: {fileID: 1971838361033771119}
 --- !u!114 &1971838360380672435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10108,3 +10112,26 @@ MonoBehaviour:
   immuneTime: 2
   maxHitPoints: 1
   currentHitPoints: 1
+--- !u!114 &661296833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4697750405587687979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37bfd2404f5892a4aa2099707fa8dc07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpingClips:
+  - {fileID: 8300000, guid: 66ea683d48f31a6429dc488714268cc7, type: 3}
+  - {fileID: 8300000, guid: 0a4d300de93fb03468fddb4fed72c76c, type: 3}
+  - {fileID: 8300000, guid: 1104280fbf517a3428232293d0038315, type: 3}
+  - {fileID: 8300000, guid: 2f852acd1be91ce4eb3f5789d90a9a8a, type: 3}
+  meleeAttackClips:
+  - {fileID: 8300000, guid: 06a8777b2e78a5347beff011fc535ffa, type: 3}
+  - {fileID: 8300000, guid: 42b9e1ffb44640a46a3eec33da5487da, type: 3}
+  - {fileID: 8300000, guid: 1d1645d7264a91040a99be4952f426c3, type: 3}
+  - {fileID: 8300000, guid: 97e7cba0a5c972a47ac136e4d7bf3703, type: 3}
+  deathClips: []

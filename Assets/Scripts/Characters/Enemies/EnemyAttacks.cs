@@ -45,7 +45,7 @@ public class EnemyAttacks : MonoBehaviour
         }
     }
 
-    protected IEnumerator IsAttackingCooldown(float duration)
+    protected virtual IEnumerator IsAttackingCooldown(float duration)
     {
         isAttacking = true;
 
