@@ -18,11 +18,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AnimationManager animationManager;
     [SerializeField] private DialogueManager dialogueManager;
     [SerializeField] private SFXManager sfxManager;
-
+    [SerializeField] private CurrentProgressManager currentProgressManager;
+ 
     #region UI
 
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private CountersUI countersUI;
 
     #endregion
 
@@ -50,9 +52,11 @@ public class GameManager : MonoBehaviour
             Destroy(animationManager.gameObject);
             Destroy(dialogueManager.gameObject);
             Destroy(sfxManager.gameObject);
+            Destroy(currentProgressManager.gameObject);
 
             Destroy(mainMenu.gameObject);
             Destroy(pauseMenu.gameObject);
+            Destroy(countersUI.gameObject);
         }
         else
         {
@@ -83,6 +87,8 @@ public class GameManager : MonoBehaviour
         {
             mainMenu.SetActive(false);
 
+            countersUI.gameObject.SetActive(true);
+
             GameObject playerSpawnPoint = GameObject.FindGameObjectWithTag(Config.SPAWN_POINT_TAG);
             if (playerSpawnPoint)
                 player.transform.position = playerSpawnPoint.transform.position;
@@ -98,7 +104,9 @@ public class GameManager : MonoBehaviour
         else
         {
             mainMenu.SetActive(true);
+
             pauseMenu.SetActive(false);
+            countersUI.gameObject.SetActive(false);
         }
 
         levelLoader.FinishTransition();
@@ -112,7 +120,11 @@ public class GameManager : MonoBehaviour
     public void ToMainMenu()
     {
         SetGamePaused(false);
+
+        currentProgressManager.SaveCurrentProgress();
+
         onMainMenu = true;
+        currentProgressManager.UpdateCurrentFightingRoute(FightingRoute.None);
 
         levelLoader.LoadLevel(Config.MAIN_MENU_SCENE_NAME, Config.CROSSFADE_TRANSITION);
         pauseMenu.SetActive(false);
@@ -165,6 +177,11 @@ public class GameManager : MonoBehaviour
     public bool IsGamePaused()
     {
         return isGamePaused;
+    }
+
+    public bool IsOnMainMenu()
+    {
+        return onMainMenu;
     }
 
     public bool IsTeleporting()
@@ -234,6 +251,16 @@ public class GameManager : MonoBehaviour
     public SFXManager GetSFXManager()
     {
         return sfxManager;
+    }
+
+    public CurrentProgressManager GetCurrentProgressManager()
+    {
+        return currentProgressManager;
+    }
+
+    public CountersUI GetCountersUI()
+    {
+        return countersUI;
     }
 
     #endregion

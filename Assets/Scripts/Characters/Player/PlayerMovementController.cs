@@ -18,7 +18,10 @@ public class PlayerMovementController : Mover
 
     private void Start()
     {
+        FirstRouteFinishedStateChange();
+
         GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += AliveStatusChange;
+        GameManager.instance.GetCurrentProgressManager().OnFirstRouteFinishedStateChange += FirstRouteFinishedStateChange;
     }
 
     protected override void Update()
@@ -81,6 +84,14 @@ public class PlayerMovementController : Mover
         return rigidBody.velocity.y > 0.1;
     }
 
+    private void FirstRouteFinishedStateChange()
+    {
+        if (GameManager.instance.GetCurrentProgressManager().IsFinishedRoute1)
+            hasAbilityToDash = true;
+        else
+            hasAbilityToDash = false;
+    }
+
     private void AliveStatusChange()
     {
         if (GetComponent<DamageReceiver>().IsAlive)
@@ -98,6 +109,7 @@ public class PlayerMovementController : Mover
         base.Death();
 
         isAlive = false;
+        GameManager.instance.GetCurrentProgressManager().IncreaseDeathsCount();
     }
 
     protected override void Resurrection()
