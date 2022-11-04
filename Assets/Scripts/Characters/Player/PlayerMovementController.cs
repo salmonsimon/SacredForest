@@ -19,9 +19,11 @@ public class PlayerMovementController : Mover
     private void Start()
     {
         FirstRouteFinishedStateChange();
+        SecondRouteFinishedStateChange();
 
         GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += AliveStatusChange;
         GameManager.instance.GetCurrentProgressManager().OnFirstRouteFinishedStateChange += FirstRouteFinishedStateChange;
+        GameManager.instance.GetCurrentProgressManager().OnSecondRouteFinishedStateChange += SecondRouteFinishedStateChange;
     }
 
     protected override void Update()
@@ -86,10 +88,18 @@ public class PlayerMovementController : Mover
 
     private void FirstRouteFinishedStateChange()
     {
-        if (GameManager.instance.GetCurrentProgressManager().IsFinishedRoute1)
+        if (GameManager.instance.GetCurrentProgressManager().FinishedRoute1)
             hasAbilityToDash = true;
         else
             hasAbilityToDash = false;
+    }
+
+    private void SecondRouteFinishedStateChange()
+    {
+        if (GameManager.instance.GetCurrentProgressManager().FinishedRoute2)
+            hasAbilityToWallJump = true;
+        else
+            hasAbilityToWallJump = false;
     }
 
     private void AliveStatusChange()

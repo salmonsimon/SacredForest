@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85c281656c7fdd54b856f335668a12f8, type: 3}
-  m_Name: ProgressManager
+  m_Script: {fileID: 11500000, guid: 17526797d331c334d804f96cc09d54c4, type: 3}
+  m_Name: Settings
   m_EditorClassIdentifier: 
-  firstTimePlaying: 1
-  finishedRoute1: 0
-  finishedRoute2: 0
-  finishedRoute3: 0
-  finishedRoute4: 0
-  enemiesKilledCount: 0
-  deathsCount: 0
-  timePlayed: 0
+  newGameIndex: 1
+  savedGamesAmount: 1
+  currentSavedGames: 00000000
+  savedGamesCountersSerialized:
+    keys: 00000000
+    values: []
+  musicVolume: 1
+  SFXVolume: 1

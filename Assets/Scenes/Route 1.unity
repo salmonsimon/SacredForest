@@ -31840,6 +31840,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6773972703030399893, guid: 12926b2e81421054d9560c26c07aa16e, type: 3}
   m_PrefabInstance: {fileID: 606182365}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &606182368 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 128544285, guid: 12926b2e81421054d9560c26c07aa16e, type: 3}
+  m_PrefabInstance: {fileID: 606182365}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dade75339339d44c8b3417062479f49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &607937145
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35501,6 +35512,7 @@ MonoBehaviour:
   sfxManager: {fileID: 1446752218}
   currentProgressManager: {fileID: 1419986047}
   mainMenu: {fileID: 606182367}
+  chooseGameUI: {fileID: 606182368}
   pauseMenu: {fileID: 1231368549}
   countersUI: {fileID: 1009155021}
   onMainMenu: 0

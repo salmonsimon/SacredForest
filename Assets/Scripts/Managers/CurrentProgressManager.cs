@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class CurrentProgressManager : MonoBehaviour
@@ -13,27 +14,66 @@ public class CurrentProgressManager : MonoBehaviour
     [SerializeField] private bool finishedRoute3;
     [SerializeField] private bool finishedRoute4;
 
-    
+    #region Routes Properties
+
+    public bool FinishedRoute1
+    {
+        get { return finishedRoute1; }
+        private set
+        {
+            if (finishedRoute1 == value) return;
+
+            finishedRoute1 = value;
+            if (OnFirstRouteFinishedStateChange != null)
+                OnFirstRouteFinishedStateChange();
+        }
+    }
+
+    public bool FinishedRoute2
+    {
+        get { return finishedRoute2; }
+        private set
+        {
+            if (finishedRoute2 == value) return;
+
+            finishedRoute2 = value;
+            if (OnSecondRouteFinishedStateChange != null)
+                OnSecondRouteFinishedStateChange();
+        }
+    }
+
+    public bool FinishedRoute3
+    {
+        get { return finishedRoute3; }
+        private set
+        {
+            if (finishedRoute3 == value) return;
+
+            finishedRoute3 = value;
+            if (OnThirdRouteFinishedStateChange != null)
+                OnThirdRouteFinishedStateChange();
+        }
+    }
+
+    public bool FinishedRoute4
+    {
+        get { return finishedRoute4; }
+        private set
+        {
+            if (finishedRoute4 == value) return;
+
+            finishedRoute4 = value;
+            if (OnFourthRouteFinishedStateChange != null)
+                OnFourthRouteFinishedStateChange();
+        }
+    }
+
+    #endregion
 
     [SerializeField] private float timePlayed;
 
     [SerializeField] private int enemiesKilledCount;
     [SerializeField] private int deathsCount;
-
-    private void Awake()
-    {
-        firstTimePlaying = ProgressManager.Instance.firstTimePlaying;
-
-        finishedRoute1 = ProgressManager.Instance.finishedRoute1;
-        finishedRoute2 = ProgressManager.Instance.finishedRoute2;
-        finishedRoute3 = ProgressManager.Instance.finishedRoute3;
-        finishedRoute4 = ProgressManager.Instance.finishedRoute4;
-
-        timePlayed = ProgressManager.Instance.timePlayed;
-
-        enemiesKilledCount = ProgressManager.Instance.enemiesKilledCount;
-        deathsCount = ProgressManager.Instance.deathsCount;
-    }
 
     #region Events and Delegates
 
@@ -50,6 +90,23 @@ public class CurrentProgressManager : MonoBehaviour
     public event OnFirstRouteFinishedStateChangeDelegate OnFourthRouteFinishedStateChange;
 
     #endregion
+
+    public void Initialize()
+    {
+        //ProgressManager.Load();
+
+        firstTimePlaying = ProgressManager.Instance.firstTimePlaying;
+
+        FinishedRoute1 = ProgressManager.Instance.finishedRoute1;
+        FinishedRoute2 = ProgressManager.Instance.finishedRoute2;
+        FinishedRoute3 = ProgressManager.Instance.finishedRoute3;
+        FinishedRoute4 = ProgressManager.Instance.finishedRoute4;
+
+        timePlayed = ProgressManager.Instance.timePlayed;
+
+        enemiesKilledCount = ProgressManager.Instance.enemiesKilledCount;
+        deathsCount = ProgressManager.Instance.deathsCount;
+    }
 
     private void Update()
     {
@@ -75,38 +132,6 @@ public class CurrentProgressManager : MonoBehaviour
 
     #region Fighting Routes
 
-    public void FinishedRoute1(bool value)
-    {
-        finishedRoute1 = value;
-
-        if (OnFirstRouteFinishedStateChange != null)
-            OnFirstRouteFinishedStateChange();
-    }
-
-    public void FinishedRoute2(bool value)
-    {
-        finishedRoute2 = value;
-
-        if (OnSecondRouteFinishedStateChange != null)
-            OnSecondRouteFinishedStateChange();
-    }
-
-    public void FinishedRoute3(bool value)
-    {
-        finishedRoute3 = value;
-
-        if (OnThirdRouteFinishedStateChange != null)
-            OnThirdRouteFinishedStateChange();
-    }
-
-    public void FinishedRoute4(bool value)
-    {
-        finishedRoute4 = value;
-
-        if (OnFourthRouteFinishedStateChange != null)
-            OnFourthRouteFinishedStateChange();
-    }
-
     public void FinishedCurrentFightingRoute(bool value)
     {
         if (currentFightingRoute != FightingRoute.None)
@@ -114,19 +139,19 @@ public class CurrentProgressManager : MonoBehaviour
             switch (currentFightingRoute)
             {
                 case FightingRoute.Route1:
-                    FinishedRoute1(value);
+                    FinishedRoute1 = value;
                     break;
 
                 case FightingRoute.Route2:
-                    FinishedRoute2(value);
+                    FinishedRoute2 = value;
                     break;
 
                 case FightingRoute.Route3:
-                    FinishedRoute3(value);
+                    FinishedRoute3 = value;
                     break;
 
                 case FightingRoute.Route4:
-                    FinishedRoute4(value);
+                    FinishedRoute4 = value;
                     break;
             }
         }
@@ -136,30 +161,6 @@ public class CurrentProgressManager : MonoBehaviour
     {
         currentFightingRoute = fightingRoute;
     }
-
-    #region Public Getters
-
-    public bool IsFinishedRoute1
-    {
-        get { return finishedRoute1; }
-    }
-
-    public bool IsFinishedRoute2
-    {
-        get { return finishedRoute2; }
-    }
-
-    public bool IsFinishedRoute3
-    {
-        get { return finishedRoute3; }
-    }
-
-    public bool IsFinishedRoute4
-    {
-        get { return finishedRoute4; }
-    }
-
-    #endregion
 
     #endregion
 
@@ -177,10 +178,10 @@ public class CurrentProgressManager : MonoBehaviour
     {
         ProgressManager.Instance.firstTimePlaying = firstTimePlaying;
 
-        ProgressManager.Instance.finishedRoute1 = finishedRoute1;
-        ProgressManager.Instance.finishedRoute2 = finishedRoute2;
-        ProgressManager.Instance.finishedRoute3 = finishedRoute3;
-        ProgressManager.Instance.finishedRoute4 = finishedRoute4;
+        ProgressManager.Instance.finishedRoute1 = FinishedRoute1;
+        ProgressManager.Instance.finishedRoute2 = FinishedRoute2;
+        ProgressManager.Instance.finishedRoute3 = FinishedRoute3;
+        ProgressManager.Instance.finishedRoute4 = FinishedRoute4;
 
         ProgressManager.Instance.timePlayed = timePlayed;
 
@@ -188,6 +189,19 @@ public class CurrentProgressManager : MonoBehaviour
         ProgressManager.Instance.deathsCount = deathsCount;
 
         ProgressManager.Save();
+
+        Counters updatedCounters = new Counters()
+        {
+            EnemiesKilledCount = enemiesKilledCount,
+            DeathsCount = deathsCount,
+            TimePlayed = timePlayed
+        };
+
+        Settings.Instance.savedGamesCounters[ZSerializer.ZSerializerSettings.Instance.selectedSaveFile] = updatedCounters;
+        Settings.Instance.savedGamesCountersSerialized = Settings.Instance.savedGamesCounters;
+
+        Settings.Save();
+
     }
 
     #region Show Counters
@@ -204,13 +218,7 @@ public class CurrentProgressManager : MonoBehaviour
 
     public string ShowCurrentTimePlayed()
     {
-        double timePlayedDouble = (double)timePlayed;
-
-        System.TimeSpan time = System.TimeSpan.FromSeconds(timePlayedDouble);
-
-        string displayTime = time.ToString("hh':'mm':'ss");
-
-        return displayTime;
+        return GameManager.instance.FloatToTimeFormat(timePlayed);
     }
 
     #endregion

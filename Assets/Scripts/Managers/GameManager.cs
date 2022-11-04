@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     #region UI
 
     [SerializeField] private GameObject mainMenu;
+    [SerializeField] private ChooseGameUI chooseGameUI;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private CountersUI countersUI;
 
@@ -55,12 +56,16 @@ public class GameManager : MonoBehaviour
             Destroy(currentProgressManager.gameObject);
 
             Destroy(mainMenu.gameObject);
+            Destroy(chooseGameUI.gameObject);
             Destroy(pauseMenu.gameObject);
             Destroy(countersUI.gameObject);
         }
         else
         {
             instance = this;
+
+            ProgressManager.Instance.Reset();
+            Settings.Instance.Deserialize();
         }
     }
     private void OnEnable()
@@ -88,6 +93,8 @@ public class GameManager : MonoBehaviour
             mainMenu.SetActive(false);
 
             countersUI.gameObject.SetActive(true);
+            currentProgressManager.gameObject.SetActive(true);
+            player.SetActive(true);
 
             GameObject playerSpawnPoint = GameObject.FindGameObjectWithTag(Config.SPAWN_POINT_TAG);
             if (playerSpawnPoint)
@@ -103,10 +110,13 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            player.SetActive(false);
+
             mainMenu.SetActive(true);
 
             pauseMenu.SetActive(false);
             countersUI.gameObject.SetActive(false);
+            currentProgressManager.gameObject.SetActive(false);
         }
 
         levelLoader.FinishTransition();
@@ -120,20 +130,37 @@ public class GameManager : MonoBehaviour
     public void ToMainMenu()
     {
         SetGamePaused(false);
+        player.SetActive(false);
 
         currentProgressManager.SaveCurrentProgress();
 
         onMainMenu = true;
         currentProgressManager.UpdateCurrentFightingRoute(FightingRoute.None);
 
+        ZSerializer.ZSerializerSettings.Instance.selectedSaveFile = -1;
+        ProgressManager.Instance.Reset();
+
         levelLoader.LoadLevel(Config.MAIN_MENU_SCENE_NAME, Config.CROSSFADE_TRANSITION);
         pauseMenu.SetActive(false);
     }
 
-    public void PlayGame()
+    public void PlayGame(int savedGameIndex)
     {
         onMainMenu = false;
+
+        int correctedIndex = Settings.Instance.currentSavedGames[savedGameIndex];
+
+        ZSerializer.ZSerializerSettings.Instance.selectedSaveFile = correctedIndex;
+        ProgressManager.Load();
+
+        currentProgressManager.Initialize();
+
         levelLoader.LoadLevel(Config.MAIN_SCENE_NAME, Config.CROSSFADE_TRANSITION);
+    }
+
+    public void NewGame()
+    {
+        Settings.Instance.AddNewGameAndPlay();
     }
 
     public void QuitGame()
@@ -263,5 +290,21 @@ public class GameManager : MonoBehaviour
         return countersUI;
     }
 
+    public ChooseGameUI GetChooseGameUI()
+    {
+        return chooseGameUI;
+    }
+
     #endregion
+
+    public string FloatToTimeFormat(float timeInput)
+    {
+        double timePlayedDouble = (double)timeInput;
+
+        System.TimeSpan time = System.TimeSpan.FromSeconds(timePlayedDouble);
+
+        string displayTime = time.ToString("hh':'mm':'ss");
+
+        return displayTime;
+    }
 }

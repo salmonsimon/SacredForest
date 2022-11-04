@@ -14,4 +14,18 @@ public partial class ProgressManager
     public int enemiesKilledCount = 0;
     public int deathsCount = 0;
     public float timePlayed = 0;
+
+    public void Reset()
+    {
+        firstTimePlaying = true;
+
+        finishedRoute1 = false;
+        finishedRoute2 = false;
+        finishedRoute3 = false;
+        finishedRoute4 = false;
+
+        enemiesKilledCount = 0;
+        deathsCount = 0;
+        timePlayed = 0;
+}
 }
