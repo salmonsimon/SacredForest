@@ -50,7 +50,7 @@ public partial class Settings
 
             Save();
 
-            GameManager.instance.PlayGame(newGameIndex - 1);
+            GameManager.instance.GetMainMenuUI().PlayGame(newGameIndex - 1);
         }
 
         return true;
@@ -58,11 +58,13 @@ public partial class Settings
 
     public void DeleteGame(int savedGameIndex)
     {
-        ZSerialize.DeleteSaveFile(savedGameIndex);
+        int correctedIndex = currentSavedGames[savedGameIndex];
 
-        currentSavedGames.Remove(savedGameIndex);
+        ZSerialize.DeleteSaveFile(correctedIndex);
 
-        savedGamesCounters.Remove(savedGameIndex);
+        currentSavedGames.Remove(correctedIndex);
+
+        savedGamesCounters.Remove(correctedIndex);
         savedGamesCountersSerialized = savedGamesCounters;
 
         savedGamesAmount--;

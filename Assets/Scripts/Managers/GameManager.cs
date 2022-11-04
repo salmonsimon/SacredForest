@@ -19,11 +19,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private DialogueManager dialogueManager;
     [SerializeField] private SFXManager sfxManager;
     [SerializeField] private CurrentProgressManager currentProgressManager;
- 
+
     #region UI
 
     [SerializeField] private GameObject mainMenu;
-    [SerializeField] private ChooseGameUI chooseGameUI;
+    [SerializeField] private MainMenuUI mainMenuUI;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private CountersUI countersUI;
 
@@ -32,8 +32,8 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Logic Variables
-
-    [SerializeField] private bool onMainMenu = true;
+    
+    [SerializeField] private bool isOnMainMenu = true;
 
     [SerializeField] private bool isGamePaused;
     private bool isTeleporting;
@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
             Destroy(currentProgressManager.gameObject);
 
             Destroy(mainMenu.gameObject);
-            Destroy(chooseGameUI.gameObject);
+            Destroy(mainMenuUI.gameObject);
             Destroy(pauseMenu.gameObject);
             Destroy(countersUI.gameObject);
         }
@@ -79,16 +79,16 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (!isGamePaused && !onMainMenu && Input.GetKeyDown(KeyCode.Escape))
+        if (!isGamePaused && !isOnMainMenu && Input.GetKeyDown(KeyCode.Escape))
             PauseGame();
-        else if (isGamePaused && !onMainMenu && Input.GetKeyDown(KeyCode.Escape))
+        else if (isGamePaused && !isOnMainMenu && Input.GetKeyDown(KeyCode.Escape))
             ResumeGame();
     }
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
 
-        if (!onMainMenu)
+        if (!isOnMainMenu)
         {
             mainMenu.SetActive(false);
 
@@ -134,7 +134,7 @@ public class GameManager : MonoBehaviour
 
         currentProgressManager.SaveCurrentProgress();
 
-        onMainMenu = true;
+        isOnMainMenu = true;
         currentProgressManager.UpdateCurrentFightingRoute(FightingRoute.None);
 
         ZSerializer.ZSerializerSettings.Instance.selectedSaveFile = -1;
@@ -142,46 +142,6 @@ public class GameManager : MonoBehaviour
 
         levelLoader.LoadLevel(Config.MAIN_MENU_SCENE_NAME, Config.CROSSFADE_TRANSITION);
         pauseMenu.SetActive(false);
-    }
-
-    public void PlayGame(int savedGameIndex)
-    {
-        onMainMenu = false;
-
-        int correctedIndex = Settings.Instance.currentSavedGames[savedGameIndex];
-
-        ZSerializer.ZSerializerSettings.Instance.selectedSaveFile = correctedIndex;
-        ProgressManager.Load();
-
-        currentProgressManager.Initialize();
-
-        levelLoader.LoadLevel(Config.MAIN_SCENE_NAME, Config.CROSSFADE_TRANSITION);
-    }
-
-    public void NewGame()
-    {
-        Settings.Instance.AddNewGameAndPlay();
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
-
-    public void DeleteSavedGame()
-    {
-        string path = Application.persistentDataPath;
-
-        DirectoryInfo di = new DirectoryInfo(path);
-
-        foreach (FileInfo file in di.EnumerateFiles())
-        {
-            file.Delete();
-        }
-        foreach (DirectoryInfo dir in di.EnumerateDirectories())
-        {
-            dir.Delete(true);
-        }
     }
 
     public void PauseGame()
@@ -208,7 +168,12 @@ public class GameManager : MonoBehaviour
 
     public bool IsOnMainMenu()
     {
-        return onMainMenu;
+        return isOnMainMenu;
+    }
+
+    public void SetIsOnMainMenu(bool value)
+    {
+        isOnMainMenu = value;
     }
 
     public bool IsTeleporting()
@@ -290,9 +255,9 @@ public class GameManager : MonoBehaviour
         return countersUI;
     }
 
-    public ChooseGameUI GetChooseGameUI()
+    public MainMenuUI GetMainMenuUI()
     {
-        return chooseGameUI;
+        return mainMenuUI;
     }
 
     #endregion

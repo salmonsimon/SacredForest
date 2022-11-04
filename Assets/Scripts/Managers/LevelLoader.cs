@@ -44,7 +44,6 @@ public class LevelLoader : MonoBehaviour
         if (lastTransitionType != null)
         {
             GameManager.instance.SetGamePaused(false);
-            GameManager.instance.GetChooseGameUI().gameObject.SetActive(false);
 
             switch (lastTransitionType)
             {
@@ -67,6 +66,8 @@ public class LevelLoader : MonoBehaviour
 
         if (!GameManager.instance.IsOnMainMenu())
             SetPlayerVariablesAfterTransition();
+        else
+            GameManager.instance.GetMainMenuUI().ResetMainMenu();
 
         yield return new WaitForSeconds(endTransitionDuration);
 
