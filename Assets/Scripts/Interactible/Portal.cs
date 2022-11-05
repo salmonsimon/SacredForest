@@ -7,9 +7,12 @@ public class Portal : GeneralCollider
     private PolygonCollider2D polygonCollider;
     private Animator animator;
 
+    PlayerPortalAnimation playerPortalAnimation;
+
     [SerializeField] private string sceneName;
 
-    PlayerPortalAnimation playerPortalAnimation;
+
+    [SerializeField] private FightingRoute fightingRoute;
 
     protected virtual void Awake()
     {
@@ -31,6 +34,9 @@ public class Portal : GeneralCollider
     private IEnumerator UsePortal()
     {
         GameManager.instance.SetIsTeleporting(true);
+
+        GameManager.instance.GetCurrentProgressManager().SaveCurrentProgress();
+        GameManager.instance.GetCurrentProgressManager().UpdateCurrentFightingRoute(fightingRoute);
 
         animator.SetTrigger("Close");
         GameManager.instance.GetPlayer().GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;

@@ -18,19 +18,22 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AnimationManager animationManager;
     [SerializeField] private DialogueManager dialogueManager;
     [SerializeField] private SFXManager sfxManager;
+    [SerializeField] private CurrentProgressManager currentProgressManager;
 
     #region UI
 
     [SerializeField] private GameObject mainMenu;
+    [SerializeField] private MainMenuUI mainMenuUI;
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private CountersUI countersUI;
 
     #endregion
 
     #endregion
 
     #region Logic Variables
-
-    [SerializeField] private bool onMainMenu = true;
+    
+    [SerializeField] private bool isOnMainMenu = true;
 
     [SerializeField] private bool isGamePaused;
     private bool isTeleporting;
@@ -50,13 +53,20 @@ public class GameManager : MonoBehaviour
             Destroy(animationManager.gameObject);
             Destroy(dialogueManager.gameObject);
             Destroy(sfxManager.gameObject);
+            Destroy(currentProgressManager.gameObject);
 
             Destroy(mainMenu.gameObject);
+            Destroy(mainMenuUI.gameObject);
             Destroy(pauseMenu.gameObject);
+            Destroy(countersUI.gameObject);
         }
         else
         {
             instance = this;
+
+            ProgressManager.Instance.Reset();
+            Settings.Load();
+            Settings.Instance.Deserialize();
         }
     }
     private void OnEnable()
@@ -70,18 +80,25 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (!isGamePaused && !onMainMenu && Input.GetKeyDown(KeyCode.Escape))
+        if (!isGamePaused && !isOnMainMenu && Input.GetKeyDown(KeyCode.Escape))
             PauseGame();
-        else if (isGamePaused && !onMainMenu && Input.GetKeyDown(KeyCode.Escape))
+        else if (isGamePaused && !isOnMainMenu && Input.GetKeyDown(KeyCode.Escape))
             ResumeGame();
     }
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        GameManager.instance.GetAnimationManager().ShowImageUI(Config.SPACE_KEY_GUI, false);
+        GameManager.instance.GetAnimationManager().ShowImageUI(Config.RIGHT_ARROW_GUI, false);
+        GameManager.instance.GetAnimationManager().ShowImageUI(Config.LEFT_ARROW_GUI, false);
 
-        if (!onMainMenu)
+        if (!isOnMainMenu)
         {
             mainMenu.SetActive(false);
+
+            countersUI.gameObject.SetActive(true);
+            currentProgressManager.gameObject.SetActive(true);
+            player.SetActive(true);
 
             GameObject playerSpawnPoint = GameObject.FindGameObjectWithTag(Config.SPAWN_POINT_TAG);
             if (playerSpawnPoint)
@@ -97,8 +114,13 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            player.SetActive(false);
+
             mainMenu.SetActive(true);
+
             pauseMenu.SetActive(false);
+            countersUI.gameObject.SetActive(false);
+            currentProgressManager.gameObject.SetActive(false);
         }
 
         levelLoader.FinishTransition();
@@ -112,37 +134,18 @@ public class GameManager : MonoBehaviour
     public void ToMainMenu()
     {
         SetGamePaused(false);
-        onMainMenu = true;
+        player.SetActive(false);
+
+        currentProgressManager.SaveCurrentProgress();
+
+        isOnMainMenu = true;
+        currentProgressManager.UpdateCurrentFightingRoute(FightingRoute.None);
+
+        ZSerializer.ZSerializerSettings.Instance.selectedSaveFile = -1;
+        ProgressManager.Instance.Reset();
 
         levelLoader.LoadLevel(Config.MAIN_MENU_SCENE_NAME, Config.CROSSFADE_TRANSITION);
         pauseMenu.SetActive(false);
-    }
-
-    public void PlayGame()
-    {
-        onMainMenu = false;
-        levelLoader.LoadLevel(Config.MAIN_SCENE_NAME, Config.CROSSFADE_TRANSITION);
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
-
-    public void DeleteSavedGame()
-    {
-        string path = Application.persistentDataPath;
-
-        DirectoryInfo di = new DirectoryInfo(path);
-
-        foreach (FileInfo file in di.EnumerateFiles())
-        {
-            file.Delete();
-        }
-        foreach (DirectoryInfo dir in di.EnumerateDirectories())
-        {
-            dir.Delete(true);
-        }
     }
 
     public void PauseGame()
@@ -165,6 +168,16 @@ public class GameManager : MonoBehaviour
     public bool IsGamePaused()
     {
         return isGamePaused;
+    }
+
+    public bool IsOnMainMenu()
+    {
+        return isOnMainMenu;
+    }
+
+    public void SetIsOnMainMenu(bool value)
+    {
+        isOnMainMenu = value;
     }
 
     public bool IsTeleporting()
@@ -197,6 +210,7 @@ public class GameManager : MonoBehaviour
 
         player.GetComponent<PlayerMovementController>().Reset();
         player.GetComponent<PlayerAttackController>().Reset();
+        player.GetComponent<DamageReceiver>().Resurrect();
 
         player.gameObject.SetActive(true);
     }
@@ -236,5 +250,31 @@ public class GameManager : MonoBehaviour
         return sfxManager;
     }
 
+    public CurrentProgressManager GetCurrentProgressManager()
+    {
+        return currentProgressManager;
+    }
+
+    public CountersUI GetCountersUI()
+    {
+        return countersUI;
+    }
+
+    public MainMenuUI GetMainMenuUI()
+    {
+        return mainMenuUI;
+    }
+
     #endregion
+
+    public string FloatToTimeFormat(float timeInput)
+    {
+        double timePlayedDouble = (double)timeInput;
+
+        System.TimeSpan time = System.TimeSpan.FromSeconds(timePlayedDouble);
+
+        string displayTime = time.ToString("hh':'mm':'ss");
+
+        return displayTime;
+    }
 }

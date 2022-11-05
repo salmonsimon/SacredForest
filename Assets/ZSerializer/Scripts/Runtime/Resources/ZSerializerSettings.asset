@@ -1,0 +1,176 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1efd7af9bd4fdc48a69c60405eb42f4, type: 3}
+  m_Name: ZSerializerSettings
+  m_EditorClassIdentifier: 
+  packageInitialized: 1
+  debugMode: 2
+  autoRebuildSerializers: 1
+  selectedSaveFile: 0
+  encryptData: 0
+  advancedSerialization: 0
+  serializationType: 0
+  maxBatchCount: 50
+  sceneGroups:
+  - name: Home
+    scenePaths:
+    - ZSerializer/Samples/2 - Scene Groups/House/Scenes/Bedroom
+    - ZSerializer/Samples/2 - Scene Groups/House/Scenes/Kitchen
+  unityComponentTypes:
+  - UnityEngine.HingeJoint2D, UnityEngine.Physics2DModule, Version=0.0.0.0, Culture=neutral,
+    PublicKeyToken=null
+  unityComponentDataList:
+  - typeFullName: UnityEngine.AI.NavMeshAgent, UnityEngine.AIModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    componentNames:
+    - path
+    customVariableEntries: []
+    OnSerialize:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDeserialize:
+      m_PersistentCalls:
+        m_Calls: []
+  - typeFullName: UnityEngine.ParticleSystem, UnityEngine.ParticleSystemModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    componentNames:
+    - randomSeed
+    - useAutoRandomSeed
+    customVariableEntries: []
+    OnSerialize:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDeserialize:
+      m_PersistentCalls:
+        m_Calls: []
+  - typeFullName: UnityEngine.Video.VideoPlayer, UnityEngine.VideoModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    componentNames:
+    - url
+    customVariableEntries: []
+    OnSerialize:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDeserialize:
+      m_PersistentCalls:
+        m_Calls: []
+  - typeFullName: UnityEngine.HingeJoint2D, UnityEngine.Physics2DModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    componentNames: []
+    customVariableEntries:
+    - variableType: Vector2
+      variableName: serializableLimits
+    - variableType: Vector2
+      variableName: serializableMotor
+    OnSerialize:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: -7866980211983801819, guid: 800c2cad99a8dcc489f9ebd3db087bc2, type: 3}
+          m_TargetAssemblyTypeName: CustomHingeSerializer, Assembly-CSharp
+          m_MethodName: SerializeJoint
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDeserialize:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: -7866980211983801819, guid: 800c2cad99a8dcc489f9ebd3db087bc2, type: 3}
+          m_TargetAssemblyTypeName: CustomHingeSerializer, Assembly-CSharp
+          m_MethodName: DeserializeJoint
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  saveGroups:
+  - Main
+  - Settings
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  componentDataDictionary:
+    typeDatas:
+      keys:
+      - B, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      - C, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      - CustomNamespace.A, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      - Anchor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      - NodeSpawner, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      - IntegrityTester, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      - FrameTester, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      - BallMover, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      - GameManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      - Pin, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      - ZSerializer.PersistentMonoBehaviour, ZSerializer.Runtime, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      - ChildTest, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      - CodeScreenshots, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      - DifferentAssemblyMono, DifferentAssembly, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      - ParentTest, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      - SerializationTest, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      values:
+      - isOn: 1
+        groupID: 0
+      - isOn: 1
+        groupID: 0
+      - isOn: 1
+        groupID: 0
+      - isOn: 1
+        groupID: 0
+      - isOn: 1
+        groupID: 0
+      - isOn: 1
+        groupID: 0
+      - isOn: 1
+        groupID: 0
+      - isOn: 1
+        groupID: 0
+      - isOn: 1
+        groupID: 0
+      - isOn: 1
+        groupID: 0
+      - isOn: 1
+        groupID: 0
+      - isOn: 1
+        groupID: 0
+      - isOn: 1
+        groupID: 0
+      - isOn: 1
+        groupID: 0
+      - isOn: 1
+        groupID: 0
+      - isOn: 1
+        groupID: 0

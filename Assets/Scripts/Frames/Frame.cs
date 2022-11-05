@@ -117,6 +117,7 @@ public class Frame : MonoBehaviour
     private void EnemyKilled()
     {
         enemiesKilledCount++;
+        GameManager.instance.GetCurrentProgressManager().IncreaseEnemiesKilledCount();
 
         if (enemiesKilledCount == enemiesTotalCount)
         {
