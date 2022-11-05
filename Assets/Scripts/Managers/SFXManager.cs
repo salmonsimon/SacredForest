@@ -22,11 +22,13 @@ public class SFXManager : MonoBehaviour
     [SerializeField] private List<AudioClip> rockStepClips = new List<AudioClip>();
     [SerializeField] private List<AudioClip> woodStepClips = new List<AudioClip>();
     [SerializeField] private List<AudioClip> dirtStepClips = new List<AudioClip>();
+    [SerializeField] private List<AudioClip> monsterStepClips = new List<AudioClip>();
 
     private int currentGrassStepClipIndex = 0;
     private int currentRockStepClipsIndex = 0;
     private int currentWoodStepClipsIndex = 0;
     private int currentDirtStepClipsIndex = 0;
+    private int currentMonsterStepClipsIndex = 0;
 
     [Header("Landing Sound")]
     [SerializeField] private AudioClip grassLandingClip;
@@ -152,6 +154,16 @@ public class SFXManager : MonoBehaviour
     public void PlayDirtLandingSound()
     {
         PlaySound(dirtLandingClip);
+    }
+
+    public void PlayMonsterStepSound()
+    {
+        PlaySound(monsterStepClips[currentMonsterStepClipsIndex]);
+
+        if (currentMonsterStepClipsIndex < monsterStepClips.Count - 1)
+            currentMonsterStepClipsIndex++;
+        else
+            currentMonsterStepClipsIndex = 0;
     }
 
     #endregion

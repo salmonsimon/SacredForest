@@ -134,4 +134,20 @@ public class GroundMonk : Elemental
         meleeZoneCollider = transformedMeleeZoneCollider;
         enemyMover.AlterRunSpeed(1f);
     }
+
+    public void PlayMonsterStepSound()
+    {
+        GameManager.instance.GetSFXManager().PlayMonsterStepSound();
+        SmallCameraShake();
+    }
+
+    public void SmallCameraShake()
+    {
+        GameManager.instance.GetCinemachineShake().ShakeCamera(2f, Config.SMALL_DELAY);
+    }
+
+    public void TransformationCameraShake()
+    {
+        GameManager.instance.GetCinemachineShake().ShakeCamera(3f, transformationDuration);
+    }
 }
