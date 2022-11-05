@@ -72,13 +72,13 @@ public class GroundMonkAttacks : EnemyAttacks
             switch (attackPattern)
             {
                 case 0:
-                    isAttackingCooldownCoroutine = StartCoroutine(IsAttackingCooldown(.6f));
+                    isAttackingCooldownCoroutine = StartCoroutine(IsAttackingCooldown(.75f));
                     break;
                 case 1:
-                    isAttackingCooldownCoroutine = StartCoroutine(IsAttackingCooldown(.9f));
+                    isAttackingCooldownCoroutine = StartCoroutine(IsAttackingCooldown(1.2f));
                     break;
                 case 2:
-                    isAttackingCooldownCoroutine = StartCoroutine(IsAttackingCooldown(1.4f));
+                    isAttackingCooldownCoroutine = StartCoroutine(IsAttackingCooldown(2f));
                     break;
             }
         }
