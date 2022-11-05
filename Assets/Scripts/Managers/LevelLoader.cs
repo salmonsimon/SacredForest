@@ -64,9 +64,9 @@ public class LevelLoader : MonoBehaviour
     {
         crossFade.SetTrigger(Config.CROSSFADE_END_TRIGGER);
 
-        if (!GameManager.instance.IsOnMainMenu())
-            SetPlayerVariablesAfterTransition();
-        else
+        SetPlayerVariablesAfterTransition();
+
+        if (GameManager.instance.IsOnMainMenu())
             GameManager.instance.GetMainMenuUI().ResetMainMenu();
 
         yield return new WaitForSeconds(endTransitionDuration);

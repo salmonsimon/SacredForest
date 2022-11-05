@@ -44,6 +44,7 @@ public partial class Settings
 
             ZSerializerSettings.Instance.selectedSaveFile = newGameIndex;
             ProgressManager.Save();
+            GameManager.instance.GetCurrentProgressManager().Initialize();
 
             savedGamesAmount++;
             newGameIndex++;

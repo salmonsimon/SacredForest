@@ -30,12 +30,26 @@ public class MainMenuUI : MonoBehaviour
     {
         GameManager.instance.SetIsOnMainMenu(false);
 
+        ZSerializer.ZSerializerSettings.Instance.selectedSaveFile = savedGameIndex;
+        ProgressManager.Load();
+
+        GameManager.instance.GetCurrentProgressManager().Initialize();
+        GameManager.instance.GetCountersUI().UpdateCounters();
+
+        GameManager.instance.GetLevelLoader().LoadLevel(Config.MAIN_SCENE_NAME, Config.CROSSFADE_TRANSITION);
+    }
+
+    public void PlayGameCorrected(int savedGameIndex)
+    {
+        GameManager.instance.SetIsOnMainMenu(false);
+
         int correctedIndex = Settings.Instance.currentSavedGames[savedGameIndex];
 
         ZSerializer.ZSerializerSettings.Instance.selectedSaveFile = correctedIndex;
         ProgressManager.Load();
 
         GameManager.instance.GetCurrentProgressManager().Initialize();
+        GameManager.instance.GetCountersUI().UpdateCounters();
 
         GameManager.instance.GetLevelLoader().LoadLevel(Config.MAIN_SCENE_NAME, Config.CROSSFADE_TRANSITION);
     }
@@ -58,6 +72,9 @@ public class MainMenuUI : MonoBehaviour
     public void DisplaySavedGames()
     {
         int savedGamesAmount = Settings.Instance.savedGamesAmount;
+
+        foreach (GameObject savedGameButton in savedGamesButtons)
+            savedGameButton.SetActive(false);
 
         for (int i = 0; i < savedGamesAmount; i++)
         {
@@ -95,6 +112,13 @@ public class MainMenuUI : MonoBehaviour
         for (int i = 0; i < savedGamePanels.Count; i++)
         {
             savedGamePanels[i].SetActive(false);
+        }
+
+        int savedGamesAmount = Settings.Instance.savedGamesAmount;
+
+        for (int i = 0; i < savedGamesAmount; i++)
+        {
+            savedGamesButtons[i].SetActive(false);
         }
     }
 }

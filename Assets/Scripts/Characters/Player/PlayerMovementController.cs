@@ -14,6 +14,8 @@ public class PlayerMovementController : Mover
         base.Reset();
 
         isAlive = true;
+        FirstRouteFinishedStateChange();
+        SecondRouteFinishedStateChange();
     }
 
     private void Start()
