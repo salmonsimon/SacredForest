@@ -320,6 +320,9 @@ public class Mover : MonoBehaviour
 
     private IEnumerator DoDashAction()
     {
+        StartCoroutine(GetComponent<DamageReceiver>().SetImmune(Config.MEDIUM_DELAY));
+        StartCoroutine(ToDashLayerCooldown(Config.MEDIUM_DELAY));
+
         Cinemachine.CinemachineVirtualCamera vcam = FindObjectOfType<Cinemachine.CinemachineVirtualCamera>();
 
         float lookaheadSmoothing = vcam.GetCinemachineComponent<Cinemachine.CinemachineFramingTransposer>().m_LookaheadSmoothing;
@@ -336,6 +339,15 @@ public class Mover : MonoBehaviour
         vcam.GetCinemachineComponent<Cinemachine.CinemachineFramingTransposer>().m_LookaheadSmoothing = lookaheadSmoothing;
 
         StartCoroutine(DashCooldown());
+    }
+
+    private IEnumerator ToDashLayerCooldown(float duration)
+    {
+        gameObject.layer = LayerMask.NameToLayer(Config.DASH_LAYER);
+
+        yield return new WaitForSeconds(duration);
+
+        gameObject.layer = LayerMask.NameToLayer(Config.PLAYER_LAYER);
     }
 
     public void OnLanding()
