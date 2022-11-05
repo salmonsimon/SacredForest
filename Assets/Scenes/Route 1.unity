@@ -35393,7 +35393,7 @@ MonoBehaviour:
   mainMenuUI: {fileID: 1609019670}
   pauseMenu: {fileID: 1231368549}
   countersUI: {fileID: 1009155021}
-  onMainMenu: 0
+  isOnMainMenu: 1
   isGamePaused: 0
 --- !u!1 &656666303
 GameObject:
