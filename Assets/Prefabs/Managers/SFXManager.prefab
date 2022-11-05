@@ -167,12 +167,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f119cb31ce6654742b1a579ea5f1ae03, type: 3}
   - {fileID: 8300000, guid: 8a4f8b8deecd0ad458be06e397193758, type: 3}
   rockStepClips:
-  - {fileID: 8300000, guid: 885e2935a68e8974795ae51ad00dcd4f, type: 3}
-  - {fileID: 8300000, guid: dc625ea3aa1f10d4ab919fc2ddd8f981, type: 3}
-  woodStepClips:
-  - {fileID: 8300000, guid: f7ccb2e6c82a1e647ae2be84178356a9, type: 3}
-  - {fileID: 8300000, guid: 4fa30003d7ac74d46b1facf9569400e7, type: 3}
-  dirtStepClips:
   - {fileID: 8300000, guid: d23e4682db6542b4f90c2aed016a5bcd, type: 3}
   - {fileID: 8300000, guid: 64d4a667b5f027e459793e89092f1e3a, type: 3}
   - {fileID: 8300000, guid: f77c96c760adeea4b8641a4f246d7c72, type: 3}
@@ -186,7 +180,22 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 08d6926ab61ab5a4fbdb64e02884e649, type: 3}
   - {fileID: 8300000, guid: 94c1a8629cc0e9f4492a8958b61090e4, type: 3}
   - {fileID: 8300000, guid: e5eba76308debc14e86f9d401f91cd3b, type: 3}
+  woodStepClips:
+  - {fileID: 8300000, guid: f7ccb2e6c82a1e647ae2be84178356a9, type: 3}
+  - {fileID: 8300000, guid: 4fa30003d7ac74d46b1facf9569400e7, type: 3}
+  dirtStepClips:
+  - {fileID: 8300000, guid: f02a37e71da76724086024bdf16765c8, type: 3}
+  - {fileID: 8300000, guid: ec14ebd1079f5a1409d14e9acb185258, type: 3}
+  - {fileID: 8300000, guid: 21745a7e9dc0eb9468a82177835053cb, type: 3}
+  monsterStepClips:
+  - {fileID: 8300000, guid: 5ca26fe614165ff45a383b9203878704, type: 3}
+  - {fileID: 8300000, guid: 2a7493f886afcf6438f933656ed78e0a, type: 3}
+  - {fileID: 8300000, guid: 9f3249734cf27214fa83517a0995d2dc, type: 3}
+  - {fileID: 8300000, guid: f88af0f48a4191d4084bb614a90e9ee4, type: 3}
+  - {fileID: 8300000, guid: cca03e3de351156419b928fb0dc1b257, type: 3}
+  - {fileID: 8300000, guid: 892dff8db85277e469bdab849d2d1c55, type: 3}
+  - {fileID: 8300000, guid: ed218eae2ac3425489fe148d94f12f23, type: 3}
   grassLandingClip: {fileID: 8300000, guid: 8aed5f04f7ebe8b40b597c7ced476667, type: 3}
-  rockLandingClip: {fileID: 8300000, guid: 885e2935a68e8974795ae51ad00dcd4f, type: 3}
+  rockLandingClip: {fileID: 8300000, guid: 21745a7e9dc0eb9468a82177835053cb, type: 3}
   woodLandingClip: {fileID: 8300000, guid: 4a0a255188fdc8d4bb57487b70583078, type: 3}
-  dirtLandingClip: {fileID: 8300000, guid: 5ad089ca210e8fe4fb7b93aa3feb600d, type: 3}
+  dirtLandingClip: {fileID: 8300000, guid: 170fd7390fb32c640944d077ff92ade6, type: 3}
