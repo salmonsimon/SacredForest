@@ -31,8 +31,16 @@ public class DialogueManager : MonoBehaviour
             dialogueBubble.UpdateDialogueBubble();
     }
 
+    public void RunBubbleDialogue(DialogueObject dialogueObject, List<Transform> speakers, int fromIndex = 0, int toIndex = -1)
+    {
+        dialogueObject.SetSpeakers(speakers);
+
+        StartCoroutine(StepThroughDialogue(dialogueObject, fromIndex, toIndex));
+    }
+         
     public void ShowDialogue(DialogueObject dialogueObject, Vector3 position, Transform lookAt, string bubbleType = "WhiteBubble")
     {
+        /*
         DialogueBubble dialogueBubble = GetDialogueBubble(bubbleType);
 
         dialogueBubble.finalPosition = position;
@@ -42,14 +50,24 @@ public class DialogueManager : MonoBehaviour
             dialogueBubble.lookAt = lookAt;
             dialogueBubble.originalDisplacement = position - lookAt.position;
         }
+        */
 
-        StartCoroutine(StepThroughDialogue(dialogueObject, dialogueBubble));
+        //StartCoroutine(StepThroughDialogue(dialogueObject, dialogueBubble, 0, 3));
+
+        StartCoroutine(StepThroughDialogue(dialogueObject, 0, 3));
     }
 
-    private DialogueBubble GetDialogueBubble(string bubbleType)
+    //private DialogueBubble GetDialogueBubble(string bubbleType)
+    private DialogueBubble GetDialogueBubble(bool isEnemyBubble)
     {
         DialogueBubble bubblePrefab = null;
 
+        if (!isEnemyBubble)
+            bubblePrefab = whiteDialogueBubblePrefab;
+        else
+            bubblePrefab = blackDialogueBubblePrefab;
+
+        /*
         switch (bubbleType)
         {
             case Config.WHITE_DIALOGUE_BUBBLE:
@@ -60,7 +78,9 @@ public class DialogueManager : MonoBehaviour
                 bubblePrefab = blackDialogueBubblePrefab;
                 break;
         }
+        */
 
+        /*
         DialogueBubble dialogueBubble = dialogueBubbles.Find(x => !x.IsOpen);
 
         if (dialogueBubble == null)
@@ -69,18 +89,62 @@ public class DialogueManager : MonoBehaviour
 
             dialogueBubbles.Add(dialogueBubble);
         }
+        */
+
+        DialogueBubble dialogueBubble = Instantiate(bubblePrefab, dialogueContainer.transform);
+        dialogueBubbles.Add(dialogueBubble);
 
         return dialogueBubble;
     }
 
-    private IEnumerator StepThroughDialogue(DialogueObject dialogueObject, DialogueBubble dialogueBubble)
+    private IEnumerator StepThroughDialogue(DialogueObject dialogueObject, int fromIndex = 0, int toIndex = -1)
     {
+        DialogueBubble dialogueBubble = null;
+        int previousSpeakerIndex = -1;
         bool openedBubble = false;
 
-        foreach (Dialogue dialogue in dialogueObject.Dialogues)
+        if (fromIndex > dialogueObject.Dialogues.Count - 1)
+            yield break;
+
+        if (toIndex == -1 || toIndex > dialogueObject.Dialogues.Count - 1)
+            toIndex = dialogueObject.Dialogues.Count - 1;
+
+        for (int i = fromIndex; i <= toIndex; i++)
         {
+            Dialogue dialogue = dialogueObject.Dialogues[i];
+
+            if (previousSpeakerIndex != -1)
+            {
+                if (previousSpeakerIndex != dialogue.SpeakerIndex)
+                {
+                    dialogueBubbles.Remove(dialogueBubble);
+                    StartCoroutine(dialogueBubble.CloseDialogueBubble());
+                    openedBubble = false;
+
+                    yield return new WaitForSeconds(Config.BIG_DELAY);
+                    yield return new WaitForSeconds(dialogueBubble.AnimationDuration);
+                }
+            }
+
             if (!openedBubble)
             {
+                dialogueBubble = GetDialogueBubble(dialogue.IsEnemyBubble);
+
+                /*
+                GameObject player = GameManager.instance.GetPlayer();
+                Vector3 position = new Vector3(player.transform.position.x + .4f, player.transform.position.y + .4f, player.transform.position.z);
+
+                dialogueBubble.finalPosition = position;
+
+                dialogueBubble.lookAt = player.transform;
+                dialogueBubble.originalDisplacement = position - player.transform.position;
+                */
+
+                dialogueBubble.initialPosition = dialogueObject.Speakers[dialogue.SpeakerIndex].parent.transform.position;
+                dialogueBubble.finalPosition = dialogueObject.Speakers[dialogue.SpeakerIndex].transform.position;
+
+                dialogueBubble.lookAt = dialogueObject.Speakers[dialogue.SpeakerIndex].transform;
+
                 StartCoroutine(dialogueBubble.OpenDialogueBubble(dialogue.Text.Length));
                 openedBubble = true;
 
@@ -90,6 +154,8 @@ public class DialogueManager : MonoBehaviour
                 yield return new WaitForSeconds(Config.BIG_DELAY);
                 yield return new WaitForSeconds(dialogueBubble.AnimationDuration);
             }
+
+            previousSpeakerIndex = dialogue.SpeakerIndex;
 
             yield return RunTypingEffect(dialogue, dialogueBubble);
 
@@ -103,11 +169,12 @@ public class DialogueManager : MonoBehaviour
             yield return null;
 
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space) || dialogueBubble.TypewriterEffect.FinishedWaitingTime);
-            
+
             dialogueBubble.TypewriterEffect.Reset();
             dialogueBubble.ShowSpaceBarIcon(false);
         }
 
+        dialogueBubbles.Remove(dialogueBubble);
         StartCoroutine(dialogueBubble.CloseDialogueBubble());
     }
 

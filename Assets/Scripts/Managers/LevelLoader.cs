@@ -7,6 +7,8 @@ public class LevelLoader : MonoBehaviour
 {
     [SerializeField] private Animator crossFade;
 
+    [SerializeField] private GameObject loadingScreen;
+
     private float startTransitionDuration = Config.START_TRANSITION_DURATION;
     private float endTransitionDuration = Config.END_TRANSITION_DURATION;
     private string lastTransitionType;
@@ -85,5 +87,15 @@ public class LevelLoader : MonoBehaviour
         GameManager.instance.RestartPlayer();
 
         GameManager.instance.GetPlayer().GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+    }
+
+    public Animator GetCrossfadeAnimator()
+    {
+        return crossFade;
+    }
+
+    public GameObject GetLoadingScreen()
+    {
+        return loadingScreen;
     }
 }

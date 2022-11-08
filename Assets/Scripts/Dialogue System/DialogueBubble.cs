@@ -16,9 +16,9 @@ public class DialogueBubble : MonoBehaviour
 
     [SerializeField] GameObject spaceBarIcon;
 
+    [HideInInspector] public Vector3 initialPosition = Vector3.zero;
     [HideInInspector] public Vector3 finalPosition = Vector3.zero;
     [HideInInspector] public Transform lookAt;
-    [HideInInspector] public Vector3 originalDisplacement = Vector3.zero;
 
     private float minWidth = 500;
     private float maxWidth = 800;
@@ -27,7 +27,7 @@ public class DialogueBubble : MonoBehaviour
     private float minHeight = 200;
     private float maxHeight = 350;
     private float heightIncrease = 50;
-    
+
 
     public bool IsOpen { get; private set; }
 
@@ -56,7 +56,7 @@ public class DialogueBubble : MonoBehaviour
 
         if (lookAt)
         {
-            Vector3 displacement = lookAt.position - dialogueBox.transform.position + originalDisplacement;
+            Vector3 displacement = lookAt.position - dialogueBox.transform.position;
 
             dialogueBox.transform.position += displacement;
         }
@@ -111,7 +111,7 @@ public class DialogueBubble : MonoBehaviour
             yield return null;
         }
 
-        ResetDialogueBubble();
+        Destroy(this.gameObject);
     }
 
     private void ResetDialogueBubble()
@@ -128,6 +128,8 @@ public class DialogueBubble : MonoBehaviour
     {
         RectTransform rectTransform = dialogueBox.GetComponent<RectTransform>();
         rectTransform.sizeDelta = GetBubbleDimensions(stringLength);
+
+        rectTransform.pivot = GetComponent<Image>().sprite.pivot / rectTransform.sizeDelta;
     }
 
     private Vector2 GetBubbleDimensions(int stringLength)

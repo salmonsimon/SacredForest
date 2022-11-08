@@ -1,0 +1,121 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a29fe2c6e1452341a540e858dfdab48, type: 3}
+  m_Name: Deaths
+  m_EditorClassIdentifier: 
+  speakers: []
+  dialogues:
+  - title: 
+    text: nice try... it was sarcasm, by the way.
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+  - title: 
+    text: you really are a failure, aren't you?
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+  - title: 
+    text: and i thought this was a beginner's level ...
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+  - title: 
+    text: come one! you can do it ... or maybe not ...
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+  - title: 
+    text: ...
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+  - title: 
+    text: '[anxious coughing]'
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+  - title: 
+    text: how many times have you died yet?
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+  - title: 
+    text: still trying to win?
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+  - title: 
+    text: again, again and again ...
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+  - title: 
+    text: breath in, breath out ...
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+  - title: 
+    text: are you sure you don't need a break?
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+  - title: 
+    text: come one! this one was really easy
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+  - title: 
+    text: easy peasy ... right?
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+  - title: 
+    text: l.o.l
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+  - title: 
+    text: '[sighing miserably]'
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+  - title: 
+    text: you really suck at this, don't you?
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+  - title: 
+    text: maybe after dying a hundred times more, you'll manage... please...
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+  - title: 
+    text: it's not even funny seeing you die like this
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+  - title: 
+    text: i thought you would at least give them some trouble...
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+  - title: 
+    text: ready to lose again?
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+  - title: 
+    text: i'm retiring...
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a29fe2c6e1452341a540e858dfdab48, type: 3}
+  m_Name: 01 - William Wilfred
+  m_EditorClassIdentifier: 
+  speakers:
+  - {fileID: 0}
+  dialogues:
+  - title: William Wilfred - 01
+    text: it seems that you defeated our lackeys, but your luck runs out now!
+    duration: 2
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 1
+  - title: William Wilfred - 02
+    text: you'll never be able to defeat me, William Wilfred, the right hand of the
+      almighty grime bearer... on guard!!!
+    duration: 2
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 1
