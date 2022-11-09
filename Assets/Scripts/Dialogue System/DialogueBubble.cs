@@ -64,8 +64,7 @@ public class DialogueBubble : MonoBehaviour
 
     public IEnumerator OpenDialogueBubble(int stringLength)
     {
-        //TODO: despues borrar este timer
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(Config.LARGE_DELAY);
 
         ScaleBubbleDimensions(stringLength);
 
@@ -143,12 +142,17 @@ public class DialogueBubble : MonoBehaviour
 
             width += widthIncrease * stringLength;
         }
-        else if (stringLength > 28)
+        else if (stringLength > 28 && stringLength <= 112)
         {
             stringLength -= 28;
 
             width = maxWidth;
-            height += heightIncrease * (stringLength / 28);
+
+            while (stringLength > 0)
+            {
+                height += heightIncrease;
+                stringLength -= 28;
+            }
         }
         else if (stringLength > 112)
         {

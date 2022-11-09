@@ -20,6 +20,7 @@ public class Config
     #region Layers
 
     public const string PLAYER_LAYER = "Player";
+    public const string NPC_LAYER = "NPC";
     public const string ENEMY_LAYER = "Enemy";
     public const string DASH_LAYER = "Dash";
     public const string DEAD_LAYER = "Dead";
@@ -68,6 +69,7 @@ public class Config
 
     public const float SMALL_DELAY = .1f;
     public const float MEDIUM_DELAY = .2f;
+    public const float LARGE_DELAY = .3f;
     public const float BIG_DELAY = .5f;
 
     #endregion

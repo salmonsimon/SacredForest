@@ -21,14 +21,23 @@ MonoBehaviour:
     duration: 2
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: Foxy - 02
     text: but the selinam kingdom has grown powerful wizards too!
     duration: 2
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: Foxy - 03
     text: ' please step inside the portal and rescue him, before is too late... I''m
       sure he''ll lend you a hand in return'
     duration: 2
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
+  - title: Akate - 01
+    text: mhm!
+    duration: 2
+    isSkippable: 1
+    speakerIndex: 1
+    isEnemyBubble: 0
