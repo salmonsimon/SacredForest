@@ -18,20 +18,20 @@ MonoBehaviour:
   dialogues:
   - title: Grim Bearer - 01
     text: i can't believe this is happening... you defeated me! ... the grim bearer!!!
-    duration: 2
+    duration: 5
     isSkippable: 1
     speakerIndex: 0
     isEnemyBubble: 1
   - title: Akate - 01
     text: ...
-    duration: 1
+    duration: 3
     isSkippable: 1
     speakerIndex: 1
     isEnemyBubble: 0
   - title: Grim Bearer - 02
     text: anyway... you're doomed! the other rounders are way stronger than me, this
       forest is sentenced to its death!
-    duration: 2
+    duration: 6
     isSkippable: 1
     speakerIndex: 0
     isEnemyBubble: 1

@@ -5087,7 +5087,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 1019188038, guid: cae3e31d970ed03488582496e5126f50, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.33, y: 0.32}
@@ -5113,6 +5113,7 @@ MonoBehaviour:
   speakers:
   - {fileID: 2185183941544594824}
   playerCheck: {fileID: 4108718526408562381}
+  fightingRoute: 0
 --- !u!1 &2607302049267287285
 GameObject:
   m_ObjectHideFlags: 0

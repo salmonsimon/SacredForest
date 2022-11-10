@@ -190,6 +190,8 @@ public class Cutscene04 : MonoBehaviour
         if (!GameManager.instance.GetDialogueManager().IsRunning && playableDirector.state == PlayState.Playing)
             playableDirector.Stop();
 
+        groundMonk.GetComponent<EnemyMover>().Flip(new Vector2(groundMonk.transform.position.x - 1, 0));
+
         playableDirector.extrapolationMode = DirectorWrapMode.None;
 
         playableDirector.playableAsset = timelines[2];

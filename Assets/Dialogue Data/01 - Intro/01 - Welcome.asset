@@ -18,75 +18,75 @@ MonoBehaviour:
   dialogues:
   - title: Foxy - 01
     text: ... can't believe the tales were true!
-    duration: 1
+    duration: 4
     isSkippable: 1
     speakerIndex: 0
     isEnemyBubble: 0
   - title: Foxy - 02
     text: '"On the grimmest days of this forest, its guardian, Akate, will come and
       defend it against evil foes"'
-    duration: 2
+    duration: 6
     isSkippable: 1
     speakerIndex: 0
     isEnemyBubble: 0
   - title: Foxy - 03
     text: '"Even if killed, rumor says that she''ll come back to life until her purpose
       is accomplished"'
-    duration: 2
+    duration: 6
     isSkippable: 1
     speakerIndex: 0
     isEnemyBubble: 0
   - title: Akate - 01
     text: ...
-    duration: 1
+    duration: 3
     isSkippable: 1
     speakerIndex: 1
     isEnemyBubble: 0
   - title: Foxy - 04
     text: Oh! are you awake? Oh great guardian!
-    duration: 2
+    duration: 4
     isSkippable: 1
     speakerIndex: 0
     isEnemyBubble: 0
   - title: Foxy - 05
     text: you descended from the skies, just like the old tales had sung since the
       forgotten ages, is unbelievable!
-    duration: 2
+    duration: 6
     isSkippable: 1
     speakerIndex: 0
     isEnemyBubble: 0
   - title: Foxy - 06
     text: i'm sorry to bother you just after you woke up, but we are in a pinch right
       now...
-    duration: 2
+    duration: 6
     isSkippable: 1
     speakerIndex: 0
     isEnemyBubble: 0
   - title: Foxy - 07
     text: the selinam kingdom has gotten stronger over the last decade, and with
       its strength they've become greddier...
-    duration: 2
+    duration: 6
     isSkippable: 1
     speakerIndex: 0
     isEnemyBubble: 0
   - title: Foxy - 08
     text: they broke our peace treaty and captured our 3 family heads, the sly, the
       swift and the sage ...
-    duration: 4
+    duration: 6
     isSkippable: 1
     speakerIndex: 0
     isEnemyBubble: 0
   - title: Foxy - 09
     text: please help us get them back... if they manage to steal their powers, the
       forest... no, the world will perish!
-    duration: 2
+    duration: 6
     isSkippable: 1
     speakerIndex: 0
     isEnemyBubble: 0
   - title: Foxy - 10
     text: follow me, the sly was last seen trying to protect the teal forest! he
       might still be there!
-    duration: 2
+    duration: 6
     isSkippable: 1
     speakerIndex: 0
     isEnemyBubble: 0

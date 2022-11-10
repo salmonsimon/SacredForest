@@ -17,23 +17,27 @@ MonoBehaviour:
   dialogues:
   - title: The Sly - 01
     text: thanks, i'm finally free!
-    duration: 1
-    isSkippable: 1
-    speakerIndex: 0
-  - title: The Sly - 02
-    text: 'as promised, i''ll teach you a technique that will help you in this endeavor... '
-    duration: 2
-    isSkippable: 1
-    speakerIndex: 0
-  - title: The Sly - 03
-    text: this technique has been passed down for generations in our family, it's
-      called dash, and its amazing!
     duration: 3
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
+  - title: The Sly - 02
+    text: 'as promised, i''ll teach you a technique that will help you in this endeavor... '
+    duration: 4
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: The Sly - 03
+    text: this technique has been passed down for generations in our family, it's
+      called dash, and its amazing!
+    duration: 6
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
   - title: The Sly - 04
     text: besides being able to move fast, you won't get hit by any attack when you're
       doing this move, remember that!
-    duration: 5
+    duration: 6
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0

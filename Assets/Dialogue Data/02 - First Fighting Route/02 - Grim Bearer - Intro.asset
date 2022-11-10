@@ -17,20 +17,20 @@ MonoBehaviour:
   dialogues:
   - title: Grim Bearer - 01
     text: seems that another challenger has arrived, sadly, the outcome won't change...
-    duration: 2
+    duration: 5
     isSkippable: 1
     speakerIndex: 0
     isEnemyBubble: 1
   - title: Grim Bearer - 02
     text: is that old fox that important to you guys? well, that doesn't even matter
       since you're already dead!
-    duration: 2
+    duration: 6
     isSkippable: 1
     speakerIndex: 0
     isEnemyBubble: 1
   - title: Grim Bearer - 03
     text: no one will be able to pass through the immovable rock wall!!!
-    duration: 2
+    duration: 4
     isSkippable: 1
     speakerIndex: 0
     isEnemyBubble: 1

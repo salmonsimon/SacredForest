@@ -17,14 +17,14 @@ MonoBehaviour:
   dialogues:
   - title: William Wilfred - 01
     text: it seems that you defeated our lackeys, but your luck runs out now!
-    duration: 2
+    duration: 4
     isSkippable: 1
     speakerIndex: 0
     isEnemyBubble: 1
   - title: William Wilfred - 02
     text: you'll never be able to defeat me, William Wilfred, the right hand of the
       almighty grime bearer... on guard!!!
-    duration: 2
+    duration: 6
     isSkippable: 1
     speakerIndex: 0
     isEnemyBubble: 1

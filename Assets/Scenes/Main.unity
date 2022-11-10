@@ -40132,14 +40132,8 @@ PlayableDirector:
     value: {fileID: 249695532}
   - key: {fileID: 8420339616829128389, guid: de660983c1f0c2f4698a2fe694051877, type: 2}
     value: {fileID: 249695532}
-  - key: {fileID: -5499178606392702142, guid: de660983c1f0c2f4698a2fe694051877, type: 2}
-    value: {fileID: 249695532}
   - key: {fileID: -7423533189885798640, guid: de660983c1f0c2f4698a2fe694051877, type: 2}
     value: {fileID: 1708248214}
-  - key: {fileID: 5540250180656662668, guid: de660983c1f0c2f4698a2fe694051877, type: 2}
-    value: {fileID: 1708248214}
-  - key: {fileID: 2052344206225820276, guid: de660983c1f0c2f4698a2fe694051877, type: 2}
-    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &1771974626
@@ -41062,6 +41056,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed2467affc1bb7644b45d9687bbf5c8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  foxyIntro: {fileID: 2102027488392276717}
   foxyNPC: {fileID: 2102027488208565476}
 --- !u!1 &1989748753
 GameObject:
@@ -42001,36 +41996,13 @@ PrefabInstance:
       propertyPath: goalPoint
       value: 
       objectReference: {fileID: 1462819826}
-    - target: {fileID: 2102027488392276721, guid: 7a547ad780afc5942a4be6892335e9b9, type: 3}
-      propertyPath: _zuid
-      value: ba68a3582579b984188f9b417fe431db
-      objectReference: {fileID: 0}
-    - target: {fileID: 2102027488392276721, guid: 7a547ad780afc5942a4be6892335e9b9, type: 3}
-      propertyPath: _gozuid
-      value: 2e739e5302ef654428a751a032281935
-      objectReference: {fileID: 0}
-    - target: {fileID: 2102027488392276721, guid: 7a547ad780afc5942a4be6892335e9b9, type: 3}
-      propertyPath: serializedComponents.Array.data[0].zuid
-      value: 474e227ff0348d649b483d25c7626456
-      objectReference: {fileID: 0}
-    - target: {fileID: 2102027488392276721, guid: 7a547ad780afc5942a4be6892335e9b9, type: 3}
-      propertyPath: serializedComponents.Array.data[1].zuid
-      value: 28e06abf337d7f1469da2e06fb2bda99
-      objectReference: {fileID: 0}
-    - target: {fileID: 2102027488392276721, guid: 7a547ad780afc5942a4be6892335e9b9, type: 3}
-      propertyPath: serializedComponents.Array.data[2].zuid
-      value: 1dd8635d4ad122d4bbbb8f51e2a87067
-      objectReference: {fileID: 0}
-    - target: {fileID: 2102027488392276721, guid: 7a547ad780afc5942a4be6892335e9b9, type: 3}
-      propertyPath: serializedComponents.Array.data[3].zuid
-      value: 21b1f917aa74afc4abad1cc8cfe683a7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2102027488392276721, guid: 7a547ad780afc5942a4be6892335e9b9, type: 3}
-      propertyPath: serializedComponents.Array.data[4].zuid
-      value: 2101db040851c1844a3a1d74be9321f9
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a547ad780afc5942a4be6892335e9b9, type: 3}
+--- !u!1 &2102027488392276717 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2102027488352298951, guid: 7a547ad780afc5942a4be6892335e9b9, type: 3}
+  m_PrefabInstance: {fileID: 2102027488392276716}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4108718526958164115
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42038,10 +42010,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 168517696}
     m_Modifications:
-    - target: {fileID: 2607302048780086385, guid: 2ca427887d512f04a83ba07e02d365d3, type: 3}
-      propertyPath: m_FlipX
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2607302048780086386, guid: 2ca427887d512f04a83ba07e02d365d3, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -42089,10 +42057,6 @@ PrefabInstance:
     - target: {fileID: 2607302048780086391, guid: 2ca427887d512f04a83ba07e02d365d3, type: 3}
       propertyPath: m_Name
       value: Foxy - NPC
-      objectReference: {fileID: 0}
-    - target: {fileID: 2607302048780086391, guid: 2ca427887d512f04a83ba07e02d365d3, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ca427887d512f04a83ba07e02d365d3, type: 3}

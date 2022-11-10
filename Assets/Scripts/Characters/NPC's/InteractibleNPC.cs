@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class InteractibleNPC : MonoBehaviour
+public class InteractibleNPC : NPC
 {
     [SerializeField] private DialogueObject unclearedDialogues;
     [SerializeField] private DialogueObject clearedDialogues;
@@ -12,77 +12,94 @@ public class InteractibleNPC : MonoBehaviour
 
     [SerializeField] private BoxCollider playerCheck;
 
-    private Vector3 originalScale;
+    [SerializeField] FightingRoute fightingRoute;
 
     private List<int> randomizedDialoguesIndexList;
     private int currentDialogueIndex = 0;
 
     private float lastTimeShownSurprise = 0;
 
-    private void Start()
+    protected override void Start()
     {
-        originalScale = transform.localScale;
+        base.Start();
 
-        if (ProgressManager.Instance.finishedRoute1)
+        bool clearedFightingRoute = false;
+
+        switch (fightingRoute)
+        {
+            case FightingRoute.None:
+                clearedFightingRoute = true;
+                break;
+
+            case FightingRoute.Route1:
+
+                if (GameManager.instance.GetCurrentProgressManager().FinishedRoute1)
+                    clearedFightingRoute = true;
+
+                break;
+
+            case FightingRoute.Route2:
+
+                if (GameManager.instance.GetCurrentProgressManager().FinishedRoute2)
+                    clearedFightingRoute = true;
+
+                break;
+
+            case FightingRoute.Route3:
+
+                if (GameManager.instance.GetCurrentProgressManager().FinishedRoute3)
+                    clearedFightingRoute = true;
+
+                break;
+
+            case FightingRoute.Route4:
+
+                if (GameManager.instance.GetCurrentProgressManager().FinishedRoute4)
+                    clearedFightingRoute = true;
+
+                break;
+        }
+
+        if (clearedFightingRoute)
             dialogues = clearedDialogues;
         else
             dialogues = unclearedDialogues;
 
         dialogues.SetSpeakers(speakers);
 
-        randomizedDialoguesIndexList = Enumerable.Range(1, dialogues.Dialogues.Count).ToList();
-        randomizedDialoguesIndexList.Shuffle();
+        if (dialogues.Dialogues.Count > 0)
+        {
+            randomizedDialoguesIndexList = Enumerable.Range(1, dialogues.Dialogues.Count).ToList();
+            randomizedDialoguesIndexList.Shuffle();
+        }
+        
     }
 
-    private void Update()
+    protected override void Update()
     {
-        float relativePlayerPositionX = GameManager.instance.GetPlayer().transform.position.x - transform.position.x;
-        Flip(new Vector2(relativePlayerPositionX, 0));
+        base.Update();
 
-        if (!GameManager.instance.GetDialogueManager().IsRunning && playerCheck.IsColliding())
+        if (playerCheck != null)
         {
-            if (lastTimeShownSurprise + 5f < Time.time)
+            if (!GameManager.instance.GetDialogueManager().IsRunning && playerCheck.IsColliding())
             {
-                GameManager.instance.ShowText("!", 1, Color.white, new Vector3(transform.position.x, transform.position.y + 0.32f, 0), Vector3.up * .05f, 2, transform);
-                lastTimeShownSurprise = Time.time;
-            }
+                if (lastTimeShownSurprise + 5f < Time.time)
+                {
+                    GameManager.instance.ShowText("!", 1, Color.white, new Vector3(transform.position.x, transform.position.y + 0.32f, 0), Vector3.up * .05f, 2, transform);
+                    lastTimeShownSurprise = Time.time;
+                }
 
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                int dialogueToPlay = randomizedDialoguesIndexList[currentDialogueIndex];
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    int dialogueToPlay = randomizedDialoguesIndexList[currentDialogueIndex];
 
-                GameManager.instance.GetDialogueManager().RunBubbleDialogue(unclearedDialogues, speakers, dialogueToPlay, dialogueToPlay);
+                    GameManager.instance.GetDialogueManager().RunBubbleDialogue(unclearedDialogues, speakers, dialogueToPlay, dialogueToPlay);
 
-                if (currentDialogueIndex == dialogues.Dialogues.Count - 1)
-                    currentDialogueIndex = 0;
-                else
-                    currentDialogueIndex++;
-            }
-        }
-    }
-
-    public void Flip(Vector2 movement)
-    {
-        if (movement.x > 0)
-        {
-            if (originalScale.x > 0)
-            {
-                transform.localScale = originalScale;
-            }
-            else
-            {
-                transform.localScale = new Vector3(originalScale.x * -1f, originalScale.y, originalScale.z);
-            }
-        }
-        else if (movement.x < 0)
-        {
-            if (originalScale.x > 0)
-            {
-                transform.localScale = new Vector3(originalScale.x * -1f, originalScale.y, originalScale.z);
-            }
-            else
-            {
-                transform.localScale = originalScale;
+                    if (currentDialogueIndex == dialogues.Dialogues.Count - 1)
+                        currentDialogueIndex = 0;
+                    else
+                        currentDialogueIndex++;
+                }
             }
         }
     }

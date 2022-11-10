@@ -18,28 +18,33 @@ MonoBehaviour:
   dialogues:
   - title: The Sly - 01
     text: who are you? ... are you the one who will steal my powers?! ...
-    duration: 2
+    duration: 4
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: Akate - 01
     text: ...
-    duration: 2
+    duration: 3
     isSkippable: 1
     speakerIndex: 1
+    isEnemyBubble: 0
   - title: The Sly - 02
     text: what?! the forest guardian of the legends... Akate?!
-    duration: 2
+    duration: 4
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: The Sly - 03
     text: you were real this whole time! i'm really glad that you're the one helping
       us, now there is hope!
-    duration: 2
+    duration: 6
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: The Sly - 04
     text: in exchange for rescuing me, i'll teach you something great! ... first
       let me out of here tho...
-    duration: 2
+    duration: 6
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0

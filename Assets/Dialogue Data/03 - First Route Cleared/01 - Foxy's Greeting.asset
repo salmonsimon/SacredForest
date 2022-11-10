@@ -18,11 +18,13 @@ MonoBehaviour:
   - title: Foxy - 01
     text: thanks to your help our uncle is back home! we will keep watch of the teal
       forest now, rest assured...
-    duration: 3
+    duration: 6
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: Foxy - 02
     text: if you have time, pay a visit to our family! thanks again!
-    duration: 2
+    duration: 4
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0

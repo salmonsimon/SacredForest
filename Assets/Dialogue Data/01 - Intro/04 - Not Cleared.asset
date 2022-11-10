@@ -17,33 +17,39 @@ MonoBehaviour:
   dialogues:
   - title: Foxy - 01
     text: good luck!
-    duration: 2
+    duration: 3
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: Foxy - 02
     text: please save our cousin!
-    duration: 2
+    duration: 3
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: Foxy - 03
     text: we believe in you!!!
-    duration: 2
+    duration: 3
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: Foxy - 04
     text: take your time, if our cousin was captured the route ahead must be really
       challenging
-    duration: 2
+    duration: 4
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: Foxy - 05
     text: are you gonna challenge it again? good luck!
-    duration: 2
+    duration: 3
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: Foxy - 06
     text: we are gonna sing song about you after this war is over! Akate will never
       be forgotten, i swear it!
-    duration: 2
+    duration: 4
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0

@@ -32,12 +32,12 @@ public class Cutscene02 : MonoBehaviour
 
     private IEnumerator Play()
     {
-        GameManager.instance.GetPlayer().GetComponent<PlayerAttackController>().enabled = false;
-        GameManager.instance.GetPlayer().GetComponent<PlayerMovementController>().enabled = false;
-        GameManager.instance.GetPlayer().GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        GameObject player = GameManager.instance.GetPlayer();
 
-        RuntimeAnimatorController playerAnimator = GameManager.instance.GetPlayer().GetComponent<Animator>().runtimeAnimatorController;
-        GameManager.instance.GetPlayer().GetComponent<Animator>().runtimeAnimatorController = null;
+        player.GetComponent<PlayerAttackController>().enabled = false;
+        player.GetComponent<PlayerMovementController>().enabled = false;
+
+        StartCoroutine(WaitUntilGroundedToFreezePlayer(player));
 
         GameObject foxy = GameObject.FindWithTag("Foxy");
         foxy.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
@@ -47,10 +47,7 @@ public class Cutscene02 : MonoBehaviour
         playableDirector.playableAsset = timelines[0];
 
         Bind(playableDirector, "Foxy Animations", foxy.GetComponent<Animator>());
-        Bind(playableDirector, "Foxy Movement", foxy.GetComponent<Animator>());
         Bind(playableDirector, "Akate Animations", GameManager.instance.GetPlayer().GetComponent<Animator>());
-        Bind(playableDirector, "Akate Movement", GameManager.instance.GetPlayer().GetComponent<Animator>());
-        Bind(playableDirector, "Crossfade Animation", GameManager.instance.GetLevelLoader().GetCrossfadeAnimator());
 
         playableDirector.Play();
 
@@ -70,11 +67,8 @@ public class Cutscene02 : MonoBehaviour
         GameManager.instance.GetPlayer().GetComponent<PlayerMovementController>().enabled = true;
         GameManager.instance.GetPlayer().GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
 
-        GameManager.instance.GetPlayer().GetComponent<Animator>().runtimeAnimatorController = playerAnimator;
+        foxy.AddComponent<NPC>();
 
-        foxy.SetActive(false);
-
-        foxyNPC.SetActive(true);
         this.enabled = false;
     }
 
@@ -89,5 +83,16 @@ public class Cutscene02 : MonoBehaviour
                 break;
             }
         }
+    }
+
+    private IEnumerator WaitUntilGroundedToFreezePlayer(GameObject player)
+    {
+        while (!player.GetComponent<Mover>().IsGrounded())
+        {
+            yield return null;
+        }
+
+        player.GetComponent<PlayerMovementController>().StayInPosition();
+        player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
     }
 }
