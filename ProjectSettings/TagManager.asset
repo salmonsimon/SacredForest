@@ -16,6 +16,7 @@ TagManager:
   - Ground Type
   - NPC
   - Foxy
+  - Cutscene
   layers:
   - Default
   - TransparentFX

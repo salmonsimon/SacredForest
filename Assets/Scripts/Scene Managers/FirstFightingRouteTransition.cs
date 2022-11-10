@@ -58,11 +58,10 @@ public class FirstFightingRouteTransition : MonoBehaviour
 
     private IEnumerator ActivateGroundMonk()
     {
-        yield return new WaitForSeconds(Config.MEDIUM_DELAY);
 
         groundMonk.GetComponent<Animator>().SetTrigger("Fight");
 
-        yield return new WaitForSeconds(Config.LARGE_DELAY);
+        yield return null;
 
         groundMonk.GetComponent<GroundMonk>().enabled = true;
     }

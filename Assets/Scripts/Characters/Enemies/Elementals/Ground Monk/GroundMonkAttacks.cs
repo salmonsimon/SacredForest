@@ -141,6 +141,4 @@ public class GroundMonkAttacks : EnemyAttacks
 
         return base.IsAttackingCooldown(duration);
     }
-
-
 }
