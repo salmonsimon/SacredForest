@@ -15,17 +15,22 @@ public class Cutscene01 : MonoBehaviour
 
     [SerializeField] private List<TimelineAsset> timelines;
 
-    [SerializeField] private List<Transform> speakers = new List<Transform>();
+    private List<Transform> speakers = new List<Transform>();
 
     private void Start()
     {
-        playableDirector = GetComponent<PlayableDirector>();
+        if (GameManager.instance.GetCurrentProgressManager().FirstTimePlaying)
+        {
+            playableDirector = GetComponent<PlayableDirector>();
 
-        foxyDialogueTransform = GameObject.Find("Foxy/DialogueBubble Transform").transform;
-        akateDialogueTransform = GameManager.instance.GetPlayer().transform.Find("DialogueBubble Transform").transform;
-        speakers = new List<Transform>() { foxyDialogueTransform, akateDialogueTransform };
+            foxyDialogueTransform = GameObject.Find("Foxy - Intro/DialogueBubble Transform").transform;
+            akateDialogueTransform = GameManager.instance.GetPlayer().transform.Find("DialogueBubble Transform").transform;
+            speakers = new List<Transform>() { foxyDialogueTransform, akateDialogueTransform };
 
-        StartCoroutine(Play());
+            StartCoroutine(Play());
+        }
+        else 
+            Destroy(this.gameObject);
     }
 
     private IEnumerator Play()

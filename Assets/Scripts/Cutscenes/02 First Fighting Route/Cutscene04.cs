@@ -4,30 +4,25 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
-public class Cutscene02 : MonoBehaviour
+public class Cutscene04 : MonoBehaviour
 {
-    private Transform foxyDialogueTransform;
-    private Transform akateDialogueTransform;
+    private Transform enemyDialogueTransform;
 
-    [SerializeField] private DialogueObject dialogue;
+    [SerializeField] private List<DialogueObject> dialogues;
 
     private PlayableDirector playableDirector;
 
     [SerializeField] private List<TimelineAsset> timelines;
 
     private List<Transform> speakers = new List<Transform>();
-
-    [SerializeField] private GameObject foxyNPC;
+    private GameObject enemy;
 
     private void Start()
     {
         playableDirector = GetComponent<PlayableDirector>();
 
-        foxyDialogueTransform = GameObject.Find("Foxy - Intro/DialogueBubble Transform").transform;
-        akateDialogueTransform = GameManager.instance.GetPlayer().transform.Find("DialogueBubble Transform").transform;
-        speakers = new List<Transform>() { foxyDialogueTransform, akateDialogueTransform };
-
-        StartCoroutine(Play());
+        if (!ProgressManager.Instance.finishedRoute1)
+            StartCoroutine(Play());
     }
 
     private IEnumerator Play()
@@ -39,24 +34,20 @@ public class Cutscene02 : MonoBehaviour
         RuntimeAnimatorController playerAnimator = GameManager.instance.GetPlayer().GetComponent<Animator>().runtimeAnimatorController;
         GameManager.instance.GetPlayer().GetComponent<Animator>().runtimeAnimatorController = null;
 
-        GameObject foxy = GameObject.FindWithTag("Foxy");
-        foxy.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-        foxy.GetComponent<FoxyController>().StayInPosition();
-        foxy.GetComponent<FoxyController>().enabled = false;
+        enemy = GameObject.FindGameObjectWithTag("Enemy");
+        enemyDialogueTransform = enemy.transform.Find("DialogueBubbleHolder").transform;
+        speakers = new List<Transform>() { enemyDialogueTransform };
 
         playableDirector.playableAsset = timelines[0];
 
-        Bind(playableDirector, "Foxy Animations", foxy.GetComponent<Animator>());
-        Bind(playableDirector, "Foxy Movement", foxy.GetComponent<Animator>());
+        Bind(playableDirector, "Monk Animations", enemy.GetComponent<Animator>());
         Bind(playableDirector, "Akate Animations", GameManager.instance.GetPlayer().GetComponent<Animator>());
-        Bind(playableDirector, "Akate Movement", GameManager.instance.GetPlayer().GetComponent<Animator>());
-        Bind(playableDirector, "Crossfade Animation", GameManager.instance.GetLevelLoader().GetCrossfadeAnimator());
 
         playableDirector.Play();
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
 
-        GameManager.instance.GetDialogueManager().RunBubbleDialogue(dialogue, speakers);
+        GameManager.instance.GetDialogueManager().RunBubbleDialogue(dialogues[0], speakers);
 
         while (GameManager.instance.GetDialogueManager().IsRunning)
         {
@@ -72,9 +63,10 @@ public class Cutscene02 : MonoBehaviour
 
         GameManager.instance.GetPlayer().GetComponent<Animator>().runtimeAnimatorController = playerAnimator;
 
-        foxy.SetActive(false);
+        yield return new WaitForSeconds(Config.SMALL_DELAY);
 
-        foxyNPC.SetActive(true);
+        enemy.GetComponent<Animator>().SetTrigger("Fight");
+        enemy.GetComponent<GroundMonk>().enabled = true;
         this.enabled = false;
     }
 

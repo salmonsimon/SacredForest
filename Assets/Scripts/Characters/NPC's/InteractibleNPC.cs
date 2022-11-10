@@ -17,6 +17,8 @@ public class InteractibleNPC : MonoBehaviour
     private List<int> randomizedDialoguesIndexList;
     private int currentDialogueIndex = 0;
 
+    private float lastTimeShownSurprise = 0;
+
     private void Start()
     {
         originalScale = transform.localScale;
@@ -39,6 +41,12 @@ public class InteractibleNPC : MonoBehaviour
 
         if (!GameManager.instance.GetDialogueManager().IsRunning && playerCheck.IsColliding())
         {
+            if (lastTimeShownSurprise + 5f < Time.time)
+            {
+                GameManager.instance.ShowText("!", 1, Color.white, new Vector3(transform.position.x, transform.position.y + 0.32f, 0), Vector3.up * .05f, 2, transform);
+                lastTimeShownSurprise = Time.time;
+            }
+
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 int dialogueToPlay = randomizedDialoguesIndexList[currentDialogueIndex];

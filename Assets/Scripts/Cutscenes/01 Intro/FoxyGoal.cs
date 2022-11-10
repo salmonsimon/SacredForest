@@ -22,6 +22,8 @@ public class FoxyGoal : MonoBehaviour
 
             GameObject.FindGameObjectWithTag("Foxy").GetComponent<FoxyController>().FlipTowardsPlayer();
             cutscenesObject.GetComponent<Cutscene02>().enabled = true;
+
+            this.gameObject.SetActive(false);
         }
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 public class CurrentProgressManager : MonoBehaviour
 {
     [SerializeField] private bool firstTimePlaying;
+    public bool FirstTimePlaying { get { return firstTimePlaying; } set { firstTimePlaying = value; }}
 
     [SerializeField] private FightingRoute currentFightingRoute;
 
@@ -93,7 +94,7 @@ public class CurrentProgressManager : MonoBehaviour
 
     public void Initialize()
     {
-        //ProgressManager.Load();
+        ProgressManager.Load();
 
         firstTimePlaying = ProgressManager.Instance.firstTimePlaying;
 

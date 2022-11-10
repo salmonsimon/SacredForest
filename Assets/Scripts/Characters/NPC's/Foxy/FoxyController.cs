@@ -53,6 +53,8 @@ public class FoxyController : MonoBehaviour
 
     #endregion
 
+    private Coroutine isMovingCoroutine;
+ 
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -72,14 +74,18 @@ public class FoxyController : MonoBehaviour
 
         isBeingFollowed = followCheck.IsColliding();
 
+        if (isBeingFollowed && isMoving)
+        {
+            StopCoroutine(isMovingCoroutine);
+            isMovingCoroutine = StartCoroutine(IsMovingCooldown());
+        }
+
         relativePositionToGoalX = goalPoint.position.x - transform.position.x;
 
         if (relativePositionToGoalX < .1f)
         {
             hasArrived = true;
             StayInPosition();
-            rigidBody.bodyType = RigidbodyType2D.Static;
-            this.enabled = false;
         }
     }
 
@@ -134,7 +140,7 @@ public class FoxyController : MonoBehaviour
             movement = Vector2.left;
         }
 
-        StartCoroutine(IsMovingCooldown());
+        isMovingCoroutine = StartCoroutine(IsMovingCooldown());
         return movement;
     }
 

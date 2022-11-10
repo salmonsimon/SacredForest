@@ -133,6 +133,11 @@ public class Enemy : MonoBehaviour
         isStartled = false;
     }
 
+    public void SetStartleDuration(float duration)
+    {
+        startleDuration = duration;
+    }
+
     protected virtual void Damaged()
     {
         if (isAlive)

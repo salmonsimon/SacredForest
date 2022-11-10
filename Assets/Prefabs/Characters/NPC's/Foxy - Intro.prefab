@@ -152,9 +152,9 @@ GameObject:
   - component: {fileID: 9165356680343965406}
   - component: {fileID: 1357917963378030120}
   - component: {fileID: 2102027488352298973}
-  - component: {fileID: 7068968656081626163}
-  m_Layer: 0
-  m_Name: Foxy
+  - component: {fileID: 2102027488392276721}
+  m_Layer: 13
+  m_Name: Foxy - Intro
   m_TagString: Foxy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -309,25 +309,66 @@ MonoBehaviour:
   groundCheck: {fileID: 2102027488143269767}
   hasToJumpCheck: {fileID: 2102027488673808806}
   followCheck: {fileID: 2102027489911934791}
-  runSpeed: 2
+  runSpeed: 2.5
   movingTime: 1
---- !u!114 &7068968656081626163
+--- !u!114 &2102027488392276721
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2102027488352298951}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ee12e08805042c448e37b12e79fef8b, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d3dbe3a42223b24a8cc44e36ba653fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unclearedDialogues: {fileID: 11400000, guid: 7aa2cd437ad9e924593ebb76b25973e1, type: 2}
-  clearedDialogues: {fileID: 11400000, guid: 99599381aef295b4fabca23b400089ec, type: 2}
-  speakers:
-  - {fileID: 2834537182814815800}
-  playerCheck: {fileID: 944840061}
+  onPreSave:
+    m_PersistentCalls:
+      m_Calls: []
+    targetZUIDs: []
+  onPreLoad:
+    m_PersistentCalls:
+      m_Calls: []
+    targetZUIDs: []
+  onPostSave:
+    m_PersistentCalls:
+      m_Calls: []
+    targetZUIDs: []
+  onPostLoad:
+    m_PersistentCalls:
+      m_Calls: []
+    targetZUIDs: []
+  showSettings: 0
+  groupID: 0
+  _zuid: 
+  _gozuid: 
+  serializedComponents:
+  - typeFullName: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    persistenceType: 0
+    component: {fileID: 2102027488352298946}
+    zuid: 
+  - typeFullName: UnityEngine.Animator, UnityEngine.AnimationModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    persistenceType: 0
+    component: {fileID: 2102027488352298944}
+    zuid: 
+  - typeFullName: UnityEngine.SpriteRenderer, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    persistenceType: 0
+    component: {fileID: 2102027488352298945}
+    zuid: 
+  - typeFullName: UnityEngine.CapsuleCollider2D, UnityEngine.Physics2DModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    persistenceType: 0
+    component: {fileID: 9165356680343965406}
+    zuid: 
+  - typeFullName: UnityEngine.Rigidbody2D, UnityEngine.Physics2DModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    persistenceType: 0
+    component: {fileID: 1357917963378030120}
+    zuid: 
 --- !u!1 &2102027488673808804
 GameObject:
   m_ObjectHideFlags: 0
