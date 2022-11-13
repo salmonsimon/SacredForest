@@ -42,6 +42,8 @@ MonoBehaviour:
     PublicKeyToken=null
   - UnityEngine.BoxCollider2D, UnityEngine.Physics2DModule, Version=0.0.0.0, Culture=neutral,
     PublicKeyToken=null
+  - UnityEngine.PolygonCollider2D, UnityEngine.Physics2DModule, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
   unityComponentDataList:
   - typeFullName: UnityEngine.AI.NavMeshAgent, UnityEngine.AIModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null

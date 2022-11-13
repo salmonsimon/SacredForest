@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2185183941544594824}
   m_Layer: 0
-  m_Name: DialogueBubble Transform
+  m_Name: DialogueBubbleTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5113,7 +5113,7 @@ MonoBehaviour:
   speakers:
   - {fileID: 2185183941544594824}
   playerCheck: {fileID: 4108718526408562381}
-  fightingRoute: 0
+  fightingRoute: 1
 --- !u!1 &2607302049267287285
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,24 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
-using UnityEngine.Timeline;
 
-public class Cutscene04 : MonoBehaviour
+public class Cutscene04 : Cutscene
 {
     private Transform enemyDialogueTransform;
-
-    [SerializeField] private List<DialogueObject> dialogues;
-
-    private PlayableDirector playableDirector;
-
-    [SerializeField] private List<TimelineAsset> timelines;
-
-    private List<Transform> speakers = new List<Transform>();
     private GameObject enemy;
 
-    private void Start()
+    protected override void Start()
     {
-        playableDirector = GetComponent<PlayableDirector>();
+        base.Start();
 
         if (!ProgressManager.Instance.finishedRoute1)
             StartCoroutine(Play());
@@ -27,23 +18,23 @@ public class Cutscene04 : MonoBehaviour
 
     private IEnumerator Play()
     {
+        GameManager.instance.GetLevelLoader().CinematicBracketsStart();
+
         yield return new WaitForSeconds(Config.MEDIUM_DELAY);
 
         GameObject player = GameManager.instance.GetPlayer();
-
-        player.GetComponent<PlayerAttackController>().enabled = false;
-        player.GetComponent<PlayerMovementController>().enabled = false;
-
-        StartCoroutine(WaitUntilGroundedToFreezePlayer(player));
+        DeactivatePlayer(player);
 
         enemy = GameObject.FindGameObjectWithTag("Enemy");
         enemyDialogueTransform = enemy.transform.Find("DialogueBubbleHolder").transform;
         speakers = new List<Transform>() { enemyDialogueTransform };
 
+        #region Ground Monk Introduction
+
         playableDirector.playableAsset = timelines[0];
 
-        Bind(playableDirector, "Monk Animations", enemy.GetComponent<Animator>());
-        Bind(playableDirector, "Akate Animations", GameManager.instance.GetPlayer().GetComponent<Animator>());
+        Bind(playableDirector, "Monk Animations", enemy);
+        Bind(playableDirector, "Akate Animations", player);
 
         playableDirector.Play();
 
@@ -61,26 +52,26 @@ public class Cutscene04 : MonoBehaviour
         if (!GameManager.instance.GetDialogueManager().IsRunning && playableDirector.state == PlayState.Playing)
             playableDirector.Stop();
 
-        player.GetComponent<PlayerAttackController>().enabled = true;
-        player.GetComponent<PlayerMovementController>().enabled = true;
-        player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+        #endregion
+
+        ActivatePlayer(player);
 
         yield return new WaitForSeconds(Config.SMALL_DELAY);
 
         enemy.GetComponent<Animator>().SetTrigger("Fight");
         enemy.GetComponent<GroundMonk>().enabled = true;
+
+        StartCoroutine(GameManager.instance.GetLevelLoader().CinematicBracketsEnd());
     }
 
     public IEnumerator PlayTransformScene()
     {
+        GameManager.instance.GetLevelLoader().CinematicBracketsStart();
+
         yield return new WaitForSeconds(Config.LARGE_DELAY);
 
         GameObject player = GameManager.instance.GetPlayer();
-
-        player.GetComponent<PlayerAttackController>().enabled = false;
-        player.GetComponent<PlayerMovementController>().enabled = false;
-
-        StartCoroutine(WaitUntilGroundedToFreezePlayer(player));
+        DeactivatePlayer(player);
 
         player.GetComponent<DamageReceiver>().enabled = false;
 
@@ -91,10 +82,11 @@ public class Cutscene04 : MonoBehaviour
         enemyDialogueTransform = enemy.transform.Find("DialogueBubbleHolder").transform;
         speakers = new List<Transform>() { enemyDialogueTransform };
 
+        #region Transformation Cutscene
+
         playableDirector.playableAsset = timelines[1];
 
-        Bind(playableDirector, "Monk Animations", enemy.GetComponent<Animator>());
-        Bind(playableDirector, "Akate Animations", GameManager.instance.GetPlayer().GetComponent<Animator>());
+        Bind(playableDirector, "Monk Animations", enemy);
 
         playableDirector.extrapolationMode = DirectorWrapMode.Loop;
         playableDirector.Play();
@@ -115,16 +107,19 @@ public class Cutscene04 : MonoBehaviour
 
         playableDirector.extrapolationMode = DirectorWrapMode.None;
 
+        #endregion
+
         GameManager.instance.GetCurrentProgressManager().Route1BossHasTransformed = true;
+
+        StartCoroutine(GameManager.instance.GetLevelLoader().CinematicBracketsEnd());
+
+        player.GetComponent<DamageReceiver>().enabled = true;
 
         yield return null;
 
         groundMonk.Transform();
 
-        player.GetComponent<PlayerAttackController>().enabled = true;
-        player.GetComponent<PlayerMovementController>().enabled = true;
-        player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
-        player.GetComponent<DamageReceiver>().enabled = true;
+        ActivatePlayer(player);
 
         yield return new WaitForSeconds(3.7f);
 
@@ -134,14 +129,14 @@ public class Cutscene04 : MonoBehaviour
 
     public IEnumerator PlayDeathScene()
     {
+        GameManager.instance.GetLevelLoader().CinematicBracketsStart();
+
         GameObject player = GameManager.instance.GetPlayer();
+        DeactivatePlayer(player);
 
-        player.GetComponent<PlayerAttackController>().enabled = false;
-        player.GetComponent<PlayerMovementController>().enabled = false;
+        player.GetComponent<DamageReceiver>().enabled = false;
 
-        StartCoroutine(WaitUntilGroundedToFreezePlayer(player));
-
-        Transform playerDialogueTransform = player.transform.Find("DialogueBubble Transform").transform;
+        Transform playerDialogueTransform = player.transform.Find("DialogueBubbleTransform").transform;
 
         enemy = GameObject.FindGameObjectWithTag("Enemy");
         GroundMonk groundMonk = enemy.GetComponent<GroundMonk>();
@@ -150,17 +145,18 @@ public class Cutscene04 : MonoBehaviour
         groundMonk.GetComponent<Animator>().runtimeAnimatorController = null;
 
         enemyDialogueTransform = enemy.transform.Find("DialogueBubbleHolder").transform;
-        speakers = new List<Transform>() { enemyDialogueTransform };
+        speakers = new List<Transform>() { enemyDialogueTransform , playerDialogueTransform };
 
-        playableDirector.playableAsset = timelines[1];
+        #region Death Scene - Detransformation
 
-        Bind(playableDirector, "Monk Animations", enemy.GetComponent<Animator>());
-        Bind(playableDirector, "Akate Animations", GameManager.instance.GetPlayer().GetComponent<Animator>());
+        playableDirector.playableAsset = timelines[2];
+
+        Bind(playableDirector, "Monk Animations", enemy);
 
         playableDirector.extrapolationMode = DirectorWrapMode.Hold;
         playableDirector.Play();
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         // TODO: change later so it plays in the middle of the screen instead, just
         // like deaths
@@ -170,7 +166,7 @@ public class Cutscene04 : MonoBehaviour
         {
             yield return null;
         }
-        
+
         GameManager.instance.GetDialogueManager().RunBubbleDialogue(dialogues[2], new List<Transform>() { enemyDialogueTransform, playerDialogueTransform }, 1, 1);
 
         while (GameManager.instance.GetDialogueManager().IsRunning)
@@ -190,42 +186,24 @@ public class Cutscene04 : MonoBehaviour
         if (!GameManager.instance.GetDialogueManager().IsRunning && playableDirector.state == PlayState.Playing)
             playableDirector.Stop();
 
-        groundMonk.GetComponent<EnemyMover>().Flip(new Vector2(groundMonk.transform.position.x - 1, 0));
+        #endregion
+
+        #region Death Scene - Death
 
         playableDirector.extrapolationMode = DirectorWrapMode.None;
 
-        playableDirector.playableAsset = timelines[2];
+        groundMonk.GetComponent<EnemyMover>().Flip(Vector2.right);
 
-        Bind(playableDirector, "Monk Animations", enemy.GetComponent<Animator>());
-        Bind(playableDirector, "Akate Animations", GameManager.instance.GetPlayer().GetComponent<Animator>());
+        playableDirector.playableAsset = timelines[3];
+
+        Bind(playableDirector, "Monk Animations", enemy);
         playableDirector.Play();
 
-        player.GetComponent<PlayerAttackController>().enabled = true;
-        player.GetComponent<PlayerMovementController>().enabled = true;
-        player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
-    }
+        #endregion
 
-    public static void Bind(PlayableDirector director, string trackName, Animator animator)
-    {
-        var timeline = director.playableAsset as TimelineAsset;
-        foreach (var track in timeline.GetOutputTracks())
-        {
-            if (track.name == trackName)
-            {
-                director.SetGenericBinding(track, animator);
-                break;
-            }
-        }
-    }
+        player.GetComponent<DamageReceiver>().enabled = true;
+        ActivatePlayer(player);
 
-    private IEnumerator WaitUntilGroundedToFreezePlayer(GameObject player)
-    {
-        while(!player.GetComponent<Mover>().IsGrounded())
-        {
-            yield return null;
-        }
-
-        player.GetComponent<PlayerMovementController>().StayInPosition();
-        player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        StartCoroutine(GameManager.instance.GetLevelLoader().CinematicBracketsEnd());
     }
 }

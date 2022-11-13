@@ -93,7 +93,7 @@ public class InteractibleNPC : NPC
                 {
                     int dialogueToPlay = randomizedDialoguesIndexList[currentDialogueIndex];
 
-                    GameManager.instance.GetDialogueManager().RunBubbleDialogue(unclearedDialogues, speakers, dialogueToPlay, dialogueToPlay);
+                    GameManager.instance.GetDialogueManager().RunBubbleDialogue(dialogues, speakers, dialogueToPlay, dialogueToPlay);
 
                     if (currentDialogueIndex == dialogues.Dialogues.Count - 1)
                         currentDialogueIndex = 0;

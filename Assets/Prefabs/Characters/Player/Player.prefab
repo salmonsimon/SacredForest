@@ -74,7 +74,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1675811227}
   m_Layer: 9
-  m_Name: DialogueBubble Transform
+  m_Name: DialogueBubbleTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9940,6 +9940,7 @@ MonoBehaviour:
   tagsToCheck:
   - Enemy
   - Arrow
+  - Breakable
   damage: 1
   damageType: 0
 --- !u!1 &1971838361857962905

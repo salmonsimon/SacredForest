@@ -2,29 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
-using UnityEngine.Timeline;
 
-public class Cutscene02 : MonoBehaviour
+public class Cutscene02 : Cutscene
 {
     private Transform foxyDialogueTransform;
     private Transform akateDialogueTransform;
 
-    [SerializeField] private DialogueObject dialogue;
-
-    private PlayableDirector playableDirector;
-
-    [SerializeField] private List<TimelineAsset> timelines;
-
-    private List<Transform> speakers = new List<Transform>();
-
-    [SerializeField] private GameObject foxyNPC;
-
-    private void Start()
+    protected override void Start()
     {
-        playableDirector = GetComponent<PlayableDirector>();
+        base.Start();
 
-        foxyDialogueTransform = GameObject.Find("Foxy - Intro/DialogueBubble Transform").transform;
-        akateDialogueTransform = GameManager.instance.GetPlayer().transform.Find("DialogueBubble Transform").transform;
+        foxyDialogueTransform = GameObject.Find("Foxy - Intro/DialogueBubbleTransform").transform;
+        akateDialogueTransform = GameManager.instance.GetPlayer().transform.Find("DialogueBubbleTransform").transform;
         speakers = new List<Transform>() { foxyDialogueTransform, akateDialogueTransform };
 
         StartCoroutine(Play());
@@ -32,28 +21,29 @@ public class Cutscene02 : MonoBehaviour
 
     private IEnumerator Play()
     {
+        GameManager.instance.GetLevelLoader().CinematicBracketsStart();
+
         GameObject player = GameManager.instance.GetPlayer();
 
-        player.GetComponent<PlayerAttackController>().enabled = false;
-        player.GetComponent<PlayerMovementController>().enabled = false;
-
-        StartCoroutine(WaitUntilGroundedToFreezePlayer(player));
+        DeactivatePlayer(player);
 
         GameObject foxy = GameObject.FindWithTag("Foxy");
         foxy.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         foxy.GetComponent<FoxyController>().StayInPosition();
         foxy.GetComponent<FoxyController>().enabled = false;
 
+        #region First Portal Cutscene
+
         playableDirector.playableAsset = timelines[0];
 
-        Bind(playableDirector, "Foxy Animations", foxy.GetComponent<Animator>());
-        Bind(playableDirector, "Akate Animations", GameManager.instance.GetPlayer().GetComponent<Animator>());
+        Bind(playableDirector, "Foxy Animations", foxy);
+        Bind(playableDirector, "Akate Animations", player);
 
         playableDirector.Play();
 
         yield return new WaitForSeconds(1f);
 
-        GameManager.instance.GetDialogueManager().RunBubbleDialogue(dialogue, speakers);
+        GameManager.instance.GetDialogueManager().RunBubbleDialogue(dialogues[0], speakers);
 
         while (GameManager.instance.GetDialogueManager().IsRunning)
         {
@@ -63,36 +53,12 @@ public class Cutscene02 : MonoBehaviour
         if (!GameManager.instance.GetDialogueManager().IsRunning && playableDirector.state == PlayState.Playing)
             playableDirector.Stop();
 
-        GameManager.instance.GetPlayer().GetComponent<PlayerAttackController>().enabled = true;
-        GameManager.instance.GetPlayer().GetComponent<PlayerMovementController>().enabled = true;
-        GameManager.instance.GetPlayer().GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+        #endregion
 
+        ActivatePlayer(player);
         foxy.AddComponent<NPC>();
 
+        StartCoroutine(GameManager.instance.GetLevelLoader().CinematicBracketsEnd());
         this.enabled = false;
-    }
-
-    public static void Bind(PlayableDirector director, string trackName, Animator animator)
-    {
-        var timeline = director.playableAsset as TimelineAsset;
-        foreach (var track in timeline.GetOutputTracks())
-        {
-            if (track.name == trackName)
-            {
-                director.SetGenericBinding(track, animator);
-                break;
-            }
-        }
-    }
-
-    private IEnumerator WaitUntilGroundedToFreezePlayer(GameObject player)
-    {
-        while (!player.GetComponent<Mover>().IsGrounded())
-        {
-            yield return null;
-        }
-
-        player.GetComponent<PlayerMovementController>().StayInPosition();
-        player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
     }
 }

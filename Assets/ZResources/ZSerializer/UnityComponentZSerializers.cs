@@ -443,6 +443,48 @@ public sealed class BoxCollider2DZSerializer : ZSerializer.Internal.ZSerializer 
     }
 }
 [System.Serializable]
+public sealed class PolygonCollider2DZSerializer : ZSerializer.Internal.ZSerializer {
+    public System.Boolean autoTiling;
+    public UnityEngine.Vector2[] points;
+    public System.Int32 pathCount;
+    public System.Single density;
+    public System.Boolean isTrigger;
+    public System.Boolean usedByEffector;
+    public System.Boolean usedByComposite;
+    public UnityEngine.Vector2 offset;
+    public System.Boolean enabled;
+    public UnityEngine.HideFlags hideFlags;
+    public PolygonCollider2DZSerializer (string ZUID, string GOZUID) : base(ZUID, GOZUID) {
+        var instance = ZSerializer.ZSerialize.idMap[ZSerializer.ZSerialize.CurrentGroupID][ZUID] as UnityEngine.PolygonCollider2D;
+        autoTiling = instance.autoTiling;
+        points = instance.points;
+        pathCount = instance.pathCount;
+        density = instance.density;
+        isTrigger = instance.isTrigger;
+        usedByEffector = instance.usedByEffector;
+        usedByComposite = instance.usedByComposite;
+        offset = instance.offset;
+        enabled = instance.enabled;
+        hideFlags = instance.hideFlags;
+        ZSerializerSettings.Instance.unityComponentDataList.FirstOrDefault(data => data.Type == typeof(UnityEngine.PolygonCollider2D))?.OnSerialize?.Invoke(this, instance);
+    }
+    public override void RestoreValues(UnityEngine.Component component)
+    {
+        var instance = (UnityEngine.PolygonCollider2D)component;
+        instance.autoTiling = autoTiling;
+        instance.points = points;
+        instance.pathCount = pathCount;
+        instance.density = density;
+        instance.isTrigger = isTrigger;
+        instance.usedByEffector = usedByEffector;
+        instance.usedByComposite = usedByComposite;
+        instance.offset = offset;
+        instance.enabled = enabled;
+        instance.hideFlags = hideFlags;
+        ZSerializerSettings.Instance.unityComponentDataList.FirstOrDefault(data => data.Type == typeof(UnityEngine.PolygonCollider2D))?.OnDeserialize?.Invoke(this, instance);
+    }
+}
+[System.Serializable]
 public sealed class HingeJoint2DZSerializer : ZSerializer.Internal.ZSerializer {
     public System.Boolean useMotor;
     public System.Boolean useLimits;

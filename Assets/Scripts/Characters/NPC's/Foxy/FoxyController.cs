@@ -74,7 +74,7 @@ public class FoxyController : MonoBehaviour
 
         isBeingFollowed = followCheck.IsColliding();
 
-        if (isBeingFollowed && isMoving)
+        if (isBeingFollowed && isMoving || PlayerIsCloserToGoal())
         {
             StopCoroutine(isMovingCoroutine);
             isMovingCoroutine = StartCoroutine(IsMovingCooldown());
@@ -96,7 +96,7 @@ public class FoxyController : MonoBehaviour
 
         movement = Vector2.zero;
 
-        if (!isBeingFollowed && !isMoving)
+        if (!isBeingFollowed && !isMoving && !PlayerIsCloserToGoal())
         {
             StayInPosition();
             FlipTowardsPlayer();
@@ -115,11 +115,6 @@ public class FoxyController : MonoBehaviour
         if (!hasArrived)
         {
             animator.SetFloat(Config.MOVEMENT_ANIMATOR_SPEED, Mathf.Abs(movement.x));
-
-            if (isGrounded && !hasToJumpCheck.IsColliding())
-            {
-                StartCoroutine(JumpAction());
-            }
 
             Vector3 targetVelocity = new Vector2(movement.x * runSpeed, rigidBody.velocity.y);
             rigidBody.velocity = Vector3.SmoothDamp(rigidBody.velocity, targetVelocity, ref refVelocity, movementSmoothing);
@@ -185,40 +180,8 @@ public class FoxyController : MonoBehaviour
         Flip(new Vector2(relativePlayerPositionX, 0));
     }
 
-    private IEnumerator JumpAction()
-    {
-        yield return null;
-
-        /*
-        StartCoroutine(MovementCooldown(Config.MOVEMENT_AFTER_JUMP_BACK_COOLDOWN));
-
-        animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_JUMPING_BACK, true);
-        animator.SetTrigger(Config.MOVEMENT_ANIMATOR_JUMP_BACK_TRIGGER);
-
-        GetComponent<CharacterSFX>().PlayRandomJumpAudioClip();
-
-        rigidBody.AddForce(new Vector2(-transform.localScale.x * (jumpBackForce / 2f), jumpBackForce / 2f));
-
-        particlesLand.Play();
-        particlesJump.Play();
-
-        yield return new WaitForSeconds(Config.JUMP_BACK_DURATION);
-        animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_JUMPING_BACK, false);
-
-        animator.SetFloat(Config.MOVEMENT_ANIMATOR_SPEED, 0);
-
-        isAbleToJumpBack = false;
-
-        yield return new WaitForSeconds(Config.JUMP_BACK_COOLDOWN);
-
-        isAbleToJumpBack = true;
-        */
-    }
-
     public void OnLanding()
     {
-        //animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_JUMPING, false);
-
         if (isGrounded)
         {
             rigidBody.velocity *= .1f;
@@ -232,5 +195,10 @@ public class FoxyController : MonoBehaviour
 
         rigidBody.velocity = Vector2.zero;
         UpdateMotor(Vector2.zero);
+    }
+
+    private bool PlayerIsCloserToGoal()
+    {
+        return player.transform.position.x - transform.position.x > 0;
     }
 }

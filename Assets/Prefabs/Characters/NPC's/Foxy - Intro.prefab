@@ -5255,7 +5255,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 1}
+  m_Size: {x: 4, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &2102027489911934791
 MonoBehaviour:
@@ -10164,7 +10164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2834537182814815800}
   m_Layer: 0
-  m_Name: DialogueBubble Transform
+  m_Name: DialogueBubbleTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

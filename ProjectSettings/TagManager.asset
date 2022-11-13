@@ -17,6 +17,7 @@ TagManager:
   - NPC
   - Foxy
   - Cutscene
+  - Breakable
   layers:
   - Default
   - TransparentFX

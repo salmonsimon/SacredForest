@@ -129,7 +129,8 @@ public class GroundMonk : Elemental
 
     public override void Transform()
     {
-        if (GameManager.instance.GetCurrentProgressManager().Route1BossHasTransformed)
+        if (GameManager.instance.GetCurrentProgressManager().FinishedRoute1 || 
+            GameManager.instance.GetCurrentProgressManager().Route1BossHasTransformed)
         {
             base.Transform();
 
@@ -168,7 +169,10 @@ public class GroundMonk : Elemental
     {
         base.Death();
 
-        GameObject cutscene = GameObject.FindGameObjectWithTag("Cutscene");
-        StartCoroutine(cutscene.GetComponent<Cutscene04>().PlayDeathScene());
+        if (!GameManager.instance.GetCurrentProgressManager().FinishedRoute1)
+        {
+            GameObject cutscene = GameObject.FindGameObjectWithTag("Cutscene");
+            StartCoroutine(cutscene.GetComponent<Cutscene04>().PlayDeathScene());
+        }
     }
 }
