@@ -45,6 +45,7 @@ public class FloatingText
             go.transform.position += displacement;
         }
 
+        originalDisplacement += motion * Time.deltaTime;
         go.transform.position += motion * Time.deltaTime;
     }
 }

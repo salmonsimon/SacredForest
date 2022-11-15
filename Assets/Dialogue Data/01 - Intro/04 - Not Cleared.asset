@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a29fe2c6e1452341a540e858dfdab48, type: 3}
+  m_Name: 04 - Not Cleared
+  m_EditorClassIdentifier: 
+  speakers:
+  - {fileID: 0}
+  dialogues:
+  - title: Foxy - 01
+    text: good luck!
+    duration: 3
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: Foxy - 02
+    text: please save our cousin!
+    duration: 3
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: Foxy - 03
+    text: we believe in you!!!
+    duration: 3
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: Foxy - 04
+    text: take your time, if our cousin was captured the route ahead must be really
+      challenging
+    duration: 4
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: Foxy - 05
+    text: are you gonna challenge it again? good luck!
+    duration: 3
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: Foxy - 06
+    text: we are gonna sing song about you after this war is over! Akate will never
+      be forgotten, i swear it!
+    duration: 4
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0

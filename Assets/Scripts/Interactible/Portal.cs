@@ -35,8 +35,15 @@ public class Portal : GeneralCollider
     {
         GameManager.instance.SetIsTeleporting(true);
 
-        GameManager.instance.GetCurrentProgressManager().SaveCurrentProgress();
-        GameManager.instance.GetCurrentProgressManager().UpdateCurrentFightingRoute(fightingRoute);
+        CurrentProgressManager currentProgressManager = GameManager.instance.GetCurrentProgressManager();
+
+        if (currentProgressManager.FirstTimePlaying)
+            currentProgressManager.FirstTimePlaying = false;
+
+        currentProgressManager.SaveCurrentProgress();
+        currentProgressManager.UpdateCurrentFightingRoute(fightingRoute);
+
+        ZSerializer.ZSerialize.SaveScene();
 
         animator.SetTrigger("Close");
         GameManager.instance.GetPlayer().GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
