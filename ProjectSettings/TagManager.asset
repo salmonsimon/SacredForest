@@ -18,6 +18,7 @@ TagManager:
   - Foxy
   - Cutscene
   - Breakable
+  - ParallaxBackground
   layers:
   - Default
   - TransparentFX
@@ -33,7 +34,7 @@ TagManager:
   - Dash
   - Dead
   - NPC
-  - 
+  - PlayerBlock
   - 
   - 
   - 

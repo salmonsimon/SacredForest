@@ -6,6 +6,8 @@ public class BoxCollider : GeneralCollider
 {
     protected BoxCollider2D boxCollider;
 
+    protected float timeToCheck = 0;
+
     protected virtual void Awake()
     {
         boxCollider = GetComponent<BoxCollider2D>();
@@ -13,8 +15,12 @@ public class BoxCollider : GeneralCollider
 
     protected virtual void Update()
     {
-        if (!isColliding)
+        timeToCheck -= Time.deltaTime;
+
+        if (!isColliding || timeToCheck < 0)
         {
+            timeToCheck = 1f;
+
             boxCollider.OverlapCollider(filter, hits);
 
             for (int i = 0; i < hits.Length; i++)

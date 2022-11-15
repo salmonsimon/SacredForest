@@ -308,7 +308,7 @@ MonoBehaviour:
   groundCheck: {fileID: 2102027488143269767}
   hasToJumpCheck: {fileID: 2102027488673808806}
   followCheck: {fileID: 2102027489911934791}
-  runSpeed: 2.5
+  runSpeed: 3
   movingTime: 1
 --- !u!1 &2102027488673808804
 GameObject:

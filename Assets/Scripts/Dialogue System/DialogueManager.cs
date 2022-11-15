@@ -140,4 +140,18 @@ public class DialogueManager : MonoBehaviour
             }
         }
     }
+
+    public void ClearDialogues()
+    {
+        StopAllCoroutines();
+
+        dialogueBubbles.Clear();
+
+        foreach (Transform child in transform)
+        {
+            StartCoroutine(child.gameObject.GetComponent<DialogueBubble>().CloseDialogueBubble());
+        }
+
+        isRunning = false;
+    }
 }

@@ -148,4 +148,17 @@ public class AnimationManager : MonoBehaviour
             Destroy(child.gameObject);
         }
     }
+
+    public void ClearScreenOverlayCanvas()
+    {
+        ShowImageUI(Config.SPACE_KEY_GUI, false);
+        ShowImageUI(Config.RIGHT_ARROW_GUI, false);
+        ShowImageUI(Config.LEFT_ARROW_GUI, false);
+    }
+
+    public void ClearCanvases()
+    {
+        ClearWorldSpaceCanvas();
+        ClearScreenOverlayCanvas();
+    }
 }

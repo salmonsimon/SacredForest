@@ -71,6 +71,12 @@ public class FrameManager : MonoBehaviour
         activeFrame.gameObject.SetActive(true);
         activeFrame.StartFrame();
 
+        GameObject[] parallaxBackgrounds = GameObject.FindGameObjectsWithTag(Config.PARALLAX_BACKGROUND_TAG);
+        foreach (GameObject parallaxBackground in parallaxBackgrounds)
+        {
+            parallaxBackground.GetComponent<ParallaxBackground>().SetYLimit();
+        }
+
         yield return new WaitForSeconds(Config.END_TRANSITION_DURATION);
 
         GameManager.instance.GetPlayer().GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;

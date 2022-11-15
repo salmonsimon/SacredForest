@@ -9,17 +9,37 @@ public partial class Settings
     public int savedGamesAmount = 0;
     public List<int> currentSavedGames = new List<int>();
 
-    public ZDictionary<int, Counters> savedGamesCountersSerialized = new ZDictionary<int, Counters>();
-    public Dictionary<int, Counters> savedGamesCounters = new Dictionary<int, Counters>();
+    public ZDictionary<int, int> savedGamesKillsCounterSerialized = new ZDictionary<int, int>();
+    public Dictionary<int, int> savedGamesKillsCounter = new Dictionary<int, int>();
+
+    public ZDictionary<int, int> savedGamesDeathsCounterSerialized = new ZDictionary<int, int>();
+    public Dictionary<int, int> savedGamesDeathsCounter = new Dictionary<int, int>();
+
+    public ZDictionary<int, float> savedGamesTimePlayedCounterSerialized = new ZDictionary<int, float>();
+    public Dictionary<int, float> savedGamesTimePlayedCounter = new Dictionary<int, float>();
 
     public float musicVolume = 1;
     public float SFXVolume = 1;
 
+    public void SaveCounters(int enemiesKilledCount, int deathsCount, float timePlayed)
+    {
+        savedGamesKillsCounter[ZSerializerSettings.Instance.selectedSaveFile] = enemiesKilledCount;
+        savedGamesKillsCounterSerialized = savedGamesKillsCounter;
+
+        savedGamesDeathsCounter[ZSerializerSettings.Instance.selectedSaveFile] = deathsCount;
+        savedGamesDeathsCounterSerialized = savedGamesDeathsCounter;
+
+        savedGamesTimePlayedCounter[ZSerializerSettings.Instance.selectedSaveFile] = timePlayed;
+        savedGamesTimePlayedCounterSerialized = savedGamesTimePlayedCounter;
+    }
+
     public void Deserialize()
     {
-        for (var i = 0; i < savedGamesCountersSerialized.keys.Count; i++)
+        for (var i = 0; i < currentSavedGames.Count; i++)
         {
-            savedGamesCounters.Add(savedGamesCountersSerialized.keys[i], savedGamesCountersSerialized.values[i]);
+            savedGamesKillsCounter.Add(savedGamesKillsCounterSerialized.keys[i], savedGamesKillsCounterSerialized.values[i]);
+            savedGamesDeathsCounter.Add(savedGamesDeathsCounterSerialized.keys[i], savedGamesDeathsCounterSerialized.values[i]);
+            savedGamesTimePlayedCounter.Add(savedGamesTimePlayedCounterSerialized.keys[i], savedGamesTimePlayedCounterSerialized.values[i]);
         }
     }
 
@@ -39,8 +59,7 @@ public partial class Settings
         {
             currentSavedGames.Add(newGameIndex);
 
-            savedGamesCounters.Add(newGameIndex, new Counters());
-            savedGamesCountersSerialized = savedGamesCounters;
+            AddNewCounters(newGameIndex);
 
             ZSerializerSettings.Instance.selectedSaveFile = newGameIndex;
             ProgressManager.Save();
@@ -65,11 +84,34 @@ public partial class Settings
 
         currentSavedGames.Remove(correctedIndex);
 
-        savedGamesCounters.Remove(correctedIndex);
-        savedGamesCountersSerialized = savedGamesCounters;
+        RemoveCounters(correctedIndex);
 
         savedGamesAmount--;
 
         Save();
+    }
+
+    private void AddNewCounters(int newGameIndex)
+    {
+        savedGamesKillsCounter.Add(newGameIndex, 0);
+        savedGamesKillsCounterSerialized = savedGamesKillsCounter;
+
+        savedGamesDeathsCounter.Add(newGameIndex, 0);
+        savedGamesDeathsCounterSerialized = savedGamesDeathsCounter;
+
+        savedGamesTimePlayedCounter.Add(newGameIndex, 0);
+        savedGamesTimePlayedCounterSerialized = savedGamesTimePlayedCounter;
+    }
+
+    private void RemoveCounters(int correctedGameIndex)
+    {
+        savedGamesKillsCounter.Remove(correctedGameIndex);
+        savedGamesKillsCounterSerialized = savedGamesKillsCounter;
+
+        savedGamesDeathsCounter.Remove(correctedGameIndex);
+        savedGamesDeathsCounterSerialized = savedGamesDeathsCounter;
+
+        savedGamesTimePlayedCounter.Remove(correctedGameIndex);
+        savedGamesTimePlayedCounterSerialized = savedGamesTimePlayedCounter;
     }
 }

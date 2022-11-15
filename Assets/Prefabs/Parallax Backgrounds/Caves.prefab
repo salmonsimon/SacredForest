@@ -620,7 +620,7 @@ GameObject:
   - component: {fileID: 6497529401144640537}
   m_Layer: 0
   m_Name: 1 - Back
-  m_TagString: Untagged
+  m_TagString: ParallaxBackground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -724,7 +724,7 @@ GameObject:
   - component: {fileID: 6497529401193739441}
   m_Layer: 0
   m_Name: 2 - Far
-  m_TagString: Untagged
+  m_TagString: ParallaxBackground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1080,7 +1080,7 @@ GameObject:
   - component: {fileID: 6497529401818198156}
   m_Layer: 0
   m_Name: 3 - Middle
-  m_TagString: Untagged
+  m_TagString: ParallaxBackground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

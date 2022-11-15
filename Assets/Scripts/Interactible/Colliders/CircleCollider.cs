@@ -6,6 +6,8 @@ public class CircleCollider : GeneralCollider
 {
     private CircleCollider2D circleCollider;
 
+    protected float timeToCheck = 0;
+
     protected virtual void Awake()
     {
         circleCollider = GetComponent<CircleCollider2D>();
@@ -13,8 +15,12 @@ public class CircleCollider : GeneralCollider
 
     protected virtual void Update()
     {
-        if (!isColliding)
+        timeToCheck -= Time.deltaTime;
+
+        if (!isColliding || timeToCheck < 0)
         {
+            timeToCheck = 1f;
+
             circleCollider.OverlapCollider(filter, hits);
 
             for (int i = 0; i < hits.Length; i++)
