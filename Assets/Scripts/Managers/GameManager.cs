@@ -94,8 +94,6 @@ public class GameManager : MonoBehaviour
 
         if (!isOnMainMenu)
         {
-            ZSerializer.ZSerialize.LoadScene();
-
             mainMenu.SetActive(false);
 
             countersUI.gameObject.SetActive(true);

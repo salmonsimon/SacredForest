@@ -14,10 +14,6 @@ TagManager:
   - EnemySpawner
   - Projectile Container
   - Ground Type
-  - NPC
-  - Foxy
-  - Cutscene
-  - Breakable
   layers:
   - Default
   - TransparentFX
@@ -32,7 +28,7 @@ TagManager:
   - Projectile
   - Dash
   - Dead
-  - NPC
+  - 
   - 
   - 
   - 

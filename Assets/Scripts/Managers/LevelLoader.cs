@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class LevelLoader : MonoBehaviour
 {
     [SerializeField] private Animator crossFade;
-    [SerializeField] private Animator cinematicBrackets;
 
     private float startTransitionDuration = Config.START_TRANSITION_DURATION;
     private float endTransitionDuration = Config.END_TRANSITION_DURATION;
@@ -79,24 +78,6 @@ public class LevelLoader : MonoBehaviour
         GameManager.instance.SetIsTeleporting(false);
     }
 
-    public void CinematicBracketsStart()
-    {
-        GameManager.instance.GetCountersUI().ShowCounters(false);
-
-        cinematicBrackets.gameObject.SetActive(true);
-        cinematicBrackets.SetTrigger(Config.CROSSFADE_START_TRIGGER);
-    }
-
-    public IEnumerator CinematicBracketsEnd()
-    {
-        cinematicBrackets.SetTrigger(Config.CINEMATIC_END_TRIGGER);
-
-        yield return new WaitForSeconds(Config.CINEMATIC_TRANSITION_DURATION);
-
-        GameManager.instance.GetCountersUI().ShowCounters(true);
-        cinematicBrackets.gameObject.SetActive(false);
-    }
-
     private void SetPlayerVariablesAfterTransition()
     {
         GameManager.instance.GetPlayer().GetComponent<Animator>().enabled = true;
@@ -104,10 +85,5 @@ public class LevelLoader : MonoBehaviour
         GameManager.instance.RestartPlayer();
 
         GameManager.instance.GetPlayer().GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
-    }
-
-    public Animator GetCrossfadeAnimator()
-    {
-        return crossFade;
     }
 }

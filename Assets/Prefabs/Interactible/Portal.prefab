@@ -167,7 +167,6 @@ MonoBehaviour:
   tagsToCheck:
   - Player
   sceneName: Route1
-  fightingRoute: 0
 --- !u!114 &2663822527312026172
 MonoBehaviour:
   m_ObjectHideFlags: 0

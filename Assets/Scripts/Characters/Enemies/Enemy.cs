@@ -29,8 +29,6 @@ public class Enemy : MonoBehaviour
     protected bool isStartled = false;
     protected bool isAlive = true;
 
-    protected Coroutine startleCooldownCoroutine;
-
     #endregion
 
     #region Action Variables
@@ -125,7 +123,7 @@ public class Enemy : MonoBehaviour
         onActionCooldown = false;
     }
 
-    public IEnumerator Startled(float duration)
+    protected IEnumerator Startled(float duration)
     {
         isStartled = true;
 
@@ -133,11 +131,6 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(duration);
 
         isStartled = false;
-    }
-
-    public void SetStartleDuration(float duration)
-    {
-        startleDuration = duration;
     }
 
     protected virtual void Damaged()
