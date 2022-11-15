@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
             instance = this;
 
             ProgressManager.Instance.Reset();
+
             Settings.Load();
             Settings.Instance.Deserialize();
         }
@@ -88,9 +89,7 @@ public class GameManager : MonoBehaviour
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        GameManager.instance.GetAnimationManager().ShowImageUI(Config.SPACE_KEY_GUI, false);
-        GameManager.instance.GetAnimationManager().ShowImageUI(Config.RIGHT_ARROW_GUI, false);
-        GameManager.instance.GetAnimationManager().ShowImageUI(Config.LEFT_ARROW_GUI, false);
+        animationManager.ClearCanvases();
 
         if (!isOnMainMenu)
         {

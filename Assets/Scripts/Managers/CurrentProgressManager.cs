@@ -209,18 +209,9 @@ public class CurrentProgressManager : MonoBehaviour
 
         ProgressManager.Save();
 
-        Counters updatedCounters = new Counters()
-        {
-            EnemiesKilledCount = enemiesKilledCount,
-            DeathsCount = deathsCount,
-            TimePlayed = timePlayed
-        };
-
-        Settings.Instance.savedGamesCounters[ZSerializer.ZSerializerSettings.Instance.selectedSaveFile] = updatedCounters;
-        Settings.Instance.savedGamesCountersSerialized = Settings.Instance.savedGamesCounters;
+        Settings.Instance.SaveCounters(enemiesKilledCount, deathsCount, timePlayed);
 
         Settings.Save();
-
     }
 
     #region Show Counters

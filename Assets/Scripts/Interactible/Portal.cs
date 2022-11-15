@@ -35,6 +35,8 @@ public class Portal : GeneralCollider
     {
         GameManager.instance.SetIsTeleporting(true);
 
+        GameManager.instance.GetDialogueManager().ClearDialogues();
+
         CurrentProgressManager currentProgressManager = GameManager.instance.GetCurrentProgressManager();
 
         if (currentProgressManager.FirstTimePlaying)

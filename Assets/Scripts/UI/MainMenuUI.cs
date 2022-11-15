@@ -82,10 +82,10 @@ public class MainMenuUI : MonoBehaviour
 
             int savedGameIndex = Settings.Instance.currentSavedGames[i];
 
-            killsTexts[i].text = Settings.Instance.savedGamesCounters[savedGameIndex].EnemiesKilledCount.ToString("#,##0");
-            deathsTexts[i].text = Settings.Instance.savedGamesCounters[savedGameIndex].DeathsCount.ToString("#,##0");
+            killsTexts[i].text = Settings.Instance.savedGamesKillsCounter[savedGameIndex].ToString("#,##0");
+            deathsTexts[i].text = Settings.Instance.savedGamesDeathsCounter[savedGameIndex].ToString("#,##0");
 
-            float timePlayedFloat = Settings.Instance.savedGamesCounters[savedGameIndex].TimePlayed;
+            float timePlayedFloat = Settings.Instance.savedGamesTimePlayedCounter[savedGameIndex];
             string time = GameManager.instance.FloatToTimeFormat(timePlayedFloat);
             timePlayedTexts[i].text = time;
         }
@@ -97,10 +97,10 @@ public class MainMenuUI : MonoBehaviour
 
         int correctedSavedGameIndex = Settings.Instance.currentSavedGames[savedGameIndex];
 
-        savedGameKillsTexts[savedGameIndex].text = Settings.Instance.savedGamesCounters[correctedSavedGameIndex].EnemiesKilledCount.ToString("#,##0");
-        savedGameDeathsTexts[savedGameIndex].text = Settings.Instance.savedGamesCounters[correctedSavedGameIndex].DeathsCount.ToString("#,##0");
+        savedGameKillsTexts[savedGameIndex].text = Settings.Instance.savedGamesKillsCounter[correctedSavedGameIndex].ToString("#,##0");
+        savedGameDeathsTexts[savedGameIndex].text = Settings.Instance.savedGamesDeathsCounter[correctedSavedGameIndex].ToString("#,##0");
 
-        float timePlayedFloat = Settings.Instance.savedGamesCounters[correctedSavedGameIndex].TimePlayed;
+        float timePlayedFloat = Settings.Instance.savedGamesTimePlayedCounter[correctedSavedGameIndex];
         string time = GameManager.instance.FloatToTimeFormat(timePlayedFloat);
         savedGameTimePlayedTexts[savedGameIndex].text = time;
     }
