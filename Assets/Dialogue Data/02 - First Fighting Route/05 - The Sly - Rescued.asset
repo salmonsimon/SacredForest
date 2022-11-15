@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a29fe2c6e1452341a540e858dfdab48, type: 3}
+  m_Name: 05 - The Sly - Rescued
+  m_EditorClassIdentifier: 
+  speakers:
+  - {fileID: 0}
+  - {fileID: 0}
+  dialogues:
+  - title: The Sly - 01
+    text: who are you? ... are you the one who will steal my powers?! ...
+    duration: 4
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: Akate - 01
+    text: ...
+    duration: 3
+    isSkippable: 1
+    speakerIndex: 1
+    isEnemyBubble: 0
+  - title: The Sly - 02
+    text: what?! the forest guardian of the legends... Akate?!
+    duration: 4
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: The Sly - 03
+    text: you were real this whole time! i'm really glad that you're the one helping
+      us, now there is hope!
+    duration: 6
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: The Sly - 04
+    text: in exchange for rescuing me, i'll teach you something great!
+    duration: 6
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: The Sly - 05
+    text: this technique has been passed down for generations in our family, it's
+      called dash, and its amazing!
+    duration: 6
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: The Sly - 06
+    text: besides being able to move fast, you won't get hit by any attack when you're
+      doing this move, remember that!
+    duration: 6
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: The Sly - 07
+    text: thanks for rescuing me! i'm going back to my family now, see you on the
+      other side!
+    duration: 6
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0

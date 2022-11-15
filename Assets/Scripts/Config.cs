@@ -20,6 +20,7 @@ public class Config
     #region Layers
 
     public const string PLAYER_LAYER = "Player";
+    public const string NPC_LAYER = "NPC";
     public const string ENEMY_LAYER = "Enemy";
     public const string DASH_LAYER = "Dash";
     public const string DEAD_LAYER = "Dead";
@@ -45,6 +46,13 @@ public class Config
     public const string RIGHT_ARROW_GUI = "Right Arrow";
     public const string LEFT_ARROW_GUI = "Left Arrow";
 
+    public const string Z_KEY_GUI = "Z Key";
+    public const string X_KEY_GUI = "X Key";
+    public const string C_KEY_GUI = "C Key";
+    public const string S_KEY_GUI = "S Key";
+    public const string MOVEMENT_KEYS_GUI = "Movement Keys";
+
+
     #endregion
 
     #endregion
@@ -52,6 +60,8 @@ public class Config
     #region General Animations
 
     public const string ANIMATOR_BEAR_TRAP_TRIGGER = "Activate";
+    public const string ANIMATOR_SHOW_COUNTERS = "Appear";
+    public const string ANIMATOR_HIDE_COUNTERS = "Disappear";
 
     #region Camera Shake
 
@@ -68,6 +78,7 @@ public class Config
 
     public const float SMALL_DELAY = .1f;
     public const float MEDIUM_DELAY = .2f;
+    public const float LARGE_DELAY = .3f;
     public const float BIG_DELAY = .5f;
 
     #endregion
@@ -181,6 +192,11 @@ public class Config
     public const string CROSSFADE_END_TRIGGER = "End";
     public const float START_TRANSITION_DURATION = .5f;
     public const float END_TRANSITION_DURATION = 1f;
+
+    public const string CINEMATIC_TRANSITION = "Cinematic";
+    public const string CINEMATIC_START_TRIGGER = "Start";
+    public const string CINEMATIC_END_TRIGGER = "End";
+    public const float CINEMATIC_TRANSITION_DURATION = 1f;
     #endregion
 
     #region Damage Types

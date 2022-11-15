@@ -64,6 +64,37 @@ MonoBehaviour:
   isColliding: 0
   tagsToCheck: []
   groundType: 
+--- !u!1 &1675811226
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1675811227}
+  m_Layer: 9
+  m_Name: DialogueBubbleTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1675811227
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675811226}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.075, y: 0.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4697750405587687972}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1971838360422419964
 GameObject:
   m_ObjectHideFlags: 0
@@ -9909,6 +9940,7 @@ MonoBehaviour:
   tagsToCheck:
   - Enemy
   - Arrow
+  - Breakable
   damage: 1
   damageType: 0
 --- !u!1 &1971838361857962905
@@ -10017,6 +10049,7 @@ Transform:
   - {fileID: 1971838361857962904}
   - {fileID: 1971838361033771117}
   - {fileID: 623503153}
+  - {fileID: 1675811227}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10111,7 +10144,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!70 &1971838360332155259
 CapsuleCollider2D:

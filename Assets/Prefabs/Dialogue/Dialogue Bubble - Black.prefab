@@ -293,9 +293,9 @@ MonoBehaviour:
   dialogueBox: {fileID: 2556890503558660729}
   textLabel: {fileID: 2556890504396083928}
   spaceBarIcon: {fileID: 686378737393325243}
+  initialPosition: {x: 0, y: 0, z: 0}
   finalPosition: {x: 0, y: 0, z: 0}
   lookAt: {fileID: 0}
-  originalDisplacement: {x: 0, y: 0, z: 0}
 --- !u!114 &4342650258692468029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,7 +308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79b4747be24e062448e9511134433516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typewriterSpeed: 15
+  typewriterSpeed: 20
 --- !u!1 &2556890504396083930
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,10 +6,13 @@ using UnityEngine;
 public class CurrentProgressManager : MonoBehaviour
 {
     [SerializeField] private bool firstTimePlaying;
+    public bool FirstTimePlaying { get { return firstTimePlaying; } set { firstTimePlaying = value; }}
 
     [SerializeField] private FightingRoute currentFightingRoute;
 
     [SerializeField] private bool finishedRoute1;
+    [SerializeField] private bool route1BossHasTransformed;
+
     [SerializeField] private bool finishedRoute2;
     [SerializeField] private bool finishedRoute3;
     [SerializeField] private bool finishedRoute4;
@@ -28,6 +31,10 @@ public class CurrentProgressManager : MonoBehaviour
                 OnFirstRouteFinishedStateChange();
         }
     }
+
+
+    public bool Route1BossHasTransformed { get { return route1BossHasTransformed; } set { route1BossHasTransformed = value; } }
+
 
     public bool FinishedRoute2
     {
@@ -93,11 +100,13 @@ public class CurrentProgressManager : MonoBehaviour
 
     public void Initialize()
     {
-        //ProgressManager.Load();
+        ProgressManager.Load();
 
         firstTimePlaying = ProgressManager.Instance.firstTimePlaying;
 
         FinishedRoute1 = ProgressManager.Instance.finishedRoute1;
+        Route1BossHasTransformed = ProgressManager.Instance.route1BossHasTransformed;
+
         FinishedRoute2 = ProgressManager.Instance.finishedRoute2;
         FinishedRoute3 = ProgressManager.Instance.finishedRoute3;
         FinishedRoute4 = ProgressManager.Instance.finishedRoute4;
@@ -179,6 +188,8 @@ public class CurrentProgressManager : MonoBehaviour
         ProgressManager.Instance.firstTimePlaying = firstTimePlaying;
 
         ProgressManager.Instance.finishedRoute1 = FinishedRoute1;
+        ProgressManager.Instance.route1BossHasTransformed = Route1BossHasTransformed;
+
         ProgressManager.Instance.finishedRoute2 = FinishedRoute2;
         ProgressManager.Instance.finishedRoute3 = FinishedRoute3;
         ProgressManager.Instance.finishedRoute4 = FinishedRoute4;

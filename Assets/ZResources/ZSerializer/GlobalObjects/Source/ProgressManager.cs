@@ -7,6 +7,8 @@ public partial class ProgressManager
     public bool firstTimePlaying = true;
 
     public bool finishedRoute1 = false;
+    public bool route1BossHasTransformed = false;
+
     public bool finishedRoute2 = false;
     public bool finishedRoute3 = false;
     public bool finishedRoute4 = false;
@@ -20,6 +22,8 @@ public partial class ProgressManager
         firstTimePlaying = true;
 
         finishedRoute1 = false;
+        route1BossHasTransformed = false;
+
         finishedRoute2 = false;
         finishedRoute3 = false;
         finishedRoute4 = false;
