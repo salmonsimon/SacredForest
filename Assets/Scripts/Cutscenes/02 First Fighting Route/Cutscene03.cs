@@ -41,7 +41,7 @@ public class Cutscene03 : Cutscene
 
         playableDirector.Play();
 
-        yield return new WaitForSeconds(Config.BIG_DELAY);
+        yield return new WaitForSeconds(1f + Config.BIG_DELAY + Config.MEDIUM_DELAY);
 
         GameManager.instance.GetDialogueManager().RunBubbleDialogue(dialogues[0], speakers);
 

@@ -105,7 +105,15 @@ public class CurrentProgressManager : MonoBehaviour
         firstTimePlaying = ProgressManager.Instance.firstTimePlaying;
 
         FinishedRoute1 = ProgressManager.Instance.finishedRoute1;
-        Route1BossHasTransformed = ProgressManager.Instance.route1BossHasTransformed;
+
+        if (FinishedRoute1)
+        {
+            Route1BossHasTransformed = true;
+        }
+        else
+        {
+            Route1BossHasTransformed = false;
+        }
 
         FinishedRoute2 = ProgressManager.Instance.finishedRoute2;
         FinishedRoute3 = ProgressManager.Instance.finishedRoute3;

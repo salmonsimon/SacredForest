@@ -12,7 +12,7 @@ public class Cutscene04 : Cutscene
     {
         base.Start();
 
-        if (!ProgressManager.Instance.finishedRoute1)
+        if (!GameManager.instance.GetCurrentProgressManager().FinishedRoute1)
             StartCoroutine(Play());
     }
 
@@ -88,7 +88,7 @@ public class Cutscene04 : Cutscene
 
         Bind(playableDirector, "Monk Animations", enemy);
 
-        playableDirector.extrapolationMode = DirectorWrapMode.Loop;
+        playableDirector.extrapolationMode = DirectorWrapMode.Hold;
         playableDirector.Play();
 
         yield return new WaitForSeconds(1f);
@@ -149,6 +149,8 @@ public class Cutscene04 : Cutscene
 
         #region Death Scene - Detransformation
 
+        groundMonk.GetComponent<EnemyMover>().Flip(Vector2.right);
+
         playableDirector.playableAsset = timelines[2];
 
         Bind(playableDirector, "Monk Animations", enemy);
@@ -191,8 +193,6 @@ public class Cutscene04 : Cutscene
         #region Death Scene - Death
 
         playableDirector.extrapolationMode = DirectorWrapMode.None;
-
-        groundMonk.GetComponent<EnemyMover>().Flip(Vector2.right);
 
         playableDirector.playableAsset = timelines[3];
 
