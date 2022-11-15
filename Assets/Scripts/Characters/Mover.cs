@@ -40,7 +40,6 @@ public class Mover : MonoBehaviour
     protected bool isAbleToMove = true;
 
     private bool isGrounded;
-
     private bool isJumping;
     private bool isCollidingWithWall;
     private bool isWallSliding;
@@ -427,15 +426,6 @@ public class Mover : MonoBehaviour
         isAbleToDash = true;
     }
 
-    public void StayInPosition()
-    {
-        animator.SetFloat(Config.MOVEMENT_ANIMATOR_SPEED, 0);
-
-        rigidBody.velocity = Vector2.zero;
-        movement = Vector2.zero;
-        UpdateMotor();
-    }
-
     protected bool IsFalling()
     {
         return rigidBody.velocity.y < 0.1;
@@ -459,11 +449,6 @@ public class Mover : MonoBehaviour
     public void SetIsAbleToMove(bool value)
     {
         isAbleToMove = value;
-    }
-
-    public bool IsGrounded()
-    {
-        return groundCheck.IsColliding();
     }
 
     public void BlockMovement(bool value)

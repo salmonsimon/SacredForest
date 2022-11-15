@@ -14,14 +14,15 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] private DialogueObject testDialogue;
 
-    private bool isRunning = false;
-    public bool IsRunning { get { return isRunning; } private set { isRunning = value; } }
-
     private void Start()
     {
         dialogueContainer = transform.gameObject;
 
         GameObject player = GameManager.instance.GetPlayer();
+
+        // TODO: delete this ones
+        //ShowDialogue(testDialogue, new Vector3(player.transform.position.x + .4f, player.transform.position.y + .4f, player.transform.position.z), player.transform, "BlackBubble");
+        //ShowDialogue(testDialogue, new Vector3(player.transform.position.x + .4f, player.transform.position.y + .4f, player.transform.position.z), player.transform);
     }
 
     private void Update()
@@ -30,78 +31,65 @@ public class DialogueManager : MonoBehaviour
             dialogueBubble.UpdateDialogueBubble();
     }
 
-    public void RunBubbleDialogue(DialogueObject dialogueObject, List<Transform> speakers, int fromIndex = 0, int toIndex = -1)
+    public void ShowDialogue(DialogueObject dialogueObject, Vector3 position, Transform lookAt, string bubbleType = "WhiteBubble")
     {
-        dialogueObject.SetSpeakers(speakers);
+        DialogueBubble dialogueBubble = GetDialogueBubble(bubbleType);
 
-        StartCoroutine(StepThroughDialogue(dialogueObject, fromIndex, toIndex));
+        dialogueBubble.finalPosition = position;
+
+        if (lookAt)
+        {
+            dialogueBubble.lookAt = lookAt;
+            dialogueBubble.originalDisplacement = position - lookAt.position;
+        }
+
+        StartCoroutine(StepThroughDialogue(dialogueObject, dialogueBubble));
     }
 
-    private DialogueBubble GetDialogueBubble(bool isEnemyBubble)
+    private DialogueBubble GetDialogueBubble(string bubbleType)
     {
         DialogueBubble bubblePrefab = null;
 
-        if (!isEnemyBubble)
-            bubblePrefab = whiteDialogueBubblePrefab;
-        else
-            bubblePrefab = blackDialogueBubblePrefab;
+        switch (bubbleType)
+        {
+            case Config.WHITE_DIALOGUE_BUBBLE:
+                bubblePrefab = whiteDialogueBubblePrefab;
+                break;
 
-        DialogueBubble dialogueBubble = Instantiate(bubblePrefab, dialogueContainer.transform);
-        dialogueBubbles.Add(dialogueBubble);
+            case Config.BLACK_DIALOGUE_BUBBLE:
+                bubblePrefab = blackDialogueBubblePrefab;
+                break;
+        }
+
+        DialogueBubble dialogueBubble = dialogueBubbles.Find(x => !x.IsOpen);
+
+        if (dialogueBubble == null)
+        {
+            dialogueBubble = Instantiate(bubblePrefab, dialogueContainer.transform);
+
+            dialogueBubbles.Add(dialogueBubble);
+        }
 
         return dialogueBubble;
     }
 
-    private IEnumerator StepThroughDialogue(DialogueObject dialogueObject, int fromIndex = 0, int toIndex = -1)
+    private IEnumerator StepThroughDialogue(DialogueObject dialogueObject, DialogueBubble dialogueBubble)
     {
-        DialogueBubble dialogueBubble = null;
-        int previousSpeakerIndex = -1;
         bool openedBubble = false;
 
-        if (fromIndex > dialogueObject.Dialogues.Count - 1)
-            yield break;
-
-        if (toIndex == -1 || toIndex > dialogueObject.Dialogues.Count - 1)
-            toIndex = dialogueObject.Dialogues.Count - 1;
-
-        isRunning = true;
-
-        for (int i = fromIndex; i <= toIndex; i++)
+        foreach (Dialogue dialogue in dialogueObject.Dialogues)
         {
-            Dialogue dialogue = dialogueObject.Dialogues[i];
-
-            if (previousSpeakerIndex != -1)
-            {
-                if (previousSpeakerIndex != dialogue.SpeakerIndex)
-                {
-                    dialogueBubbles.Remove(dialogueBubble);
-                    StartCoroutine(dialogueBubble.CloseDialogueBubble());
-                    openedBubble = false;
-
-                    yield return new WaitForSeconds(Config.BIG_DELAY);
-                    yield return new WaitForSeconds(dialogueBubble.AnimationDuration);
-                }
-            }
-
             if (!openedBubble)
             {
-                dialogueBubble = GetDialogueBubble(dialogue.IsEnemyBubble);
-
-                dialogueBubble.initialPosition = dialogueObject.Speakers[dialogue.SpeakerIndex].parent.transform.position;
-                dialogueBubble.finalPosition = dialogueObject.Speakers[dialogue.SpeakerIndex].transform.position;
-
-                dialogueBubble.lookAt = dialogueObject.Speakers[dialogue.SpeakerIndex].transform;
-
                 StartCoroutine(dialogueBubble.OpenDialogueBubble(dialogue.Text.Length));
                 openedBubble = true;
 
-                yield return new WaitForSeconds(Config.LARGE_DELAY);
+                //TODO: dsps borrar este timer
+                yield return new WaitForSeconds(2f);
 
                 yield return new WaitForSeconds(Config.BIG_DELAY);
                 yield return new WaitForSeconds(dialogueBubble.AnimationDuration);
             }
-
-            previousSpeakerIndex = dialogue.SpeakerIndex;
 
             yield return RunTypingEffect(dialogue, dialogueBubble);
 
@@ -115,14 +103,12 @@ public class DialogueManager : MonoBehaviour
             yield return null;
 
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space) || dialogueBubble.TypewriterEffect.FinishedWaitingTime);
-
+            
             dialogueBubble.TypewriterEffect.Reset();
             dialogueBubble.ShowSpaceBarIcon(false);
         }
 
-        dialogueBubbles.Remove(dialogueBubble);
         StartCoroutine(dialogueBubble.CloseDialogueBubble());
-        isRunning = false;
     }
 
     private IEnumerator RunTypingEffect(Dialogue dialogue, DialogueBubble dialogueBubble)

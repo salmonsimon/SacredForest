@@ -684,8 +684,6 @@ GameObject:
   - component: {fileID: 5385116824661687184}
   - component: {fileID: 5385116824661687185}
   - component: {fileID: 5385116824661687198}
-  - component: {fileID: 1009155024}
-  - component: {fileID: 1009155023}
   m_Layer: 5
   m_Name: CountersUI
   m_TagString: Untagged
@@ -773,38 +771,6 @@ MonoBehaviour:
   killsText: {fileID: 5385116823405522868}
   deathsText: {fileID: 5385116823518201458}
   timePlayedText: {fileID: 5385116823209014325}
---- !u!225 &1009155024
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5385116824661687196}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 0
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
---- !u!95 &1009155023
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5385116824661687196}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b3c846aa2dd603247ad90df50976442b, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5385116824901311995
 GameObject:
   m_ObjectHideFlags: 0

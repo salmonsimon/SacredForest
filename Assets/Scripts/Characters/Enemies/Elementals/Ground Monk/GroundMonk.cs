@@ -127,26 +127,12 @@ public class GroundMonk : Elemental
         onSpecialAttackCooldown = false;
     }
 
-    public override void Transform()
+    protected override void Transform()
     {
-        if (GameManager.instance.GetCurrentProgressManager().FinishedRoute1 || 
-            GameManager.instance.GetCurrentProgressManager().Route1BossHasTransformed)
-        {
-            base.Transform();
+        base.Transform();
 
-            meleeZoneCollider = transformedMeleeZoneCollider;
-            enemyMover.AlterRunSpeed(1f);
-        }
-        else
-        {
-            StartCoroutine(damageReceiver.SetImmune(Config.STUN_DURATION));
-            isTransformed = true;
-
-            enabled = false;
-
-            GameObject cutscene = GameObject.FindGameObjectWithTag("Cutscene");
-            StartCoroutine(cutscene.GetComponent<Cutscene04>().PlayTransformScene());
-        }
+        meleeZoneCollider = transformedMeleeZoneCollider;
+        enemyMover.AlterRunSpeed(1f);
     }
 
     public void PlayMonsterStepSound()
@@ -163,16 +149,5 @@ public class GroundMonk : Elemental
     public void TransformationCameraShake()
     {
         GameManager.instance.GetCinemachineShake().ShakeCamera(3f, transformationDuration);
-    }
-
-    protected override void Death()
-    {
-        base.Death();
-
-        if (!GameManager.instance.GetCurrentProgressManager().FinishedRoute1)
-        {
-            GameObject cutscene = GameObject.FindGameObjectWithTag("Cutscene");
-            StartCoroutine(cutscene.GetComponent<Cutscene04>().PlayDeathScene());
-        }
     }
 }

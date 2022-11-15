@@ -5,12 +5,10 @@ using UnityEngine;
 public class Elemental : Enemy
 {
     protected bool isTransformed = false;
-    public bool IsTransformed { get { return IsTransformed; } set { isTransformed = value; } }
 
     #region Parameters
 
     [SerializeField] protected float transformationDuration = 3f;
-    public float TransformationDuration { get { return transformationDuration; } }
 
     #endregion
 
@@ -47,7 +45,7 @@ public class Elemental : Enemy
 
     }
 
-    public virtual void Transform()
+    protected virtual void Transform()
     {
         StartCoroutine(damageReceiver.SetImmune(transformationDuration + Config.STUN_DURATION));
         StartCoroutine(Startled(transformationDuration + Config.STUN_DURATION));
@@ -63,10 +61,5 @@ public class Elemental : Enemy
 
         animator.SetBool(Config.ELEMENTAL_ANIMATOR_IS_TRANSFORMED, true);
         animator.SetTrigger(Config.ELEMENTAL_ANIMATOR_TRANSFORM_TRIGGER);
-    }
-
-    protected override void Death()
-    {
-        base.Death();
     }
 }
