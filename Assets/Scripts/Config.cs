@@ -14,6 +14,7 @@ public class Config
     public const string GROUND_TAG = "Ground";
     public const string SPAWN_POINT_TAG = "Spawn Point";
     public const string CINEMACHINE_CAMERA_TAG = "CinemachineCamera";
+    public const string PARALLAX_BACKGROUND_TAG = "ParallaxBackground";
 
     #endregion
 

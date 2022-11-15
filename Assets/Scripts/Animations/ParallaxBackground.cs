@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using Cinemachine;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -13,7 +15,8 @@ public class ParallaxBackground : MonoBehaviour
 
     [SerializeField] private bool repeatingXAxis = true;
 
-    private float startPositionY, currentPositionX, currentPositionY, width, limitY;
+    private float startPositionY, currentPositionX, currentPositionY, width;
+    private float limitY = -1;
 
     private Vector3 lastCameraPosition;
 
@@ -35,11 +38,24 @@ public class ParallaxBackground : MonoBehaviour
         currentPositionY = startPositionY;
 
         width = GetComponent<SpriteRenderer>().bounds.size.x;
-        limitY = ((GetComponent<SpriteRenderer>().size.y * GetComponent<SpriteRenderer>().transform.localScale.y) - (Camera.main.orthographicSize * 2f)) / 2f;
+
+        StartCoroutine(SetYLimit());
+    }
+
+    public IEnumerator SetYLimit()
+    {
+        yield return new WaitForSeconds(Config.MEDIUM_DELAY);
+
+        CinemachineVirtualCamera vcam = GameObject.FindGameObjectWithTag(Config.CINEMACHINE_CAMERA_TAG).GetComponent<CinemachineVirtualCamera>();
+
+        limitY = ((GetComponent<SpriteRenderer>().size.y * GetComponent<SpriteRenderer>().transform.localScale.y) - (vcam.m_Lens.OrthographicSize * 2f)) / 2f;
     }
 
     private void LateUpdate()
     {
+        if (!bottomOnlySprite && limitY == -1)
+            return;
+
         float deltaXFromCamera = (cameraTransform.position.x * (1 - parallaxEffect.x));
         float deltaXPosition = cameraTransform.position.x * parallaxEffect.x;
 

@@ -924,7 +924,7 @@ GameObject:
   - component: {fileID: 875180813602268288}
   m_Layer: 0
   m_Name: 1 - Sky
-  m_TagString: Untagged
+  m_TagString: ParallaxBackground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1200,7 +1200,7 @@ GameObject:
   - component: {fileID: 875180813922526602}
   m_Layer: 0
   m_Name: 4 - Far Grounds
-  m_TagString: Untagged
+  m_TagString: ParallaxBackground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1304,7 +1304,7 @@ GameObject:
   - component: {fileID: 875180813934147447}
   m_Layer: 0
   m_Name: 2 - Clouds
-  m_TagString: Untagged
+  m_TagString: ParallaxBackground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1912,7 +1912,7 @@ GameObject:
   - component: {fileID: 875180814948116409}
   m_Layer: 0
   m_Name: 3 - Sea
-  m_TagString: Untagged
+  m_TagString: ParallaxBackground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
