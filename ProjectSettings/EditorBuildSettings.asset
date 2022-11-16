@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Route 1.unity
     guid: 89a711e8e0f677d4db1d88751c86d545
   - enabled: 1
-    path: Assets/Scenes/Fighting Mecanics.unity
+    path: Assets/Scenes/Fighting Mechanics.unity
     guid: f1c1ddca7b6ccf34dac152830413bbeb
   - enabled: 1
     path: Assets/Scenes/Foxes Home.unity
