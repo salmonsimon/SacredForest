@@ -68,6 +68,9 @@ public class GameManager : MonoBehaviour
 
             Settings.Load();
             Settings.Instance.Deserialize();
+
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
     }
     private void OnEnable()
@@ -134,6 +137,12 @@ public class GameManager : MonoBehaviour
 
     public void ToMainMenu()
     {
+        animationManager.ClearCanvases();
+        dialogueManager.ClearDialogues();
+        player.GetComponent<Animator>().runtimeAnimatorController = Resources.Load(Config.PLAYER_ANIMATOR_CONTROLLER_FILE) as RuntimeAnimatorController;
+
+        StartCoroutine(levelLoader.CinematicBracketsEnd());
+
         SetGamePaused(false);
         player.SetActive(false);
 

@@ -7,17 +7,35 @@ public class MainMenuUI : MonoBehaviour
 {
     #region Choose Game Panel
 
+    [Header("Choose Game Panel")]
+
+    [SerializeField] private GameObject mainPanel;
+    [SerializeField] private Button playButton;
     [SerializeField] private GameObject chooseGamePanel;
     [SerializeField] private GameObject newGameErrorPanel;
+
+    [Space(5)]
 
     [SerializeField] private List<GameObject> savedGamesButtons;
     [SerializeField] private List<Text> killsTexts;
     [SerializeField] private List<Text> deathsTexts;
     [SerializeField] private List<Text> timePlayedTexts;
 
+    [Space(5)]
+
+    [SerializeField] private List<Button> chooseGameButtons;
+    private List<Button> activeChooseGameButtons = new List<Button>();
+    private bool onChooseGamePanel;
+    private int buttonSelectionIndex = 0;
+    private int maxButtonSelectionIndex = 0;
+
     #endregion
 
     #region Saved Games 
+
+    [Space(10)]
+    [Header("Saved Game Panels")]
+    [Space(2)]
 
     [SerializeField] private List<GameObject> savedGamePanels;
     [SerializeField] private List<Text> savedGameKillsTexts;
@@ -25,6 +43,36 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private List<Text> savedGameTimePlayedTexts;
 
     #endregion
+
+    private void Start()
+    {
+        ResetMainMenu();
+    }
+
+    private void Update()
+    {
+        if (onChooseGamePanel)
+        {
+            if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+            {
+                if (buttonSelectionIndex < maxButtonSelectionIndex - 1)
+                    buttonSelectionIndex++;
+                else
+                    buttonSelectionIndex = 0;
+
+                activeChooseGameButtons[buttonSelectionIndex].Select();
+            }
+            else if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+            {
+                if (buttonSelectionIndex > 0)
+                    buttonSelectionIndex--;
+                else
+                    buttonSelectionIndex = maxButtonSelectionIndex - 1;
+
+                activeChooseGameButtons[buttonSelectionIndex].Select();
+            }
+        }
+    }
 
     public void PlayGame(int savedGameIndex)
     {
@@ -61,6 +109,12 @@ public class MainMenuUI : MonoBehaviour
         if (!couldCreateNewGame)
         {
             newGameErrorPanel.SetActive(true);
+            newGameErrorPanel.transform.Find("Exit").GetComponent<Button>().Select();
+        }
+        else
+        {
+            chooseGamePanel.SetActive(false);
+            SetOnChooseGamePanel(false);
         }
     }
 
@@ -71,6 +125,8 @@ public class MainMenuUI : MonoBehaviour
 
     public void DisplaySavedGames()
     {
+        SetOnChooseGamePanel(true);
+
         int savedGamesAmount = Settings.Instance.savedGamesAmount;
 
         foreach (GameObject savedGameButton in savedGamesButtons)
@@ -89,10 +145,14 @@ public class MainMenuUI : MonoBehaviour
             string time = GameManager.instance.FloatToTimeFormat(timePlayedFloat);
             timePlayedTexts[i].text = time;
         }
+
+        CountActiveChooseGamePanelButtons();
     }
 
     public void DisplaySavedGame(int savedGameIndex)
     {
+        SetOnChooseGamePanel(false);
+
         savedGamePanels[savedGameIndex].SetActive(true);
 
         int correctedSavedGameIndex = Settings.Instance.currentSavedGames[savedGameIndex];
@@ -107,6 +167,7 @@ public class MainMenuUI : MonoBehaviour
 
     public void ResetMainMenu()
     {
+        SetOnChooseGamePanel(false);
         chooseGamePanel.SetActive(false);
 
         for (int i = 0; i < savedGamePanels.Count; i++)
@@ -120,5 +181,29 @@ public class MainMenuUI : MonoBehaviour
         {
             savedGamesButtons[i].SetActive(false);
         }
+
+        mainPanel.SetActive(true);
+        playButton.Select();
+    }
+
+    private void CountActiveChooseGamePanelButtons()
+    {
+        maxButtonSelectionIndex = 0;
+        buttonSelectionIndex = 0;
+        activeChooseGameButtons.Clear();
+
+        foreach (Button button in chooseGameButtons)
+        {
+            if (button.gameObject.activeSelf)
+            {
+                maxButtonSelectionIndex++;
+                activeChooseGameButtons.Add(button);
+            }
+        }
+    }
+
+    private void SetOnChooseGamePanel(bool value)
+    {
+        onChooseGamePanel = value;
     }
 }

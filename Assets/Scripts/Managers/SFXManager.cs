@@ -4,6 +4,7 @@ using UnityEngine;
 public class SFXManager : MonoBehaviour
 {
     private AudioSource audioSource;
+    private float sfxVolume = 1f;
 
     [Header("UI Sounds")]
     [SerializeField] private AudioClip pauseSFX;
@@ -40,8 +41,13 @@ public class SFXManager : MonoBehaviour
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+    }
 
+    public void UpdateVolume(float value)
+    {
+        sfxVolume = value;
 
+        audioSource.volume = sfxVolume;
     }
 
     public void PlaySound(string str)
