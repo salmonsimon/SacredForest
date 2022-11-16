@@ -9,10 +9,10 @@ public class Portal : GeneralCollider
 
     PlayerPortalAnimation playerPortalAnimation;
 
-    [SerializeField] private string sceneName;
+    [SerializeField] protected string sceneName;
 
 
-    [SerializeField] private FightingRoute fightingRoute;
+    [SerializeField] protected FightingRoute fightingRoute;
 
     protected virtual void Awake()
     {

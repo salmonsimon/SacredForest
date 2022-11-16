@@ -17,10 +17,14 @@ public class BoxCollider : GeneralCollider
     {
         timeToCheck -= Time.deltaTime;
 
-        if (!isColliding || timeToCheck < 0)
+        if (timeToCheck < 0)
         {
             timeToCheck = 1f;
+            isColliding = false;
+        }
 
+        if (!isColliding)
+        {
             boxCollider.OverlapCollider(filter, hits);
 
             for (int i = 0; i < hits.Length; i++)

@@ -19,7 +19,7 @@ public class Arrow : MonoBehaviour
 
     private void Update()
     {
-        if(!hasHitGround)
+        if(!hasHitGround && rigidBody.constraints == RigidbodyConstraints2D.FreezeRotation)
         {
             if (rigidBody.velocity.x > 0)
             {

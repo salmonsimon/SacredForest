@@ -88,7 +88,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1675811226}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.075, y: 0.2, z: 0}
+  m_LocalPosition: {x: -0.016, y: 0.287, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10225,7 +10225,7 @@ MonoBehaviour:
   jumpingClips:
   - {fileID: 8300000, guid: 66ea683d48f31a6429dc488714268cc7, type: 3}
   - {fileID: 8300000, guid: 0a4d300de93fb03468fddb4fed72c76c, type: 3}
-  - {fileID: 8300000, guid: 1104280fbf517a3428232293d0038315, type: 3}
+  - {fileID: 8300000, guid: 38551fe351fb7e4489037d23eeef2e6a, type: 3}
   - {fileID: 8300000, guid: 2f852acd1be91ce4eb3f5789d90a9a8a, type: 3}
   meleeAttackClips:
   - {fileID: 8300000, guid: 06a8777b2e78a5347beff011fc535ffa, type: 3}
