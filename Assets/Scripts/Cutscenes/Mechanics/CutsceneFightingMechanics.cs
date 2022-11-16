@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Playables;
 
-public class CutsceneFightingMecanics : Cutscene
+public class CutsceneFightingMechanics : Cutscene
 {
     private GameObject player;
     [SerializeField] private GameObject enemy;
