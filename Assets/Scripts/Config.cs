@@ -4,6 +4,9 @@ public class Config
 
     public const string MAIN_MENU_SCENE_NAME = "Main Menu";
     public const string MAIN_SCENE_NAME = "Main";
+    public const string FIGHTING_MECANICS_SCENE_NAME = "Fighting Mecanics";
+    public const string FIRST_ROUTE_SCENE_NAME = "Route 1";
+    public const string FOXES_HOME_SCENE_NAME = "Foxes Home";
 
     #endregion
 

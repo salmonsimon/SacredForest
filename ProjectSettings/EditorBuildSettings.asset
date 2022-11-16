@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Route 1.unity
     guid: 89a711e8e0f677d4db1d88751c86d545
+  - enabled: 1
+    path: Assets/Scenes/Fighting Mecanics.unity
+    guid: f1c1ddca7b6ccf34dac152830413bbeb
+  - enabled: 1
+    path: Assets/Scenes/Foxes Home.unity
+    guid: 1fb4585373341b94d9752ee2051b12bf
   m_configObjects: {}
