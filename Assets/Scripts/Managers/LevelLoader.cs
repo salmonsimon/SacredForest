@@ -6,7 +6,9 @@ using UnityEngine.SceneManagement;
 public class LevelLoader : MonoBehaviour
 {
     [SerializeField] private Animator crossFade;
+
     [SerializeField] private Animator cinematicBrackets;
+    [SerializeField] private bool onCinematicBrackets = false;
 
     private float startTransitionDuration = Config.START_TRANSITION_DURATION;
     private float endTransitionDuration = Config.END_TRANSITION_DURATION;
@@ -68,7 +70,10 @@ public class LevelLoader : MonoBehaviour
         SetPlayerVariablesAfterTransition();
 
         if (GameManager.instance.IsOnMainMenu())
+        {
             GameManager.instance.GetMainMenuUI().ResetMainMenu();
+            GameManager.instance.GetPlayer().SetActive(false);
+        }
 
         yield return new WaitForSeconds(endTransitionDuration);
 
@@ -85,16 +90,23 @@ public class LevelLoader : MonoBehaviour
 
         cinematicBrackets.gameObject.SetActive(true);
         cinematicBrackets.SetTrigger(Config.CROSSFADE_START_TRIGGER);
+
+        onCinematicBrackets = true;
     }
 
     public IEnumerator CinematicBracketsEnd()
     {
-        cinematicBrackets.SetTrigger(Config.CINEMATIC_END_TRIGGER);
+        if (onCinematicBrackets)
+        {
+            onCinematicBrackets = false;
 
-        yield return new WaitForSeconds(Config.CINEMATIC_TRANSITION_DURATION);
+            cinematicBrackets.SetTrigger(Config.CINEMATIC_END_TRIGGER);
 
-        GameManager.instance.GetCountersUI().ShowCounters(true);
-        cinematicBrackets.gameObject.SetActive(false);
+            yield return new WaitForSeconds(Config.CINEMATIC_TRANSITION_DURATION);
+
+            GameManager.instance.GetCountersUI().ShowCounters(true);
+            cinematicBrackets.gameObject.SetActive(false);
+        }
     }
 
     private void SetPlayerVariablesAfterTransition()

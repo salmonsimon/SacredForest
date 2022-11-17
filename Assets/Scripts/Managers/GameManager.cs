@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AnimationManager animationManager;
     [SerializeField] private DialogueManager dialogueManager;
     [SerializeField] private SFXManager sfxManager;
+    [SerializeField] private MusicManager musicManager;
     [SerializeField] private CurrentProgressManager currentProgressManager;
 
     #region UI
@@ -53,6 +55,7 @@ public class GameManager : MonoBehaviour
             Destroy(animationManager.gameObject);
             Destroy(dialogueManager.gameObject);
             Destroy(sfxManager.gameObject);
+            Destroy(musicManager.gameObject);
             Destroy(currentProgressManager.gameObject);
 
             Destroy(mainMenu.gameObject);
@@ -68,6 +71,9 @@ public class GameManager : MonoBehaviour
 
             Settings.Load();
             Settings.Instance.Deserialize();
+
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
     }
     private void OnEnable()
@@ -134,6 +140,12 @@ public class GameManager : MonoBehaviour
 
     public void ToMainMenu()
     {
+        animationManager.ClearCanvases();
+        dialogueManager.ClearDialogues();
+        player.GetComponent<Animator>().runtimeAnimatorController = Resources.Load(Config.PLAYER_ANIMATOR_CONTROLLER_FILE) as RuntimeAnimatorController;
+
+        StartCoroutine(levelLoader.CinematicBracketsEnd());
+
         SetGamePaused(false);
         player.SetActive(false);
 
@@ -251,6 +263,11 @@ public class GameManager : MonoBehaviour
         return sfxManager;
     }
 
+    public MusicManager GetMusicManager()
+    {
+        return musicManager;
+    }
+
     public CurrentProgressManager GetCurrentProgressManager()
     {
         return currentProgressManager;
@@ -277,5 +294,14 @@ public class GameManager : MonoBehaviour
         string displayTime = time.ToString("hh':'mm':'ss");
 
         return displayTime;
+    }
+
+    public void SetAudioSlidersVolumesPauseMenu()
+    {
+        Slider musicVolumeSlider = GameObject.Find("Pause Menu UI/Settings Panel/Music/Music Slider").GetComponent<Slider>();
+        Slider sfxVolumeSlider = GameObject.Find("Pause Menu UI/Settings Panel/SFX/SFX Slider").GetComponent<Slider>();
+
+        musicVolumeSlider.value = Settings.Instance.musicVolume;
+        sfxVolumeSlider.value = Settings.Instance.SFXVolume;
     }
 }

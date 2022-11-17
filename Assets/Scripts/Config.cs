@@ -135,6 +135,8 @@ public class Config
 
     #region Player
 
+    public const string PLAYER_ANIMATOR_CONTROLLER_FILE = "Animator/Player";
+
     #region Player Attack
 
     public const float ATTACK_COOLDOWN_DURATION = .3f;

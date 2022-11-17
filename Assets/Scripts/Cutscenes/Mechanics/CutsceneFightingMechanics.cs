@@ -16,6 +16,7 @@ public class CutsceneFightingMechanics : Cutscene
 
         player = GameManager.instance.GetPlayer();
         player.GetComponent<PlayerMovementController>().enabled = false;
+        player.GetComponent<PlayerAttackController>().enabled = false;
     }
 
     private void Update()
@@ -37,6 +38,10 @@ public class CutsceneFightingMechanics : Cutscene
             new Vector3(arrow.transform.position.x, arrow.transform.position.y + .16f, arrow.transform.position.z));
 
         enemy.GetComponent<Archer>().enabled = false;
+
+        yield return null;
+
+        player.GetComponent<PlayerAttackController>().enabled = true;
 
         while (!Input.GetKeyDown(KeyCode.X))
         {

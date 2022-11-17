@@ -317,6 +317,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crossFade: {fileID: 1213218581500020162}
   cinematicBrackets: {fileID: 1208237968}
+  onCinematicBrackets: 0
 --- !u!1 &1213218580600111395
 GameObject:
   m_ObjectHideFlags: 0
