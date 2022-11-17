@@ -111,11 +111,16 @@ public class LevelLoader : MonoBehaviour
 
     private void SetPlayerVariablesAfterTransition()
     {
-        GameManager.instance.GetPlayer().GetComponent<Animator>().enabled = true;
-        GameManager.instance.GetPlayer().transform.localScale = Vector3.one;
+        GameObject player = GameManager.instance.GetPlayer();
+
+        player.GetComponent<Animator>().enabled = true;
+        player.transform.localScale = Vector3.one;
         GameManager.instance.RestartPlayer();
 
-        GameManager.instance.GetPlayer().GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+        player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+
+        player.GetComponent<PlayerAttackController>().enabled = true;
+        player.GetComponent<PlayerMovementController>().enabled = true;
     }
 
     public Animator GetCrossfadeAnimator()

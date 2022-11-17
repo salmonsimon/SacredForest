@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CircleCollider2D))]
 public class CircleCollider : GeneralCollider
 {
     private CircleCollider2D circleCollider;
