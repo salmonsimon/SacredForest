@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class SFXManager : MonoBehaviour
 {
     private AudioSource audioSource;
@@ -41,6 +42,8 @@ public class SFXManager : MonoBehaviour
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+
+        UpdateVolume(Settings.Instance.SFXVolume);
     }
 
     public void UpdateVolume(float value)
@@ -48,6 +51,9 @@ public class SFXManager : MonoBehaviour
         sfxVolume = value;
 
         audioSource.volume = sfxVolume;
+        Settings.Instance.SFXVolume = sfxVolume;
+
+        Settings.Save();
     }
 
     public void PlaySound(string str)
@@ -173,4 +179,9 @@ public class SFXManager : MonoBehaviour
     }
 
     #endregion
+
+    public float GetSFXVolume()
+    {
+        return sfxVolume;
+    }
 }

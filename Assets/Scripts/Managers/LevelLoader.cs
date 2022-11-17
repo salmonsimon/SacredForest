@@ -70,7 +70,10 @@ public class LevelLoader : MonoBehaviour
         SetPlayerVariablesAfterTransition();
 
         if (GameManager.instance.IsOnMainMenu())
+        {
             GameManager.instance.GetMainMenuUI().ResetMainMenu();
+            GameManager.instance.GetPlayer().SetActive(false);
+        }
 
         yield return new WaitForSeconds(endTransitionDuration);
 

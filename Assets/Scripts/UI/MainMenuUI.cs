@@ -44,6 +44,13 @@ public class MainMenuUI : MonoBehaviour
 
     #endregion
 
+    #region Settings Panel
+
+    [SerializeField] Slider musicVolumeSlider;
+    [SerializeField] Slider sfxVolumeSlider;
+
+    #endregion
+
     private void Start()
     {
         ResetMainMenu();
@@ -205,5 +212,11 @@ public class MainMenuUI : MonoBehaviour
     private void SetOnChooseGamePanel(bool value)
     {
         onChooseGamePanel = value;
+    }
+
+    public void SetAudioSlidersVolumes()
+    {
+        musicVolumeSlider.value = Settings.Instance.musicVolume;
+        sfxVolumeSlider.value = Settings.Instance.SFXVolume;
     }
 }
