@@ -79,6 +79,14 @@ public class PlayerAttackController : MonoBehaviour
 
         ableToDoSecondAttack = false;
 
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack 1"))
+        {
+            while (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack 1"))
+            {
+                yield return null;
+            }
+        }
+
         yield return new WaitForSeconds(Config.SECOND_ATTACK_DURATION);
 
         animator.SetBool(Config.ANIMATOR_IS_DOING_SECOND_ATTACK, false);
@@ -95,11 +103,12 @@ public class PlayerAttackController : MonoBehaviour
 
     private IEnumerator AttackCooldown()
     {
-        yield return new WaitForSeconds(attackCooldownDuration*(0.75f));
+        //yield return new WaitForSeconds(attackCooldownDuration * (0.75f));
+        yield return new WaitForSeconds(attackCooldownDuration);
 
         ableToDoSecondAttack = false;
 
-        yield return new WaitForSeconds(attackCooldownDuration*(0.25f));
+        //yield return new WaitForSeconds(attackCooldownDuration*(0.25f));
 
         onAttackCooldown = false;
     }
