@@ -12,20 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17526797d331c334d804f96cc09d54c4, type: 3}
   m_Name: Settings
   m_EditorClassIdentifier: 
-  newGameIndex: 16
-  savedGamesAmount: 3
-  currentSavedGames: 0a0000000e0000000f000000
+  newGameIndex: 0
+  savedGamesAmount: 0
+  currentSavedGames: 
   savedGamesKillsCounterSerialized:
-    keys: 0a0000000e0000000f000000
-    values: 000000001f00000003000000
+    keys: 
+    values: 
   savedGamesDeathsCounterSerialized:
-    keys: 0a0000000e0000000f000000
-    values: 000000000400000000000000
+    keys: 
+    values: 
   savedGamesTimePlayedCounterSerialized:
-    keys: 0a0000000e0000000f000000
-    values:
-    - 0
-    - 268.91617
-    - 51.364014
+    keys: 
+    values: []
   musicVolume: 1
-  SFXVolume: 0.39999992
+  SFXVolume: 1

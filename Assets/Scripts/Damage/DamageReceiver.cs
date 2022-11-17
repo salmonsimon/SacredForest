@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DamageReceiver : MonoBehaviour
 {
-    [SerializeField] private Animator animator;
+    private Animator animator;
 
     [SerializeField] private float immuneTime = 1f;
     private bool isImmune = false;
@@ -64,6 +64,8 @@ public class DamageReceiver : MonoBehaviour
     private void Awake()
     {
         currentHitPoints = maxHitPoints;
+
+        animator = GetComponent<Animator>();
     }
 
     protected virtual void ReceiveDamage(Damage damage)

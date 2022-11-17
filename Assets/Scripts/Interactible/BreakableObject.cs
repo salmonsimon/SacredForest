@@ -7,6 +7,9 @@ public class BreakableObject : MonoBehaviour
 {
     private Animator animator;
 
+    [SerializeField] float breakAnimationDuration = .6f;
+    [SerializeField] bool destroyAfterBreaking = true;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -18,12 +21,13 @@ public class BreakableObject : MonoBehaviour
     {
         animator.SetTrigger(Config.ANIMATOR_DEATH_TRIGGER);
          
-        StartCoroutine(WaitToDestroy());
+        if (destroyAfterBreaking)
+            StartCoroutine(WaitToDestroy());
     }
 
     private IEnumerator WaitToDestroy()
     {
-        yield return new WaitForSeconds(.6f);
+        yield return new WaitForSeconds(breakAnimationDuration);
 
         Destroy(gameObject);
     }
