@@ -10206,7 +10206,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e58c267cd4ef09409f30c564b9ca1d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 4697750405587687973}
+  flashMaterial: {fileID: 2100000, guid: c2d4b6910146ab943a4f522da386226e, type: 2}
+  flashDuration: 0.25
+  flashFrequency: 0.5
   immuneTime: 2
   maxHitPoints: 1
   currentHitPoints: 1

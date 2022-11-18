@@ -67,6 +67,8 @@ public class Config
     public const string ANIMATOR_SHOW_COUNTERS = "Appear";
     public const string ANIMATOR_HIDE_COUNTERS = "Disappear";
 
+    public const string FLASH_MATERIAL_FILE = "Materials/SpriteFlash";
+
     #region Camera Shake
 
     public const string SHAKE_FILE = "Cinemachine/2D Shake";

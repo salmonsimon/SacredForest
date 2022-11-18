@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: ZSerializerSettings
   m_EditorClassIdentifier: 
   packageInitialized: 1
-  debugMode: 2
+  debugMode: 1
   autoRebuildSerializers: 1
-  selectedSaveFile: 0
+  selectedSaveFile: -1
   encryptData: 0
   advancedSerialization: 0
   serializationType: 0
