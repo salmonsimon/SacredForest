@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speakers:
   - {fileID: 0}
+  speakerBeeps:
+  - {fileID: 8300000, guid: 8d9ba6544c9eb2b45823bc4cb40be99d, type: 3}
   dialogues:
   - title: Foxy - 01
     text: good luck!

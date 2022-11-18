@@ -14,54 +14,66 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speakers:
   - {fileID: 0}
+  speakerBeeps:
+  - {fileID: 8300000, guid: 8d9ba6544c9eb2b45823bc4cb40be99d, type: 3}
   dialogues:
   - title: Foxy - 01
     text: come on! this way!
     duration: 2
     isSkippable: 0
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: Foxy - 02
     text: here, here!!!
     duration: 2
     isSkippable: 0
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: Foxy - 03
     text: follow me! my cousin awaits ...
     duration: 2
     isSkippable: 0
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: Foxy - 04
     text: please...
     duration: 2
     isSkippable: 0
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: Foxy - 05
     text: really? ...
     duration: 2
     isSkippable: 0
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: Foxy - 06
     text: ...
     duration: 2
     isSkippable: 0
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: Foxy - 07
     text: '[sigh]'
     duration: 2
     isSkippable: 0
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: Foxy - 08
     text: come on! if they manage to steal his powers we will all be doomed!
     duration: 2
     isSkippable: 0
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: Foxy - 09
     text: are you really the goddess messenger, the forest guardian? ...
     duration: 2
     isSkippable: 0
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: Foxy - 10
     text: :(
     duration: 2
     isSkippable: 0
     speakerIndex: 0
+    isEnemyBubble: 0

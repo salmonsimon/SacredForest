@@ -19,16 +19,19 @@ public class TypewriterEffect : MonoBehaviour
     private string textToType;
     private float duration;
 
+    private AudioClip beepSound;
+
     public bool IsRunning { get; private set; }
     public bool FinishedWaitingTime { get; private set; }
 
-    public void Run(Dialogue dialogue, TMP_Text textLabel)
+    public void Run(Dialogue dialogue, TMP_Text textLabel, AudioClip speakerBeep, bool isDialogueBubble)
     {
         this.textToType = dialogue.Text;
         this.textLabel = textLabel;
         this.duration = dialogue.Duration;
+        this.beepSound = speakerBeep;
 
-        typingCoroutine = StartCoroutine(TypeText());
+        typingCoroutine = StartCoroutine(TypeText(isDialogueBubble));
     }
 
     public void Reset()
@@ -52,10 +55,13 @@ public class TypewriterEffect : MonoBehaviour
         StartCoroutine(WaitForWaitingTime());
     }
 
-    private IEnumerator TypeText()
+    private IEnumerator TypeText(bool isDialogueBubble)
     {
-        DialogueBubble dialogueBubble = GetComponent<DialogueBubble>();
-        dialogueBubble.ScaleBubbleDimensions(textToType.Length);
+        if (isDialogueBubble)
+        {
+            DialogueBubble dialogueBubble = GetComponent<DialogueBubble>();
+            dialogueBubble.ScaleBubbleDimensions(textToType.Length);
+        }
 
         IsRunning = true;
 
@@ -79,6 +85,8 @@ public class TypewriterEffect : MonoBehaviour
                 bool isLast = i >= textToType.Length - 1;
 
                 textLabel.maxVisibleCharacters = i + 1;
+
+                GameManager.instance.GetSFXManager().PlaySound(beepSound);
 
                 if (IsPunctuation(textToType[i], out float waitDuration) && !isLast && !IsPunctuation(textToType[i + 1], out _))
                 {

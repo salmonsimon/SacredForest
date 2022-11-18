@@ -24,8 +24,7 @@ public class Sign : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    // TODO: Change later for canvas dialogue
-                    GameManager.instance.GetDialogueManager().RunBubbleDialogue(dialogue, new List<Transform>() { transform });
+                    GameManager.instance.GetDialogueManager().RunScreenOverlayDialogue(dialogue);
                 }
             }
         }

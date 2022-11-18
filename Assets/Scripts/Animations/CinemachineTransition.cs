@@ -13,6 +13,7 @@ public class CinemachineTransition : MonoBehaviour
     [SerializeField] BoxCollider2D blockCollider;
 
     private GameObject player;
+    private bool isPlayerAlive = true;
 
     private void Awake()
     {
@@ -22,21 +23,25 @@ public class CinemachineTransition : MonoBehaviour
     private void Start()
     {
         player = GameManager.instance.GetPlayer();
+
+        player.GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += PlayerAliveStatusChange;
     }
 
-    private void Update()
+    private void PlayerAliveStatusChange()
     {
-        if (!player.GetComponent<DamageReceiver>().IsAlive)
+        if (!isPlayerAlive)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                activeVcam.Priority = 1;
-                otherVcam.Priority = 0;
+            activeVcam.Priority = 1;
+            otherVcam.Priority = 0;
 
-                GameManager.instance.GetCinemachineShake().SetVirtualCamera();
+            GameManager.instance.GetCinemachineShake().SetVirtualCamera();
 
-                blockCollider.gameObject.SetActive(false);
-            }
+            blockCollider.gameObject.SetActive(false);
+            isPlayerAlive = true;
+        }
+        else
+        {
+            isPlayerAlive = false;
         }
     }
 
