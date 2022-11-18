@@ -512,10 +512,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAttacking: 0
-  attackCooldownDuration: 3
+  attackCooldownDuration: 2
   arrowAnimationClip: {fileID: 7400000, guid: 33ba12ab319d1694b94b63289b95dfb1, type: 2}
   arrowPrefab: {fileID: 4554462955417439476, guid: 04d5739dc3c1b6748820e6225f94623c, type: 3}
   shootingWaitingTime: 0.3
+  shootingSpeeds:
+  - 10
+  - 7
 --- !u!114 &2957183605891938239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -573,7 +576,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e58c267cd4ef09409f30c564b9ca1d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 2957183605891938227}
   immuneTime: 2
   maxHitPoints: 1
   currentHitPoints: 1

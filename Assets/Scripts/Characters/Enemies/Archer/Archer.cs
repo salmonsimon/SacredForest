@@ -106,7 +106,7 @@ public class Archer : Enemy
         shootArrowAction = true;
 
         if (shootArrowAction)
-            archerAttacks.ArrowAttack(transform.position, player.transform.position);
+            archerAttacks.ArrowAttack(transform, player.transform);
     }
 
     private void ResetActionBooleans()
