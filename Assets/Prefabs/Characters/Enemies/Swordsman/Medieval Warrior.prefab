@@ -401,7 +401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAttacking: 0
-  attackCooldownDuration: 3
+  attackCooldownDuration: 2
   animationClips:
   - {fileID: 7400000, guid: 4667812ea66582849bbedc30a748a852, type: 2}
   - {fileID: 7400000, guid: 27108073f599823428f4489c75a6f175, type: 2}
@@ -465,7 +465,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e58c267cd4ef09409f30c564b9ca1d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 771548696854713194}
   immuneTime: 2
   maxHitPoints: 1
   currentHitPoints: 1

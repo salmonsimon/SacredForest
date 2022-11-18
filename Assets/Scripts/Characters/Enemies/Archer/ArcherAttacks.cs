@@ -15,7 +15,7 @@ public class ArcherAttacks : EnemyAttacks
     [SerializeField] private Arrow arrowPrefab;
     [SerializeField] private float shootingWaitingTime = .3f;
 
-    private float[] shootingSpeeds = { 10f, 7f };
+    [SerializeField] private float[] shootingSpeeds = { 10f, 7f };
     private float shootingSpeed;
     private float shootingAngle;
     private Vector2 shootingDirection;
@@ -32,11 +32,12 @@ public class ArcherAttacks : EnemyAttacks
         projectileContainer = GameObject.FindGameObjectWithTag(Config.PROJECTILE_CONTAINER_NAME);
     }
 
-    public void ArrowAttack(Vector3 archerPosition, Vector3 playerPosition)
+    public void ArrowAttack(Transform archerTransform, Transform playerTransform)
     {
+        isGoingToShoot = false;
 
-        float xDistance = playerPosition.x - archerPosition.x;
-        float yDistance = playerPosition.y - archerPosition.y;
+        float xDistance = playerTransform.position.x - archerTransform.position.x;
+        float yDistance = playerTransform.position.y - archerTransform.position.y;
 
         CalculateShot(xDistance, yDistance);
 
@@ -47,11 +48,21 @@ public class ArcherAttacks : EnemyAttacks
             StartCoroutine(IsAttackingCooldown(shootingWaitingTime + Config.MEDIUM_DELAY));
 
             StartCoroutine(PlayClip(Animator.StringToHash(arrowAnimationClip.name), 0));
-            StartCoroutine(ShootArrow(shootingSpeed, shootingDirection));
+            StartCoroutine(ShootArrow(archerTransform, playerTransform));
         }
     }
 
-    private void CalculateShot(float xDistance, float yDistance) 
+    private void CalculateShot(float xDistance, float yDistance)
+    {
+        float distance = new Vector2(xDistance, yDistance).magnitude;
+
+        if (distance > 2)
+            CalculateLongRangeShot(xDistance, yDistance);
+        else
+            CalculateShortRangeShot(xDistance, yDistance);
+    }
+
+    private void CalculateLongRangeShot(float xDistance, float yDistance) 
     {
         float yGravity = Physics2D.gravity.y;
 
@@ -91,6 +102,15 @@ public class ArcherAttacks : EnemyAttacks
                 isGoingToShoot = true;
             }
         }
+    }
+
+    private void CalculateShortRangeShot(float xDistance, float yDistance)
+    {
+        this.shootingSpeed = shootingSpeeds[1];
+
+        this.shootingDirection = new Vector2(xDistance, yDistance);
+
+        isGoingToShoot = true;
     }
 
     private float CalculateShootingSpeedCorrection(float yDistance)
@@ -139,18 +159,26 @@ public class ArcherAttacks : EnemyAttacks
         return speedCorrection;
     }
 
-    private IEnumerator ShootArrow(float shootingForce, Vector2 direction)
+    private IEnumerator ShootArrow(Transform archerTransform, Transform playerTransform)
     {
         yield return new WaitForSeconds(shootingWaitingTime);
 
-        Arrow newArrow = Instantiate(arrowPrefab, transform.position + new Vector3(transform.localScale.x * .16f, 0, 0), Quaternion.identity);
-        newArrow.transform.SetParent(projectileContainer.transform);
-
-        if (transform.localScale.x < 0)
+        if (isAlive)
         {
-            newArrow.transform.localScale = new Vector3(newArrow.transform.localScale.x * -1f, newArrow.transform.localScale.y, newArrow.transform.localScale.z);
-        }
+            float xDistance = playerTransform.position.x - archerTransform.position.x;
+            float yDistance = playerTransform.position.y - archerTransform.position.y;
 
-        newArrow.GetComponent<Rigidbody2D>().velocity = direction * shootingForce;
+            CalculateShot(xDistance, yDistance);
+
+            Arrow newArrow = Instantiate(arrowPrefab, transform.position + new Vector3(transform.localScale.x * .16f, 0, 0), Quaternion.identity);
+            newArrow.transform.SetParent(projectileContainer.transform);
+
+            if (transform.localScale.x < 0)
+            {
+                newArrow.transform.localScale = new Vector3(newArrow.transform.localScale.x * -1f, newArrow.transform.localScale.y, newArrow.transform.localScale.z);
+            }
+
+            newArrow.GetComponent<Rigidbody2D>().velocity = shootingDirection * shootingSpeed;
+        }
     }
 }

@@ -103,13 +103,9 @@ public class PlayerAttackController : MonoBehaviour
 
     private IEnumerator AttackCooldown()
     {
-        //yield return new WaitForSeconds(attackCooldownDuration * (0.75f));
         yield return new WaitForSeconds(attackCooldownDuration);
 
         ableToDoSecondAttack = false;
-
-        //yield return new WaitForSeconds(attackCooldownDuration*(0.25f));
-
         onAttackCooldown = false;
     }
 
