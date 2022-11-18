@@ -10224,7 +10224,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e58c267cd4ef09409f30c564b9ca1d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  immuneTime: 2
+  flashMaterial: {fileID: 0}
+  immuneTime: 1
   maxHitPoints: 1
   currentHitPoints: 1
 --- !u!114 &6336324247480200791

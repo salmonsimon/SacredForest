@@ -6,6 +6,21 @@ public class DamageReceiver : MonoBehaviour
 {
     private Animator animator;
 
+    #region Sprite Flash
+
+    [SerializeField] private bool flashesWhenImmune = false;
+    [SerializeField] private Color flashingColor = Color.white;
+
+    private SpriteRenderer spriteRenderer;
+    private Material spriteFlashMaterial;
+    private Material spriteDefaultMaterial;
+    private float flashDuration;
+    private float flashFrequency;
+
+    private Coroutine flashCoroutine;
+
+    #endregion
+
     [SerializeField] private float immuneTime = 1f;
     private bool isImmune = false;
 
@@ -29,7 +44,7 @@ public class DamageReceiver : MonoBehaviour
     {
         currentHitPoints -= damage;
 
-        if (OnCharacterDamaged != null)
+        if (OnCharacterDamaged != null && currentHitPoints > 0)
             OnCharacterDamaged();
     }
 
@@ -66,6 +81,16 @@ public class DamageReceiver : MonoBehaviour
         currentHitPoints = maxHitPoints;
 
         animator = GetComponent<Animator>();
+
+        if (flashesWhenImmune)
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+            spriteFlashMaterial = Resources.Load(Config.FLASH_MATERIAL_FILE) as Material;
+            spriteDefaultMaterial = spriteRenderer.material;
+
+            flashDuration = immuneTime / 4;
+            flashFrequency = immuneTime / 2;
+        }
     }
 
     protected virtual void ReceiveDamage(Damage damage)
@@ -94,10 +119,22 @@ public class DamageReceiver : MonoBehaviour
 
         isImmune = true;
 
+        if (flashesWhenImmune)
+        {
+            InvokeRepeating("Flash", Config.SMALL_DELAY, flashFrequency);
+        }
+
         yield return new WaitForSeconds(immuneTime);
 
         isImmune = false;
+
+        if (flashesWhenImmune)
+        {
+            CancelInvoke();
+        }
     }
+
+    
 
     public IEnumerator SetImmune(float duration)
     {
@@ -105,9 +142,19 @@ public class DamageReceiver : MonoBehaviour
 
         isImmune = true;
 
+        if (flashesWhenImmune)
+        {
+            InvokeRepeating("Flash", Config.SMALL_DELAY, flashFrequency);
+        }
+
         yield return new WaitForSeconds(duration);
 
         isImmune = false;
+
+        if (flashesWhenImmune)
+        {
+            CancelInvoke();
+        }
     }
 
     protected virtual void Death()
@@ -167,5 +214,28 @@ public class DamageReceiver : MonoBehaviour
                     break;
             }
         }
+    }
+
+    private void Flash()
+    {
+        if (flashCoroutine != null)
+        {
+            StopCoroutine(flashCoroutine);
+        }
+
+        flashCoroutine = StartCoroutine(FlashCoroutine());
+    }
+
+    private IEnumerator FlashCoroutine()
+    {
+        spriteRenderer.material = spriteFlashMaterial;
+
+        spriteFlashMaterial.color = flashingColor;
+
+        yield return new WaitForSeconds(flashDuration);
+
+        spriteRenderer.material = spriteDefaultMaterial;
+
+        flashCoroutine = null;
     }
 }

@@ -570,6 +570,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1402623859}
     m_Modifications:
+    - target: {fileID: 1971838360380672435, guid: da2b955bb7d5a7c43a29028653e8dd83, type: 3}
+      propertyPath: flashDuration
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1971838360380672435, guid: da2b955bb7d5a7c43a29028653e8dd83, type: 3}
+      propertyPath: flashMaterial
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1971838360380672435, guid: da2b955bb7d5a7c43a29028653e8dd83, type: 3}
+      propertyPath: flashFrequency
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4697750405587687972, guid: da2b955bb7d5a7c43a29028653e8dd83, type: 3}
       propertyPath: m_RootOrder
       value: 1

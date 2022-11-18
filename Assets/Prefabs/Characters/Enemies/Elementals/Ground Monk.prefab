@@ -10548,7 +10548,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e58c267cd4ef09409f30c564b9ca1d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 6285235481602671983}
+  flashesWhenImmune: 1
+  flashingColor: {r: 0.33333334, g: 0.0627451, b: 0.043137256, a: 1}
   immuneTime: 1
   maxHitPoints: 10
   currentHitPoints: 10

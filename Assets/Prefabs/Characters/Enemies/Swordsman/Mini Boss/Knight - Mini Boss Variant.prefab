@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6299034137655998695}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: DialogueBubbleHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,8 +47,28 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7293884391147160537, guid: 5091602d243c8154c9e31eea3332e9ed, type: 3}
+      propertyPath: flashMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: c2d4b6910146ab943a4f522da386226e, type: 2}
+    - target: {fileID: 7293884391147160537, guid: 5091602d243c8154c9e31eea3332e9ed, type: 3}
+      propertyPath: flashingColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7293884391147160537, guid: 5091602d243c8154c9e31eea3332e9ed, type: 3}
+      propertyPath: flashingColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7293884391147160537, guid: 5091602d243c8154c9e31eea3332e9ed, type: 3}
+      propertyPath: flashingColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7293884391147160537, guid: 5091602d243c8154c9e31eea3332e9ed, type: 3}
       propertyPath: currentHitPoints
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7293884391147160537, guid: 5091602d243c8154c9e31eea3332e9ed, type: 3}
+      propertyPath: flashesWhenImmune
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8428708079556957601, guid: 5091602d243c8154c9e31eea3332e9ed, type: 3}
       propertyPath: attackCooldownDuration
