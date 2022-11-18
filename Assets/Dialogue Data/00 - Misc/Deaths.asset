@@ -13,109 +13,132 @@ MonoBehaviour:
   m_Name: Deaths
   m_EditorClassIdentifier: 
   speakers: []
+  speakerBeeps:
+  - {fileID: 8300000, guid: 8eec5f8008d16f34da85de06f56ea424, type: 3}
   dialogues:
   - title: 
     text: nice try... it was sarcasm, by the way.
     duration: 20
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: 
     text: you really are a failure, aren't you?
     duration: 20
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: 
     text: and i thought this was a beginner's level ...
     duration: 20
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: 
     text: come one! you can do it ... or maybe not ...
     duration: 20
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: 
     text: ...
     duration: 20
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: 
     text: '[anxious coughing]'
     duration: 20
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: 
     text: how many times have you died yet?
     duration: 20
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: 
     text: still trying to win?
     duration: 20
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: 
     text: again, again and again ...
     duration: 20
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: 
     text: breath in, breath out ...
     duration: 20
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: 
     text: are you sure you don't need a break?
     duration: 20
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: 
     text: come one! this one was really easy
     duration: 20
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: 
     text: easy peasy ... right?
     duration: 20
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: 
     text: l.o.l
     duration: 20
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: 
     text: '[sighing miserably]'
     duration: 20
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: 
     text: you really suck at this, don't you?
     duration: 20
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: 
     text: maybe after dying a hundred times more, you'll manage... please...
     duration: 20
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: 
     text: it's not even funny seeing you die like this
     duration: 20
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: 
     text: i thought you would at least give them some trouble...
     duration: 20
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: 
     text: ready to lose again?
     duration: 20
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: 
     text: i'm retiring...
     duration: 20
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0

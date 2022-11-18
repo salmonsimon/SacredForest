@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speakers:
   - {fileID: 0}
+  speakerBeeps:
+  - {fileID: 8300000, guid: 7b08740d04ef070458ce774b189f454b, type: 3}
   dialogues:
   - title: William Wilfred - 01
     text: it seems that you defeated our lackeys, but your luck runs out now!

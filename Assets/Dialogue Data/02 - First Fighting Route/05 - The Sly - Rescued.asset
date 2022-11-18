@@ -15,6 +15,9 @@ MonoBehaviour:
   speakers:
   - {fileID: 0}
   - {fileID: 0}
+  speakerBeeps:
+  - {fileID: 8300000, guid: fc69ded06129280489e1e84e005be705, type: 3}
+  - {fileID: 8300000, guid: 6638b4c896c290147bf1e17bf583128d, type: 3}
   dialogues:
   - title: The Sly - 01
     text: who are you? ... are you the one who will steal my powers?! ...

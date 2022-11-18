@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Temporary Sign - Route 3
   m_EditorClassIdentifier: 
   speakers: []
+  speakerBeeps:
+  - {fileID: 8300000, guid: 8eec5f8008d16f34da85de06f56ea424, type: 3}
   dialogues:
   - title: Sign Dialogue
     text: this will be where the portal to the third route is... thanks for playing!

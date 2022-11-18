@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speakers:
   - {fileID: 0}
+  speakerBeeps:
+  - {fileID: 8300000, guid: fc69ded06129280489e1e84e005be705, type: 3}
   dialogues:
   - title: Sly - 01
     text: 'Thanks for saving me! now we can live happily again in our forest :) '

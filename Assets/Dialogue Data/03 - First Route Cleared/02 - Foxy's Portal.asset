@@ -14,29 +14,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speakers:
   - {fileID: 0}
+  speakerBeeps:
+  - {fileID: 8300000, guid: 8d9ba6544c9eb2b45823bc4cb40be99d, type: 3}
   dialogues:
   - title: Foxy - 01
     text: thank youuuuuu!!
     duration: 3
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: Foxy - 02
     text: 'we are creating an akate fan club! '
     duration: 3
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: Foxy - 03
     text: my uncle is back home! yaaaay!!
     duration: 3
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: Foxy - 04
     text: i thought we were doomed, but after you came, there is hope again!
     duration: 3
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0
   - title: Foxy - 05
     text: a.k.a.t.e... what a beautif... what! you're here! hey!
     duration: 3
     isSkippable: 1
     speakerIndex: 0
+    isEnemyBubble: 0

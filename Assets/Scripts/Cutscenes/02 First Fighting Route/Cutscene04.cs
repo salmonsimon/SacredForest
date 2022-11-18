@@ -40,8 +40,6 @@ public class Cutscene04 : Cutscene
 
         yield return new WaitForSeconds(2f);
 
-        // TODO: change later so it plays in the middle of the screen instead, just
-        // like deaths
         GameManager.instance.GetDialogueManager().RunBubbleDialogue(dialogues[0], speakers);
 
         while (GameManager.instance.GetDialogueManager().IsRunning)
@@ -93,9 +91,8 @@ public class Cutscene04 : Cutscene
 
         yield return new WaitForSeconds(1f);
 
-        // TODO: change later so it plays in the middle of the screen instead, just
-        // like deaths
-        GameManager.instance.GetDialogueManager().RunBubbleDialogue(dialogues[1], speakers);
+        GameManager.instance.GetDialogueManager().RunScreenOverlayDialogue(dialogues[1]);
+
 
         while (GameManager.instance.GetDialogueManager().IsRunning)
         {
@@ -160,9 +157,7 @@ public class Cutscene04 : Cutscene
 
         yield return new WaitForSeconds(2f);
 
-        // TODO: change later so it plays in the middle of the screen instead, just
-        // like deaths
-        GameManager.instance.GetDialogueManager().RunBubbleDialogue(dialogues[2], speakers, 0, 0);
+        GameManager.instance.GetDialogueManager().RunScreenOverlayDialogue(dialogues[2], 0, 0);
 
         while (GameManager.instance.GetDialogueManager().IsRunning)
         {
@@ -176,9 +171,7 @@ public class Cutscene04 : Cutscene
             yield return null;
         }
 
-        // TODO: change later so it plays in the middle of the screen instead, just
-        // like deaths
-        GameManager.instance.GetDialogueManager().RunBubbleDialogue(dialogues[2], speakers, 2, 2);
+        GameManager.instance.GetDialogueManager().RunScreenOverlayDialogue(dialogues[2], 2, 2);
 
         while (GameManager.instance.GetDialogueManager().IsRunning)
         {

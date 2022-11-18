@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speakers:
   - {fileID: 0}
+  speakerBeeps:
+  - {fileID: 8300000, guid: 6924fd56af7d8c04ea2f3be436570d63, type: 3}
   dialogues:
   - title: Grim Bearer - 01
     text: aaaarrrgghh...

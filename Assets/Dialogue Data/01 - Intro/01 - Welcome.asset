@@ -15,6 +15,9 @@ MonoBehaviour:
   speakers:
   - {fileID: 0}
   - {fileID: 0}
+  speakerBeeps:
+  - {fileID: 8300000, guid: 8d9ba6544c9eb2b45823bc4cb40be99d, type: 3}
+  - {fileID: 8300000, guid: 6638b4c896c290147bf1e17bf583128d, type: 3}
   dialogues:
   - title: Foxy - 01
     text: ... can't believe the tales were true!

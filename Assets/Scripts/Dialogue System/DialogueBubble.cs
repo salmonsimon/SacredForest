@@ -88,6 +88,9 @@ public class DialogueBubble : MonoBehaviour
             yield return null;
         }
 
+        dialogueBox.transform.localScale = finalScale;
+        dialogueBox.transform.position = finalPosition;
+
         IsOpen = true;
     }
 
@@ -109,6 +112,9 @@ public class DialogueBubble : MonoBehaviour
 
             yield return null;
         }
+
+        dialogueBox.transform.localScale = finalScale;
+        dialogueBox.transform.position = finalPosition;
 
         Destroy(this.gameObject);
     }

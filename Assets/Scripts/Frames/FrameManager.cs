@@ -10,6 +10,7 @@ public class FrameManager : MonoBehaviour
     private int activeFrameIndex = 0;
 
     private GameObject player;
+    private bool isPlayerAlive = true;
 
     private void Start()
     {
@@ -19,11 +20,27 @@ public class FrameManager : MonoBehaviour
 
         activeFrame.gameObject.SetActive(true);
         activeFrame.StartFrame();
+
+        player.GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += PlayerAliveStatusChange;
+    }
+
+    private void PlayerAliveStatusChange()
+    {
+        if (player.GetComponent<DamageReceiver>().IsAlive)
+        {
+            isPlayerAlive = true;
+        }
+        else
+        {
+            isPlayerAlive = false;
+
+            GameManager.instance.GetDialogueManager().ShowRandomDeathDialogue();
+        }
     }
 
     private void Update()
     {
-        if (!player.GetComponent<DamageReceiver>().IsAlive && !GameManager.instance.IsTeleporting())
+        if (!isPlayerAlive && !GameManager.instance.IsTeleporting() && !GameManager.instance.GetDialogueManager().IsRunning)
         {
             GameManager.instance.GetAnimationManager().ShowImageUI(Config.SPACE_KEY_GUI, true);
 

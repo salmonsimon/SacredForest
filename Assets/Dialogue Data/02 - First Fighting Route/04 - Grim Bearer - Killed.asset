@@ -15,6 +15,9 @@ MonoBehaviour:
   speakers:
   - {fileID: 0}
   - {fileID: 0}
+  speakerBeeps:
+  - {fileID: 8300000, guid: 6924fd56af7d8c04ea2f3be436570d63, type: 3}
+  - {fileID: 8300000, guid: 6638b4c896c290147bf1e17bf583128d, type: 3}
   dialogues:
   - title: Grim Bearer - 01
     text: i can't believe this is happening... you defeated me! ... the grim bearer!!!
