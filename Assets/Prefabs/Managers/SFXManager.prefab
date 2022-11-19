@@ -199,3 +199,4 @@ MonoBehaviour:
   rockLandingClip: {fileID: 8300000, guid: 21745a7e9dc0eb9468a82177835053cb, type: 3}
   woodLandingClip: {fileID: 8300000, guid: 4a0a255188fdc8d4bb57487b70583078, type: 3}
   dirtLandingClip: {fileID: 8300000, guid: 170fd7390fb32c640944d077ff92ade6, type: 3}
+  suspenseSFX: {fileID: 8300000, guid: 42a4980225a8a9b46a6e4440ec7051bd, type: 3}

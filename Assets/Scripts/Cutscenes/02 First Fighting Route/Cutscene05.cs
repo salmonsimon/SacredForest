@@ -52,6 +52,8 @@ public class Cutscene05 : Cutscene
 
     private IEnumerator Play()
     {
+        GameManager.instance.GetMusicManager().PlayMusic(Config.FOXES_HOME_SCENE_NAME);
+
         GameManager.instance.GetLevelLoader().CinematicBracketsStart();
 
         GameObject player = GameManager.instance.GetPlayer();
@@ -191,6 +193,7 @@ public class Cutscene05 : Cutscene
         playerCamera.Priority = 1;
 
         StartCoroutine(GameManager.instance.GetLevelLoader().CinematicBracketsEnd());
+        GameManager.instance.GetMusicManager().SetLooping(false);
         ActivatePlayer(player);
 
         yield return new WaitForSeconds(Config.SMALL_DELAY);

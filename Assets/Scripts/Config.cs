@@ -8,6 +8,8 @@ public class Config
     public const string FIRST_ROUTE_SCENE_NAME = "Route 1";
     public const string FOXES_HOME_SCENE_NAME = "Foxes Home";
 
+    public const string FIRST_BOSS_FRAME = "First Boss";
+
     #endregion
 
     #region Tags
@@ -229,6 +231,7 @@ public class Config
 
     public const string ARROW_HIT_SFX = "Arrow Hit";
     public const string PAUSE_SFX = "Pause";
+    public const string SUSPENSE_SFX = "Suspense";
 
     #endregion
 

@@ -38,6 +38,8 @@ public class SFXManager : MonoBehaviour
     [SerializeField] private AudioClip woodLandingClip;
     [SerializeField] private AudioClip dirtLandingClip;
 
+    [Header("Ambience Sound")]
+    [SerializeField] private AudioClip suspenseSFX;
 
     private void Awake()
     {
@@ -66,6 +68,10 @@ public class SFXManager : MonoBehaviour
 
             case Config.PAUSE_SFX:
                 audioSource.PlayOneShot(pauseSFX);
+                break;
+
+            case Config.SUSPENSE_SFX:
+                audioSource.PlayOneShot(suspenseSFX);
                 break;
         }
     }

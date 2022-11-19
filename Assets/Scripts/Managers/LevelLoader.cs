@@ -33,6 +33,7 @@ public class LevelLoader : MonoBehaviour
         yield return new WaitForSeconds(startTransitionDuration);
 
         GameManager.instance.SetGamePaused(true);
+        GameManager.instance.GetMusicManager().StopMusic();
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
 

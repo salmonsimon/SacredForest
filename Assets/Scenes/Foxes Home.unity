@@ -12760,6 +12760,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1287751072}
     m_Modifications:
     - target: {fileID: 6060335076994810125, guid: 5cbadde9bfaecdb47a265369b0cbd69d, type: 3}
+      propertyPath: m_FlipX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6060335076994810125, guid: 5cbadde9bfaecdb47a265369b0cbd69d, type: 3}
       propertyPath: m_SortingLayer
       value: 3
       objectReference: {fileID: 0}
