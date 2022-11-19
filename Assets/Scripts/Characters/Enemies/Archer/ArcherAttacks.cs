@@ -44,7 +44,7 @@ public class ArcherAttacks : EnemyAttacks
         if (isGoingToShoot)
         {
             GetComponent<EnemyMover>().Flip(new Vector2(xDistance, 0));
-            StartCoroutine(GetComponent<EnemyMover>().MovementCooldown(shootingWaitingTime));
+            StartCoroutine(GetComponent<EnemyMover>().MovementCooldown(shootingWaitingTime + Config.MEDIUM_DELAY));
             StartCoroutine(IsAttackingCooldown(shootingWaitingTime + Config.MEDIUM_DELAY));
 
             StartCoroutine(PlayClip(Animator.StringToHash(arrowAnimationClip.name), 0));
@@ -106,9 +106,21 @@ public class ArcherAttacks : EnemyAttacks
 
     private void CalculateShortRangeShot(float xDistance, float yDistance)
     {
-        this.shootingSpeed = shootingSpeeds[1];
-
         this.shootingDirection = new Vector2(xDistance, yDistance);
+
+        Vector2 horizontal = Vector2.right;
+
+        if (xDistance < 0)
+            horizontal = Vector2.left;
+
+        float shootingAngle = Vector2.Angle(horizontal, shootingDirection);
+
+        if (shootingAngle > 50 && shootingAngle <= 80)
+            this.shootingSpeed = 12f;
+        else if (shootingAngle > 80 && shootingAngle < 100)
+            this.shootingSpeed = 17f;
+        else
+            this.shootingSpeed = 7f;
 
         isGoingToShoot = true;
     }
