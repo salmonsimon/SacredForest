@@ -20,6 +20,7 @@ public class Cutscene03 : Cutscene
     private IEnumerator Play()
     {
         GameManager.instance.GetLevelLoader().CinematicBracketsStart();
+        GameManager.instance.GetSFXManager().PlaySound(Config.SUSPENSE_SFX);
 
         GameObject player = GameManager.instance.GetPlayer();
         DeactivatePlayer(player);

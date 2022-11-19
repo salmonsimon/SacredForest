@@ -127,6 +127,7 @@ public class Cutscene04 : Cutscene
     public IEnumerator PlayDeathScene()
     {
         GameManager.instance.GetLevelLoader().CinematicBracketsStart();
+        GameManager.instance.GetMusicManager().StopMusic();
 
         GameObject player = GameManager.instance.GetPlayer();
         DeactivatePlayer(player);

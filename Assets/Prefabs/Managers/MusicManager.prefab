@@ -25,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4868110689616056793}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 325.64062, y: 107.983734, z: 0.92364734}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -44,7 +44,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -141,3 +141,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f75f5fddf8d9b24a91599badaf610b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenuMusic: {fileID: 8300000, guid: 16964cb0a20ffad4eab291b51a5a03a9, type: 3}
+  mainAreaMusic: {fileID: 8300000, guid: 8ff715b1ccc82424880191da7a203147, type: 3}
+  firstBossMusic: {fileID: 8300000, guid: 06467877d4062294ca7842bc5b06b7bf, type: 3}
+  foxesMusic: {fileID: 8300000, guid: 82f09fd9c40275348a172defa40771aa, type: 3}
+  firstFightingRouteTracks:
+  - {fileID: 8300000, guid: dbfd6b8ff5d58fe44afbdd6e8314a5a6, type: 3}
+  - {fileID: 8300000, guid: dbfd6b8ff5d58fe44afbdd6e8314a5a6, type: 3}
+  - {fileID: 8300000, guid: f5360e40c4fd4c440b0cd3404a531e31, type: 3}
+  - {fileID: 8300000, guid: 6a2e1e1ddb50c65428ba2bd308820725, type: 3}
+  - {fileID: 8300000, guid: 6a2e1e1ddb50c65428ba2bd308820725, type: 3}
+  - {fileID: 8300000, guid: 6a2e1e1ddb50c65428ba2bd308820725, type: 3}
+  - {fileID: 8300000, guid: 6a2e1e1ddb50c65428ba2bd308820725, type: 3}
+  - {fileID: 8300000, guid: afb4e55f348711f4fa76e4a465d510a7, type: 3}
+  - {fileID: 8300000, guid: afb4e55f348711f4fa76e4a465d510a7, type: 3}
+  - {fileID: 8300000, guid: afb4e55f348711f4fa76e4a465d510a7, type: 3}
+  - {fileID: 8300000, guid: 6a2e1e1ddb50c65428ba2bd308820725, type: 3}
+  - {fileID: 8300000, guid: 6a2e1e1ddb50c65428ba2bd308820725, type: 3}
+  - {fileID: 8300000, guid: 9b66e3476e1fed34abc9f5af25ba9a29, type: 3}
+  - {fileID: 8300000, guid: e8efc1474f694fc4883fbb5c7decf12b, type: 3}
+  - {fileID: 8300000, guid: 9b66e3476e1fed34abc9f5af25ba9a29, type: 3}
+  - {fileID: 8300000, guid: afb4e55f348711f4fa76e4a465d510a7, type: 3}
+  - {fileID: 8300000, guid: afb4e55f348711f4fa76e4a465d510a7, type: 3}
+  - {fileID: 8300000, guid: afb4e55f348711f4fa76e4a465d510a7, type: 3}

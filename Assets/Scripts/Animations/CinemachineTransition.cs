@@ -55,6 +55,14 @@ public class CinemachineTransition : MonoBehaviour
             GameManager.instance.GetCinemachineShake().SetVirtualCamera();
 
             blockCollider.gameObject.SetActive(true);
+
+            if (GameManager.instance.GetMusicManager().GetCurrentAudioClipName() != "First Boss - Comigo")
+            {
+                GameManager.instance.GetSFXManager().PlaySound(Config.SUSPENSE_SFX);
+
+                GameManager.instance.GetMusicManager().StopMusic();
+                GameManager.instance.GetMusicManager().PlayMusic(Config.FIRST_BOSS_FRAME);
+            }
         }
     }
 }

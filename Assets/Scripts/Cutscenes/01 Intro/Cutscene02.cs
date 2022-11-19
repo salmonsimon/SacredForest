@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using Cinemachine;
 
 public class Cutscene02 : Cutscene
 {
     private Transform foxyDialogueTransform;
     private Transform akateDialogueTransform;
+
+    [SerializeField] CinemachineVirtualCamera vcamFoxy;
+    [SerializeField] CinemachineVirtualCamera vcamAkate;
 
     protected override void Start()
     {
@@ -22,6 +26,9 @@ public class Cutscene02 : Cutscene
     private IEnumerator Play()
     {
         GameManager.instance.GetLevelLoader().CinematicBracketsStart();
+
+        vcamFoxy.Priority = 1;
+        vcamAkate.Priority = 0;
 
         GameObject player = GameManager.instance.GetPlayer();
 
@@ -54,6 +61,9 @@ public class Cutscene02 : Cutscene
             playableDirector.Stop();
 
         #endregion
+
+        vcamFoxy.Priority = 0;
+        vcamAkate.Priority = 1;
 
         ActivatePlayer(player);
         foxy.AddComponent<NPC>();
