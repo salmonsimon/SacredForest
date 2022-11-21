@@ -10,6 +10,8 @@ public class CutsceneFightingMechanics : Cutscene
     [SerializeField] BoxCollider arrowCollider;
     private bool arrowHasCollided = false;
 
+    [SerializeField] private FloatingUI slashDownKeys;
+
     protected override void Start()
     {
         base.Start();
@@ -48,11 +50,13 @@ public class CutsceneFightingMechanics : Cutscene
             yield return null;
         }
 
+        player.GetComponent<PlayerAttackController>().enabled = false;
+
         GameManager.instance.GetAnimationManager().ClearWorldSpaceCanvas();
 
         yield return new WaitForSeconds(Config.BIG_DELAY);
 
-        #region End Cutscene
+        #region First Cutscene - First Attack
 
         playableDirector.playableAsset = timelines[0];
 
@@ -68,7 +72,89 @@ public class CutsceneFightingMechanics : Cutscene
 
         #endregion
 
-        player.GetComponent<PlayerMovementController>().enabled = true;
+        yield return new WaitForSeconds(Config.LARGE_DELAY);
 
+        GameManager.instance.GetAnimationManager().ShowImageUIWorldSpace(Config.X_KEY_GUI,
+            new Vector3(enemy.transform.position.x, enemy.transform.position.y + .32f, enemy.transform.position.z));
+
+        yield return null;
+
+        player.GetComponent<PlayerAttackController>().enabled = true;
+
+        yield return null;
+
+        while (!Input.GetKeyDown(KeyCode.X))
+        {
+            yield return null;
+        }
+
+        GameManager.instance.GetAnimationManager().ClearWorldSpaceCanvas();
+
+        player.GetComponent<PlayerAttackController>().enabled = false;
+
+        yield return new WaitForSeconds(Config.LARGE_DELAY);
+
+        #region Second Cutscene - Jump Back and Wait
+
+        playableDirector.playableAsset = timelines[1];
+
+        Bind(playableDirector, "Akate Animations", player);
+        Bind(playableDirector, "Akate Movement", player);
+
+        playableDirector.Play();
+
+        while (playableDirector.state == PlayState.Playing)
+        {
+            yield return null;
+        }
+
+        #endregion
+
+        yield return new WaitForSeconds(Config.MEDIUM_DELAY);
+
+        GameManager.instance.GetDialogueManager().RunScreenOverlayDialogue(dialogues[0]);
+
+        while (GameManager.instance.GetDialogueManager().IsRunning)
+        {
+            yield return null;
+        }
+
+        StartCoroutine(enemy.GetComponent<DamageReceiver>().SetImmune(0));
+
+        yield return new WaitForSeconds(Config.LARGE_DELAY);
+
+        #region Third Cutscene - Jump and Wait to Attack
+
+        playableDirector.playableAsset = timelines[2];
+
+        Bind(playableDirector, "Akate Animations", player);
+        Bind(playableDirector, "Akate Movement", player);
+
+        playableDirector.Play();
+
+        #endregion
+
+        yield return new WaitForSeconds(1f);
+
+        GameManager.instance.GetAnimationManager().ShowImageUIWorldSpace(slashDownKeys,
+            new Vector3(player.transform.position.x + .075f, player.transform.position.y + .4f, player.transform.position.z));
+
+        while (!(Input.GetKeyDown(KeyCode.X) && Input.GetKey(KeyCode.DownArrow)))
+        {
+            yield return null;
+        }
+
+        GameManager.instance.GetAnimationManager().ClearWorldSpaceCanvas();
+
+        #region Fourth Cutscene - Enemy Killed and Leaving
+
+        playableDirector.playableAsset = timelines[3];
+
+        Bind(playableDirector, "Akate Animations", player);
+        Bind(playableDirector, "Akate Movement", player);
+
+        playableDirector.Play();
+
+        #endregion
     }
 }
