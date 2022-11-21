@@ -34,6 +34,7 @@ public class LevelLoader : MonoBehaviour
 
         GameManager.instance.SetGamePaused(true);
         GameManager.instance.GetMusicManager().StopMusic();
+        GameManager.instance.GetDialogueManager().ClearDialogues();
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
 

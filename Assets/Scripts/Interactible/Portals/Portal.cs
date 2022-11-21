@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Portal : GeneralCollider
 {
@@ -45,7 +46,8 @@ public class Portal : GeneralCollider
         currentProgressManager.SaveCurrentProgress();
         currentProgressManager.UpdateCurrentFightingRoute(fightingRoute);
 
-        ZSerializer.ZSerialize.SaveScene();
+        if (SceneManager.GetActiveScene().name == Config.MAIN_SCENE_NAME)
+            ZSerializer.ZSerialize.SaveScene();
 
         animator.SetTrigger("Close");
         GameManager.instance.GetPlayer().GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;

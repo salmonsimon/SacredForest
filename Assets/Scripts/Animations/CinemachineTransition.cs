@@ -13,6 +13,7 @@ public class CinemachineTransition : MonoBehaviour
     [SerializeField] BoxCollider2D blockCollider;
 
     private GameObject player;
+    private DamageReceiver playerDamageReceiver;
     private bool isPlayerAlive = true;
 
     private void Awake()
@@ -23,8 +24,22 @@ public class CinemachineTransition : MonoBehaviour
     private void Start()
     {
         player = GameManager.instance.GetPlayer();
+        playerDamageReceiver = player.GetComponent<DamageReceiver>();
+    }
+
+    private void OnEnable()
+    {
+        player = GameManager.instance.GetPlayer();
+        playerDamageReceiver = player.GetComponent<DamageReceiver>();
 
         player.GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += PlayerAliveStatusChange;
+    }
+    private void OnDisable()
+    {
+        if (player == null)
+            player = GameManager.instance.GetPlayer();
+
+        player.GetComponent<DamageReceiver>().OnCharacterAliveStatusChange -= PlayerAliveStatusChange;
     }
 
     private void PlayerAliveStatusChange()
@@ -47,6 +62,8 @@ public class CinemachineTransition : MonoBehaviour
 
     private void FixedUpdate()
     {
+        CheckIfPlayerAlive();
+
         if (transitionTrigger.IsColliding())
         {
             activeVcam.Priority = 0;
@@ -64,5 +81,16 @@ public class CinemachineTransition : MonoBehaviour
                 GameManager.instance.GetMusicManager().PlayMusic(Config.FIRST_BOSS_FRAME);
             }
         }
+    }
+
+    private void CheckIfPlayerAlive()
+    {
+        if (playerDamageReceiver.IsAlive && !isPlayerAlive)
+        {
+            if (activeVcam.Priority < otherVcam.Priority)
+                PlayerAliveStatusChange();
+        }
+        else if (!playerDamageReceiver.IsAlive && isPlayerAlive)
+            isPlayerAlive = false;
     }
 }

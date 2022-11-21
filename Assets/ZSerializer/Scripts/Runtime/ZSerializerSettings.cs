@@ -60,7 +60,7 @@ namespace ZSerializer
         public List<string> scenePaths = new List<string>();
     }
     
-    public enum DebugMode {Off = 0, Informational = 1, Developer = 2}
+    public enum DebugMode {None = -1, Off = 0, Informational = 1, Developer = 2}
 
 
     public sealed class ZSerializerSettings : ScriptableObject

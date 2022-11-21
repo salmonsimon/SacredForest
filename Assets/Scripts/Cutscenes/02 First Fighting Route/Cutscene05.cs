@@ -39,9 +39,16 @@ public class Cutscene05 : Cutscene
         slyDialogueTransform = sly.transform.Find("DialogueBubbleTransform").transform;
         akateDialogueTransform = GameManager.instance.GetPlayer().transform.Find("DialogueBubbleTransform").transform;
         speakers = new List<Transform>() { slyDialogueTransform, akateDialogueTransform };
+    }
 
+    private void OnEnable()
+    {
         GameObject.FindGameObjectWithTag("Breakable").GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += BarrelBroken;
         showButtonCoroutine = StartCoroutine(WaitToShowButton());
+    }
+    private void OnDisable()
+    {
+        GameObject.FindGameObjectWithTag("Breakable").GetComponent<DamageReceiver>().OnCharacterAliveStatusChange -= BarrelBroken;
     }
 
     private void Update()

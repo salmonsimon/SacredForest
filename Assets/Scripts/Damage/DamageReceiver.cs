@@ -95,7 +95,7 @@ public class DamageReceiver : MonoBehaviour
 
     protected virtual void ReceiveDamage(Damage damage)
     {
-        if (!isImmune && isAlive)
+        if (!isImmune && IsAlive)
         {
             Damage(damage.damage);
             GameManager.instance.GetCinemachineShake().ShakeCamera(Config.CAMERASHAKE_HIT_AMPLITUDE, Config.CAMERASHAKE_HIT_DURATION);
