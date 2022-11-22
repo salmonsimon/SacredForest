@@ -11,6 +11,9 @@ public class OneWayPlatform : MonoBehaviour
 
     private float upperBorderYPosition;
 
+    [SerializeField] private bool isActive = false;
+    public bool IsActive { get { return isActive; } private set { isActive = value; } }
+
     private void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
@@ -35,8 +38,20 @@ public class OneWayPlatform : MonoBehaviour
     private void Update()
     {
         if (PlayerFeetPosition() > upperBorderYPosition)
+        {
             boxCollider.enabled = true;
+            IsActive = true;
+        }
         else
+        {
             boxCollider.enabled = false;
+            IsActive = false;
+        }
+    }
+
+    public void DeactivatePlatform()
+    {
+        boxCollider.enabled = false;
+        IsActive = false;
     }
 }

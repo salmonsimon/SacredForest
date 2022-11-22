@@ -12,6 +12,9 @@ public class CutsceneFightingMechanics : Cutscene
 
     [SerializeField] private FloatingUI slashDownKeys;
 
+    [SerializeField] OneWayPlatform shortJumpPlatform;
+    [SerializeField] OneWayPlatform longJumpPlatform;
+
     protected override void Start()
     {
         base.Start();
@@ -112,7 +115,7 @@ public class CutsceneFightingMechanics : Cutscene
 
         yield return new WaitForSeconds(Config.MEDIUM_DELAY);
 
-        GameManager.instance.GetDialogueManager().RunScreenOverlayDialogue(dialogues[0]);
+        GameManager.instance.GetDialogueManager().RunScreenOverlayDialogue(dialogues[0], 0, 2);
 
         while (GameManager.instance.GetDialogueManager().IsRunning)
         {
@@ -120,6 +123,53 @@ public class CutsceneFightingMechanics : Cutscene
         }
 
         StartCoroutine(enemy.GetComponent<DamageReceiver>().SetImmune(0));
+
+        yield return new WaitForSeconds(Config.LARGE_DELAY);
+
+        #region Check If Jumped Both Heights
+
+        ActivatePlayer(player);
+        player.GetComponent<PlayerAttackController>().enabled = false;
+        GameManager.instance.GetPlayer().GetComponent<PlayerMovementController>().OnlyAllowActions(true);
+
+        shortJumpPlatform.transform.parent.gameObject.SetActive(true);
+
+        while (!(shortJumpPlatform.IsActive && player.GetComponent<Mover>().IsGrounded() && 
+            !player.GetComponent<PlayerMovementController>().IsJumpingUp()))
+            yield return null;
+
+        yield return new WaitForSeconds(Config.LARGE_DELAY);
+
+        shortJumpPlatform.transform.parent.gameObject.SetActive(false);
+
+        while (!player.GetComponent<Mover>().IsGrounded())
+            yield return null;
+
+        longJumpPlatform.transform.parent.gameObject.SetActive(true);
+
+        while (!(longJumpPlatform.IsActive && player.GetComponent<Mover>().IsGrounded() &&
+            !player.GetComponent<PlayerMovementController>().IsJumpingUp()))
+            yield return null;
+
+        yield return new WaitForSeconds(Config.LARGE_DELAY);
+
+        longJumpPlatform.transform.parent.gameObject.SetActive(false);
+
+        DeactivatePlayer(player);
+
+        while (!player.GetComponent<Mover>().IsGrounded())
+            yield return null;
+
+        #endregion
+
+        yield return new WaitForSeconds(Config.LARGE_DELAY);
+
+        GameManager.instance.GetDialogueManager().RunScreenOverlayDialogue(dialogues[0], 3, 3);
+
+        while (GameManager.instance.GetDialogueManager().IsRunning)
+        {
+            yield return null;
+        }
 
         yield return new WaitForSeconds(Config.LARGE_DELAY);
 
@@ -134,7 +184,7 @@ public class CutsceneFightingMechanics : Cutscene
 
         #endregion
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.7f);
 
         GameManager.instance.GetAnimationManager().ShowImageUIWorldSpace(slashDownKeys,
             new Vector3(player.transform.position.x + .075f, player.transform.position.y + .4f, player.transform.position.z));

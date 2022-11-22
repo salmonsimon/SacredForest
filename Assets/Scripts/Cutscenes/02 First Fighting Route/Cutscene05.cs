@@ -200,7 +200,6 @@ public class Cutscene05 : Cutscene
         playerCamera.Priority = 1;
 
         StartCoroutine(GameManager.instance.GetLevelLoader().CinematicBracketsEnd());
-        GameManager.instance.GetMusicManager().SetLooping(false);
         ActivatePlayer(player);
 
         yield return new WaitForSeconds(Config.SMALL_DELAY);

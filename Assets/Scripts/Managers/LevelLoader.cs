@@ -123,6 +123,7 @@ public class LevelLoader : MonoBehaviour
 
         player.GetComponent<PlayerAttackController>().enabled = true;
         player.GetComponent<PlayerMovementController>().enabled = true;
+        player.GetComponent<PlayerMovementController>().OnlyAllowActions(false);
     }
 
     public Animator GetCrossfadeAnimator()

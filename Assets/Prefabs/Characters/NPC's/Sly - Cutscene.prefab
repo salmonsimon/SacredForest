@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 7848737565393235784}
   - component: {fileID: 73739148802135998}
   m_Layer: 13
-  m_Name: The Sly
+  m_Name: Sly - Cutscene
   m_TagString: Foxy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a29fe2c6e1452341a540e858dfdab48, type: 3}
-  m_Name: ImmuneEnemiesExplanation
+  m_Name: Mechanics Explanation
   m_EditorClassIdentifier: 
   speakers: []
   speakerBeeps:
@@ -20,13 +20,27 @@ MonoBehaviour:
     text: when attacking an enemy with more than one health point, they'll start
       blinking...
     duration: 20
-    isSkippable: 0
+    isSkippable: 1
     speakerIndex: 0
     isEnemyBubble: 0
   - title: 
     text: when an enemy is blinking, they're immune to all atacks, so you'd better
       watch out!
     duration: 20
-    isSkippable: 0
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: 
+    text: Also, jumping is crucial to gameplay, pressing the jump button longer will
+      make you jump higher! give it a try...
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: 
+    text: nice! now try an air attack, this one specially is great for defending
+      as well...
+    duration: 20
+    isSkippable: 1
     speakerIndex: 0
     isEnemyBubble: 0
