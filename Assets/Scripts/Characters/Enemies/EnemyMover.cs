@@ -123,15 +123,13 @@ public class EnemyMover : MonoBehaviour
     {
         while (!isGrounded)
         {
-            if (isGrounded)
-            {
-                rigidBody.constraints = RigidbodyConstraints2D.FreezeAll;
-                GetComponent<CapsuleCollider2D>().enabled = false;
+            yield return null;
+        }
 
-                break;
-            }
-
-            yield return new WaitForSeconds(Config.BIG_DELAY);
+        if (isGrounded)
+        {
+            rigidBody.constraints = RigidbodyConstraints2D.FreezeAll;
+            GetComponent<CapsuleCollider2D>().enabled = false;
         }
     }
 

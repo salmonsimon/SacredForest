@@ -174,5 +174,7 @@ public class GroundMonk : Elemental
             GameObject cutscene = GameObject.FindGameObjectWithTag("Cutscene");
             StartCoroutine(cutscene.GetComponent<Cutscene04>().PlayDeathScene());
         }
+        else
+            enabled = false;
     }
 }

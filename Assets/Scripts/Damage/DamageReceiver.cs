@@ -52,7 +52,7 @@ public class DamageReceiver : MonoBehaviour
 
     #region IsAlive Property
 
-    private bool isAlive = true;
+    [SerializeField] private bool isAlive = true;
     public bool IsAlive
     {
         get { return isAlive; }
@@ -134,8 +134,6 @@ public class DamageReceiver : MonoBehaviour
             CancelInvoke();
         }
     }
-
-    
 
     public IEnumerator SetImmune(float duration)
     {
