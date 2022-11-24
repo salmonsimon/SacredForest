@@ -274,27 +274,19 @@ public class DialogueManager : MonoBehaviour
 
     private void StopAndResetOverlayDialogue()
     {
-        Debug.Log("Resetting overlay dialogue");
-
         if (screenOverlayDialoguePanel.gameObject.activeSelf)
         {
-            Debug.Log("Overlay dialogue is active");
-
             if (screenOverlayDialoguePanel.TypewriterEffect.IsRunning)
             {
                 screenOverlayDialoguePanel.TypewriterEffect.Stop();
-
-                Debug.Log("Stopped typewritter");
             }
 
             if (screenOverlayDialoguePanel.IsOpen)
             {
                 screenOverlayDialoguePanel.CloseDialogueOverlay();
-                Debug.Log("closed dialogue overlay");
             }
 
             screenOverlayDialoguePanel.ResetDialogueOverlay();
-            Debug.Log("Resetted dialogue overlay finished");
         }
     }
 }

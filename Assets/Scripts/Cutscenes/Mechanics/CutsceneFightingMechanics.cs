@@ -135,6 +135,9 @@ public class CutsceneFightingMechanics : Cutscene
 
         shortJumpPlatform.transform.parent.gameObject.SetActive(true);
 
+        GameManager.instance.GetAnimationManager().ShowImageUIWorldSpace(Config.Z_KEY_GUI,
+            new Vector3(player.transform.position.x, player.transform.position.y + .32f, player.transform.position.z), player.transform);
+
         while (!(shortJumpPlatform.IsActive && player.GetComponent<Mover>().IsGrounded() && 
             !player.GetComponent<PlayerMovementController>().IsJumpingUp()))
             yield return null;
@@ -156,6 +159,7 @@ public class CutsceneFightingMechanics : Cutscene
 
         longJumpPlatform.transform.parent.gameObject.SetActive(false);
 
+        GameManager.instance.GetAnimationManager().ClearCanvases();
         DeactivatePlayer(player);
 
         while (!player.GetComponent<Mover>().IsGrounded())

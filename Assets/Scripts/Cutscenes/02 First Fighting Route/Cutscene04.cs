@@ -42,8 +42,6 @@ public class Cutscene04 : Cutscene
         {
             if (!playerDamageReceiver.IsAlive)
             {
-                Debug.Log("Stopping cutscenes and dialogues");
-
                 enemy = GameObject.FindGameObjectWithTag("Enemy");
 
                 if (enemy)
@@ -51,6 +49,7 @@ public class Cutscene04 : Cutscene
                     GroundMonk groundMonk = enemy.GetComponent<GroundMonk>();
                     groundMonk.StopAllCoroutines();
                     groundMonk.enabled = false;
+                    groundMonk.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
                 }
 
                 StopAllCoroutines();
@@ -109,8 +108,6 @@ public class Cutscene04 : Cutscene
 
     public IEnumerator PlayTransformScene()
     {
-        Debug.Log("Entering transform cutscene");
-
         GameManager.instance.GetLevelLoader().CinematicBracketsStart();
 
         yield return new WaitForSeconds(Config.LARGE_DELAY);
@@ -121,6 +118,7 @@ public class Cutscene04 : Cutscene
 
         enemy = GameObject.FindGameObjectWithTag("Enemy");
         GroundMonk groundMonk = enemy.GetComponent<GroundMonk>();
+        groundMonk.GetComponent<EnemyMover>().StayInPosition();
         groundMonk.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
 
         enemyDialogueTransform = enemy.transform.Find("DialogueBubbleHolder").transform;
@@ -184,6 +182,7 @@ public class Cutscene04 : Cutscene
         enemy = GameObject.FindGameObjectWithTag("Enemy");
         GroundMonk groundMonk = enemy.GetComponent<GroundMonk>();
         groundMonk.enabled = false;
+        groundMonk.GetComponent<EnemyMover>().StayInPosition();
         groundMonk.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         groundMonk.GetComponent<Animator>().runtimeAnimatorController = null;
 

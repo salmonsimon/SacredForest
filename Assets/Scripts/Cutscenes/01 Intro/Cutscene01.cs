@@ -113,6 +113,11 @@ public class Cutscene01 : Cutscene
             new Vector3(player.transform.position.x, player.transform.position.y + .32f, player.transform.position.z), player.transform, 6);
 
         StartCoroutine(GameManager.instance.GetLevelLoader().CinematicBracketsEnd());
+
+        yield return new WaitForSeconds(1.2f);
+
+        GameManager.instance.GetAnimationManager().ShowImageUI(Config.RIGHT_ARROW_GUI, true);
+
         this.enabled = false;
     }
 }

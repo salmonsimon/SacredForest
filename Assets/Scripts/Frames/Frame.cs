@@ -130,6 +130,7 @@ public class Frame : MonoBehaviour
     {
         frameCleared = true;
         frameChangeTrigger.gameObject.SetActive(true);
+        GameManager.instance.GetSFXManager().PlaySound(Config.STAGE_CLEARED_SFX);
 
         ShowArrowUI();
     }
