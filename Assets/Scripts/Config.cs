@@ -232,6 +232,7 @@ public class Config
     public const string ARROW_HIT_SFX = "Arrow Hit";
     public const string PAUSE_SFX = "Pause";
     public const string SUSPENSE_SFX = "Suspense";
+    public const string STAGE_CLEARED_SFX = "Stage Cleared";
 
     #endregion
 

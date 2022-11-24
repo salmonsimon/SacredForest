@@ -88,14 +88,14 @@ public class DamageReceiver : MonoBehaviour
             spriteFlashMaterial = Resources.Load(Config.FLASH_MATERIAL_FILE) as Material;
             spriteDefaultMaterial = spriteRenderer.material;
 
-            flashDuration = immuneTime / 4;
-            flashFrequency = immuneTime / 2;
+            flashDuration = .25f;
+            flashFrequency = .5f;
         }
     }
 
     protected virtual void ReceiveDamage(Damage damage)
     {
-        if (!isImmune && isAlive)
+        if (!isImmune && IsAlive)
         {
             Damage(damage.damage);
             GameManager.instance.GetCinemachineShake().ShakeCamera(Config.CAMERASHAKE_HIT_AMPLITUDE, Config.CAMERASHAKE_HIT_DURATION);
@@ -116,6 +116,7 @@ public class DamageReceiver : MonoBehaviour
     public IEnumerator ImmuneCooldown()
     {
         StopAllCoroutines();
+        ResetFlashing();
 
         isImmune = true;
 
@@ -139,6 +140,7 @@ public class DamageReceiver : MonoBehaviour
     public IEnumerator SetImmune(float duration)
     {
         StopAllCoroutines();
+        ResetFlashing();
 
         isImmune = true;
 
@@ -237,5 +239,17 @@ public class DamageReceiver : MonoBehaviour
         spriteRenderer.material = spriteDefaultMaterial;
 
         flashCoroutine = null;
+    }
+
+    private void ResetFlashing()
+    {
+        CancelInvoke();
+
+        if (flashCoroutine != null)
+        {
+            StopCoroutine(flashCoroutine);
+        }
+
+        spriteRenderer.material = spriteDefaultMaterial;
     }
 }

@@ -70,7 +70,7 @@ public class Frame : MonoBehaviour
         player.transform.position = playerSpawnPoint.position;
         StartCoroutine(WaitAndResurrectPlayer(Config.SMALL_DELAY));
 
-        StartCoroutine(WaitAndSpawnEnemies(Config.SMALL_DELAY));
+        StartCoroutine(WaitAndSpawnEnemies(Config.SMALL_DELAY + 0.02f));
     }
 
     private IEnumerator WaitAndResurrectPlayer(float duration)
@@ -87,6 +87,7 @@ public class Frame : MonoBehaviour
 
         ShowArrowUI();
         GameManager.instance.GetAnimationManager().ShowImageUI(Config.SPACE_KEY_GUI, false);
+        StartCoroutine(GameManager.instance.GetLevelLoader().CinematicBracketsEnd());
 
         foreach (GameObject enemy in enemies)
         {
@@ -129,6 +130,7 @@ public class Frame : MonoBehaviour
     {
         frameCleared = true;
         frameChangeTrigger.gameObject.SetActive(true);
+        GameManager.instance.GetSFXManager().PlaySound(Config.STAGE_CLEARED_SFX);
 
         ShowArrowUI();
     }

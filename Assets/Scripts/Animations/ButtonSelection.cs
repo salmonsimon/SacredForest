@@ -25,4 +25,9 @@ public class ButtonSelection : MonoBehaviour
             lastselect = EventSystem.current.currentSelectedGameObject;
         }
     }
+
+    public void ResetSelectedButton()
+    {
+        EventSystem.current.SetSelectedGameObject(defaultSelection);
+    }
 }

@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a29fe2c6e1452341a540e858dfdab48, type: 3}
+  m_Name: Mechanics Explanation
+  m_EditorClassIdentifier: 
+  speakers: []
+  speakerBeeps:
+  - {fileID: 8300000, guid: 8eec5f8008d16f34da85de06f56ea424, type: 3}
+  dialogues:
+  - title: 
+    text: when attacking an enemy with more than one health point, they'll start
+      blinking...
+    duration: 20
+    isSkippable: 0
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: 
+    text: when an enemy is blinking, they're immune to all atacks, so you'd better
+      watch out!
+    duration: 20
+    isSkippable: 0
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: 
+    text: Also, jumping is crucial to gameplay, pressing the jump button longer will
+      make you jump higher! give it a try...
+    duration: 20
+    isSkippable: 0
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: 
+    text: nice! now try an air attack, this one specially is great for defending
+      as well...
+    duration: 20
+    isSkippable: 0
+    speakerIndex: 0
+    isEnemyBubble: 0

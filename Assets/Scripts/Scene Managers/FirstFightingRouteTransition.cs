@@ -25,17 +25,32 @@ public class FirstFightingRouteTransition : MonoBehaviour
         StartCoroutine(SetGroundMonk(Config.MEDIUM_DELAY));
     }
 
-    private void Update()
+    private void OnEnable()
+    {
+        player = GameManager.instance.GetPlayer();
+
+        player.GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += PlayerAliveStatusChange;
+    }
+    private void OnDisable()
+    {
+        if (player == null)
+            player = GameManager.instance.GetPlayer();
+
+        player.GetComponent<DamageReceiver>().OnCharacterAliveStatusChange -= PlayerAliveStatusChange;
+    }
+
+    private void PlayerAliveStatusChange()
     {
         if (!player.GetComponent<DamageReceiver>().IsAlive)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                isActivated = false;
+            if (!hasDied)
                 hasDied = true;
+        }
+        else
+        {
+            isActivated = false;
 
-                StartCoroutine(SetGroundMonk(1f));
-            }
+            StartCoroutine(SetGroundMonk(1f));
         }
     }
 

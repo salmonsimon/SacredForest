@@ -238,11 +238,17 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void ShowRandomDeathDialogue()
+    public IEnumerator ShowRandomDeathDialogue()
     {
+        StopAndResetOverlayDialogue();
+
+        IsRunning = true;
+
+        yield return null;
+
         int dialogueToPlay = randomizedDeathDialoguesIndexList[currentDeathDialogueIndex];
 
-        GameManager.instance.GetDialogueManager().RunScreenOverlayDialogue(deathDialogues, dialogueToPlay, dialogueToPlay, false);
+        RunScreenOverlayDialogue(deathDialogues, dialogueToPlay, dialogueToPlay, false);
 
         if (currentDeathDialogueIndex == deathDialogues.Dialogues.Count - 1)
             currentDeathDialogueIndex = 0;
@@ -261,6 +267,26 @@ public class DialogueManager : MonoBehaviour
             StartCoroutine(child.gameObject.GetComponent<DialogueBubble>().CloseDialogueBubble());
         }
 
+        StopAndResetOverlayDialogue();
+
         isRunning = false;
+    }
+
+    private void StopAndResetOverlayDialogue()
+    {
+        if (screenOverlayDialoguePanel.gameObject.activeSelf)
+        {
+            if (screenOverlayDialoguePanel.TypewriterEffect.IsRunning)
+            {
+                screenOverlayDialoguePanel.TypewriterEffect.Stop();
+            }
+
+            if (screenOverlayDialoguePanel.IsOpen)
+            {
+                screenOverlayDialoguePanel.CloseDialogueOverlay();
+            }
+
+            screenOverlayDialoguePanel.ResetDialogueOverlay();
+        }
     }
 }

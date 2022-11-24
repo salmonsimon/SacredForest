@@ -9,6 +9,7 @@ public class SFXManager : MonoBehaviour
 
     [Header("UI Sounds")]
     [SerializeField] private AudioClip pauseSFX;
+    [SerializeField] private AudioClip stageClearedSFX;
 
     [Header("Projectile Sounds")]
     [SerializeField] private AudioClip arrowHitSFX;
@@ -72,6 +73,10 @@ public class SFXManager : MonoBehaviour
 
             case Config.SUSPENSE_SFX:
                 audioSource.PlayOneShot(suspenseSFX);
+                break;
+
+            case Config.STAGE_CLEARED_SFX:
+                audioSource.PlayOneShot(stageClearedSFX);
                 break;
         }
     }

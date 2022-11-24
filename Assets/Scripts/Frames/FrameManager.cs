@@ -20,8 +20,20 @@ public class FrameManager : MonoBehaviour
 
         activeFrame.gameObject.SetActive(true);
         activeFrame.StartFrame();
+    }
+
+    private void OnEnable()
+    {
+        player = GameManager.instance.GetPlayer();
 
         player.GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += PlayerAliveStatusChange;
+    }
+    private void OnDisable()
+    {
+        if (player == null)
+            player = GameManager.instance.GetPlayer();
+
+        player.GetComponent<DamageReceiver>().OnCharacterAliveStatusChange -= PlayerAliveStatusChange;
     }
 
     private void PlayerAliveStatusChange()
@@ -34,7 +46,7 @@ public class FrameManager : MonoBehaviour
         {
             isPlayerAlive = false;
 
-            GameManager.instance.GetDialogueManager().ShowRandomDeathDialogue();
+            StartCoroutine(GameManager.instance.GetDialogueManager().ShowRandomDeathDialogue());
         }
     }
 

@@ -99,7 +99,8 @@ public class GameManager : MonoBehaviour
 
         if (!isOnMainMenu)
         {
-            ZSerializer.ZSerialize.LoadScene();
+            if (scene.name == Config.MAIN_SCENE_NAME)
+                ZSerializer.ZSerialize.LoadScene();
 
             mainMenu.SetActive(false);
 
@@ -167,6 +168,8 @@ public class GameManager : MonoBehaviour
         SetGamePaused(true);
 
         pauseMenu.SetActive(true);
+        pauseMenu.transform.Find("Pause Panel").gameObject.SetActive(true);
+        pauseMenu.GetComponent<ButtonSelection>().ResetSelectedButton();
     }
 
     public void ResumeGame()
@@ -174,6 +177,8 @@ public class GameManager : MonoBehaviour
         SetGamePaused(false);
 
         pauseMenu.SetActive(false);
+        pauseMenu.transform.Find("Settings Panel").gameObject.SetActive(false);
+
     }
 
     #region Getters and Setters

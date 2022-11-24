@@ -34,6 +34,7 @@ public class LevelLoader : MonoBehaviour
 
         GameManager.instance.SetGamePaused(true);
         GameManager.instance.GetMusicManager().StopMusic();
+        GameManager.instance.GetDialogueManager().ClearDialogues();
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
 
@@ -122,6 +123,7 @@ public class LevelLoader : MonoBehaviour
 
         player.GetComponent<PlayerAttackController>().enabled = true;
         player.GetComponent<PlayerMovementController>().enabled = true;
+        player.GetComponent<PlayerMovementController>().OnlyAllowActions(false);
     }
 
     public Animator GetCrossfadeAnimator()

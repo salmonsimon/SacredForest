@@ -8,12 +8,57 @@ public class Cutscene04 : Cutscene
     private Transform enemyDialogueTransform;
     private GameObject enemy;
 
+    private GameObject player;
+    private DamageReceiver playerDamageReceiver;
+
     protected override void Start()
     {
         base.Start();
 
         if (!GameManager.instance.GetCurrentProgressManager().FinishedRoute1)
+        {
             StartCoroutine(Play());
+        }
+    }
+
+    private void OnEnable()
+    {
+        player = GameManager.instance.GetPlayer();
+        playerDamageReceiver = player.GetComponent<DamageReceiver>();
+
+        playerDamageReceiver.OnCharacterAliveStatusChange += PlayerAliveStatusChange;
+    }
+    private void OnDisable()
+    {
+        player = GameManager.instance.GetPlayer();
+        playerDamageReceiver = player.GetComponent<DamageReceiver>();
+
+        playerDamageReceiver.OnCharacterAliveStatusChange -= PlayerAliveStatusChange;
+    }
+
+    private void PlayerAliveStatusChange()
+    {
+        if (gameObject.activeSelf)
+        {
+            if (!playerDamageReceiver.IsAlive)
+            {
+                enemy = GameObject.FindGameObjectWithTag("Enemy");
+
+                if (enemy)
+                {
+                    GroundMonk groundMonk = enemy.GetComponent<GroundMonk>();
+                    groundMonk.StopAllCoroutines();
+                    groundMonk.enabled = false;
+                    groundMonk.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+                }
+
+                StopAllCoroutines();
+
+                GameManager.instance.GetDialogueManager().ClearDialogues();
+                playableDirector.Stop();
+                StartCoroutine(GameManager.instance.GetLevelLoader().CinematicBracketsEnd());
+            }
+        }
     }
 
     private IEnumerator Play()
@@ -22,7 +67,6 @@ public class Cutscene04 : Cutscene
 
         yield return new WaitForSeconds(Config.MEDIUM_DELAY);
 
-        GameObject player = GameManager.instance.GetPlayer();
         DeactivatePlayer(player);
 
         enemy = GameObject.FindGameObjectWithTag("Enemy");
@@ -68,13 +112,13 @@ public class Cutscene04 : Cutscene
 
         yield return new WaitForSeconds(Config.LARGE_DELAY);
 
-        GameObject player = GameManager.instance.GetPlayer();
         DeactivatePlayer(player);
 
         player.GetComponent<DamageReceiver>().enabled = false;
 
         enemy = GameObject.FindGameObjectWithTag("Enemy");
         GroundMonk groundMonk = enemy.GetComponent<GroundMonk>();
+        groundMonk.GetComponent<EnemyMover>().StayInPosition();
         groundMonk.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
 
         enemyDialogueTransform = enemy.transform.Find("DialogueBubbleHolder").transform;
@@ -129,7 +173,6 @@ public class Cutscene04 : Cutscene
         GameManager.instance.GetLevelLoader().CinematicBracketsStart();
         GameManager.instance.GetMusicManager().StopMusic();
 
-        GameObject player = GameManager.instance.GetPlayer();
         DeactivatePlayer(player);
 
         player.GetComponent<DamageReceiver>().enabled = false;
@@ -139,6 +182,7 @@ public class Cutscene04 : Cutscene
         enemy = GameObject.FindGameObjectWithTag("Enemy");
         GroundMonk groundMonk = enemy.GetComponent<GroundMonk>();
         groundMonk.enabled = false;
+        groundMonk.GetComponent<EnemyMover>().StayInPosition();
         groundMonk.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         groundMonk.GetComponent<Animator>().runtimeAnimatorController = null;
 

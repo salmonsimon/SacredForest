@@ -76,9 +76,11 @@ public class DialogueOverlay : MonoBehaviour
         ResetDialogueOverlay();
     }
 
-    private void ResetDialogueOverlay()
+    public void ResetDialogueOverlay()
     {
         IsOpen = false;
+
+        dialogueBox.transform.localScale = Vector3.zero;
 
         dialogueBox.SetActive(false);
         spaceBarIcon.SetActive(false);

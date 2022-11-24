@@ -26,6 +26,7 @@ public class Cutscene02 : Cutscene
     private IEnumerator Play()
     {
         GameManager.instance.GetLevelLoader().CinematicBracketsStart();
+        GameManager.instance.GetAnimationManager().ClearCanvases();
 
         vcamFoxy.Priority = 1;
         vcamAkate.Priority = 0;
@@ -69,6 +70,11 @@ public class Cutscene02 : Cutscene
         foxy.AddComponent<NPC>();
 
         StartCoroutine(GameManager.instance.GetLevelLoader().CinematicBracketsEnd());
+
+        yield return new WaitForSeconds(1.2f);
+
+        GameManager.instance.GetAnimationManager().ShowImageUI(Config.RIGHT_ARROW_GUI, true);
+
         this.enabled = false;
     }
 }

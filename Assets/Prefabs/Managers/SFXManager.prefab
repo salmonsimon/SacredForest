@@ -142,6 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseSFX: {fileID: 8300000, guid: a5feaeda103f792438c1071c29116d10, type: 3}
+  stageClearedSFX: {fileID: 8300000, guid: c217fccdc0e5a1448974c27dd48b7726, type: 3}
   arrowHitSFX: {fileID: 8300000, guid: 9d7cb2fcbadf09b4687614c644e7ab59, type: 3}
   swordDamageClips:
   - {fileID: 8300000, guid: 7cbd6cd765888ff418d01d98bd1ce9c2, type: 3}

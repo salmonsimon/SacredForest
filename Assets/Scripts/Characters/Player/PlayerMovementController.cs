@@ -9,6 +9,8 @@ public class PlayerMovementController : Mover
 
     private bool isAlive = true;
 
+    private bool onlyAllowActions = false;
+
     public override void Reset()
     {
         base.Reset();
@@ -36,8 +38,11 @@ public class PlayerMovementController : Mover
         {
             jumpRememberTime -= Time.deltaTime;
 
-            movement.x = Input.GetAxisRaw(Config.MOVEMENT_ANIMATOR_HORIZONTAL);
-            movement.y = Input.GetAxisRaw(Config.MOVEMENT_ANIMATOR_VERTICAL);
+            if (!onlyAllowActions)
+            {
+                movement.x = Input.GetAxisRaw(Config.MOVEMENT_ANIMATOR_HORIZONTAL);
+                movement.y = Input.GetAxisRaw(Config.MOVEMENT_ANIMATOR_VERTICAL);
+            }
 
             if (movement != Vector2.zero)
             {
@@ -83,7 +88,7 @@ public class PlayerMovementController : Mover
         }
     }
 
-    private bool IsJumpingUp()
+    public bool IsJumpingUp()
     {
         return rigidBody.velocity.y > 0.1;
     }
@@ -102,6 +107,11 @@ public class PlayerMovementController : Mover
             hasAbilityToWallJump = true;
         else
             hasAbilityToWallJump = false;
+    }
+
+    public void OnlyAllowActions(bool value)
+    {
+        onlyAllowActions = value;
     }
 
     private void AliveStatusChange()

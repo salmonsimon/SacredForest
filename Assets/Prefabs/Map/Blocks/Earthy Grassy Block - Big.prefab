@@ -83,6 +83,8 @@ GameObject:
   - component: {fileID: 7838359911046812374}
   - component: {fileID: 7838359911046812201}
   - component: {fileID: 7838359911046812375}
+  - component: {fileID: 1745506980}
+  - component: {fileID: 1745506979}
   m_Layer: 0
   m_Name: Earthy Grassy Block - Big
   m_TagString: Ground
@@ -187,11 +189,9 @@ PolygonCollider2D:
       - {x: 0.39161992, y: -0.053098857}
       - {x: 0.3742853, y: 0.07446073}
       - {x: 0.4311377, y: 0.1714432}
-      - {x: 0.4311377, y: 0.33360732}
-      - {x: 0.030658722, y: 0.31627306}
+      - {x: 0.4369368, y: 0.31910962}
       - {x: -0.118216515, y: 0.3200266}
       - {x: -0.29777884, y: 0.32118645}
-      - {x: -0.3797469, y: 0.29839087}
       - {x: -0.49184242, y: 0.319254}
       - {x: -0.41987672, y: 0.16448393}
       - {x: -0.28822577, y: 0.1373865}
@@ -209,3 +209,41 @@ PolygonCollider2D:
       - {x: 0.07152875, y: -0.2377848}
       - {x: 0.14052838, y: -0.2429722}
       - {x: 0.1861198, y: -0.18032038}
+--- !u!61 &1745506980
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7838359911046812200}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 1eb860329c40ee545a3e1fcabc25abf0, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.018909454, y: 0.26820743}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.989899, y: 0.7676768}
+    newSize: {x: 0.989899, y: 0.7676768}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.9922075, y: 0.11528015}
+  m_EdgeRadius: 0
+--- !u!114 &1745506979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7838359911046812200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b9e720eecf524848b7428a055ddafc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

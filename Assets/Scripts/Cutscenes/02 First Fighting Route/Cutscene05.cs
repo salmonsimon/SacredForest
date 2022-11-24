@@ -39,9 +39,16 @@ public class Cutscene05 : Cutscene
         slyDialogueTransform = sly.transform.Find("DialogueBubbleTransform").transform;
         akateDialogueTransform = GameManager.instance.GetPlayer().transform.Find("DialogueBubbleTransform").transform;
         speakers = new List<Transform>() { slyDialogueTransform, akateDialogueTransform };
+    }
 
+    private void OnEnable()
+    {
         GameObject.FindGameObjectWithTag("Breakable").GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += BarrelBroken;
         showButtonCoroutine = StartCoroutine(WaitToShowButton());
+    }
+    private void OnDisable()
+    {
+        GameObject.FindGameObjectWithTag("Breakable").GetComponent<DamageReceiver>().OnCharacterAliveStatusChange -= BarrelBroken;
     }
 
     private void Update()
@@ -193,7 +200,6 @@ public class Cutscene05 : Cutscene
         playerCamera.Priority = 1;
 
         StartCoroutine(GameManager.instance.GetLevelLoader().CinematicBracketsEnd());
-        GameManager.instance.GetMusicManager().SetLooping(false);
         ActivatePlayer(player);
 
         yield return new WaitForSeconds(Config.SMALL_DELAY);

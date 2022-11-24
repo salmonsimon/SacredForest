@@ -95,7 +95,7 @@ MonoBehaviour:
     speakerIndex: 0
     isEnemyBubble: 0
   - title: 
-    text: l.o.l
+    text: lol...
     duration: 20
     isSkippable: 1
     speakerIndex: 0
@@ -113,7 +113,7 @@ MonoBehaviour:
     speakerIndex: 0
     isEnemyBubble: 0
   - title: 
-    text: maybe after dying a hundred times more, you'll manage... please...
+    text: maybe after dying a hundred times more, you'll manage...
     duration: 20
     isSkippable: 1
     speakerIndex: 0
@@ -252,6 +252,126 @@ MonoBehaviour:
     isEnemyBubble: 0
   - title: 
     text: go selinam kingdom!
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: 
+    text: go selinam kingdom!
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: 
+    text: so... this is you trying?
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: 
+    text: you fucked it up...
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: 
+    text: what attempt was this one already?...
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: 
+    text: if we just had an award for losing, you'd win for sure...
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: 
+    text: please, go take a break...
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: 
+    text: i bet you just want to know what happens in the next level... hahaha...
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: 
+    text: you're dying (literally) to clear this level
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: 
+    text: you can't do it...
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: 
+    text: this was supposed to be easy
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: 
+    text: nope, not that way...
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: 
+    text: good luck next time...
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: 
+    text: what doesn't kill you makes you stronger... means you're weak, right?
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: 
+    text: if i just had a dollar every time you die...
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: 
+    text: did you try not dying?
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: 
+    text: i wouldn't have done that...
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: 
+    text: you need to try harder...
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: 
+    text: when you're not losing... what do you do?
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: 
+    text: sorry not sorry...
+    duration: 20
+    isSkippable: 1
+    speakerIndex: 0
+    isEnemyBubble: 0
+  - title: 
+    text: i'm not perfect but at least i'm not you...
     duration: 20
     isSkippable: 1
     speakerIndex: 0
