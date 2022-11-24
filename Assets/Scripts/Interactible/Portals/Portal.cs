@@ -53,10 +53,34 @@ public class Portal : GeneralCollider
         GameManager.instance.GetPlayer().GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         GameManager.instance.GetPlayer().GetComponent<Animator>().enabled = false;
 
+        StartCoroutine(SmoothPlayerPlacement());
+
+        yield return new WaitForSeconds(Config.SMALL_DELAY);
+
         playerPortalAnimation.PlayerTeleport(Config.BIG_DELAY * 2);
 
         yield return new WaitForSeconds(Config.BIG_DELAY);
 
         GameManager.instance.GetLevelLoader().LoadLevel(sceneName, Config.CROSSFADE_TRANSITION);
+    }
+
+    private IEnumerator SmoothPlayerPlacement()
+    {
+        float duration = .2f;
+
+        float startTime = Time.time;
+        float endTime = startTime + duration;
+
+        GameObject player = GameManager.instance.GetPlayer();
+
+        Vector3 playerOriginalPosition = player.transform.position;
+        Vector3 playerFinalPosition = new Vector3(transform.position.x, transform.position.y, player.transform.position.z);
+
+        while (Time.time < endTime)
+        {
+            player.transform.position = Vector3.Lerp(playerOriginalPosition, playerFinalPosition, (Time.time - startTime) / duration);
+
+            yield return null;
+        }
     }
 }

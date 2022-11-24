@@ -144,7 +144,7 @@ MonoBehaviour:
   mainMenuMusic: {fileID: 8300000, guid: 16964cb0a20ffad4eab291b51a5a03a9, type: 3}
   mainAreaMusic: {fileID: 8300000, guid: 8ff715b1ccc82424880191da7a203147, type: 3}
   firstBossMusic: {fileID: 8300000, guid: 06467877d4062294ca7842bc5b06b7bf, type: 3}
-  foxesMusic: {fileID: 8300000, guid: 82f09fd9c40275348a172defa40771aa, type: 3}
+  foxesMusic: {fileID: 8300000, guid: 46677df20cd25f74fb5a34ac3db2d8fa, type: 3}
   firstFightingRouteTracks:
   - {fileID: 8300000, guid: dbfd6b8ff5d58fe44afbdd6e8314a5a6, type: 3}
   - {fileID: 8300000, guid: dbfd6b8ff5d58fe44afbdd6e8314a5a6, type: 3}
