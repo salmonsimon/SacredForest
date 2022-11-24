@@ -118,20 +118,18 @@ public class MusicManager : MonoBehaviour
 
         for (int i = 0; i < firstFightingRouteTracks.Length; i++)
         {
-            while (audioSource.isPlaying)
+            while (AudioSettings.dspTime < startTime)
                 yield return null;
 
             AudioClip clipToSchedule = firstFightingRouteTracks[i];
 
             audioSource.clip = clipToSchedule;
-            audioSource.PlayScheduled(startTime);
+
+            audioSource.Play();
 
             double duration = (double)clipToSchedule.samples / clipToSchedule.frequency;
 
             startTime += duration;
-
-            if (!audioSource.isPlaying)
-                audioSource.Play();
         }
 
         while (audioSource.isPlaying)
