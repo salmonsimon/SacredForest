@@ -103,4 +103,11 @@ public class Wizard : Enemy
             wizardAttacks.ProjectileAttack(transform.position, player.transform.position);
         }
     }
+
+    protected override void Death()
+    {
+        base.Death();
+
+        enabled = false;
+    }
 }

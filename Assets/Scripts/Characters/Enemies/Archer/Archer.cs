@@ -114,4 +114,11 @@ public class Archer : Enemy
         jumpBackAction = false;
         shootArrowAction = false;
     }
+
+    protected override void Death()
+    {
+        base.Death();
+
+        enabled = false;
+    }
 }

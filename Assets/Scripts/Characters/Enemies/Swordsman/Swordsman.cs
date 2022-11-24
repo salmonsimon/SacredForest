@@ -159,4 +159,11 @@ public class Swordsman : Enemy
         secondAttackAction = false;
         thirdAttackAction = false;
     }
+
+    protected override void Death()
+    {
+        base.Death();
+
+        enabled = false;
+    }
 }

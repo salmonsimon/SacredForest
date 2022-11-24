@@ -72,6 +72,8 @@ public class FrameManager : MonoBehaviour
             activeFrame.ShowArrowUI(false);
             StartCoroutine(NextFrame());
         }
+
+        PlayerAliveStatusChange();
     }
 
     private IEnumerator NextFrame()
