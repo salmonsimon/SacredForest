@@ -116,12 +116,12 @@ public class DamageReceiver : MonoBehaviour
     public IEnumerator ImmuneCooldown()
     {
         StopAllCoroutines();
-        ResetFlashing();
 
         isImmune = true;
 
         if (flashesWhenImmune)
         {
+            ResetFlashing();
             InvokeRepeating("Flash", Config.SMALL_DELAY, flashFrequency);
         }
 
@@ -138,12 +138,12 @@ public class DamageReceiver : MonoBehaviour
     public IEnumerator SetImmune(float duration)
     {
         StopAllCoroutines();
-        ResetFlashing();
 
         isImmune = true;
 
         if (flashesWhenImmune)
         {
+            ResetFlashing();
             InvokeRepeating("Flash", Config.SMALL_DELAY, flashFrequency);
         }
 

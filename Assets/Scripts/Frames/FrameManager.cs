@@ -73,6 +73,7 @@ public class FrameManager : MonoBehaviour
             StartCoroutine(NextFrame());
         }
 
+        if (isPlayerAlive && !GameManager.instance.GetDialogueManager().IsRunning)
         PlayerAliveStatusChange();
     }
 

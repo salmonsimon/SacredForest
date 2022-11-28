@@ -48,7 +48,8 @@ public class Cutscene05 : Cutscene
     }
     private void OnDisable()
     {
-        GameObject.FindGameObjectWithTag("Breakable").GetComponent<DamageReceiver>().OnCharacterAliveStatusChange -= BarrelBroken;
+        if (GameObject.FindGameObjectWithTag("Breakable"))
+            GameObject.FindGameObjectWithTag("Breakable").GetComponent<DamageReceiver>().OnCharacterAliveStatusChange -= BarrelBroken;
     }
 
     private void Update()
