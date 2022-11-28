@@ -206,6 +206,8 @@ public class GameManager : MonoBehaviour
     {
         FrameManager frameManager = GameObject.FindGameObjectWithTag(Config.FRAME_MANAGER_TAG).GetComponent<FrameManager>();
 
+        dialogueManager.ClearDialogues();
+        animationManager.ClearCanvases();
         StartCoroutine(frameManager.RestartFrame());
     }
 

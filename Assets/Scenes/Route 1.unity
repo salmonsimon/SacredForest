@@ -8595,6 +8595,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8106663203899359985, guid: 3e4c3e90a7c61324b8ce89ecae976c0b, type: 3}
   m_PrefabInstance: {fileID: 262408952}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &262408954 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8106663203899359994, guid: 3e4c3e90a7c61324b8ce89ecae976c0b, type: 3}
+  m_PrefabInstance: {fileID: 262408952}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &272697793
 GameObject:
   m_ObjectHideFlags: 0
@@ -35727,7 +35732,7 @@ MonoBehaviour:
   mainMenu: {fileID: 2096627361}
   mainMenuUI: {fileID: 2096627360}
   pauseMenu: {fileID: 1816972621}
-  pauseMenuFightingRoute: {fileID: 0}
+  pauseMenuFightingRoute: {fileID: 262408954}
   countersUI: {fileID: 1009155021}
   isOnMainMenu: 1
   isGamePaused: 0
@@ -61503,11 +61508,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   frames:
   - {fileID: 1368459968}
+  - {fileID: 1403479523}
   - {fileID: 2071746091}
   - {fileID: 329032152}
   - {fileID: 1035707527}
   - {fileID: 761324798}
-  - {fileID: 1403479523}
   - {fileID: 420930561}
 --- !u!1 &1616341461
 GameObject:

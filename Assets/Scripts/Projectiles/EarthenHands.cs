@@ -13,6 +13,8 @@ public class EarthenHands : MonoBehaviour
 
     private bool isFollowing = true;
 
+    [SerializeField] float movingSpeed = .01f; 
+
 
     private void Start()
     {
@@ -58,7 +60,16 @@ public class EarthenHands : MonoBehaviour
     {
         Vector3 lookatPreviousPosition = lookatPreviousPositions.Dequeue();
 
-        transform.position = new Vector3(lookatPreviousPosition.x, transform.position.y, transform.position.z);
+        //transform.position = new Vector3(lookatPreviousPosition.x, transform.position.y, transform.position.z);
+
+        float relativePlayerPositionX = lookatPreviousPosition.x - transform.position.x;
+        int directionToMove = 1;
+
+        if (relativePlayerPositionX < 0)
+            directionToMove = -1;
+
+        if (Mathf.Abs(relativePlayerPositionX) > .1f)
+            transform.position = transform.position + (Vector3.right * directionToMove * movingSpeed);
     }
 
     private void CatchPlayer()
