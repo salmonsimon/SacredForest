@@ -19,6 +19,7 @@ TagManager:
   - Cutscene
   - Breakable
   - ParallaxBackground
+  - FrameManager
   layers:
   - Default
   - TransparentFX

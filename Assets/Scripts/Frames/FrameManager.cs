@@ -114,7 +114,7 @@ public class FrameManager : MonoBehaviour
         GameManager.instance.GetPlayer().GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
-    private IEnumerator RestartFrame()
+    public IEnumerator RestartFrame()
     {
         GameManager.instance.SetIsTeleporting(true);
         GameManager.instance.GetPlayer().GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
@@ -131,6 +131,4 @@ public class FrameManager : MonoBehaviour
 
         GameManager.instance.GetPlayer().GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
     }
-
-    
 }

@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private MainMenuUI mainMenuUI;
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject pauseMenuFightingRoute;
     [SerializeField] private CountersUI countersUI;
 
     #endregion
@@ -61,6 +62,7 @@ public class GameManager : MonoBehaviour
             Destroy(mainMenu.gameObject);
             Destroy(mainMenuUI.gameObject);
             Destroy(pauseMenu.gameObject);
+            Destroy(pauseMenuFightingRoute.gameObject);
             Destroy(countersUI.gameObject);
         }
         else
@@ -127,6 +129,7 @@ public class GameManager : MonoBehaviour
             mainMenu.SetActive(true);
 
             pauseMenu.SetActive(false);
+            pauseMenuFightingRoute.SetActive(false);
             countersUI.gameObject.SetActive(false);
             currentProgressManager.gameObject.SetActive(false);
         }
@@ -160,6 +163,7 @@ public class GameManager : MonoBehaviour
 
         levelLoader.LoadLevel(Config.MAIN_MENU_SCENE_NAME, Config.CROSSFADE_TRANSITION);
         pauseMenu.SetActive(false);
+        pauseMenuFightingRoute.SetActive(false);
     }
 
     public void PauseGame()
@@ -167,18 +171,42 @@ public class GameManager : MonoBehaviour
         GetSFXManager().PlaySound(Config.PAUSE_SFX);
         SetGamePaused(true);
 
-        pauseMenu.SetActive(true);
-        pauseMenu.transform.Find("Pause Panel").gameObject.SetActive(true);
-        pauseMenu.GetComponent<ButtonSelection>().ResetSelectedButton();
+        if (currentProgressManager.CurrentFightingRoute == FightingRoute.None)
+        {
+            pauseMenu.SetActive(true);
+            pauseMenu.transform.Find("Pause Panel").gameObject.SetActive(true);
+            pauseMenu.GetComponent<ButtonSelection>().ResetSelectedButton();
+        }
+        else
+        {
+            pauseMenuFightingRoute.SetActive(true);
+            pauseMenuFightingRoute.transform.Find("Pause Panel").gameObject.SetActive(true);
+            pauseMenuFightingRoute.GetComponent<ButtonSelection>().ResetSelectedButton();
+        }
+        
     }
 
     public void ResumeGame()
     {
         SetGamePaused(false);
 
-        pauseMenu.SetActive(false);
-        pauseMenu.transform.Find("Settings Panel").gameObject.SetActive(false);
+        if (currentProgressManager.CurrentFightingRoute == FightingRoute.None)
+        {
+            pauseMenu.SetActive(false);
+            pauseMenu.transform.Find("Settings Panel").gameObject.SetActive(false);
+        }
+        else
+        {
+            pauseMenuFightingRoute.SetActive(false);
+            pauseMenuFightingRoute.transform.Find("Settings Panel").gameObject.SetActive(false);
+        }
+    }
 
+    public void RestartFrame()
+    {
+        FrameManager frameManager = GameObject.FindGameObjectWithTag(Config.FRAME_MANAGER_TAG).GetComponent<FrameManager>();
+
+        StartCoroutine(frameManager.RestartFrame());
     }
 
     #region Getters and Setters
@@ -303,8 +331,19 @@ public class GameManager : MonoBehaviour
 
     public void SetAudioSlidersVolumesPauseMenu()
     {
-        Slider musicVolumeSlider = GameObject.Find("Pause Menu UI/Settings Panel/Music/Music Slider").GetComponent<Slider>();
-        Slider sfxVolumeSlider = GameObject.Find("Pause Menu UI/Settings Panel/SFX/SFX Slider").GetComponent<Slider>();
+        Slider musicVolumeSlider = null;
+        Slider sfxVolumeSlider = null;
+
+        if (currentProgressManager.CurrentFightingRoute == FightingRoute.None)
+        {
+            musicVolumeSlider = GameObject.Find("Pause Menu UI/Settings Panel/Music/Music Slider").GetComponent<Slider>();
+            sfxVolumeSlider = GameObject.Find("Pause Menu UI/Settings Panel/SFX/SFX Slider").GetComponent<Slider>();
+        }
+        else
+        {
+            musicVolumeSlider = GameObject.Find("Pause Menu UI - Fighting Route/Settings Panel/Music/Music Slider").GetComponent<Slider>();
+            sfxVolumeSlider = GameObject.Find("Pause Menu UI - Fighting Route/Settings Panel/SFX/SFX Slider").GetComponent<Slider>();
+        }
 
         musicVolumeSlider.value = Settings.Instance.musicVolume;
         sfxVolumeSlider.value = Settings.Instance.SFXVolume;

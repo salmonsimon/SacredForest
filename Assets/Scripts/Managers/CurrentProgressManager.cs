@@ -9,6 +9,7 @@ public class CurrentProgressManager : MonoBehaviour
     public bool FirstTimePlaying { get { return firstTimePlaying; } set { firstTimePlaying = value; }}
 
     [SerializeField] private FightingRoute currentFightingRoute;
+    public FightingRoute CurrentFightingRoute { get { return currentFightingRoute; } }
 
     [SerializeField] private bool finishedRoute1;
     [SerializeField] private bool route1BossHasTransformed;
