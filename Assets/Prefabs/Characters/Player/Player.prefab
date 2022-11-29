@@ -10024,13 +10024,14 @@ GameObject:
   - component: {fileID: 1971838360700276062}
   - component: {fileID: 1971838360380672435}
   - component: {fileID: 661296833}
+  - component: {fileID: 864613793}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4697750405587687972
 Transform:
   m_ObjectHideFlags: 0
@@ -10113,7 +10114,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -566649837
   m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -3318188226485093758, guid: ae72133dacba6ec4eb33ecde48f50e56, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -10206,12 +10207,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e58c267cd4ef09409f30c564b9ca1d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flashMaterial: {fileID: 2100000, guid: c2d4b6910146ab943a4f522da386226e, type: 2}
-  flashDuration: 0.25
-  flashFrequency: 0.5
-  immuneTime: 2
+  flashesWhenImmune: 0
+  flashingColor: {r: 1, g: 1, b: 1, a: 1}
+  immuneTime: 1
   maxHitPoints: 1
   currentHitPoints: 1
+  isAlive: 1
 --- !u!114 &661296833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10235,3 +10236,15 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1d1645d7264a91040a99be4952f426c3, type: 3}
   - {fileID: 8300000, guid: 97e7cba0a5c972a47ac136e4d7bf3703, type: 3}
   deathClips: []
+--- !u!114 &864613793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4697750405587687979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2eddc69d688f3c4c85e0cc448c8224d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

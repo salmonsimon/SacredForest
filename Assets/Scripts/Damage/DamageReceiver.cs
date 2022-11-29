@@ -25,19 +25,19 @@ public class DamageReceiver : MonoBehaviour
     private bool isImmune = false;
 
     [SerializeField] private int maxHitPoints = 1;
-    public int MaxHitPoints
-    {
-        get { return maxHitPoints; }
-    }
+    public int MaxHitPoints { get { return maxHitPoints; }}
 
     #region Properties
 
     #region CurrentHitPoints
 
     [SerializeField] private int currentHitPoints = 1;
-    public int CurrentHitPoints
+    public int CurrentHitPoints { get { return currentHitPoints; } }
+
+    public void SetHealth(int hitPoints)
     {
-        get { return currentHitPoints; }
+        maxHitPoints = hitPoints;
+        currentHitPoints = hitPoints;
     }
 
     public void Damage(int damage)

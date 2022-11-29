@@ -26,6 +26,8 @@ public class PlayerMovementController : Mover
         SecondRouteFinishedStateChange();
 
         GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += AliveStatusChange;
+        GetComponent<DamageReceiver>().OnCharacterDamaged += Damaged;
+
         GameManager.instance.GetCurrentProgressManager().OnFirstRouteFinishedStateChange += FirstRouteFinishedStateChange;
         GameManager.instance.GetCurrentProgressManager().OnSecondRouteFinishedStateChange += SecondRouteFinishedStateChange;
     }
@@ -123,6 +125,14 @@ public class PlayerMovementController : Mover
         else
         {
             Death();
+        }
+    }
+
+    protected virtual void Damaged()
+    {
+        if (isAlive)
+        {
+            StartCoroutine(GetComponent<DamageReceiver>().ImmuneCooldown());
         }
     }
 
