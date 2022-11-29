@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject pauseMenuFightingRoute;
     [SerializeField] private CountersUI countersUI;
+    [SerializeField] private HealthUI healthUI;
 
     #endregion
 
@@ -64,6 +65,7 @@ public class GameManager : MonoBehaviour
             Destroy(pauseMenu.gameObject);
             Destroy(pauseMenuFightingRoute.gameObject);
             Destroy(countersUI.gameObject);
+            Destroy(healthUI.gameObject);
         }
         else
         {
@@ -107,8 +109,15 @@ public class GameManager : MonoBehaviour
             mainMenu.SetActive(false);
 
             countersUI.gameObject.SetActive(true);
+
+            healthUI.gameObject.SetActive(true);
+            healthUI.Activate();
+
             currentProgressManager.gameObject.SetActive(true);
+
             player.SetActive(true);
+            player.GetComponent<Player>().SetHealth();
+            player.GetComponent<DamageReceiver>().Resurrect();
 
             GameObject playerSpawnPoint = GameObject.FindGameObjectWithTag(Config.SPAWN_POINT_TAG);
             if (playerSpawnPoint)
@@ -132,6 +141,9 @@ public class GameManager : MonoBehaviour
             pauseMenuFightingRoute.SetActive(false);
             countersUI.gameObject.SetActive(false);
             currentProgressManager.gameObject.SetActive(false);
+
+            healthUI.gameObject.SetActive(false);
+            //healthUI.Deactivate();
         }
 
         levelLoader.FinishTransition();
@@ -258,7 +270,6 @@ public class GameManager : MonoBehaviour
 
         player.GetComponent<PlayerMovementController>().Reset();
         player.GetComponent<PlayerAttackController>().Reset();
-        player.GetComponent<DamageReceiver>().Resurrect();
 
         player.gameObject.SetActive(true);
     }
@@ -311,6 +322,11 @@ public class GameManager : MonoBehaviour
     public CountersUI GetCountersUI()
     {
         return countersUI;
+    }
+
+    public HealthUI GetHealthUI()
+    {
+        return healthUI;
     }
 
     public MainMenuUI GetMainMenuUI()

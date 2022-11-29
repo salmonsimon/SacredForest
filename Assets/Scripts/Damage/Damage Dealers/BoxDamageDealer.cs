@@ -15,7 +15,6 @@ public class BoxDamageDealer : BoxCollider
         Fire
     }
 
-
     protected override void CheckCollision(Collider2D coll, bool boolToAssing)
     {
         for (int i = 0; i < tagsToCheck.Count; i++)

@@ -17,6 +17,7 @@ public class MainMenuUI : MonoBehaviour
     [Space(5)]
 
     [SerializeField] private List<GameObject> savedGamesButtons;
+    [SerializeField] private List<GameObject> difficultyPanels;
     [SerializeField] private List<Text> killsTexts;
     [SerializeField] private List<Text> deathsTexts;
     [SerializeField] private List<Text> timePlayedTexts;
@@ -38,6 +39,7 @@ public class MainMenuUI : MonoBehaviour
     [Space(2)]
 
     [SerializeField] private List<GameObject> savedGamePanels;
+    [SerializeField] private List<GameObject> savedGameDifficultyPanels;
     [SerializeField] private List<Text> savedGameKillsTexts;
     [SerializeField] private List<Text> savedGameDeathsTexts;
     [SerializeField] private List<Text> savedGameTimePlayedTexts;
@@ -109,9 +111,9 @@ public class MainMenuUI : MonoBehaviour
         GameManager.instance.GetLevelLoader().LoadLevel(Config.MAIN_SCENE_NAME, Config.CROSSFADE_TRANSITION);
     }
 
-    public void NewGame()
+    public void NewGame(int difficultyLevel)
     {
-        bool couldCreateNewGame = Settings.Instance.AddNewGameAndPlay();
+        bool couldCreateNewGame = Settings.Instance.AddNewGameAndPlay(difficultyLevel);
 
         if (!couldCreateNewGame)
         {
@@ -145,6 +147,33 @@ public class MainMenuUI : MonoBehaviour
 
             int savedGameIndex = Settings.Instance.currentSavedGames[i];
 
+            switch (Settings.Instance.savedGamesDifficultyLevel[savedGameIndex])
+            {
+                case 0:
+                    foreach (Transform child in difficultyPanels[i].transform)
+                        child.gameObject.SetActive(false);
+
+                    difficultyPanels[i].transform.Find("Difficulty Panel - Normal").gameObject.SetActive(true);
+
+                    break;
+
+                case 1:
+                    foreach (Transform child in difficultyPanels[i].transform)
+                        child.gameObject.SetActive(false);
+
+                    difficultyPanels[i].transform.Find("Difficulty Panel - Easy").gameObject.SetActive(true);
+
+                    break;
+
+                case 2:
+                    foreach (Transform child in difficultyPanels[i].transform)
+                        child.gameObject.SetActive(false);
+
+                    difficultyPanels[i].transform.Find("Difficulty Panel - Baby").gameObject.SetActive(true);
+
+                    break;
+            }
+
             killsTexts[i].text = Settings.Instance.savedGamesKillsCounter[savedGameIndex].ToString("#,##0");
             deathsTexts[i].text = Settings.Instance.savedGamesDeathsCounter[savedGameIndex].ToString("#,##0");
 
@@ -163,6 +192,33 @@ public class MainMenuUI : MonoBehaviour
         savedGamePanels[savedGameIndex].SetActive(true);
 
         int correctedSavedGameIndex = Settings.Instance.currentSavedGames[savedGameIndex];
+
+        switch (Settings.Instance.savedGamesDifficultyLevel[correctedSavedGameIndex])
+        {
+            case 0:
+                foreach (Transform child in savedGameDifficultyPanels[savedGameIndex].transform)
+                    child.gameObject.SetActive(false);
+
+                savedGameDifficultyPanels[savedGameIndex].transform.Find("Difficulty Panel - Normal").gameObject.SetActive(true);
+                
+                break;
+
+            case 1:
+                foreach (Transform child in savedGameDifficultyPanels[savedGameIndex].transform)
+                    child.gameObject.SetActive(false);
+
+                savedGameDifficultyPanels[savedGameIndex].transform.Find("Difficulty Panel - Easy").gameObject.SetActive(true);
+                
+                break;
+
+            case 2:
+                foreach (Transform child in savedGameDifficultyPanels[savedGameIndex].transform)
+                    child.gameObject.SetActive(false);
+
+                savedGameDifficultyPanels[savedGameIndex].transform.Find("Difficulty Panel - Baby").gameObject.SetActive(true);
+                
+                break;
+        }
 
         savedGameKillsTexts[savedGameIndex].text = Settings.Instance.savedGamesKillsCounter[correctedSavedGameIndex].ToString("#,##0");
         savedGameDeathsTexts[savedGameIndex].text = Settings.Instance.savedGamesDeathsCounter[correctedSavedGameIndex].ToString("#,##0");
@@ -209,7 +265,7 @@ public class MainMenuUI : MonoBehaviour
         }
     }
 
-    private void SetOnChooseGamePanel(bool value)
+    public void SetOnChooseGamePanel(bool value)
     {
         onChooseGamePanel = value;
     }

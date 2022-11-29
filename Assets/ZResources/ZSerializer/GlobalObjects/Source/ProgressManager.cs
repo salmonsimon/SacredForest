@@ -4,6 +4,8 @@ using ZSerializer;
 [Serializable, SerializeGlobalData(GlobalDataType.PerSaveFile)]
 public partial class ProgressManager
 {
+    public int difficultyLevel = -1;
+
     public bool firstTimePlaying = true;
 
     public bool finishedRoute1 = false;
@@ -19,6 +21,8 @@ public partial class ProgressManager
 
     public void Reset()
     {
+        difficultyLevel = -1;
+
         firstTimePlaying = true;
 
         finishedRoute1 = false;

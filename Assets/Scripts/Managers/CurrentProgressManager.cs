@@ -8,6 +8,9 @@ public class CurrentProgressManager : MonoBehaviour
     [SerializeField] private bool firstTimePlaying;
     public bool FirstTimePlaying { get { return firstTimePlaying; } set { firstTimePlaying = value; }}
 
+    [SerializeField] private DifficultyLevel currentDifficultyLevel;
+    public DifficultyLevel CurrentDifficultyLevel { get { return currentDifficultyLevel; } }
+
     [SerializeField] private FightingRoute currentFightingRoute;
     public FightingRoute CurrentFightingRoute { get { return currentFightingRoute; } }
 
@@ -124,6 +127,21 @@ public class CurrentProgressManager : MonoBehaviour
 
         enemiesKilledCount = ProgressManager.Instance.enemiesKilledCount;
         deathsCount = ProgressManager.Instance.deathsCount;
+
+        switch (ProgressManager.Instance.difficultyLevel)
+        {
+            case 0:
+                currentDifficultyLevel = DifficultyLevel.Normal;
+                break;
+
+            case 1:
+                currentDifficultyLevel = DifficultyLevel.Easy;
+                break;
+
+            case 2:
+                currentDifficultyLevel = DifficultyLevel.Baby;
+                break;
+        }
     }
 
     private void Update()

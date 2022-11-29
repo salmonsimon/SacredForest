@@ -9,6 +9,9 @@ public partial class Settings
     public int savedGamesAmount = 0;
     public List<int> currentSavedGames = new List<int>();
 
+    public ZDictionary<int, int> savedGamesDifficultyLevelSerialized = new ZDictionary<int, int>();
+    public Dictionary<int, int> savedGamesDifficultyLevel = new Dictionary<int, int>();
+
     public ZDictionary<int, int> savedGamesKillsCounterSerialized = new ZDictionary<int, int>();
     public Dictionary<int, int> savedGamesKillsCounter = new Dictionary<int, int>();
 
@@ -37,6 +40,7 @@ public partial class Settings
     {
         for (var i = 0; i < currentSavedGames.Count; i++)
         {
+            savedGamesDifficultyLevel.Add(savedGamesDifficultyLevelSerialized.keys[i], savedGamesDifficultyLevelSerialized.values[i]);
             savedGamesKillsCounter.Add(savedGamesKillsCounterSerialized.keys[i], savedGamesKillsCounterSerialized.values[i]);
             savedGamesDeathsCounter.Add(savedGamesDeathsCounterSerialized.keys[i], savedGamesDeathsCounterSerialized.values[i]);
             savedGamesTimePlayedCounter.Add(savedGamesTimePlayedCounterSerialized.keys[i], savedGamesTimePlayedCounterSerialized.values[i]);
@@ -49,7 +53,7 @@ public partial class Settings
         SFXVolume = 1;
     }
 
-    public bool AddNewGameAndPlay()
+    public bool AddNewGameAndPlay(int difficultyLevel)
     {
         if (savedGamesAmount >= 3)
         {
@@ -59,10 +63,13 @@ public partial class Settings
         {
             currentSavedGames.Add(newGameIndex);
 
-            AddNewCounters(newGameIndex);
+            AddNewGameCountersAndDifficulty(newGameIndex, difficultyLevel);
 
             ZSerializerSettings.Instance.selectedSaveFile = newGameIndex;
+
+            ProgressManager.Instance.difficultyLevel = difficultyLevel;
             ProgressManager.Save();
+
             GameManager.instance.GetCurrentProgressManager().Initialize();
 
             savedGamesAmount++;
@@ -84,15 +91,18 @@ public partial class Settings
 
         currentSavedGames.Remove(correctedIndex);
 
-        RemoveCounters(correctedIndex);
+        RemoveCountersAndDifficulty(correctedIndex);
 
         savedGamesAmount--;
 
         Save();
     }
 
-    private void AddNewCounters(int newGameIndex)
+    private void AddNewGameCountersAndDifficulty(int newGameIndex, int difficultyLevel)
     {
+        savedGamesDifficultyLevel.Add(newGameIndex, difficultyLevel);
+        savedGamesDifficultyLevelSerialized = savedGamesDifficultyLevel;
+
         savedGamesKillsCounter.Add(newGameIndex, 0);
         savedGamesKillsCounterSerialized = savedGamesKillsCounter;
 
@@ -103,8 +113,11 @@ public partial class Settings
         savedGamesTimePlayedCounterSerialized = savedGamesTimePlayedCounter;
     }
 
-    private void RemoveCounters(int correctedGameIndex)
+    private void RemoveCountersAndDifficulty(int correctedGameIndex)
     {
+        savedGamesDifficultyLevel.Remove(correctedGameIndex);
+        savedGamesDifficultyLevelSerialized = savedGamesDifficultyLevel;
+
         savedGamesKillsCounter.Remove(correctedGameIndex);
         savedGamesKillsCounterSerialized = savedGamesKillsCounter;
 

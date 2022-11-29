@@ -89,6 +89,7 @@ public class LevelLoader : MonoBehaviour
     public void CinematicBracketsStart()
     {
         GameManager.instance.GetCountersUI().ShowCounters(false);
+        GameManager.instance.GetHealthUI().ShowHealth(false);
 
         cinematicBrackets.gameObject.SetActive(true);
         cinematicBrackets.SetTrigger(Config.CROSSFADE_START_TRIGGER);
@@ -107,6 +108,8 @@ public class LevelLoader : MonoBehaviour
             yield return new WaitForSeconds(Config.CINEMATIC_TRANSITION_DURATION);
 
             GameManager.instance.GetCountersUI().ShowCounters(true);
+            GameManager.instance.GetHealthUI().ShowHealth(true);
+
             cinematicBrackets.gameObject.SetActive(false);
         }
     }

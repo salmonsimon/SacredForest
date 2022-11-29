@@ -70,6 +70,9 @@ public class Config
     public const string ANIMATOR_SHOW_COUNTERS = "Appear";
     public const string ANIMATOR_HIDE_COUNTERS = "Disappear";
 
+    public const string ANIMATOR_START_CURRENT_HEART = "Start";
+    public const string ANIMATOR_DEATH_CURRENT_HEART = "Death";
+
     public const string FLASH_MATERIAL_FILE = "Materials/SpriteFlash";
 
     #region Camera Shake
