@@ -30,7 +30,7 @@ public class Cutscene01 : Cutscene
 
         GameObject player = GameManager.instance.GetPlayer();
 
-        DeactivatePlayer(player);
+        DeactivatePlayer();
 
         RuntimeAnimatorController playerAnimator = player.GetComponent<Animator>().runtimeAnimatorController;
         player.GetComponent<Animator>().runtimeAnimatorController = null;
@@ -107,7 +107,7 @@ public class Cutscene01 : Cutscene
         foxy.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         foxy.GetComponent<FoxyController>().enabled = true;
 
-        ActivatePlayer(player);
+        ActivatePlayer();
 
         GameManager.instance.GetAnimationManager().ShowImageUIWorldSpace(Config.MOVEMENT_KEYS_GUI,
             new Vector3(player.transform.position.x, player.transform.position.y + .32f, player.transform.position.z), player.transform, 6);

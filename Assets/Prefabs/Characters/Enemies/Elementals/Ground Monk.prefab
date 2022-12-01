@@ -10443,7 +10443,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 50
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -10553,6 +10553,7 @@ MonoBehaviour:
   immuneTime: 1
   maxHitPoints: 10
   currentHitPoints: 10
+  isAlive: 1
 --- !u!114 &5553898471596128270
 MonoBehaviour:
   m_ObjectHideFlags: 0

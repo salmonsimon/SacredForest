@@ -39,6 +39,9 @@ public class Cutscene05 : Cutscene
         slyDialogueTransform = sly.transform.Find("DialogueBubbleTransform").transform;
         akateDialogueTransform = GameManager.instance.GetPlayer().transform.Find("DialogueBubbleTransform").transform;
         speakers = new List<Transform>() { slyDialogueTransform, akateDialogueTransform };
+
+        FrameManager frameManager = GameObject.FindGameObjectWithTag(Config.FRAME_MANAGER_TAG).GetComponent<FrameManager>();
+        frameManager.OnFrameRestart += FrameRestarted;
     }
 
     private void OnEnable()
@@ -50,6 +53,9 @@ public class Cutscene05 : Cutscene
     {
         if (GameObject.FindGameObjectWithTag("Breakable"))
             GameObject.FindGameObjectWithTag("Breakable").GetComponent<DamageReceiver>().OnCharacterAliveStatusChange -= BarrelBroken;
+
+        FrameManager frameManager = GameObject.FindGameObjectWithTag(Config.FRAME_MANAGER_TAG).GetComponent<FrameManager>();
+        frameManager.OnFrameRestart -= FrameRestarted;
     }
 
     private void Update()
@@ -65,7 +71,7 @@ public class Cutscene05 : Cutscene
         GameManager.instance.GetLevelLoader().CinematicBracketsStart();
 
         GameObject player = GameManager.instance.GetPlayer();
-        DeactivatePlayer(player);
+        DeactivatePlayer();
 
         #region Rescued Scene - Suspecting
 
@@ -138,6 +144,7 @@ public class Cutscene05 : Cutscene
 
         Bind(playableDirector, "Sly Animations", sly);
         Bind(playableDirector, "Sly Movement", sly);
+        Bind(playableDirector, "Audio Track", GameManager.instance.GetSFXManager().gameObject);
 
         playableDirector.Play();
 
@@ -161,6 +168,7 @@ public class Cutscene05 : Cutscene
 
         Bind(playableDirector, "Sly Animations", sly);
         Bind(playableDirector, "Sly Movement", sly);
+        Bind(playableDirector, "Audio Track", GameManager.instance.GetSFXManager().gameObject);
 
         playableDirector.Play();
 
@@ -186,6 +194,7 @@ public class Cutscene05 : Cutscene
 
         Bind(playableDirector, "Sly Animations", sly);
         Bind(playableDirector, "Sly Movement", sly);
+        Bind(playableDirector, "Audio Track", GameManager.instance.GetSFXManager().gameObject);
 
         playableDirector.Play();
 
@@ -201,7 +210,7 @@ public class Cutscene05 : Cutscene
         playerCamera.Priority = 1;
 
         StartCoroutine(GameManager.instance.GetLevelLoader().CinematicBracketsEnd());
-        ActivatePlayer(player);
+        ActivatePlayer();
 
         yield return new WaitForSeconds(Config.SMALL_DELAY);
 

@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Elemental : Enemy
 {
-    protected bool isTransformed = false;
+    [SerializeField] protected bool isTransformed = false;
     public bool IsTransformed { get { return IsTransformed; } set { isTransformed = value; } }
+
+    [SerializeField] protected bool isTransforming = false;
+    public bool IsTransforming { get { return isTransforming; }}
 
     #region Parameters
 
@@ -28,8 +31,6 @@ public class Elemental : Enemy
 
     private void CheckDamageToTransform()
     {
-        bool isTransforming = false;
-
         if (!isTransformed)
         {
             if (damageReceiver.CurrentHitPoints <= (float)(damageReceiver.MaxHitPoints / 2f))
@@ -63,6 +64,10 @@ public class Elemental : Enemy
 
         animator.SetBool(Config.ELEMENTAL_ANIMATOR_IS_TRANSFORMED, true);
         animator.SetTrigger(Config.ELEMENTAL_ANIMATOR_TRANSFORM_TRIGGER);
+
+        yield return new WaitForSeconds(transformationDuration);
+
+        isTransforming = false;
     }
 
     protected override void Death()

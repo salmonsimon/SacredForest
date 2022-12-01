@@ -15,7 +15,8 @@ public class ArcherAttacks : EnemyAttacks
     [SerializeField] private Arrow arrowPrefab;
     [SerializeField] private float shootingWaitingTime = .3f;
 
-    [SerializeField] private float[] shootingSpeeds = { 10f, 7f };
+    [SerializeField] private float[] shootingSpeeds = { 7f };
+
     private float shootingSpeed;
     private float shootingAngle;
     private Vector2 shootingDirection;
@@ -56,7 +57,9 @@ public class ArcherAttacks : EnemyAttacks
     {
         float distance = new Vector2(xDistance, yDistance).magnitude;
 
-        if (distance > 2)
+        if (distance > 6)
+            return;
+        else if (distance > 2)
             CalculateLongRangeShot(xDistance, yDistance);
         else
             CalculateShortRangeShot(xDistance, yDistance);
@@ -64,9 +67,14 @@ public class ArcherAttacks : EnemyAttacks
 
     private void CalculateLongRangeShot(float xDistance, float yDistance) 
     {
+        float[] shootingSpeedsToCheck = shootingSpeeds;
+
+        if (yDistance < -0.5f)
+            shootingSpeedsToCheck[0] = 10f;
+
         float yGravity = Physics2D.gravity.y;
 
-        foreach (float shootingSpeed in shootingSpeeds)
+        foreach (float shootingSpeed in shootingSpeedsToCheck)
         {
             float sqrt = (shootingSpeed * shootingSpeed * shootingSpeed * shootingSpeed) -
             (yGravity * (yGravity * (xDistance * xDistance) + 2 * yDistance * (shootingSpeed * shootingSpeed)));
@@ -98,6 +106,9 @@ public class ArcherAttacks : EnemyAttacks
                 }
 
                 shootingDirection = new Vector2(Mathf.Sign(xDistance) * Mathf.Cos(shootingAngle), -Mathf.Sign(xDistance) * Mathf.Sin(shootingAngle));
+                
+                if (yDistance < 1 && yDistance > 0)
+                    this.shootingDirection += new Vector2(0, 0.1f);
 
                 isGoingToShoot = true;
             }
@@ -115,12 +126,21 @@ public class ArcherAttacks : EnemyAttacks
 
         float shootingAngle = Vector2.Angle(horizontal, shootingDirection);
 
-        if (shootingAngle > 50 && shootingAngle <= 80)
-            this.shootingSpeed = 12f;
-        else if (shootingAngle > 80 && shootingAngle < 100)
-            this.shootingSpeed = 17f;
+        if (yDistance > -0.5)
+        {
+            if (shootingAngle > 50 && shootingAngle <= 80)
+                this.shootingSpeed = 12f;
+            else if (shootingAngle > 80 && shootingAngle < 100)
+                this.shootingSpeed = 17f;
+            else
+                this.shootingSpeed = 7f;
+        }
         else
-            this.shootingSpeed = 7f;
+        {
+            this.shootingSpeed = 4f;
+        }
+
+        this.shootingDirection += new Vector2(0, 0.2f);
 
         isGoingToShoot = true;
     }
@@ -133,20 +153,23 @@ public class ArcherAttacks : EnemyAttacks
 
         if (yDistance > 0)
         {
-            if (absoluteDifference >= 1)
+            if (absoluteDifference > 1)
             {
-                speedCorrection += 0.1f;
+                speedCorrection += 0.6f;
 
-                absoluteDifference -= 1;
+                absoluteDifference -= 1f;
 
                 int correctionFactor = Mathf.RoundToInt(absoluteDifference / 0.25f);
 
-                speedCorrection += 0.1f * correctionFactor;
+                speedCorrection += 0.2f * correctionFactor;
             }
         }
         else
         {
-            speedCorrection += 0.7f;
+            if (absoluteDifference > 1)
+                speedCorrection += 0.7f;
+            else
+                speedCorrection += 0.9f;
 
             absoluteDifference -= 1;
 

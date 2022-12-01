@@ -103,6 +103,8 @@ public class CutsceneFightingMechanics : Cutscene
 
         Bind(playableDirector, "Akate Animations", player);
         Bind(playableDirector, "Akate Movement", player);
+        Bind(playableDirector, "Audio Track", GameManager.instance.GetSFXManager().gameObject);
+
 
         playableDirector.Play();
 
@@ -128,7 +130,7 @@ public class CutsceneFightingMechanics : Cutscene
 
         #region Check If Jumped Both Heights
 
-        ActivatePlayer(player);
+        ActivatePlayer();
         GameManager.instance.GetPlayer().GetComponent<PlayerMovementController>().StayInPosition();
         GameManager.instance.GetPlayer().GetComponent<PlayerMovementController>().OnlyAllowActions(true);
         player.GetComponent<PlayerAttackController>().enabled = false;
@@ -160,7 +162,7 @@ public class CutsceneFightingMechanics : Cutscene
         longJumpPlatform.transform.parent.gameObject.SetActive(false);
 
         GameManager.instance.GetAnimationManager().ClearCanvases();
-        DeactivatePlayer(player);
+        DeactivatePlayer();
 
         while (!player.GetComponent<Mover>().IsGrounded())
             yield return null;
@@ -184,6 +186,7 @@ public class CutsceneFightingMechanics : Cutscene
 
         Bind(playableDirector, "Akate Animations", player);
         Bind(playableDirector, "Akate Movement", player);
+        Bind(playableDirector, "Audio Track", GameManager.instance.GetSFXManager().gameObject);
 
         playableDirector.Play();
 
@@ -207,6 +210,7 @@ public class CutsceneFightingMechanics : Cutscene
 
         Bind(playableDirector, "Akate Animations", player);
         Bind(playableDirector, "Akate Movement", player);
+        Bind(playableDirector, "Audio Track", GameManager.instance.GetSFXManager().gameObject);
 
         playableDirector.Play();
 

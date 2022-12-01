@@ -118,6 +118,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8428708079556957604, guid: 5091602d243c8154c9e31eea3332e9ed, type: 3}
+      propertyPath: m_Mass
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 8428708079556957606, guid: 5091602d243c8154c9e31eea3332e9ed, type: 3}
       propertyPath: m_Name
       value: Knight - Mini Boss Variant

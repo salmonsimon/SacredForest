@@ -81,6 +81,8 @@ public class EnemyMover : MonoBehaviour
         animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();
         damageReceiver = GetComponent<DamageReceiver>();
+
+        jumpBackForce *= rigidBody.mass;
     }
 
     private void Start()

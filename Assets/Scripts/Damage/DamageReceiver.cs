@@ -32,7 +32,7 @@ public class DamageReceiver : MonoBehaviour
     #region CurrentHitPoints
 
     [SerializeField] private int currentHitPoints = 1;
-    public int CurrentHitPoints { get { return currentHitPoints; } }
+    public int CurrentHitPoints { get { return currentHitPoints; } set { currentHitPoints = value; } }
 
     public void SetHealth(int hitPoints)
     {

@@ -102,7 +102,7 @@ public class EarthenHands : MonoBehaviour
         }
     }
 
-    private IEnumerator WaitAndDestroy(float waitingTime)
+    public IEnumerator WaitAndDestroy(float waitingTime)
     {
         yield return new WaitForSeconds(waitingTime);
 
