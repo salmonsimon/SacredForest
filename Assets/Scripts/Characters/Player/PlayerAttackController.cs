@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerAttackController : MonoBehaviour
 {
     private Animator animator;
+
     private PlayerMovementController playerMovementController;
+    private DamageReceiver damageReceiver;
 
     [SerializeField] private BoxCollider2D swordCollider;
 
@@ -14,13 +16,10 @@ public class PlayerAttackController : MonoBehaviour
 
     private bool ableToDoSecondAttack = true;
 
-    private bool isAlive = true;
-
     public void Reset()
     {
         onAttackCooldown = false;
         ableToDoSecondAttack = true;
-        isAlive = true;
 
         swordCollider.enabled = false;
     }
@@ -28,17 +27,14 @@ public class PlayerAttackController : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        playerMovementController = GetComponent<PlayerMovementController>();
-    }
 
-    private void Start()
-    {
-        GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += AliveStatusChange;
+        playerMovementController = GetComponent<PlayerMovementController>();
+        damageReceiver = GetComponent<DamageReceiver>();
     }
 
     private void Update()
     {
-        if (!GameManager.instance.IsGamePaused() && !GameManager.instance.IsTeleporting() && isAlive)
+        if (!GameManager.instance.IsGamePaused() && !GameManager.instance.IsTeleporting() && damageReceiver.IsAlive)
         {
             if (Input.GetKeyDown(KeyCode.X))
             {
@@ -79,9 +75,9 @@ public class PlayerAttackController : MonoBehaviour
 
         ableToDoSecondAttack = false;
 
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack 1"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName(Config.PLAYER_ANIMATOR_FIRST_ATTACK_NAME))
         {
-            while (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack 1"))
+            while (animator.GetCurrentAnimatorStateInfo(0).IsName(Config.PLAYER_ANIMATOR_FIRST_ATTACK_NAME))
             {
                 yield return null;
             }
@@ -96,7 +92,7 @@ public class PlayerAttackController : MonoBehaviour
     {
         animator.SetBool(Config.ANIMATOR_IS_ATTACKING, true);
 
-        yield return new WaitForSeconds(.3f);
+        yield return new WaitForSeconds(Config.LARGE_DELAY);
 
         animator.SetBool(Config.ANIMATOR_IS_ATTACKING, false);
     }
@@ -123,24 +119,7 @@ public class PlayerAttackController : MonoBehaviour
         playerMovementController.SetIsAbleToMove(true);
     }
 
-    private void AliveStatusChange()
-    {
-        if (GetComponent<DamageReceiver>().IsAlive)
-        {
-            Resurrection();
-        }
-        else
-        {
-            Death();
-        }
-    }
-
-    private void Death()
-    {
-        isAlive = false;
-    }
-
-    private void Resurrection()
+    public void Resurrection()
     {
         Reset();
     }

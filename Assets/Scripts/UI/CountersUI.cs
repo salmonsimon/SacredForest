@@ -41,12 +41,10 @@ public class CountersUI : MonoBehaviour
         if (value)
         {
             animator.SetTrigger(Config.ANIMATOR_SHOW_COUNTERS);
-            Debug.Log("Show counters");
         }
         else
         {
             animator.SetTrigger(Config.ANIMATOR_HIDE_COUNTERS);
-            Debug.Log("Hide counters");
         }
     }
 }

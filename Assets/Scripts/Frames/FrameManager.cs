@@ -10,7 +10,7 @@ public class FrameManager : MonoBehaviour
     private int activeFrameIndex = 0;
 
     private GameObject player;
-    private bool isPlayerAlive = true;
+    private DamageReceiver playerDamageReceiver;
 
     public delegate void OnFrameRestartDelegate();
     public event OnFrameRestartDelegate OnFrameRestart;
@@ -18,6 +18,7 @@ public class FrameManager : MonoBehaviour
     private void Start()
     {
         player = GameManager.instance.GetPlayer();
+        playerDamageReceiver = player.GetComponent<DamageReceiver>();
 
         activeFrame = frames[activeFrameIndex];
 
@@ -25,41 +26,9 @@ public class FrameManager : MonoBehaviour
         activeFrame.StartFrame();
     }
 
-    private void OnEnable()
-    {
-        player = GameManager.instance.GetPlayer();
-
-        player.GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += PlayerAliveStatusChange;
-
-        Debug.Log("Subscribed to player alive status change");
-    }
-    private void OnDisable()
-    {
-        if (player == null)
-            player = GameManager.instance.GetPlayer();
-
-        player.GetComponent<DamageReceiver>().OnCharacterAliveStatusChange -= PlayerAliveStatusChange;
-
-        Debug.Log("Unsubscribed to player alive status change");
-    }
-
-    private void PlayerAliveStatusChange()
-    {
-        if (player.GetComponent<DamageReceiver>().IsAlive)
-        {
-            isPlayerAlive = true;
-        }
-        else
-        {
-            isPlayerAlive = false;
-
-            StartCoroutine(GameManager.instance.GetDialogueManager().ShowRandomDeathDialogue());
-        }
-    }
-
     private void Update()
     {
-        if (!isPlayerAlive && !GameManager.instance.IsTeleporting() && !GameManager.instance.GetDialogueManager().IsRunning)
+        if (!playerDamageReceiver.IsAlive && !GameManager.instance.IsTeleporting() && !GameManager.instance.GetDialogueManager().IsRunning)
         {
             GameManager.instance.GetAnimationManager().ShowImageUI(Config.SPACE_KEY_GUI, true);
 
@@ -79,9 +48,6 @@ public class FrameManager : MonoBehaviour
             activeFrame.ShowArrowUI(false);
             StartCoroutine(NextFrame());
         }
-
-        if (isPlayerAlive && !GameManager.instance.GetDialogueManager().IsRunning)
-        PlayerAliveStatusChange();
     }
 
     private IEnumerator NextFrame()

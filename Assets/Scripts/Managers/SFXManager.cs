@@ -8,6 +8,7 @@ public class SFXManager : MonoBehaviour
     private float sfxVolume = 1f;
 
     [Header("UI Sounds")]
+    [SerializeField] private AudioClip clickSFX;
     [SerializeField] private AudioClip pauseSFX;
     [SerializeField] private AudioClip stageClearedSFX;
 
@@ -65,6 +66,10 @@ public class SFXManager : MonoBehaviour
         {
             case Config.ARROW_HIT_SFX:
                 audioSource.PlayOneShot(arrowHitSFX);
+                break;
+
+            case Config.CLICK_SFX:
+                audioSource.PlayOneShot(clickSFX);
                 break;
 
             case Config.PAUSE_SFX:
