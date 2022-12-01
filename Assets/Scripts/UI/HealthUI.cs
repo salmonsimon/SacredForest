@@ -137,7 +137,7 @@ public class HealthUI : MonoBehaviour
         {
             GameObject heart = currentShownGameHearts[i];
 
-            if (heart.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Await"))
+            if (heart.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Config.ANIMATOR_AWAIT_STATE_NAME))
                 heart.GetComponent<Animator>().SetTrigger(Config.ANIMATOR_START_CURRENT_HEART);
 
             yield return null;

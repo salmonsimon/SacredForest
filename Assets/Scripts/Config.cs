@@ -67,6 +67,8 @@ public class Config
 
     #region General Animations
 
+    public const string ANIMATOR_AWAIT_STATE_NAME = "Await";
+
     public const string ANIMATOR_BEAR_TRAP_TRIGGER = "Activate";
     public const string ANIMATOR_SHOW_COUNTERS = "Appear";
     public const string ANIMATOR_HIDE_COUNTERS = "Disappear";
@@ -156,6 +158,8 @@ public class Config
     public const string ANIMATOR_IS_DOING_SECOND_ATTACK = "IsDoingSecondAttack";
     public const string ANIMATOR_IS_ATTACKING = "IsAttacking";
 
+    public const string PLAYER_ANIMATOR_FIRST_ATTACK_NAME = "Attack 1";
+
     #endregion
 
     #region Player Movement
@@ -235,6 +239,7 @@ public class Config
     #region SFX
 
     public const string ARROW_HIT_SFX = "Arrow Hit";
+    public const string CLICK_SFX = "Click";
     public const string PAUSE_SFX = "Pause";
     public const string SUSPENSE_SFX = "Suspense";
     public const string STAGE_CLEARED_SFX = "Stage Cleared";

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerMovementController : Mover
 {
+    private DamageReceiver damageReceiver;
+
     private float addedFallGravity = Config.ADDED_FALL_GRAVITY;
     private float  addedGravityLowJump = Config.ADDED_GRAVITY_LOW_JUMP;
-
-    private bool isAlive = true;
 
     private bool onlyAllowActions = false;
 
@@ -15,18 +15,21 @@ public class PlayerMovementController : Mover
     {
         base.Reset();
 
-        isAlive = true;
         FirstRouteFinishedStateChange();
         SecondRouteFinishedStateChange();
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        damageReceiver = GetComponent<DamageReceiver>();
     }
 
     private void Start()
     {
         FirstRouteFinishedStateChange();
         SecondRouteFinishedStateChange();
-
-        GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += AliveStatusChange;
-        GetComponent<DamageReceiver>().OnCharacterDamaged += Damaged;
 
         GameManager.instance.GetCurrentProgressManager().OnFirstRouteFinishedStateChange += FirstRouteFinishedStateChange;
         GameManager.instance.GetCurrentProgressManager().OnSecondRouteFinishedStateChange += SecondRouteFinishedStateChange;
@@ -36,7 +39,7 @@ public class PlayerMovementController : Mover
     {
         base.Update();
 
-        if (!GameManager.instance.IsGamePaused() && !GameManager.instance.IsTeleporting() && isAlive)
+        if (!GameManager.instance.IsGamePaused() && !GameManager.instance.IsTeleporting() && damageReceiver.IsAlive)
         {
             jumpRememberTime -= Time.deltaTime;
 
@@ -71,7 +74,7 @@ public class PlayerMovementController : Mover
 
     protected override void FixedUpdate()
     {
-        if (!GameManager.instance.IsGamePaused() && !GameManager.instance.IsTeleporting() && isAlive)
+        if (!GameManager.instance.IsGamePaused() && !GameManager.instance.IsTeleporting() && damageReceiver.IsAlive)
         {
             if (IsFalling() && !ExceedsFallVelocity())
             {
@@ -116,35 +119,7 @@ public class PlayerMovementController : Mover
         onlyAllowActions = value;
     }
 
-    private void AliveStatusChange()
-    {
-        if (GetComponent<DamageReceiver>().IsAlive)
-        {
-            Resurrection();
-        }
-        else
-        {
-            Death();
-        }
-    }
-
-    protected virtual void Damaged()
-    {
-        if (isAlive)
-        {
-            StartCoroutine(GetComponent<DamageReceiver>().ImmuneCooldown());
-        }
-    }
-
-    protected override void Death()
-    {
-        base.Death();
-
-        isAlive = false;
-        GameManager.instance.GetCurrentProgressManager().IncreaseDeathsCount();
-    }
-
-    protected override void Resurrection()
+    public override void Resurrection()
     {
         base.Resurrection();
 

@@ -232,9 +232,12 @@ public class GameManager : MonoBehaviour
     {
         int currentHitPoints = player.GetComponent<DamageReceiver>().CurrentHitPoints;
 
-        yield return new WaitForSeconds(1f);
+        if (currentHitPoints > 0)
+        {
+            yield return new WaitForSeconds(1f);
 
-        player.GetComponent<DamageReceiver>().CurrentHitPoints = currentHitPoints;
+            player.GetComponent<DamageReceiver>().CurrentHitPoints = currentHitPoints;
+        }
     }
 
     #region Getters and Setters

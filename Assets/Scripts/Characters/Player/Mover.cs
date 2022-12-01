@@ -65,6 +65,8 @@ public class Mover : MonoBehaviour
     private float fallSpeedLimit = Config.FALL_SPEED_LIMIT;
     private float wallSlidingVelocity = Config.WALL_SLIDING_VELOCITY;
 
+    private float dashingLookaheadSmoothing = 20;
+
     #endregion
 
     private float groundedRememberDuration = Config.SMALL_DELAY;
@@ -87,7 +89,7 @@ public class Mover : MonoBehaviour
         jumpRememberTime = 0;
     }
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         originalScale = transform.localScale;
 
@@ -327,7 +329,7 @@ public class Mover : MonoBehaviour
         Cinemachine.CinemachineVirtualCamera vcam = FindObjectOfType<Cinemachine.CinemachineVirtualCamera>();
 
         float lookaheadSmoothing = vcam.GetCinemachineComponent<Cinemachine.CinemachineFramingTransposer>().m_LookaheadSmoothing;
-        vcam.GetCinemachineComponent<Cinemachine.CinemachineFramingTransposer>().m_LookaheadSmoothing = 20;
+        vcam.GetCinemachineComponent<Cinemachine.CinemachineFramingTransposer>().m_LookaheadSmoothing = dashingLookaheadSmoothing;
 
         animator.SetTrigger(Config.MOVEMENT_ANIMATOR_DASH_TRIGGER);
         animator.SetBool(Config.MOVEMENT_ANIMATOR_IS_DASHING, true);
@@ -483,7 +485,7 @@ public class Mover : MonoBehaviour
         return rigidBody.velocity.y < -fallSpeedLimit;
     }
 
-    protected virtual void Death()
+    public virtual void Death()
     {
         ResetJumpAndWallSlide();
 
@@ -491,7 +493,7 @@ public class Mover : MonoBehaviour
         rigidBody.constraints = RigidbodyConstraints2D.FreezePositionX;
     }
 
-    protected virtual void Resurrection()
+    public virtual void Resurrection()
     {
         ResetJumpAndWallSlide();
 

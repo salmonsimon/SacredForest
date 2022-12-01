@@ -27,5 +27,5 @@ MonoBehaviour:
   savedGamesTimePlayedCounterSerialized:
     keys: 
     values: []
-  musicVolume: 1
-  SFXVolume: 1
+  musicVolume: 0.5
+  SFXVolume: 0.5
