@@ -26,6 +26,15 @@ public class GroundMonkAttacks : EnemyAttacks
 
     private Coroutine isAttackingCooldownCoroutine = null;
 
+    private GameObject projectileContainer;
+
+    protected override void Start()
+    {
+        base.Start();
+
+        projectileContainer = GameObject.FindGameObjectWithTag(Config.PROJECTILE_CONTAINER_NAME);
+    }
+
     public void RollAction()
     {
         isAttackingCooldownCoroutine = StartCoroutine(IsAttackingCooldown(Config.BIG_DELAY));
@@ -120,10 +129,14 @@ public class GroundMonkAttacks : EnemyAttacks
     {
         yield return new WaitForSeconds(shootingWaitingTime);
 
-        EarthenHands newEarthenHands = Instantiate(projectilePrefab, new Vector3( playerPosition.x, transform.position.y - .02f, transform.position.z), Quaternion.identity);
-        newEarthenHands.SetLookat(GameManager.instance.GetPlayer().transform);
+        if (!GetComponent<GroundMonk>().IsTransforming)
+        {
+            EarthenHands newEarthenHands = Instantiate(projectilePrefab, new Vector3(playerPosition.x, transform.position.y - .02f, transform.position.z), Quaternion.identity);
+            newEarthenHands.transform.parent = projectileContainer.transform;
+            newEarthenHands.SetLookat(GameManager.instance.GetPlayer().transform);
 
-        GameManager.instance.GetCinemachineShake().ShakeCamera(.5f, 2f);
+            GameManager.instance.GetCinemachineShake().ShakeCamera(.5f, 2f);
+        }
     }
 
     public void TransformedSpecialAttack()
@@ -140,5 +153,25 @@ public class GroundMonkAttacks : EnemyAttacks
             StopCoroutine(isAttackingCooldownCoroutine);
 
         return base.IsAttackingCooldown(duration);
+    }
+
+    public void StopActions()
+    {
+        StopAllCoroutines();
+        CancelInvoke();
+
+        gameObject.layer = LayerMask.NameToLayer(Config.ENEMY_LAYER);
+        StartCoroutine(GetComponent<DamageReceiver>().SetImmune(0));
+
+        isAttacking = false;
+        onAttackCooldown = false;
+    }
+
+    public void ClearProjectiles()
+    {
+        foreach (Transform child in projectileContainer.transform)
+        {
+            StartCoroutine(child.gameObject.GetComponent<EarthenHands>().WaitAndDestroy(0));
+        }
     }
 }

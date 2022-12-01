@@ -21,6 +21,7 @@ public class Config
     public const string CINEMACHINE_CAMERA_TAG = "CinemachineCamera";
     public const string PARALLAX_BACKGROUND_TAG = "ParallaxBackground";
     public const string FRAME_MANAGER_TAG = "FrameManager";
+    public const string EXIT_FRAME_TAG = "Exit Frame";
 
     #endregion
 

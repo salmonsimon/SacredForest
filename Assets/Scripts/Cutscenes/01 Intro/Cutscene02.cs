@@ -33,7 +33,7 @@ public class Cutscene02 : Cutscene
 
         GameObject player = GameManager.instance.GetPlayer();
 
-        DeactivatePlayer(player);
+        DeactivatePlayer();
 
         GameObject foxy = GameObject.FindWithTag("Foxy");
         foxy.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
@@ -66,7 +66,7 @@ public class Cutscene02 : Cutscene
         vcamFoxy.Priority = 0;
         vcamAkate.Priority = 1;
 
-        ActivatePlayer(player);
+        ActivatePlayer();
         foxy.AddComponent<NPC>();
 
         StartCoroutine(GameManager.instance.GetLevelLoader().CinematicBracketsEnd());

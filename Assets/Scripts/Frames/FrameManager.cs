@@ -12,6 +12,9 @@ public class FrameManager : MonoBehaviour
     private GameObject player;
     private bool isPlayerAlive = true;
 
+    public delegate void OnFrameRestartDelegate();
+    public event OnFrameRestartDelegate OnFrameRestart;
+
     private void Start()
     {
         player = GameManager.instance.GetPlayer();
@@ -27,6 +30,8 @@ public class FrameManager : MonoBehaviour
         player = GameManager.instance.GetPlayer();
 
         player.GetComponent<DamageReceiver>().OnCharacterAliveStatusChange += PlayerAliveStatusChange;
+
+        Debug.Log("Subscribed to player alive status change");
     }
     private void OnDisable()
     {
@@ -34,6 +39,8 @@ public class FrameManager : MonoBehaviour
             player = GameManager.instance.GetPlayer();
 
         player.GetComponent<DamageReceiver>().OnCharacterAliveStatusChange -= PlayerAliveStatusChange;
+
+        Debug.Log("Unsubscribed to player alive status change");
     }
 
     private void PlayerAliveStatusChange()
@@ -116,6 +123,9 @@ public class FrameManager : MonoBehaviour
 
     public IEnumerator RestartFrame()
     {
+        if (OnFrameRestart != null)
+            OnFrameRestart();
+
         GameManager.instance.SetIsTeleporting(true);
         GameManager.instance.GetPlayer().GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
 

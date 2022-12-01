@@ -129,6 +129,8 @@ public class GroundMonk : Elemental
 
     public override void Transform()
     {
+        GetComponent<GroundMonkAttacks>().ClearProjectiles();
+
         if (GameManager.instance.GetCurrentProgressManager().FinishedRoute1 || 
             GameManager.instance.GetCurrentProgressManager().Route1BossHasTransformed)
         {

@@ -7,12 +7,12 @@ public class FirstFightingRouteTransition : MonoBehaviour
     private BoxCollider transitionTrigger;
 
     [SerializeField] private GameObject cutscene;
-    private GameObject groundMonk;
+    [SerializeField] private GameObject groundMonk;
 
     private GameObject player;
 
-    private bool isActivated = false;
-    private bool hasDied = false;
+    [SerializeField] private bool isActivated = false;
+    [SerializeField] private bool hasDied = false;
 
     private void Awake()
     {
@@ -23,6 +23,9 @@ public class FirstFightingRouteTransition : MonoBehaviour
     {
         player = GameManager.instance.GetPlayer();
         StartCoroutine(SetGroundMonk(Config.MEDIUM_DELAY));
+
+        FrameManager frameManager = GameObject.FindGameObjectWithTag(Config.FRAME_MANAGER_TAG).GetComponent<FrameManager>();
+        frameManager.OnFrameRestart += FrameRestarted;
     }
 
     private void OnEnable()
@@ -37,6 +40,9 @@ public class FirstFightingRouteTransition : MonoBehaviour
             player = GameManager.instance.GetPlayer();
 
         player.GetComponent<DamageReceiver>().OnCharacterAliveStatusChange -= PlayerAliveStatusChange;
+
+        FrameManager frameManager = GameObject.FindGameObjectWithTag(Config.FRAME_MANAGER_TAG).GetComponent<FrameManager>();
+        frameManager.OnFrameRestart -= FrameRestarted;
     }
 
     private void PlayerAliveStatusChange()
@@ -63,6 +69,7 @@ public class FirstFightingRouteTransition : MonoBehaviour
             if (!GameManager.instance.GetCurrentProgressManager().FinishedRoute1 && !hasDied)
             {
                 cutscene.SetActive(true);
+                cutscene.GetComponent<Cutscene04>().PlayWelcomeCutscene();
             }
             else
             {
@@ -86,5 +93,20 @@ public class FirstFightingRouteTransition : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         groundMonk = GameObject.FindGameObjectWithTag(Config.ENEMY_TAG);
+
+        while (groundMonk == null)
+        {
+            groundMonk = GameObject.FindGameObjectWithTag(Config.ENEMY_TAG);
+
+            yield return null;
+        }
+    }
+
+    private void FrameRestarted()
+    {
+        isActivated = false;
+        groundMonk = null;
+
+        StartCoroutine(SetGroundMonk(1.7f));
     }
 }

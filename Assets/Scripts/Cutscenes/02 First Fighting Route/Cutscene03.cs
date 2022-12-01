@@ -14,7 +14,19 @@ public class Cutscene03 : Cutscene
 
 
         if (!GameManager.instance.GetCurrentProgressManager().FinishedRoute1)
+        {
             StartCoroutine(Play());
+
+            FrameManager frameManager = GameObject.FindGameObjectWithTag(Config.FRAME_MANAGER_TAG).GetComponent<FrameManager>();
+            frameManager.OnFrameRestart += FrameRestarted;
+        }
+            
+    }
+
+    private void OnDisable()
+    {
+        FrameManager frameManager = GameObject.FindGameObjectWithTag(Config.FRAME_MANAGER_TAG).GetComponent<FrameManager>();
+        frameManager.OnFrameRestart -= FrameRestarted;
     }
 
     private IEnumerator Play()
@@ -23,11 +35,18 @@ public class Cutscene03 : Cutscene
         GameManager.instance.GetSFXManager().PlaySound(Config.SUSPENSE_SFX);
 
         GameObject player = GameManager.instance.GetPlayer();
-        DeactivatePlayer(player);
+        DeactivatePlayer();
 
         yield return new WaitForSeconds(Config.MEDIUM_DELAY);
 
         enemy = GameObject.FindGameObjectWithTag("Enemy");
+
+        while (enemy == null)
+        {
+            enemy = GameObject.FindGameObjectWithTag("Enemy");
+            yield return null;
+        }
+
         enemy.GetComponent<Swordsman>().enabled = false;
 
         enemyDialogueTransform = enemy.transform.Find("DialogueBubbleHolder").transform;
@@ -60,11 +79,25 @@ public class Cutscene03 : Cutscene
 
         yield return new WaitForSeconds(1f);
 
-        ActivatePlayer(player);
+        ActivatePlayer();
 
         enemy.GetComponent<Swordsman>().enabled = true;
         enemy.GetComponent<Swordsman>().SetStartleDuration(Config.MEDIUM_DELAY);
         
         this.enabled = false;
+    }
+
+    protected override void FrameRestarted()
+    {
+        base.FrameRestarted();
+
+        StartCoroutine(WaitAndPlayCutscene());
+    }
+
+    private IEnumerator WaitAndPlayCutscene()
+    {
+        yield return new WaitForSeconds(1.7f);
+
+        StartCoroutine(Play());
     }
 }

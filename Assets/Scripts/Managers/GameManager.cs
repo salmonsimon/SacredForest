@@ -183,7 +183,8 @@ public class GameManager : MonoBehaviour
         GetSFXManager().PlaySound(Config.PAUSE_SFX);
         SetGamePaused(true);
 
-        if (currentProgressManager.CurrentFightingRoute == FightingRoute.None)
+        if (currentProgressManager.CurrentFightingRoute == FightingRoute.None ||
+            GameObject.FindGameObjectWithTag(Config.EXIT_FRAME_TAG))
         {
             pauseMenu.SetActive(true);
             pauseMenu.transform.Find("Pause Panel").gameObject.SetActive(true);
@@ -202,7 +203,8 @@ public class GameManager : MonoBehaviour
     {
         SetGamePaused(false);
 
-        if (currentProgressManager.CurrentFightingRoute == FightingRoute.None)
+        if (currentProgressManager.CurrentFightingRoute == FightingRoute.None ||
+            GameObject.FindGameObjectWithTag(Config.EXIT_FRAME_TAG))
         {
             pauseMenu.SetActive(false);
             pauseMenu.transform.Find("Settings Panel").gameObject.SetActive(false);
@@ -220,7 +222,19 @@ public class GameManager : MonoBehaviour
 
         dialogueManager.ClearDialogues();
         animationManager.ClearCanvases();
+
+        StartCoroutine(WaitAndSetCurrentHitPointsBack());
+        
         StartCoroutine(frameManager.RestartFrame());
+    }
+
+    private IEnumerator WaitAndSetCurrentHitPointsBack()
+    {
+        int currentHitPoints = player.GetComponent<DamageReceiver>().CurrentHitPoints;
+
+        yield return new WaitForSeconds(1f);
+
+        player.GetComponent<DamageReceiver>().CurrentHitPoints = currentHitPoints;
     }
 
     #region Getters and Setters

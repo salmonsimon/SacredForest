@@ -25,6 +25,9 @@ public class CinemachineTransition : MonoBehaviour
     {
         player = GameManager.instance.GetPlayer();
         playerDamageReceiver = player.GetComponent<DamageReceiver>();
+
+        FrameManager frameManager = GameObject.FindGameObjectWithTag(Config.FRAME_MANAGER_TAG).GetComponent<FrameManager>();
+        frameManager.OnFrameRestart += FrameRestarted;
     }
 
     private void OnEnable()
@@ -40,6 +43,9 @@ public class CinemachineTransition : MonoBehaviour
             player = GameManager.instance.GetPlayer();
 
         player.GetComponent<DamageReceiver>().OnCharacterAliveStatusChange -= PlayerAliveStatusChange;
+
+        FrameManager frameManager = GameObject.FindGameObjectWithTag(Config.FRAME_MANAGER_TAG).GetComponent<FrameManager>();
+        frameManager.OnFrameRestart -= FrameRestarted;
     }
 
     private void PlayerAliveStatusChange()
@@ -92,5 +98,16 @@ public class CinemachineTransition : MonoBehaviour
         }
         else if (!playerDamageReceiver.IsAlive && isPlayerAlive)
             isPlayerAlive = false;
+    }
+
+    private void FrameRestarted()
+    {
+        activeVcam.Priority = 1;
+        otherVcam.Priority = 0;
+
+        GameManager.instance.GetCinemachineShake().SetVirtualCamera();
+
+        blockCollider.gameObject.SetActive(false);
+        isPlayerAlive = true;
     }
 }

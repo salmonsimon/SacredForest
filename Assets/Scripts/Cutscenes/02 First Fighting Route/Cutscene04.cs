@@ -11,29 +11,26 @@ public class Cutscene04 : Cutscene
     private GameObject player;
     private DamageReceiver playerDamageReceiver;
 
-    protected override void Start()
-    {
-        base.Start();
-
-        if (!GameManager.instance.GetCurrentProgressManager().FinishedRoute1)
-        {
-            StartCoroutine(Play());
-        }
-    }
-
     private void OnEnable()
     {
         player = GameManager.instance.GetPlayer();
         playerDamageReceiver = player.GetComponent<DamageReceiver>();
 
         playerDamageReceiver.OnCharacterAliveStatusChange += PlayerAliveStatusChange;
+
+        FrameManager frameManager = GameObject.FindGameObjectWithTag(Config.FRAME_MANAGER_TAG).GetComponent<FrameManager>();
+        frameManager.OnFrameRestart += FrameRestarted;
     }
+
     private void OnDisable()
     {
         player = GameManager.instance.GetPlayer();
         playerDamageReceiver = player.GetComponent<DamageReceiver>();
 
         playerDamageReceiver.OnCharacterAliveStatusChange -= PlayerAliveStatusChange;
+
+        FrameManager frameManager = GameObject.FindGameObjectWithTag(Config.FRAME_MANAGER_TAG).GetComponent<FrameManager>();
+        frameManager.OnFrameRestart -= FrameRestarted;
     }
 
     private void PlayerAliveStatusChange()
@@ -49,6 +46,8 @@ public class Cutscene04 : Cutscene
                     GroundMonk groundMonk = enemy.GetComponent<GroundMonk>();
                     groundMonk.StopAllCoroutines();
                     groundMonk.enabled = false;
+                    groundMonk.GetComponent<GroundMonkAttacks>().StopActions();
+                    groundMonk.GetComponent<EnemyMover>().StayInPosition();
                     groundMonk.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
                 }
 
@@ -61,13 +60,18 @@ public class Cutscene04 : Cutscene
         }
     }
 
+    public void PlayWelcomeCutscene()
+    {
+        StartCoroutine(Play());
+    }
+
     private IEnumerator Play()
     {
         GameManager.instance.GetLevelLoader().CinematicBracketsStart();
 
         yield return new WaitForSeconds(Config.MEDIUM_DELAY);
 
-        DeactivatePlayer(player);
+        DeactivatePlayer();
 
         enemy = GameObject.FindGameObjectWithTag("Enemy");
         enemyDialogueTransform = enemy.transform.Find("DialogueBubbleHolder").transform;
@@ -96,7 +100,7 @@ public class Cutscene04 : Cutscene
 
         #endregion
 
-        ActivatePlayer(player);
+        ActivatePlayer();
 
         yield return new WaitForSeconds(Config.SMALL_DELAY);
 
@@ -112,12 +116,13 @@ public class Cutscene04 : Cutscene
 
         yield return new WaitForSeconds(Config.LARGE_DELAY);
 
-        DeactivatePlayer(player);
+        DeactivatePlayer();
 
         player.GetComponent<DamageReceiver>().enabled = false;
 
         enemy = GameObject.FindGameObjectWithTag("Enemy");
         GroundMonk groundMonk = enemy.GetComponent<GroundMonk>();
+        groundMonk.GetComponent<GroundMonkAttacks>().StopActions();
         groundMonk.GetComponent<EnemyMover>().StayInPosition();
         groundMonk.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
 
@@ -160,7 +165,7 @@ public class Cutscene04 : Cutscene
 
         groundMonk.Transform();
 
-        ActivatePlayer(player);
+        ActivatePlayer();
 
         yield return new WaitForSeconds(3.7f);
 
@@ -173,7 +178,7 @@ public class Cutscene04 : Cutscene
         GameManager.instance.GetLevelLoader().CinematicBracketsStart();
         GameManager.instance.GetMusicManager().StopMusic();
 
-        DeactivatePlayer(player);
+        DeactivatePlayer();
 
         player.GetComponent<DamageReceiver>().enabled = false;
 
@@ -182,6 +187,7 @@ public class Cutscene04 : Cutscene
         enemy = GameObject.FindGameObjectWithTag("Enemy");
         GroundMonk groundMonk = enemy.GetComponent<GroundMonk>();
         groundMonk.enabled = false;
+        groundMonk.GetComponent<GroundMonkAttacks>().StopActions();
         groundMonk.GetComponent<EnemyMover>().StayInPosition();
         groundMonk.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         groundMonk.GetComponent<Animator>().runtimeAnimatorController = null;
@@ -240,8 +246,15 @@ public class Cutscene04 : Cutscene
         #endregion
 
         player.GetComponent<DamageReceiver>().enabled = true;
-        ActivatePlayer(player);
+        ActivatePlayer();
 
         StartCoroutine(GameManager.instance.GetLevelLoader().CinematicBracketsEnd());
+    }
+
+    protected override void FrameRestarted()
+    {
+        base.FrameRestarted();
+
+        GameObject.FindGameObjectWithTag("Enemy").GetComponent<GroundMonk>().StopAllCoroutines();
     }
 }
