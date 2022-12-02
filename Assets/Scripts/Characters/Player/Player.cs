@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
+        StartCoroutine(GetComponent<DamageReceiver>().SetImmune(0f));
+
         damageReceiver.OnCharacterAliveStatusChange += AliveStatusChange;
         damageReceiver.OnCharacterDamaged += Damaged;
     }
