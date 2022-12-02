@@ -39,6 +39,8 @@ public class Cutscene : MonoBehaviour
             yield return null;
         }
 
+        yield return null;
+
         player.GetComponent<PlayerMovementController>().StayInPosition();
         player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
     }
@@ -48,7 +50,9 @@ public class Cutscene : MonoBehaviour
         GameObject player = GameManager.instance.GetPlayer();
 
         player.GetComponent<PlayerAttackController>().enabled = false;
-        player.GetComponent<PlayerMovementController>().enabled = false;
+
+        //player.GetComponent<PlayerMovementController>().enabled = false;
+        player.GetComponent<PlayerMovementController>().SetIsAbleToMove(false);
 
         StartCoroutine(WaitUntilGroundedToFreezePlayer(player));
     }
@@ -58,7 +62,10 @@ public class Cutscene : MonoBehaviour
         GameObject player = GameManager.instance.GetPlayer();
 
         player.GetComponent<PlayerAttackController>().enabled = true;
-        player.GetComponent<PlayerMovementController>().enabled = true;
+
+        //player.GetComponent<PlayerMovementController>().enabled = true;
+        player.GetComponent<PlayerMovementController>().SetIsAbleToMove(true);
+
         player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
