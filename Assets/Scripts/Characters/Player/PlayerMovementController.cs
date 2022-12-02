@@ -39,7 +39,8 @@ public class PlayerMovementController : Mover
     {
         base.Update();
 
-        if (!GameManager.instance.IsGamePaused() && !GameManager.instance.IsTeleporting() && damageReceiver.IsAlive)
+        if (!GameManager.instance.IsGamePaused() && !GameManager.instance.IsTeleporting() && 
+            damageReceiver.IsAlive && isAbleToMove)
         {
             jumpRememberTime -= Time.deltaTime;
 

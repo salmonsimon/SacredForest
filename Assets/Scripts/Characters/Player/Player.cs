@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     private PlayerAttackController playerAttackController;
     private PlayerMovementController playerMovementController;
 
-    private void Awake()
+    private void Start()
     {
         damageReceiver = GetComponent<DamageReceiver>();
 
@@ -20,6 +20,13 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
+        damageReceiver = GetComponent<DamageReceiver>();
+
+        playerAttackController = GetComponent<PlayerAttackController>();
+        playerMovementController = GetComponent<PlayerMovementController>();
+
+        StartCoroutine(damageReceiver.SetImmune(0f));
+
         damageReceiver.OnCharacterAliveStatusChange += AliveStatusChange;
         damageReceiver.OnCharacterDamaged += Damaged;
     }

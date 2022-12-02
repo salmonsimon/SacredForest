@@ -10020,11 +10020,11 @@ GameObject:
   - component: {fileID: 4697750405587687978}
   - component: {fileID: 1971838360332155258}
   - component: {fileID: 1971838360332155259}
+  - component: {fileID: 864613793}
   - component: {fileID: 2255596629432346798}
   - component: {fileID: 1971838360700276062}
   - component: {fileID: 1971838360380672435}
   - component: {fileID: 661296833}
-  - component: {fileID: 864613793}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -10163,6 +10163,18 @@ CapsuleCollider2D:
   m_Offset: {x: -0.0017172337, y: 0}
   m_Size: {x: 0.14848128, y: 0.33}
   m_Direction: 0
+--- !u!114 &864613793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4697750405587687979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2eddc69d688f3c4c85e0cc448c8224d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2255596629432346798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10236,15 +10248,3 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1d1645d7264a91040a99be4952f426c3, type: 3}
   - {fileID: 8300000, guid: 97e7cba0a5c972a47ac136e4d7bf3703, type: 3}
   deathClips: []
---- !u!114 &864613793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4697750405587687979}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2eddc69d688f3c4c85e0cc448c8224d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
