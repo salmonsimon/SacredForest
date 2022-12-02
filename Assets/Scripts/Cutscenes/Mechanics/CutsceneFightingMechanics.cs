@@ -131,8 +131,9 @@ public class CutsceneFightingMechanics : Cutscene
         #region Check If Jumped Both Heights
 
         ActivatePlayer();
-        GameManager.instance.GetPlayer().GetComponent<PlayerMovementController>().StayInPosition();
-        GameManager.instance.GetPlayer().GetComponent<PlayerMovementController>().OnlyAllowActions(true);
+        player.GetComponent<PlayerMovementController>().enabled = true;
+        player.GetComponent<PlayerMovementController>().StayInPosition();
+        player.GetComponent<PlayerMovementController>().OnlyAllowActions(true);
         player.GetComponent<PlayerAttackController>().enabled = false;
 
         shortJumpPlatform.transform.parent.gameObject.SetActive(true);
@@ -162,7 +163,9 @@ public class CutsceneFightingMechanics : Cutscene
         longJumpPlatform.transform.parent.gameObject.SetActive(false);
 
         GameManager.instance.GetAnimationManager().ClearCanvases();
+
         DeactivatePlayer();
+        player.GetComponent<PlayerMovementController>().enabled = false;
 
         while (!player.GetComponent<Mover>().IsGrounded())
             yield return null;

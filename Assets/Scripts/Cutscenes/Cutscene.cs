@@ -51,7 +51,6 @@ public class Cutscene : MonoBehaviour
 
         player.GetComponent<PlayerAttackController>().enabled = false;
 
-        //player.GetComponent<PlayerMovementController>().enabled = false;
         player.GetComponent<PlayerMovementController>().SetIsAbleToMove(false);
 
         StartCoroutine(WaitUntilGroundedToFreezePlayer(player));
@@ -63,7 +62,6 @@ public class Cutscene : MonoBehaviour
 
         player.GetComponent<PlayerAttackController>().enabled = true;
 
-        //player.GetComponent<PlayerMovementController>().enabled = true;
         player.GetComponent<PlayerMovementController>().SetIsAbleToMove(true);
 
         player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;

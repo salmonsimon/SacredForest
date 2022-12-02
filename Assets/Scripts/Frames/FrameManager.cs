@@ -9,8 +9,8 @@ public class FrameManager : MonoBehaviour
     private Frame activeFrame;
     private int activeFrameIndex = 0;
 
-    private GameObject player;
-    private DamageReceiver playerDamageReceiver;
+    [SerializeField] private GameObject player;
+    [SerializeField] private DamageReceiver playerDamageReceiver;
 
     public delegate void OnFrameRestartDelegate();
     public event OnFrameRestartDelegate OnFrameRestart;
@@ -28,6 +28,12 @@ public class FrameManager : MonoBehaviour
 
     private void Update()
     {
+        if (!player || !playerDamageReceiver)
+        {
+            player = GameManager.instance.GetPlayer();
+            playerDamageReceiver = player.GetComponent<DamageReceiver>();
+        }
+
         if (!playerDamageReceiver.IsAlive && !GameManager.instance.IsTeleporting() && !GameManager.instance.GetDialogueManager().IsRunning)
         {
             GameManager.instance.GetAnimationManager().ShowImageUI(Config.SPACE_KEY_GUI, true);
