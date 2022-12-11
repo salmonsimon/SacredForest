@@ -91,7 +91,7 @@ The boss for the first level is a ground monk, called ***Grim Bearer***, which h
 </picture>
 
 <picture>
-<img src="Screenshots/groundMonkTransformed.gif" width="600">
+<img src="Screenshots/grounMonkTransformed.gif" width="600">
 </picture>
 
 #### Seventh Frame - Exit
@@ -136,6 +136,7 @@ As for the dialogue system used, it was made in house. There are two types of di
 - Cinematic brackets used in cutscenes, to give it a more cinematic look.
 - Blood is instantiated when hit, choosing 3 out of 9 different blood animations, to create unique blood patterns each time.
 - Different hit sounds depending on the type of weapon used, now supporting Default, Bludgeoning, Sword and Fire (magic).
+- All sounds for deaths, jump, weapon swings, steps are chosen randomly from a list.
 - Over 60 randomized death phrases to (DIS)<del>EN</del>courage players.
 - Counters kills, deaths and time played.
 - Saved games on main menu show counters as well as difficulty level chosen.
