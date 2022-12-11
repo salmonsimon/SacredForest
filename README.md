@@ -148,8 +148,6 @@ As for the dialogue system used, it was made in house. There are two types of di
 
 ## Assets used
 
-[Consider playing it in itch.io - Museum Thief](https://salmonsimon.itch.io/museum-thief)
-
 - MC animations: [Clembod](https://clembod.itch.io/)
 
 - MC Voice: [Cici Fyre](https://cicifyre.itch.io/)
